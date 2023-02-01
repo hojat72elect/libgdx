@@ -45,3 +45,5 @@ include ":tests:gdx-tests-lwjgl"
 include ":tests:gdx-tests-lwjgl3"
 
 rootProject.name = "libgdx"
+include 'game'
+
