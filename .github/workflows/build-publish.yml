@@ -2,9 +2,9 @@ name: Build and Publish
 
 on:
   push:
-    branches: [ master ]
+    branches: [ hojat_main_libgdx_branch ]
   workflow_dispatch:
-    branches: [ master ]
+    branches: [ hojat_main_libgdx_branch ]
   release:
     types: [ published ]
 
