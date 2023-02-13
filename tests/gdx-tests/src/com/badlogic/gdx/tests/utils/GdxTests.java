@@ -188,6 +188,7 @@ public class GdxTests {
             ParticleEmittersTest.class,
             ParticleEmitterChangeSpriteTest.class,
             PixelBufferObjectTest.class,
+            PixelPerfectTest.class,
             PixelsPerInchTest.class,
             PixmapBlendingTest.class,
             PixmapPackerTest.class,
@@ -217,6 +218,7 @@ public class GdxTests {
             ShadowMappingTest.class,
             ShapeRendererTest.class,
             ShapeRendererAlphaTest.class,
+            ShortSoundTest.class,
             SimpleAnimationTest.class,
             SimpleDecalTest.class,
             SimpleStageCullingTest.class,
@@ -225,6 +227,7 @@ public class GdxTests {
             SoftKeyboardTest.class,
             SortedSpriteTest.class,
             SoundTest.class,
+            SpriteBatchOriginScaleTest.class,
             SpriteBatchRotationTest.class,
             SpriteBatchShaderTest.class,
             SpriteBatchTest.class,
@@ -298,8 +301,8 @@ public class GdxTests {
             // VorbisTest.class
     ));
 
-    static final ObjectMap<String, String> obfuscatedToOriginal = new ObjectMap();
-    static final ObjectMap<String, String> originalToObfuscated = new ObjectMap();
+    static final ObjectMap<String, String> obfuscatedToOriginal = new ObjectMap<>();
+    static final ObjectMap<String, String> originalToObfuscated = new ObjectMap<>();
 
     static {
         InputStream mappingInput = GdxTests.class.getResourceAsStream("/mapping.txt");
