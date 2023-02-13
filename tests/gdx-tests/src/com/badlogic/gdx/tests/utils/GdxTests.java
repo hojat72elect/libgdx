@@ -265,6 +265,7 @@ public class GdxTests {
             TimeUtilsTest.class,
             TouchpadTest.class,
             TreeTest.class,
+            UBJsonTest.class,
             UISimpleTest.class,
             UITest.class,
             UtfFontTest.class,
