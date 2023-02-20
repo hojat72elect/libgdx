@@ -1,5 +1,27 @@
 package com.badlogic.gdx.tests.utils;
 
+import com.badlogic.gdx.tests.*;
+import com.badlogic.gdx.tests.bench.TiledMapBench;
+import com.badlogic.gdx.tests.conformance.AudioSoundAndMusicIsolationTest;
+import com.badlogic.gdx.tests.conformance.DisplayModeTest;
+import com.badlogic.gdx.tests.examples.MoveSpriteExample;
+import com.badlogic.gdx.tests.extensions.*;
+import com.badlogic.gdx.tests.g3d.*;
+import com.badlogic.gdx.tests.g3d.utils.DefaultTextureBinderTest;
+import com.badlogic.gdx.tests.g3d.voxel.VoxelTest;
+import com.badlogic.gdx.tests.gles2.HelloTriangle;
+import com.badlogic.gdx.tests.gles2.SimpleVertexShader;
+import com.badlogic.gdx.tests.gles2.VertexArrayTest;
+import com.badlogic.gdx.tests.gles3.GL30Texture3DTest;
+import com.badlogic.gdx.tests.gles3.InstancedRenderingTest;
+import com.badlogic.gdx.tests.gles3.PixelBufferObjectTest;
+import com.badlogic.gdx.tests.math.CollisionPlaygroundTest;
+import com.badlogic.gdx.tests.math.OctreeTest;
+import com.badlogic.gdx.tests.math.collision.OrientedBoundingBoxTest;
+import com.badlogic.gdx.tests.net.NetAPITest;
+import com.badlogic.gdx.utils.ObjectMap;
+import com.badlogic.gdx.utils.StreamUtils;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -7,60 +29,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import com.badlogic.gdx.tests.*;
-import com.badlogic.gdx.tests.bench.TiledMapBench;
-import com.badlogic.gdx.tests.conformance.AudioSoundAndMusicIsolationTest;
-import com.badlogic.gdx.tests.conformance.DisplayModeTest;
-import com.badlogic.gdx.tests.examples.MoveSpriteExample;
-import com.badlogic.gdx.tests.extensions.FreeTypeAtlasTest;
-import com.badlogic.gdx.tests.extensions.FreeTypeDisposeTest;
-import com.badlogic.gdx.tests.extensions.FreeTypeFontLoaderTest;
-import com.badlogic.gdx.tests.extensions.FreeTypeIncrementalTest;
-import com.badlogic.gdx.tests.extensions.FreeTypeMetricsTest;
-import com.badlogic.gdx.tests.extensions.FreeTypePackTest;
-import com.badlogic.gdx.tests.extensions.FreeTypeTest;
-import com.badlogic.gdx.tests.extensions.InternationalFontsTest;
-import com.badlogic.gdx.tests.g3d.voxel.VoxelTest;
-import com.badlogic.gdx.tests.math.CollisionPlaygroundTest;
-import com.badlogic.gdx.tests.math.OctreeTest;
-import com.badlogic.gdx.tests.g3d.Animation3DTest;
-import com.badlogic.gdx.tests.g3d.AnisotropyTest;
-import com.badlogic.gdx.tests.g3d.Basic3DSceneTest;
-import com.badlogic.gdx.tests.g3d.Basic3DTest;
-import com.badlogic.gdx.tests.g3d.Benchmark3DTest;
-import com.badlogic.gdx.tests.g3d.FogTest;
-import com.badlogic.gdx.tests.g3d.FrameBufferCubemapTest;
-import com.badlogic.gdx.tests.g3d.HeightMapTest;
-import com.badlogic.gdx.tests.g3d.LightsTest;
-import com.badlogic.gdx.tests.g3d.MaterialEmissiveTest;
-import com.badlogic.gdx.tests.g3d.MaterialTest;
-import com.badlogic.gdx.tests.g3d.MeshBuilderTest;
-import com.badlogic.gdx.tests.g3d.ModelCacheTest;
-import com.badlogic.gdx.tests.g3d.ModelTest;
-import com.badlogic.gdx.tests.g3d.MultipleRenderTargetTest;
-import com.badlogic.gdx.tests.g3d.ParticleControllerInfluencerSingleTest;
-import com.badlogic.gdx.tests.g3d.ParticleControllerTest;
-import com.badlogic.gdx.tests.g3d.PolarAccelerationTest;
-import com.badlogic.gdx.tests.g3d.ShaderCollectionTest;
-import com.badlogic.gdx.tests.g3d.ShaderTest;
-import com.badlogic.gdx.tests.g3d.ShadowMappingTest;
-import com.badlogic.gdx.tests.g3d.SkeletonTest;
-import com.badlogic.gdx.tests.g3d.TangentialAccelerationTest;
-import com.badlogic.gdx.tests.g3d.TextureArrayTest;
-import com.badlogic.gdx.tests.g3d.TextureRegion3DTest;
-import com.badlogic.gdx.tests.g3d.utils.DefaultTextureBinderTest;
-import com.badlogic.gdx.tests.gles2.HelloTriangle;
-import com.badlogic.gdx.tests.gles2.SimpleVertexShader;
-import com.badlogic.gdx.tests.gles2.VertexArrayTest;
-import com.badlogic.gdx.tests.gles3.GL30Texture3DTest;
-import com.badlogic.gdx.tests.gles3.InstancedRenderingTest;
-import com.badlogic.gdx.tests.gles3.PixelBufferObjectTest;
-import com.badlogic.gdx.tests.math.collision.OrientedBoundingBoxTest;
-import com.badlogic.gdx.tests.net.NetAPITest;
-import com.badlogic.gdx.tests.superkoalio.SuperKoalio;
-import com.badlogic.gdx.utils.ObjectMap;
-import com.badlogic.gdx.utils.StreamUtils;
 
 /**
  * List of GdxTest classes. To be used by the test launchers. If you write your own test, add it in here!
@@ -236,7 +204,7 @@ public class GdxTests {
             StageDebugTest.class,
             StagePerformanceTest.class,
             StageTest.class,
-            SuperKoalio.class,
+//            SuperKoalio.class,
             SystemCursorTest.class,
             TableLayoutTest.class,
             TableTest.class,

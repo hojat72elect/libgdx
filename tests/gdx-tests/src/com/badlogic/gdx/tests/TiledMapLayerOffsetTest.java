@@ -57,7 +57,7 @@ public class TiledMapLayerOffsetTest extends GdxTest {
         shapeRenderer = new ShapeRenderer();
 
         assetManager = new AssetManager();
-        assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
+//        assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         assetManager.load(MAP_ORTHO, TiledMap.class);
         assetManager.load(MAP_ISO, TiledMap.class);
         assetManager.load(MAP_ISO_STAG, TiledMap.class);

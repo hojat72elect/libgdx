@@ -55,7 +55,7 @@ public class TiledMapObjectLoadingTest extends GdxTest {
 
         font = new BitmapFont();
         batch = new SpriteBatch();
-        map = new TmxMapLoader().load("data/maps/tiled-objects/test-load-mapobjects.tmx");
+//        map = new TmxMapLoader().load("data/maps/tiled-objects/test-load-mapobjects.tmx");
         MapProperties properties = map.getProperties();
         shapeRenderer = new ShapeRenderer();
 

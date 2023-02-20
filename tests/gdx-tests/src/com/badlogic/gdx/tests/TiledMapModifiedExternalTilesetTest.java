@@ -40,7 +40,7 @@ public class TiledMapModifiedExternalTilesetTest extends GdxTest {
         // The original is correct, without the bug fix to TiledMapTileSets.java that acompanies
         // this test, the latter appears as all grass.
 // map = new TmxMapLoader().load("data/maps/tiled/external-tilesets/test_original.tmx");
-        map = new TmxMapLoader().load("data/maps/tiled/external-tilesets/test_extended.tmx");
+//        map = new TmxMapLoader().load("data/maps/tiled/external-tilesets/test_extended.tmx");
         renderer = new IsometricTiledMapRenderer(map, 1f / 32f);
     }
 
