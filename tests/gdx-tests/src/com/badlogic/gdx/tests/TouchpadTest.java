@@ -5,9 +5,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 
-public class TouchpadTest extends GdxTestK {
+public class TouchpadTest extends GdxTest {
     Stage stage;
     Touchpad touchpad;
 

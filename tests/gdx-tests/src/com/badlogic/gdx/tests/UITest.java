@@ -29,12 +29,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Tooltip;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class UITest extends GdxTestK {
+public class UITest extends GdxTest {
     Object[] listEntries = {"This is a list entry1", "And another one1", "The meaning of life1", "Is hard to come by1", "This is a list entry2", "And another one2", "The meaning of life2", "Is hard to come by2", "This is a list entry3", "And another one3", "The meaning of life3", "Is hard to come by3", "This is a list entry4", "And another one4", "The meaning of life4", "Is hard to come by4", "This is a list entry5", "And another one5", "The meaning of life5", "Is hard to come by5"};
 
     Skin skin;

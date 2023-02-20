@@ -1,6 +1,6 @@
 package com.badlogic.gdx.tests;
 
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.TimeUtils;
 
@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.TimeUtils;
  *
  * @author Jon Renner
  */
-public class TimeUtilsTest extends GdxTestK {
+public class TimeUtilsTest extends GdxTest {
     final long oneMilliInNanos = 1000000;
 
     @Override

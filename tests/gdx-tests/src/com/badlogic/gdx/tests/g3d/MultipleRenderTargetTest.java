@@ -51,7 +51,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.tests.utils.GdxTestConfig;
 import com.badlogic.gdx.utils.*;
 
@@ -60,7 +60,7 @@ import com.badlogic.gdx.utils.*;
  *
  * /** @author Tomski */
 @GdxTestConfig(requireGL30 = true)
-public class MultipleRenderTargetTest extends GdxTestK {
+public class MultipleRenderTargetTest extends GdxTest {
 
 	RenderContext renderContext;
 	FrameBuffer frameBuffer;

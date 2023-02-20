@@ -18,10 +18,10 @@ package com.badlogic.gdx.tests;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class BlitTest extends GdxTestK {
+public class BlitTest extends GdxTest {
 
 	Texture rgb888;
 	Texture rgba8888;

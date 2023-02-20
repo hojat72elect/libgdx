@@ -23,9 +23,9 @@ import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 
-public class SimpleVertexShader extends GdxTestK {
+public class SimpleVertexShader extends GdxTest {
 	ShaderProgram shader;
 	Mesh mesh;
 	Matrix4 projection = new Matrix4();

@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 
-public class DisplayModeTest extends GdxTestK {
+public class DisplayModeTest extends GdxTest {
 
     @Override
     public void create() {

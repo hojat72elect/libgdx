@@ -24,12 +24,12 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.DelaunayTriangulator;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.ShortArray;
 
 /** @author Nathan Sweet */
-public class DelaunayTriangulatorTest extends GdxTestK {
+public class DelaunayTriangulatorTest extends GdxTest {
 	private ShapeRenderer renderer;
 	FloatArray points = new FloatArray();
 	ShortArray triangles;

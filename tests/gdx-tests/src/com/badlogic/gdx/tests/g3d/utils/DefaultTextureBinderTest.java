@@ -8,12 +8,12 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g3d.utils.DefaultTextureBinder;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.IntIntMap;
 
-public class DefaultTextureBinderTest extends GdxTestK {
+public class DefaultTextureBinderTest extends GdxTest {
 
     private static final int numTextures = 64;
     private DefaultTextureBinder binderLRU;

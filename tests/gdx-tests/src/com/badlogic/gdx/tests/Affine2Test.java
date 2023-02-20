@@ -20,10 +20,10 @@ import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-public class Affine2Test extends GdxTestK {
+public class Affine2Test extends GdxTest {
 
 	static public final float TOLERANCE = 0.005f;
 

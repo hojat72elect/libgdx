@@ -7,7 +7,7 @@ import android.view.WindowManager;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.tests.utils.GdxTests;
 
 public class GdxTestActivity extends AndroidApplication {
@@ -25,7 +25,7 @@ public class GdxTestActivity extends AndroidApplication {
         // obtain the test info
         Bundle extras = getIntent().getExtras();
         String testName = (String) extras.get("test");
-        GdxTestK test = GdxTests.newTest(testName);
+        GdxTest test = GdxTests.newTest(testName);
 
         // and run the application...
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();

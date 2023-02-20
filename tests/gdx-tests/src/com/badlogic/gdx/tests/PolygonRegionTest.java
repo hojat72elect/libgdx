@@ -12,11 +12,11 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class PolygonRegionTest extends GdxTestK {
+public class PolygonRegionTest extends GdxTest {
 
     PolygonSpriteBatch batch;
     PolygonRegionDebugRenderer debugRenderer;

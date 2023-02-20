@@ -13,12 +13,12 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 
 /**
  * @author Daniel Holderbaum
  */
-public class StageDebugTest extends GdxTestK {
+public class StageDebugTest extends GdxTest {
     static TextureRegion textureRegion;
 
     private Stage stage;

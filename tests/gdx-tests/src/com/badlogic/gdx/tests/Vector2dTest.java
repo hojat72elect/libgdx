@@ -8,10 +8,10 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class Vector2dTest extends GdxTestK {
+public class Vector2dTest extends GdxTest {
     private static final float DURATION = 2.0f;
 
     private ShapeRenderer renderer;

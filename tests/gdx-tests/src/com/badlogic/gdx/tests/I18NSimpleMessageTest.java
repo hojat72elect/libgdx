@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.I18NBundle;
 
 /**
@@ -17,7 +17,7 @@ import com.badlogic.gdx.utils.I18NBundle;
  *
  * @author davebaol
  */
-public class I18NSimpleMessageTest extends GdxTestK {
+public class I18NSimpleMessageTest extends GdxTest {
 
     String message = "";
     BitmapFont font;

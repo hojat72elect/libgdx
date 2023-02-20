@@ -24,10 +24,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class BitmapFontMetricsTest extends GdxTestK {
+public class BitmapFontMetricsTest extends GdxTest {
 	private SpriteBatch spriteBatch;
 	private TextureAtlas atlas;
 	private BitmapFont font, smallFont;

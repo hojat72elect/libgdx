@@ -1,12 +1,12 @@
 package com.badlogic.gdx.tests;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.UBJsonReader;
 import com.badlogic.gdx.utils.UBJsonWriter;
 
-public class UBJsonTest extends GdxTestK {
+public class UBJsonTest extends GdxTest {
     static final String fn = "test.ubjson";
     static final String longString;
 

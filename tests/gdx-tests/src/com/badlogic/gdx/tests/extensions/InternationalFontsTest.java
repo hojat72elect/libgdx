@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 
 /**
  * Shows how to use fonts for languages other than english. Note that only alphabets with a humble amount of glyphs can be used
@@ -25,7 +25,7 @@ import com.badlogic.gdx.tests.utils.GdxTestK;
  *
  * @author mzechner
  */
-public class InternationalFontsTest extends GdxTestK {
+public class InternationalFontsTest extends GdxTest {
     OrthographicCamera cam;
     SpriteBatch batch;
     BitmapFont koreanFont;

@@ -6,11 +6,11 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.BufferUtils;
 
-public class PixmapTest extends GdxTestK {
+public class PixmapTest extends GdxTest {
     Pixmap pixmap;
     Texture texture;
     SpriteBatch batch;

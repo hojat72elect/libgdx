@@ -27,14 +27,14 @@ import com.badlogic.gdx.graphics.Mesh.VertexDataType;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.tests.utils.GdxTestConfig;
 import com.badlogic.gdx.utils.BufferUtils;
 
 /** Touch the screen to cycle over 9 test case : (2 triangles, first triangle, second triangle) x (short buffer/short, byte
  * buffer/short, byte buffer/byte). */
 @GdxTestConfig(OnlyGL20 = true)
-public class VertexArrayTest extends GdxTestK {
+public class VertexArrayTest extends GdxTest {
 	ShaderProgram shader;
 	Mesh mesh;
 	int[][] testCases = {{0, 0, 6}, {0, 0, 3}, {0, 3, 3}, {1, 0, 6}, {1, 0, 3}, {1, 3, 3}, {2, 0, 6}, {2, 0, 3}, {2, 3, 3}};

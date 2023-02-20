@@ -11,13 +11,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.Array;
 
 /**
  * Test switch of scroll bars + knobs from right to left, and bottom to top
  */
-public class ScrollPaneScrollBarsTest extends GdxTestK {
+public class ScrollPaneScrollBarsTest extends GdxTest {
     private Stage stage;
     Array<ScrollPane> scrollPanes = new Array<>();
     boolean doFade = true;

@@ -16,9 +16,9 @@ import com.badlogic.gdx.graphics.g3d.loader.ObjLoader;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 
-public class EdgeDetectionTest extends GdxTestK {
+public class EdgeDetectionTest extends GdxTest {
 
     FPSLogger logger;
     // ShaderProgram shader;

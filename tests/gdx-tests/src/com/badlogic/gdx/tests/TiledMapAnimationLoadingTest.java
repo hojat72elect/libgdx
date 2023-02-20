@@ -12,11 +12,11 @@ import com.badlogic.gdx.maps.objects.CircleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.tests.utils.OrthoCamController;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class TiledMapAnimationLoadingTest extends GdxTestK {
+public class TiledMapAnimationLoadingTest extends GdxTest {
 
     private TiledMap map;
     private OrthographicCamera camera;

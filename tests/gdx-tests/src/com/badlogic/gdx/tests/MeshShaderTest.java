@@ -10,10 +10,10 @@ import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.NumberUtils;
 
-public class MeshShaderTest extends GdxTestK {
+public class MeshShaderTest extends GdxTest {
     ShaderProgram shader;
     Mesh mesh, meshCustomVA;
     Texture texture;

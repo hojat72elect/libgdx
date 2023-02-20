@@ -6,11 +6,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.QuadTreeFloat;
 
-public class QuadTreeFloatTest extends GdxTestK {
+public class QuadTreeFloatTest extends GdxTest {
     QuadTreeFloat q = new QuadTreeFloat();
     ShapeRenderer shapes;
     FloatArray results = new FloatArray(false, 16);

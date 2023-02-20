@@ -36,7 +36,7 @@ import java.util.List;
  * @author badlogicgames@gmail.com
  */
 public class GdxTests {
-    public static final List<Class<? extends GdxTestK>> tests = new ArrayList<>(Arrays.asList(
+    public static final List<Class<? extends GdxTest>> tests = new ArrayList<>(Arrays.asList(
             // @off
             IssueTest.class,
             AccelerometerTest.class,
@@ -306,14 +306,14 @@ public class GdxTests {
         return names;
     }
 
-    public static Class<? extends GdxTestK> forName(String name) {
+    public static Class<? extends GdxTest> forName(String name) {
         name = originalToObfuscated.get(name, name);
         for (Class clazz : tests)
             if (clazz.getSimpleName().equals(name)) return clazz;
         return null;
     }
 
-    public static GdxTestK newTest(String testName) {
+    public static GdxTest newTest(String testName) {
         testName = originalToObfuscated.get(testName, testName);
         try {
             return forName(testName).newInstance();

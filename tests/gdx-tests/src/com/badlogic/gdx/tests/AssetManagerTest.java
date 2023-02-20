@@ -35,7 +35,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.TimeUtils;
@@ -43,7 +43,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 import java.nio.IntBuffer;
 import java.util.Locale;
 
-public class AssetManagerTest extends GdxTestK implements AssetErrorListener {
+public class AssetManagerTest extends GdxTest implements AssetErrorListener {
     AssetManager manager;
     BitmapFont font;
     Skin skin;

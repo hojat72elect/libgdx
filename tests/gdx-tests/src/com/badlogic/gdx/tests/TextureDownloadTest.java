@@ -12,11 +12,11 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.StreamUtils;
 
-public class TextureDownloadTest extends GdxTestK {
+public class TextureDownloadTest extends GdxTest {
     TextureRegion image;
     BitmapFont font;
     SpriteBatch batch;

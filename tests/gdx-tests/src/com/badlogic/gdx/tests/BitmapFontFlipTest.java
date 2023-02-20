@@ -26,10 +26,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFontCache;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.Align;
 
-public class BitmapFontFlipTest extends GdxTestK {
+public class BitmapFontFlipTest extends GdxTest {
 	private SpriteBatch spriteBatch;
 	private Texture texture;
 	private BitmapFont font;

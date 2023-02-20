@@ -1,9 +1,9 @@
 package com.badlogic.gdx.tests;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 
-public class ShortSoundTest extends GdxTestK {
+public class ShortSoundTest extends GdxTest {
 
     @Override
     public void create() {

@@ -33,12 +33,12 @@ import com.badlogic.gdx.graphics.g3d.utils.FirstPersonCameraController;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.graphics.profiling.GLProfiler;
 import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.tests.utils.GdxTestConfig;
 
 /** @author Tomski **/
 @GdxTestConfig(requireGL30 = true)
-public class TextureArrayTest extends GdxTestK {
+public class TextureArrayTest extends GdxTest {
 
 	TextureArray textureArray;
 	Mesh terrain;

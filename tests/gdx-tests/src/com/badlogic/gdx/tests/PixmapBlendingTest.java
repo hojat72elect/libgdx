@@ -6,10 +6,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class PixmapBlendingTest extends GdxTestK {
+public class PixmapBlendingTest extends GdxTest {
     private SpriteBatch spriteBatch;
     private Sprite logoSprite;
     private Pixmap pixD, pixS1, pixS2;

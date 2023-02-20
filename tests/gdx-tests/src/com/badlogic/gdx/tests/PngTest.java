@@ -10,9 +10,9 @@ import com.badlogic.gdx.graphics.PixmapIO.PNG;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 
-public class PngTest extends GdxTestK {
+public class PngTest extends GdxTest {
     SpriteBatch batch;
     Texture badlogic, screenshot;
 

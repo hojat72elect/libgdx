@@ -25,9 +25,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 
-public class ModelLoaderTest extends GdxTestK {
+public class ModelLoaderTest extends GdxTest {
 	AssetManager assets;
 	PerspectiveCamera camera;
 	ModelInstance instance;

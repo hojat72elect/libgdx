@@ -1,7 +1,7 @@
 
 package com.badlogic.gdx.tests;
 
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.tests.utils.GdxTests;
 
 public class IosTestWrapper extends AbstractTestWrapper {
@@ -9,7 +9,7 @@ public class IosTestWrapper extends AbstractTestWrapper {
     protected Instancer[] getTestList() {
         Instancer[] tests = new Instancer[GdxTests.tests.size()];
         int i = 0;
-        for (final Class<? extends GdxTestK> aClass : GdxTests.tests) {
+        for (final Class<? extends GdxTest> aClass : GdxTests.tests) {
             tests[i] = new IosInstancer(aClass);
             i++;
         }
@@ -17,14 +17,14 @@ public class IosTestWrapper extends AbstractTestWrapper {
     }
 
     class IosInstancer implements Instancer {
-        final Class<? extends GdxTestK> clazz;
+        final Class<? extends GdxTest> clazz;
 
-        IosInstancer(Class<? extends GdxTestK> clazz) {
+        IosInstancer(Class<? extends GdxTest> clazz) {
             this.clazz = clazz;
         }
 
         @Override
-        public GdxTestK instance() {
+        public GdxTest instance() {
             try {
                 return clazz.newInstance();
             } catch (InstantiationException | IllegalAccessException e) {

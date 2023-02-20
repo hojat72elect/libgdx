@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 
-public class ShaderMultitextureTest extends GdxTestK {
+public class ShaderMultitextureTest extends GdxTest {
     ShaderProgram shader;
     Texture texture;
     Texture texture2;

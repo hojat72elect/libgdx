@@ -16,9 +16,9 @@
 
 package com.badlogic.gdx.tests;
 
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 
-public class DeviceInfoTest extends GdxTestK {
+public class DeviceInfoTest extends GdxTest {
 
 	@Override
 	public void create () {

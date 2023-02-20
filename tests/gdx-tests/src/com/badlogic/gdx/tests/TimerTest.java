@@ -1,11 +1,11 @@
 package com.badlogic.gdx.tests;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
-public class TimerTest extends GdxTestK {
+public class TimerTest extends GdxTest {
     @Override
     public void create() {
         Timer timer = new Timer();

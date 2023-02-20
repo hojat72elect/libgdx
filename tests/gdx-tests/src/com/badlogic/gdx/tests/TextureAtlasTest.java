@@ -13,9 +13,9 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 
-public class TextureAtlasTest extends GdxTestK {
+public class TextureAtlasTest extends GdxTest {
     SpriteBatch batch;
     Sprite badlogic, badlogicSmall, star;
     TextureAtlas atlas;

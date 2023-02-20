@@ -14,11 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-public class SoundTest extends GdxTestK {
+public class SoundTest extends GdxTest {
 
     private static final String[] FILENAMES = {"shotgun.ogg", "bubblepop.ogg", "bubblepop-stereo-left-only.wav"};
 

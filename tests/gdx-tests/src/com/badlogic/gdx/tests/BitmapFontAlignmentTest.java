@@ -26,12 +26,12 @@ import com.badlogic.gdx.graphics.g2d.BitmapFontCache;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 /** Shows how to align single line, wrapped, and multi line text within a rectangle. */
-public class BitmapFontAlignmentTest extends GdxTestK {
+public class BitmapFontAlignmentTest extends GdxTest {
 	private SpriteBatch spriteBatch;
 	private Texture texture;
 	private BitmapFont font;

@@ -15,14 +15,14 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 
 /**
  * A simple example of how to use a y-down coordinate system.
  *
  * @author mzechner
  */
-public class YDownTest extends GdxTestK {
+public class YDownTest extends GdxTest {
     SpriteBatch batch;
     BitmapFont font;
     TextureRegion region;

@@ -7,9 +7,9 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.tests.utils.GdxTestK;
+import com.badlogic.gdx.tests.utils.GdxTest;
 
-public class SimpleAnimationTest extends GdxTestK {
+public class SimpleAnimationTest extends GdxTest {
     private Animation<TextureRegion> currentWalk;
     private float currentFrameTime;
     private Vector2 position;
