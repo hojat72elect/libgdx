@@ -21,7 +21,7 @@ import android.widget.ListView;
 
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.tests.utils.GdxTests;
 
 public class FragmentTestStarter extends FragmentActivity implements AndroidFragmentApplication.Callbacks {
@@ -119,7 +119,7 @@ public class FragmentTestStarter extends FragmentActivity implements AndroidFrag
 			return fragment;
 		}
 
-		GdxTest test;
+		GdxTestKotlin test;
 
 		@Override
 		public void onCreate (Bundle savedInstanceState) {

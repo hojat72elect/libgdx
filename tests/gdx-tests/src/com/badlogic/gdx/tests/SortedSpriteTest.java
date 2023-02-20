@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -17,7 +17,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
  *
  * @author mzechner
  */
-public class SortedSpriteTest extends GdxTest {
+public class SortedSpriteTest extends GdxTestKotlin {
     /**
      * Sprite based class that adds a z-coordinate for depth sorting. Note that allt he constructors were auto-generated in
      * Eclipse (alt + shift + s, c).

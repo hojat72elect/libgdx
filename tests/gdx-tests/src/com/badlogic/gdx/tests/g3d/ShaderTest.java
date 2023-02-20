@@ -38,11 +38,11 @@ import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.RenderContext;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-public class ShaderTest extends GdxTest {
+public class ShaderTest extends GdxTestKotlin {
 	// Create a custom attribute, see https://libgdx.com/wiki/graphics/3d/material-and-environment
 	// See also: https://xoppa.github.io/blog/using-materials-with-libgdx/
 	public static class TestAttribute extends Attribute {

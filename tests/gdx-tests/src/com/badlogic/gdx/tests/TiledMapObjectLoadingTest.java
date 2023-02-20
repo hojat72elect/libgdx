@@ -26,11 +26,11 @@ import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Polyline;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.tests.utils.OrthoCamController;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class TiledMapObjectLoadingTest extends GdxTest {
+public class TiledMapObjectLoadingTest extends GdxTestKotlin {
 
     private TiledMap map;
     private ShapeRenderer shapeRenderer;

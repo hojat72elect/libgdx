@@ -15,10 +15,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class UISimpleTest extends GdxTest {
+public class UISimpleTest extends GdxTestKotlin {
     Skin skin;
     Stage stage;
     SpriteBatch batch;

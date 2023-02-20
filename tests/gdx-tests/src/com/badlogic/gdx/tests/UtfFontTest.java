@@ -4,14 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 
 /**
  * See <a href="https://github.com/libgdx/libgdx/issues/1315">#1315</a>
  *
  * @author badlogic
  */
-public class UtfFontTest extends GdxTest {
+public class UtfFontTest extends GdxTestKotlin {
     BitmapFont font;
     SpriteBatch batch;
 

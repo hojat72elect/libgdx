@@ -8,11 +8,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.tests.utils.OrthoCamController;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class ParallaxTest extends GdxTest {
+public class ParallaxTest extends GdxTestKotlin {
     class ParallaxCamera extends OrthographicCamera {
         Matrix4 parallaxView = new Matrix4();
         Matrix4 parallaxCombined = new Matrix4();

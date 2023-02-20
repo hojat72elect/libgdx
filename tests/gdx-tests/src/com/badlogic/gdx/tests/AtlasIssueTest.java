@@ -23,9 +23,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 
-public class AtlasIssueTest extends GdxTest {
+public class AtlasIssueTest extends GdxTestKotlin {
 	SpriteBatch batch;
 	Sprite sprite;
 	TextureAtlas atlas;

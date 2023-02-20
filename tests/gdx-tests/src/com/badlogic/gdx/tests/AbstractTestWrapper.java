@@ -33,19 +33,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 import java.util.Arrays;
 import java.util.Comparator;
 
-public abstract class AbstractTestWrapper extends GdxTest {
+public abstract class AbstractTestWrapper extends GdxTestKotlin {
 	Stage ui;
 	Table container;
 	Skin skin;
 	BitmapFont font;
-	GdxTest test;
+	GdxTestKotlin test;
 	boolean dispose = false;
 
 	@Override
@@ -418,7 +418,7 @@ public abstract class AbstractTestWrapper extends GdxTest {
 	}
 
 	protected interface Instancer {
-		GdxTest instance ();
+		GdxTestKotlin instance ();
 
 		String getSimpleName ();
 	}

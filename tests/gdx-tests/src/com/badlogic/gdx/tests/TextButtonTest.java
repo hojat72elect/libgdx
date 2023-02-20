@@ -6,10 +6,10 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class TextButtonTest extends GdxTest {
+public class TextButtonTest extends GdxTestKotlin {
     private Stage stage;
     private Skin skin;
 

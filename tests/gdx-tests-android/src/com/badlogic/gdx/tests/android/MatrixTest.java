@@ -24,9 +24,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 
-public class MatrixTest extends GdxTest {
+public class MatrixTest extends GdxTestKotlin {
 
 	BitmapFont font;
 	SpriteBatch batch;

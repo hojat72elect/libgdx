@@ -23,13 +23,13 @@ import com.badlogic.gdx.math.Octree;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.math.collision.Ray;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectSet;
 
 import java.util.Random;
 
-public class OctreeTest extends GdxTest implements ApplicationListener {
+public class OctreeTest extends GdxTestKotlin implements ApplicationListener {
     private static final float AREA_SIZE = 100;
     private static final int BOXES = 5000;
     private static final int REMOVE_BOXES = 500;

@@ -40,7 +40,7 @@ public class CommandLineOptions {
 	}
 
 	public boolean isTestCompatible (String testName) {
-		final Class<? extends GdxTest> clazz = GdxTests.forName(testName);
+		final Class<? extends GdxTestKotlin> clazz = GdxTests.forName(testName);
 		GdxTestConfig config = clazz.getAnnotation(GdxTestConfig.class);
 		if (config != null) {
 			if (config.requireGL30() && !gl30) return false;

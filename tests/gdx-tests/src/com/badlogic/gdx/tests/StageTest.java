@@ -18,14 +18,14 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class StageTest extends GdxTest implements InputProcessor {
+public class StageTest extends GdxTestKotlin implements InputProcessor {
     private static final int NUM_GROUPS = 4;
     private static final int NUM_SPRITES = (int) Math.sqrt(150 / NUM_GROUPS);
     private static final float SPACING = 5;

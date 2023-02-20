@@ -10,10 +10,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.utils.Array;
 
-public class ParticleEmitterChangeSpriteTest extends GdxTest {
+public class ParticleEmitterChangeSpriteTest extends GdxTestKotlin {
     private SpriteBatch spriteBatch;
     ParticleEffect effect;
     int emitterIndex = 0;

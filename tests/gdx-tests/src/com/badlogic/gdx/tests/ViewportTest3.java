@@ -14,7 +14,7 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -22,7 +22,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 /**
  * Cycles viewports while rendering with SpriteBatch.
  */
-public class ViewportTest3 extends GdxTest {
+public class ViewportTest3 extends GdxTestKotlin {
     Array<Viewport> viewports;
     Viewport viewport;
     Array<String> names;

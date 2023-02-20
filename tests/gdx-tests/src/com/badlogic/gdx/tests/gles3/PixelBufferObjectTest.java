@@ -12,12 +12,12 @@ import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.tests.utils.GdxTestConfig;
 import com.badlogic.gdx.utils.BufferUtils;
 
 @GdxTestConfig(requireGL30 = true)
-public class PixelBufferObjectTest extends GdxTest {
+public class PixelBufferObjectTest extends GdxTestKotlin {
 
 	static class PBOUpload {
 		private Texture texture;

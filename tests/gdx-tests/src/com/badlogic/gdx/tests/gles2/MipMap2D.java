@@ -26,9 +26,9 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 
-public class MipMap2D extends GdxTest {
+public class MipMap2D extends GdxTestKotlin {
 	ShaderProgram shader;
 	Texture texture;
 	Mesh mesh;

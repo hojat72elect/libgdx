@@ -37,11 +37,11 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.WorldManifold;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
-public class Box2DCharacterControllerTest extends GdxTest implements ApplicationListener {
+public class Box2DCharacterControllerTest extends GdxTestKotlin implements ApplicationListener {
 
 	final static float MAX_VELOCITY = 14f;
 	boolean jump = false;

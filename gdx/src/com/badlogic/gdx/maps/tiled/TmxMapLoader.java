@@ -20,7 +20,7 @@ import com.badlogic.gdx.utils.XmlReader.Element;
 /**
  * @brief synchronous loader for TMX maps created with the Tiled tool
  */
-public abstract class TmxMapLoader extends BaseTmxMapLoader<TmxMapLoader.Parameters> {
+public class TmxMapLoader extends BaseTmxMapLoader<TmxMapLoader.Parameters> {
 
 
     public static class Parameters extends BaseTmxMapLoader.Parameters {

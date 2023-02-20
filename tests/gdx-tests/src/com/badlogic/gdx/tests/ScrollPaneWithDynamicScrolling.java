@@ -10,9 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 
-public class ScrollPaneWithDynamicScrolling extends GdxTest {
+public class ScrollPaneWithDynamicScrolling extends GdxTestKotlin {
     private Stage stage;
     private Table container;
     Label dynamicLabel;

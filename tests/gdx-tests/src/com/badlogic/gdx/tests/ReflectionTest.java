@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.reflect.ArrayReflection;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
@@ -18,7 +18,7 @@ import com.badlogic.gdx.utils.reflect.Method;
  *
  * @author hneuer
  */
-public class ReflectionTest extends GdxTest {
+public class ReflectionTest extends GdxTestKotlin {
     String message = "";
     BitmapFont font;
     SpriteBatch batch;

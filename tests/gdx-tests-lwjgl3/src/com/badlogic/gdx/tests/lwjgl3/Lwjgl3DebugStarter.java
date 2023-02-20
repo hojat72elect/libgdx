@@ -33,13 +33,13 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.HdpiUtils;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class Lwjgl3DebugStarter {
 	public static void main (String[] argv) throws NoSuchFieldException, SecurityException, ClassNotFoundException {
-		GdxTest test = new GdxTest() {
+		GdxTestKotlin test = new GdxTestKotlin() {
 			float r = 0;
 			SpriteBatch batch;
 			BitmapFont font;

@@ -7,10 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class ScrollPaneTextAreaTest extends GdxTest {
+public class ScrollPaneTextAreaTest extends GdxTestKotlin {
     Stage stage;
     TextArea textArea;
     ScrollPane scrollPane;

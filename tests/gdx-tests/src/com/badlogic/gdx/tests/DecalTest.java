@@ -28,9 +28,9 @@ import com.badlogic.gdx.graphics.g3d.decals.CameraGroupStrategy;
 import com.badlogic.gdx.graphics.g3d.decals.Decal;
 import com.badlogic.gdx.graphics.g3d.decals.DecalBatch;
 import com.badlogic.gdx.math.WindowedMean;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 
-public class DecalTest extends GdxTest {
+public class DecalTest extends GdxTestKotlin {
 	public static final int TARGET_FPS = 40;
 	public static final int INITIAL_RENDERED = 100;
 	private boolean willItBlend_that_is_the_question = true;

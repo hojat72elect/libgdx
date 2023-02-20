@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 /**
@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
  *
  * @author mzechner
  */
-public class SpriteBatchOriginScaleTest extends GdxTest {
+public class SpriteBatchOriginScaleTest extends GdxTestKotlin {
     SpriteBatch batch;
     TextureRegion region;
     ShapeRenderer renderer;

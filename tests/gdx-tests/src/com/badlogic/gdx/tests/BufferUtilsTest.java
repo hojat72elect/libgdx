@@ -20,12 +20,12 @@ import java.nio.*;
 
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.TimeUtils;
 
-public class BufferUtilsTest extends GdxTest {
+public class BufferUtilsTest extends GdxTestKotlin {
 	static final int NUM_MB = 5;
 
 	@Override

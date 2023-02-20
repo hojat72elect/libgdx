@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FileTextureData;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 /**
@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
  *
  * @author barkholt
  */
-public class GWTLossyPremultipliedAlphaTest extends GdxTest {
+public class GWTLossyPremultipliedAlphaTest extends GdxTestKotlin {
     private SpriteBatch batch;
     private Texture goodTexture;
     private Texture badTexture;

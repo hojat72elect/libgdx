@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /** Placeholder class that's wired up with all backends so i can quickly test out issues...
  * @author badlogic */
-public class IssueTest extends GdxTest {
+public class IssueTest extends GdxTestKotlin {
 	SpriteBatch batch;
 	Texture img;
 	Texture img2;

@@ -6,10 +6,10 @@ import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class MeshWithCustomAttributesTest extends GdxTest {
+public class MeshWithCustomAttributesTest extends GdxTestKotlin {
     ShaderProgram shader;
     Mesh mesh;
 

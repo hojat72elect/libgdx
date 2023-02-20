@@ -22,9 +22,9 @@ import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 
-public class HelloTriangle extends GdxTest {
+public class HelloTriangle extends GdxTestKotlin {
 	ShaderProgram shader;
 	Mesh mesh;
 

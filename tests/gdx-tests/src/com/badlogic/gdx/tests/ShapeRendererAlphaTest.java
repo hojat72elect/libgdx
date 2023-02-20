@@ -5,14 +5,14 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 
 /**
  * Tests alpha blending with all ShapeRenderer shapes.
  *
  * @author mzechner
  */
-public class ShapeRendererAlphaTest extends GdxTest {
+public class ShapeRendererAlphaTest extends GdxTestKotlin {
     ShapeRenderer renderer;
 
     @Override

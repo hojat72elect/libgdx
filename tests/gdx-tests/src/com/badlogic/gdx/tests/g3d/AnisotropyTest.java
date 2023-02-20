@@ -24,9 +24,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 
-public class AnisotropyTest extends GdxTest {
+public class AnisotropyTest extends GdxTestKotlin {
 	Texture brick;
 	SpriteBatch batch;
 	PerspectiveCamera cam = new PerspectiveCamera();

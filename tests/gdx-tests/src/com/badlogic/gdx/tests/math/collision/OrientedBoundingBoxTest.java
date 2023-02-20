@@ -38,12 +38,12 @@ import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.math.collision.OrientedBoundingBox;
 import com.badlogic.gdx.math.collision.Ray;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.Random;
 
-public class OrientedBoundingBoxTest extends GdxTest implements ApplicationListener {
+public class OrientedBoundingBoxTest extends GdxTestKotlin implements ApplicationListener {
 
 	private static final int NUM_BOXES = 100;
 

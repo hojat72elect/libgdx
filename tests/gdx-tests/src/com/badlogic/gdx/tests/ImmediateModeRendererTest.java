@@ -6,9 +6,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ImmediateModeRenderer;
 import com.badlogic.gdx.graphics.glutils.ImmediateModeRenderer20;
 import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 
-public class ImmediateModeRendererTest extends GdxTest {
+public class ImmediateModeRendererTest extends GdxTestKotlin {
     Matrix4 projMatrix = new Matrix4();
     ImmediateModeRenderer renderer;
     Texture texture;

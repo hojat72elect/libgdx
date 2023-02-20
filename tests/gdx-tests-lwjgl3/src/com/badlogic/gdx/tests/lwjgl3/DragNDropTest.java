@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -20,7 +20,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
  * External files (e.g from the desktop) can be dragged into the GLFW window.
  * 
  * @author mbrlabs */
-public class DragNDropTest extends GdxTest {
+public class DragNDropTest extends GdxTestKotlin {
 
 	private Skin skin;
 	private Stage stage;

@@ -12,13 +12,13 @@ import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 
 /**
  * Draws a triangle and a trapezoid. The trapezoid is intersection between two triangles, one stencil and the triangle shown on
  * left.
  */
-public class FrameBufferTest extends GdxTest {
+public class FrameBufferTest extends GdxTestKotlin {
     FrameBuffer stencilFrameBuffer;
     FrameBuffer frameBuffer;
     Mesh mesh;

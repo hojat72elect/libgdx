@@ -5,7 +5,7 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.utils.CharArray;
 
 /**
@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.CharArray;
  *
  * @author mzechner
  */
-public class SoftKeyboardTest extends GdxTest {
+public class SoftKeyboardTest extends GdxTestKotlin {
     SpriteBatch batch;
     BitmapFont font;
     SimpleCharSequence textBuffer;

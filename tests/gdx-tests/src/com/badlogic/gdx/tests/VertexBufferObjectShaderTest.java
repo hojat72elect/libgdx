@@ -11,9 +11,9 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.graphics.glutils.VertexBufferObject;
 import com.badlogic.gdx.graphics.glutils.VertexBufferObjectWithVAO;
 import com.badlogic.gdx.graphics.glutils.VertexData;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 
-public class VertexBufferObjectShaderTest extends GdxTest {
+public class VertexBufferObjectShaderTest extends GdxTestKotlin {
     Texture texture;
     ShaderProgram shader;
     VertexData vbo;

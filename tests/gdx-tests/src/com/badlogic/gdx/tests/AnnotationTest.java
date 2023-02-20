@@ -25,7 +25,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.utils.reflect.Annotation;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.Field;
@@ -36,7 +36,7 @@ import com.badlogic.gdx.utils.reflect.Method;
  *
  * @author dludwig
  */
-public class AnnotationTest extends GdxTest {
+public class AnnotationTest extends GdxTestKotlin {
     String message = "";
     BitmapFont font;
     SpriteBatch batch;

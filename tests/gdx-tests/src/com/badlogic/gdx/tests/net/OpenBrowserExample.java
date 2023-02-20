@@ -17,11 +17,11 @@
 package com.badlogic.gdx.tests.net;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 
 /** Demonstrates how to open a browser and load a specific URL.
  * @author badlogic */
-public class OpenBrowserExample extends GdxTest {
+public class OpenBrowserExample extends GdxTestKotlin {
 	@Override
 	public void create () {
 		Gdx.net.openURI("https://libgdx.com");

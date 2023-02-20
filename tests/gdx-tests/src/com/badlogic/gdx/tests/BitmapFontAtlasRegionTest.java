@@ -8,11 +8,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 
-public class BitmapFontAtlasRegionTest extends GdxTest {
+public class BitmapFontAtlasRegionTest extends GdxTestKotlin {
 	private SpriteBatch batch;
 	private AssetManager assets;
 

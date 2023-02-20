@@ -27,13 +27,13 @@ import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 
 /** The test shows the effects of TextureAttribute.Emissive and ColorAttribute.Emissive on a models Material.
  *
  * Visually the test must show a rotating cube and background that have an orange glowing cross over the "badlogic" image. The
  * cross must be visible even when the cube side has rotated away from the light. */
-public class MaterialEmissiveTest extends GdxTest {
+public class MaterialEmissiveTest extends GdxTestKotlin {
 
 	float angleY = 0;
 

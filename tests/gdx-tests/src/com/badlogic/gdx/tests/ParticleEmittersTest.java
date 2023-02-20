@@ -20,11 +20,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestKotlin;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
-public class ParticleEmittersTest extends GdxTest {
+public class ParticleEmittersTest extends GdxTestKotlin {
     private SpriteBatch spriteBatch;
     ParticleEffect effect;
     ParticleEffectPool effectPool;
