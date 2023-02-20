@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 /**
@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
  *
  * @author mzechner
  */
-public class MoveSpriteExample extends GdxTestKotlin {
+public class MoveSpriteExample extends GdxTestK {
     Texture texture;
     SpriteBatch batch;
     OrthographicCamera camera;

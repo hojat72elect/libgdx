@@ -25,7 +25,7 @@ import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.graphics.glutils.KTXTextureData;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 /**
@@ -33,7 +33,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
  *
  * @author Vincent Bousquet
  */
-public class KTXTest extends GdxTestKotlin {
+public class KTXTest extends GdxTestK {
 
     // 3D texture cubemap example
     private PerspectiveCamera perspectiveCamera;

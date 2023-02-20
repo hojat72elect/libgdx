@@ -15,10 +15,10 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.loader.ObjLoader;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class FramebufferToTextureTest extends GdxTestKotlin {
+public class FramebufferToTextureTest extends GdxTestK {
 
     TextureRegion fbTexture;
     Texture texture;

@@ -2,10 +2,10 @@ package com.badlogic.gdx.tests;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-public class PreferencesTest extends GdxTestKotlin {
+public class PreferencesTest extends GdxTestK {
     public void create() {
         Preferences prefs = Gdx.app.getPreferences(".test");
         if (prefs.contains("bool")) {

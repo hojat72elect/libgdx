@@ -30,11 +30,11 @@ import com.badlogic.gdx.graphics.Texture3D;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.CustomTexture3DData;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.tests.utils.GdxTestConfig;
 
 @GdxTestConfig(requireGL30 = true)
-public class GL30Texture3DTest extends GdxTestKotlin {
+public class GL30Texture3DTest extends GdxTestK {
 	private Texture3D texture3D;
 	private Texture texture;
 	private float time;

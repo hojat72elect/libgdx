@@ -11,9 +11,9 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.MassData;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 
-public class KinematicBodyTest extends GdxTestKotlin {
+public class KinematicBodyTest extends GdxTestK {
 
     OrthographicCamera cam;
     World world;

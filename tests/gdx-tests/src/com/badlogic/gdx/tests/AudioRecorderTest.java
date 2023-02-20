@@ -4,9 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.AudioDevice;
 import com.badlogic.gdx.audio.AudioRecorder;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 
-public class AudioRecorderTest extends GdxTestKotlin {
+public class AudioRecorderTest extends GdxTestK {
     short[] samples = new short[1024 * 4];
     AudioDevice device;
     AudioRecorder recorder;

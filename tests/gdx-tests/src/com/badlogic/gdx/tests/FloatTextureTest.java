@@ -12,11 +12,11 @@ import com.badlogic.gdx.graphics.glutils.FloatFrameBuffer;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.tests.utils.GdxTestConfig;
 
 @GdxTestConfig(requireGL30 = true)
-public class FloatTextureTest extends GdxTestKotlin {
+public class FloatTextureTest extends GdxTestK {
     FrameBuffer fb;
     FloatFrameBuffer ffb;
     ShaderProgram fbshader, shader;

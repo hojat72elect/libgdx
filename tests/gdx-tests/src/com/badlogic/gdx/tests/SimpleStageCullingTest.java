@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.Cullable;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.tests.utils.OrthoCamController;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
@@ -26,7 +26,7 @@ import com.badlogic.gdx.utils.Scaling;
  *
  * @author mzechner
  */
-public class SimpleStageCullingTest extends GdxTestKotlin {
+public class SimpleStageCullingTest extends GdxTestK {
 
     /**
      * We need to extend a base actor class so we can add the culling in the render method. We also add a method to get the stage

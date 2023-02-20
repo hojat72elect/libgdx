@@ -26,11 +26,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.tests.utils.PerspectiveCamController;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-public class ProjectiveTextureTest extends GdxTestKotlin {
+public class ProjectiveTextureTest extends GdxTestK {
 
     PerspectiveCamera cam;
     PerspectiveCamera projector;

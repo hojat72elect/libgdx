@@ -6,9 +6,9 @@ import com.badlogic.gdx.Input.OnscreenKeyboardType;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 
-public class OnscreenKeyboardTest extends GdxTestKotlin implements InputProcessor {
+public class OnscreenKeyboardTest extends GdxTestK implements InputProcessor {
 
     BitmapFont font;
     String text;

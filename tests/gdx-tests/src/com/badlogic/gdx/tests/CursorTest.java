@@ -21,13 +21,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 /** Simple test case for mouse cursor change Switch between two cursors every frame, a third cursor is used when a mouse button is
  * pressed
  * @author haedri */
-public class CursorTest extends GdxTestKotlin {
+public class CursorTest extends GdxTestK {
 	Cursor cursor1;
 	Cursor cursor2;
 	Cursor cursor3;

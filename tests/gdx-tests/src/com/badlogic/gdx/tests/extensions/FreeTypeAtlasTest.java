@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.PixmapPacker;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.util.EnumMap;
@@ -22,7 +22,7 @@ import java.util.EnumMap;
  * with FreeTypePackTest - each texture page will be generated and refreshed once. Refreshing textures is slow on mobile
  * devices.
  */
-public class FreeTypeAtlasTest extends GdxTestKotlin {
+public class FreeTypeAtlasTest extends GdxTestK {
 
     // Define font sizes here...
     static enum FontSize {

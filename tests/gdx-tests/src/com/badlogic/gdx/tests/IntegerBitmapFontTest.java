@@ -6,10 +6,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFontCache;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.Align;
 
-public class IntegerBitmapFontTest extends GdxTestKotlin {
+public class IntegerBitmapFontTest extends GdxTestK {
 
     BitmapFont font;
     BitmapFontCache singleLineCacheNonInteger;

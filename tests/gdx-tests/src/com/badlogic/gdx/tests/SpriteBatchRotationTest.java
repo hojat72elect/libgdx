@@ -6,9 +6,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 
-public class SpriteBatchRotationTest extends GdxTestKotlin {
+public class SpriteBatchRotationTest extends GdxTestK {
     SpriteBatch spriteBatch;
     Texture texture;
     // Font font;

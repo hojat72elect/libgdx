@@ -26,9 +26,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 
-public class Scene2dTest extends GdxTestKotlin {
+public class Scene2dTest extends GdxTestK {
     Stage stage;
     private FloatAction meow = new FloatAction(10, 5);
     private TiledDrawable patch;

@@ -1,9 +1,9 @@
 package com.badlogic.gdx.tests;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 
-public class ExitTest extends GdxTestKotlin {
+public class ExitTest extends GdxTestK {
 
     @Override
     public void render() {

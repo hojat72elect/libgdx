@@ -29,10 +29,10 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.model.Node;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.Array;
 
-public class Basic3DSceneTest extends GdxTestKotlin implements ApplicationListener {
+public class Basic3DSceneTest extends GdxTestK implements ApplicationListener {
 	public PerspectiveCamera cam;
 	public CameraInputController camController;
 	public ModelBatch modelBatch;

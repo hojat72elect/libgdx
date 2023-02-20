@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.PixmapPacker;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -24,7 +24,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
  *
  * @author mattdesl AKA davedes
  */
-public class FreeTypePackTest extends GdxTestKotlin {
+public class FreeTypePackTest extends GdxTestK {
 
     // Define font sizes here...
     static enum FontSize {

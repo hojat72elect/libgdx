@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.tests.utils.GdxTestConfig;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
@@ -16,7 +16,7 @@ import java.nio.Buffer;
 import java.nio.FloatBuffer;
 
 @GdxTestConfig(requireGL30 = true)
-public class InstancedRenderingTest extends GdxTestKotlin {
+public class InstancedRenderingTest extends GdxTestK {
 
     ShaderProgram shader;
     Mesh mesh;

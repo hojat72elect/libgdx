@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.HdpiUtils;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -20,7 +20,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  * Cycles viewports while rendering with SpriteBatch, also shows how to
  * draw in the black bars.
  */
-public class ViewportTest2 extends GdxTestKotlin {
+public class ViewportTest2 extends GdxTestK {
     Array<Viewport> viewports;
     Viewport viewport;
     Array<String> names;

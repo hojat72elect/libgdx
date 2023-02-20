@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 
-public class GestureDetectorTest extends GdxTestKotlin implements ApplicationListener {
+public class GestureDetectorTest extends GdxTestK implements ApplicationListener {
     Texture texture;
     SpriteBatch batch;
     OrthographicCamera camera;

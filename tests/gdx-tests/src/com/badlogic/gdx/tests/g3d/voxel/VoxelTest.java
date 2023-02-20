@@ -14,10 +14,10 @@ import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader;
 import com.badlogic.gdx.graphics.g3d.utils.FirstPersonCameraController;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class VoxelTest extends GdxTestKotlin {
+public class VoxelTest extends GdxTestK {
     SpriteBatch spriteBatch;
     BitmapFont font;
     ModelBatch modelBatch;

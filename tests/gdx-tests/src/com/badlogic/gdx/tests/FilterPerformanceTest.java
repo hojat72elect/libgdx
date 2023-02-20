@@ -10,9 +10,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 
-public class FilterPerformanceTest extends GdxTestKotlin {
+public class FilterPerformanceTest extends GdxTestK {
     SpriteBatch batch;
     Sprite sprite;
     Sprite sprite2;

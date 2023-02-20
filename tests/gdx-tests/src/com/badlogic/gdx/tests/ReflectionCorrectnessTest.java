@@ -1,10 +1,10 @@
 package com.badlogic.gdx.tests;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 
-public class ReflectionCorrectnessTest extends GdxTestKotlin {
+public class ReflectionCorrectnessTest extends GdxTestK {
 
     // Trigger generation of reflection information
     public AbstractInterfaceStatic abstractInterfaceStatic;

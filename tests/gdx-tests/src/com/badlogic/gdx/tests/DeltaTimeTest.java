@@ -17,10 +17,10 @@
 package com.badlogic.gdx.tests;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.TimeUtils;
 
-public class DeltaTimeTest extends GdxTestKotlin {
+public class DeltaTimeTest extends GdxTestK {
 
 	long lastFrameTime;
 

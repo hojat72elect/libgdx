@@ -23,9 +23,9 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 
-public class AlphaTest extends GdxTestKotlin {
+public class AlphaTest extends GdxTestK {
 	SpriteBatch batch;
 	Texture texture;
 

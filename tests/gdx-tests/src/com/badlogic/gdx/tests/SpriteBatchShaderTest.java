@@ -8,10 +8,10 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.TimeUtils;
 
-public class SpriteBatchShaderTest extends GdxTestKotlin {
+public class SpriteBatchShaderTest extends GdxTestK {
     int SPRITES = 400;
 
     long startTime = TimeUtils.nanoTime();

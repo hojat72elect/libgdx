@@ -21,11 +21,11 @@ import com.badlogic.gdx.Net.HttpMethods;
 import com.badlogic.gdx.Net.HttpRequest;
 import com.badlogic.gdx.Net.HttpResponse;
 import com.badlogic.gdx.Net.HttpResponseListener;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 
 /** Demonstrates how to perform a simple HTTP request. Need to add internet permission to AndroidManifest.xml.
  * @author badlogic */
-public class HttpRequestExample extends GdxTestKotlin {
+public class HttpRequestExample extends GdxTestK {
 	@Override
 	public void create () {
 		HttpRequest request = new HttpRequest(HttpMethods.GET);

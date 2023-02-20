@@ -6,10 +6,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class FullscreenTest extends GdxTestKotlin {
+public class FullscreenTest extends GdxTestK {
     SpriteBatch batch;
     Texture tex;
     boolean fullscreen = false;

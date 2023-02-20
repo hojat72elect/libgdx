@@ -16,9 +16,9 @@ import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.graphics.g3d.utils.DefaultShaderProvider;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 
-public class Basic3DTest extends GdxTestKotlin {
+public class Basic3DTest extends GdxTestK {
     public PerspectiveCamera cam;
     public CameraInputController inputController;
     public ModelBatch modelBatch;

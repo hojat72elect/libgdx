@@ -26,14 +26,14 @@ import com.badlogic.gdx.net.ServerSocket;
 import com.badlogic.gdx.net.ServerSocketHints;
 import com.badlogic.gdx.net.Socket;
 import com.badlogic.gdx.net.SocketHints;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 
 /** Demonstrates how to do very simple socket programming. Implements a classic PING-PONG sequence, client connects to server,
  * sends message, server sends message back to client. Both client and server run locally. We quit as soon as the client received
  * the PONG message from the server. This example won't work in HTML. Messages are delimited by the new line character, so we can
  * use a {@link BufferedReader}.
  * @author badlogic */
-public class PingPongSocketExample extends GdxTestKotlin {
+public class PingPongSocketExample extends GdxTestK {
 	@Override
 	public void create () {
 		// setup a server thread where we wait for incoming connections

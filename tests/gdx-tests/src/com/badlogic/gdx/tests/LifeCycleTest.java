@@ -2,14 +2,14 @@ package com.badlogic.gdx.tests;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 
 /**
  * A simple test to demonstrate the life cycle of an application.
  *
  * @author mzechner
  */
-public class LifeCycleTest extends GdxTestKotlin {
+public class LifeCycleTest extends GdxTestK {
 
     @Override
     public void dispose() {

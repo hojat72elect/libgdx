@@ -16,12 +16,12 @@ import com.badlogic.gdx.maps.tiled.renderers.IsometricStaggeredTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.IsometricTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.tests.utils.OrthoCamController;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class TiledMapLayerOffsetTest extends GdxTestKotlin {
+public class TiledMapLayerOffsetTest extends GdxTestK {
     private final static String MAP_ORTHO = "data/maps/tiled-offsets/ortho.tmx";
     private final static String MAP_ISO = "data/maps/tiled-offsets/iso.tmx";
     private final static String MAP_ISO_STAG = "data/maps/tiled-offsets/iso_stag.tmx";

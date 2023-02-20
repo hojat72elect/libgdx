@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -25,7 +25,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 /**
  * Cycles viewports while rendering a stage with a root Table for the layout.
  */
-public class ViewportTest1 extends GdxTestKotlin {
+public class ViewportTest1 extends GdxTestK {
     Array<Viewport> viewports;
     Array<String> names;
     Stage stage;

@@ -7,11 +7,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteCache;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.tests.utils.OrthoCamController;
 import com.badlogic.gdx.utils.TimeUtils;
 
-public class TileTest extends GdxTestKotlin {
+public class TileTest extends GdxTestK {
     static final int LAYERS = 5;
     static final int BLOCK_TILES = 25;
     static final int WIDTH = 15;

@@ -31,10 +31,10 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class FogTest extends GdxTestKotlin implements ApplicationListener {
+public class FogTest extends GdxTestK implements ApplicationListener {
 	public PerspectiveCamera cam;
 	public CameraInputController inputController;
 	public ModelBatch modelBatch;

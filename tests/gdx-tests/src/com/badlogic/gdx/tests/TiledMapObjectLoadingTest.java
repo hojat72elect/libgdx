@@ -18,7 +18,6 @@ import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.badlogic.gdx.math.Circle;
@@ -26,11 +25,11 @@ import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Polyline;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.tests.utils.OrthoCamController;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class TiledMapObjectLoadingTest extends GdxTestKotlin {
+public class TiledMapObjectLoadingTest extends GdxTestK {
 
     private TiledMap map;
     private ShapeRenderer shapeRenderer;

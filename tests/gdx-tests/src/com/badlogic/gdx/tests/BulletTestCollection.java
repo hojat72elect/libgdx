@@ -14,13 +14,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.tests.bullet.*;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.Align;
 
 /**
  * @author xoppa
  */
-public class BulletTestCollection extends GdxTestKotlin implements InputProcessor, GestureListener {
+public class BulletTestCollection extends GdxTestK implements InputProcessor, GestureListener {
     protected final BulletTest[] tests = {new BasicBulletTest(), new ShootTest(), new BasicShapesTest(), new KinematicTest(), new ConstraintsTest(), new MeshShapeTest(), new GimpactTest(), new ConvexHullTest(), new ConvexHullDistanceTest(), new RayCastTest(), new RayPickRagdollTest(), new InternalTickTest(), new CollisionWorldTest(), new CollisionTest(), new FrustumCullingTest(), new CollisionDispatcherTest(), new ContactCallbackTest(), new ContactCallbackTest2(), new ContactCacheTest(), new SoftBodyTest(), new SoftMeshTest(), new VehicleTest(), new VehicleFilterTest(), new CharacterTest(), new ImportTest(), new TriangleRaycastTest(), new OcclusionCullingTest(), new PairCacheTest()};
 
     protected int testIndex = 0;

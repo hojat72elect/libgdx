@@ -21,9 +21,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 
-public class CustomShaderSpriteBatchTest extends GdxTestKotlin {
+public class CustomShaderSpriteBatchTest extends GdxTestK {
 	SpriteBatch batch;
 	ShaderProgram shader;
 	Texture texture;

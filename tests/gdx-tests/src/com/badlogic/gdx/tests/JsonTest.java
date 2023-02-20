@@ -1,6 +1,6 @@
 package com.badlogic.gdx.tests;
 
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
 import com.badlogic.gdx.utils.reflect.ArrayReflection;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JsonTest extends GdxTestKotlin {
+public class JsonTest extends GdxTestK {
     Json json;
 
     public void create() {

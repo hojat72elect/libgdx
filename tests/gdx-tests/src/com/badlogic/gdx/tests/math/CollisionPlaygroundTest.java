@@ -43,12 +43,12 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.math.collision.OrientedBoundingBox;
 import com.badlogic.gdx.math.collision.Ray;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CollisionPlaygroundTest extends GdxTestKotlin implements ApplicationListener {
+public class CollisionPlaygroundTest extends GdxTestK implements ApplicationListener {
 
     private static final int NUM_SHAPES = 30;
     private static final int RANGE = 4;

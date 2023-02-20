@@ -6,9 +6,9 @@ import com.badlogic.gdx.Input.TextInputListener;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 
-public class TextInputDialogTest extends GdxTestKotlin {
+public class TextInputDialogTest extends GdxTestK {
     String message;
     SpriteBatch batch;
     BitmapFont font;

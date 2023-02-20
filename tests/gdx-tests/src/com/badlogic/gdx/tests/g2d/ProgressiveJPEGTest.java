@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 /**
@@ -15,7 +15,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
  *
  * @author HD_92 (blueriverteam@gmail.com)
  */
-public class ProgressiveJPEGTest extends GdxTestKotlin {
+public class ProgressiveJPEGTest extends GdxTestK {
     private SpriteBatch batch;
     private Drawable drawable;
     private Texture texture;

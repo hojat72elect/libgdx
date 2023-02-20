@@ -3,11 +3,11 @@ package com.badlogic.gdx.tests;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.TimeUtils;
 
-public class MatrixJNITest extends GdxTestKotlin {
+public class MatrixJNITest extends GdxTestK {
 
     private static final float EPSILON = 1e-6f;
 

@@ -3,7 +3,7 @@ package com.badlogic.gdx.tests.utils
 import com.badlogic.gdx.ApplicationListener
 import com.badlogic.gdx.InputAdapter
 
-abstract class GdxTestKotlin : InputAdapter(), ApplicationListener {
+abstract class GdxTestK : InputAdapter(), ApplicationListener {
 
     override fun create() {
 

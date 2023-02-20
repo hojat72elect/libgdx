@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.graphics.glutils.IndexBufferObject;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.graphics.glutils.VertexBufferObject;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 
-public class IndexBufferObjectShaderTest extends GdxTestKotlin {
+public class IndexBufferObjectShaderTest extends GdxTestK {
     Texture texture;
     ShaderProgram shader;
     VertexBufferObject vbo;

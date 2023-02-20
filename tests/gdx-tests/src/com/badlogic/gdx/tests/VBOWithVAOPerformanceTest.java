@@ -17,7 +17,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.WindowedMean;
 import com.badlogic.gdx.tests.utils.GdxTestConfig;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StringBuilder;
@@ -28,7 +28,7 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
 @GdxTestConfig(requireGL30 = true)
-public class VBOWithVAOPerformanceTest extends GdxTestKotlin {
+public class VBOWithVAOPerformanceTest extends GdxTestK {
 
     ShaderProgram shader;
     Texture texture;

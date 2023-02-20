@@ -11,11 +11,11 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.maps.tiled.renderers.IsometricTiledMapRenderer;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.tests.utils.OrthoCamController;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class TiledMapAssetManagerTest extends GdxTestKotlin {
+public class TiledMapAssetManagerTest extends GdxTestK {
 
     private static final String MAP_PROPERTY_NAME = "mapCustomProperty";
     private static final String BOOL_PROPERTY_NAME = "boolCustomProperty";

@@ -33,9 +33,9 @@ import com.badlogic.gdx.graphics.g3d.utils.DepthShaderProvider;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 
-public class ShadowMappingTest extends GdxTestKotlin {
+public class ShadowMappingTest extends GdxTestK {
 	PerspectiveCamera cam;
 	CameraInputController camController;
 	ModelBatch modelBatch;

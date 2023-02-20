@@ -18,14 +18,14 @@ package com.badlogic.gdx.tests;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 /** Demonstrates how to use non-continuous (aka dirty-only) rendering. The application will clear the screen with a random color
  * every frame it renders. Rendering requests are issued automatically if new input events arrive.
  * 
  * @author mzechner */
-public class DirtyRenderingTest extends GdxTestKotlin {
+public class DirtyRenderingTest extends GdxTestK {
 	@Override
 	public void create () {
 		// disable continuous rendering

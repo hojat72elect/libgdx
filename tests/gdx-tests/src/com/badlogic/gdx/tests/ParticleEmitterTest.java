@@ -8,10 +8,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.ParticleEmitter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.Array;
 
-public class ParticleEmitterTest extends GdxTestKotlin {
+public class ParticleEmitterTest extends GdxTestK {
     private SpriteBatch spriteBatch;
     ParticleEffect effect;
     int emitterIndex;

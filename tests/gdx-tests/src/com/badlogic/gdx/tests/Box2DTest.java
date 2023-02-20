@@ -48,13 +48,13 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.WorldManifold;
 import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
 import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
 import java.util.ArrayList;
 
-public class Box2DTest extends GdxTestKotlin implements InputProcessor {
+public class Box2DTest extends GdxTestK implements InputProcessor {
 	/** the camera **/
 	private com.badlogic.gdx.graphics.OrthographicCamera camera;
 

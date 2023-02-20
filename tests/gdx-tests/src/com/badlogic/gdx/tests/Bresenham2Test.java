@@ -25,10 +25,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Bresenham2;
 import com.badlogic.gdx.math.GridPoint2;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.Array;
 
-public class Bresenham2Test extends GdxTestKotlin {
+public class Bresenham2Test extends GdxTestK {
 	SpriteBatch batch;
 	Texture result;
 	Pixmap pixmap;

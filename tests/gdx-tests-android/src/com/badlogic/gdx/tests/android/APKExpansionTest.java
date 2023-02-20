@@ -33,7 +33,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader.FreeTypeFontLoaderParameter;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 /* 
@@ -41,7 +41,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
  * run: gradlew tests:gdx-tests-android:uploadOBB
  * to generate and upload the aforementioned file
  */
-public class APKExpansionTest extends GdxTestKotlin {
+public class APKExpansionTest extends GdxTestK {
 	FileHandleResolver resolver;
 	Sound sound;
 	SpriteBatch batch;

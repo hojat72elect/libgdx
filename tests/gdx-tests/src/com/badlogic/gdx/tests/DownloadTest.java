@@ -7,10 +7,10 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.Queue;
 
-public class DownloadTest extends GdxTestKotlin {
+public class DownloadTest extends GdxTestK {
 	Texture texture;
 	SpriteBatch batch;
 	Queue<String> urls = new Queue<>();

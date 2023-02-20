@@ -1,12 +1,12 @@
 package com.badlogic.gdx.tests;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 
 /**
  * Test that unchecked exceptions thrown from a runnable get posted and terminate the app.
  */
-public class RunnablePostTest extends GdxTestKotlin {
+public class RunnablePostTest extends GdxTestK {
 
     private static final String TAG = "RunnablePostTest";
     static boolean expectIt = false;

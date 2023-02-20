@@ -11,14 +11,14 @@ import com.badlogic.gdx.math.Bezier;
 import com.badlogic.gdx.math.CatmullRomSpline;
 import com.badlogic.gdx.math.Path;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 /**
  * @author Xoppa
  */
-public class PathTest extends GdxTestKotlin {
+public class PathTest extends GdxTestK {
     int SAMPLE_POINTS = 100;
     float SAMPLE_POINT_DISTANCE = 1f / SAMPLE_POINTS;
     float ZIGZAG_SCALE;

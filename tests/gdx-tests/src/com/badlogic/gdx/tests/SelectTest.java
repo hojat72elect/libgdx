@@ -2,7 +2,7 @@ package com.badlogic.gdx.tests;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.PerformanceCounter;
@@ -14,7 +14,7 @@ import java.util.Comparator;
  *
  * @author Jon Renner
  */
-public class SelectTest extends GdxTestKotlin {
+public class SelectTest extends GdxTestK {
     static PerformanceCounter perf = new PerformanceCounter("bench");
     static boolean verify; // verify and report the results of each selection
     private static boolean quiet;

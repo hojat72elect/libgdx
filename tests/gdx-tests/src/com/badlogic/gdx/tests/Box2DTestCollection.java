@@ -25,9 +25,9 @@ import com.badlogic.gdx.tests.box2d.SimpleTest;
 import com.badlogic.gdx.tests.box2d.SphereStack;
 import com.badlogic.gdx.tests.box2d.VaryingRestitution;
 import com.badlogic.gdx.tests.box2d.VerticalStack;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 
-public class Box2DTestCollection extends GdxTestKotlin implements InputProcessor, GestureListener {
+public class Box2DTestCollection extends GdxTestK implements InputProcessor, GestureListener {
     private final Box2DTest[] tests = {new DebugRendererTest(), new CollisionFiltering(), new Chain(), new Bridge(), new SphereStack(), new Cantilever(), new ApplyForce(), new ContinuousTest(), new Prismatic(), new CharacterCollision(), new BodyTypes(), new SimpleTest(), new Pyramid(), new OneSidedPlatform(), new VerticalStack(), new VaryingRestitution(), new ConveyorBelt()};
 
     private int testIndex = 0;

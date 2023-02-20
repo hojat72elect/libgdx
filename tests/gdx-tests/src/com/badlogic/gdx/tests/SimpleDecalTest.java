@@ -11,12 +11,12 @@ import com.badlogic.gdx.graphics.g3d.decals.CameraGroupStrategy;
 import com.badlogic.gdx.graphics.g3d.decals.Decal;
 import com.badlogic.gdx.graphics.g3d.decals.DecalBatch;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.tests.utils.PerspectiveCamController;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class SimpleDecalTest extends GdxTestKotlin {
+public class SimpleDecalTest extends GdxTestK {
     private static final int NUM_DECALS = 3;
     DecalBatch batch;
     Array<Decal> decals = new Array<>();

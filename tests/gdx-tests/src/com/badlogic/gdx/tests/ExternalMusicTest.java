@@ -3,14 +3,14 @@ package com.badlogic.gdx.tests;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 
 /**
  * Tests playing back audio from the external storage.
  *
  * @author mzechner
  */
-public class ExternalMusicTest extends GdxTestKotlin {
+public class ExternalMusicTest extends GdxTestK {
     Music music;
 
     @Override

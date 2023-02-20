@@ -5,14 +5,14 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.Files.FileType;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 
 /**
  * Test case to validate an issue where soundID is in dirty state and controls a source used by a music.
  *
  * @author mgsx
  */
-public class AudioSoundAndMusicIsolationTest extends GdxTestKotlin {
+public class AudioSoundAndMusicIsolationTest extends GdxTestK {
     private Sound sound;
     private Music music;
     private float time;

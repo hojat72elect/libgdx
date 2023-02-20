@@ -11,11 +11,11 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.renderers.HexagonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.tests.utils.OrthoCamController;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class HexagonalTiledMapTest extends GdxTestKotlin {
+public class HexagonalTiledMapTest extends GdxTestK {
     TiledMap map;
     OrthographicCamera camera;
     OrthoCamController cameraController;

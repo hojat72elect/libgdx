@@ -19,7 +19,7 @@ package com.badlogic.gdx.tests;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.BinaryHeap;
@@ -49,7 +49,7 @@ import com.badlogic.gdx.utils.reflect.Constructor;
 import com.badlogic.gdx.utils.reflect.Method;
 
 /** Tests for the collection classes. Currently, only equals() and hashCode() methods are tested. */
-public class CollectionsTest extends GdxTestKotlin {
+public class CollectionsTest extends GdxTestK {
 	// Objects to use for test keys/values; no duplicates may exist. All arrays are 10 elements.
 	private Object[] values = {"just", "some", "random", "values", true, false, 50, "nope", "yeah", 53};
 	private Object[] valuesWithNulls = {"just", "some", null, "values", true, false, 50, "nope", "yeah", 53};

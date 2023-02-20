@@ -26,7 +26,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglPreferences;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.tests.utils.CommandLineOptions;
-import com.badlogic.gdx.tests.utils.GdxTestKotlin;
+import com.badlogic.gdx.tests.utils.GdxTestK;
 import com.badlogic.gdx.tests.utils.GdxTestWrapper;
 import com.badlogic.gdx.tests.utils.GdxTests;
 
@@ -44,14 +44,14 @@ public class LwjglTestStarter extends JFrame {
     }
 
     /**
-     * Runs the {@link GdxTestKotlin} with the given name.
+     * Runs the {@link GdxTestK} with the given name.
      *
      * @param testName the name of a test class
      * @return {@code true} if the test was found and run, {@code false} otherwise
      */
     public static boolean runTest(String testName) {
         boolean useGL30 = options.gl30;
-        GdxTestKotlin test = GdxTests.newTest(testName);
+        GdxTestK test = GdxTests.newTest(testName);
         if (test == null) {
             return false;
         }
