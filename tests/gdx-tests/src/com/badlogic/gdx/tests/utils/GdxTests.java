@@ -19,6 +19,7 @@ import com.badlogic.gdx.tests.math.CollisionPlaygroundTest;
 import com.badlogic.gdx.tests.math.OctreeTest;
 import com.badlogic.gdx.tests.math.collision.OrientedBoundingBoxTest;
 import com.badlogic.gdx.tests.net.NetAPITest;
+import com.badlogic.gdx.tests.superkoalio.SuperKoalio;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.StreamUtils;
 
@@ -37,7 +38,6 @@ import java.util.List;
  */
 public class GdxTests {
     public static final List<Class<? extends GdxTest>> tests = new ArrayList<>(Arrays.asList(
-            // @off
             IssueTest.class,
             AccelerometerTest.class,
             ActionSequenceTest.class,
@@ -204,7 +204,7 @@ public class GdxTests {
             StageDebugTest.class,
             StagePerformanceTest.class,
             StageTest.class,
-//            SuperKoalio.class,
+            SuperKoalio.class,
             SystemCursorTest.class,
             TableLayoutTest.class,
             TableTest.class,
