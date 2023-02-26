@@ -84,7 +84,8 @@ public class KTXTextureData implements TextureData, CubemapData {
                 int fileSize = in.readInt();
                 compressedData = BufferUtils.newUnsafeByteBuffer(fileSize);
                 int readBytes = 0;
-                while ((readBytes = in.read(buffer)) != -1) compressedData.put(buffer, 0, readBytes);
+                while ((readBytes = in.read(buffer)) != -1)
+                    compressedData.put(buffer, 0, readBytes);
                 ((Buffer) compressedData).position(0);
                 ((Buffer) compressedData).limit(compressedData.capacity());
             } catch (Exception e) {
@@ -95,20 +96,33 @@ public class KTXTextureData implements TextureData, CubemapData {
         } else {
             compressedData = ByteBuffer.wrap(file.readBytes());
         }
-        if (compressedData.get() != (byte) 0x0AB) throw new GdxRuntimeException("Invalid KTX Header");
-        if (compressedData.get() != (byte) 0x04B) throw new GdxRuntimeException("Invalid KTX Header");
-        if (compressedData.get() != (byte) 0x054) throw new GdxRuntimeException("Invalid KTX Header");
-        if (compressedData.get() != (byte) 0x058) throw new GdxRuntimeException("Invalid KTX Header");
-        if (compressedData.get() != (byte) 0x020) throw new GdxRuntimeException("Invalid KTX Header");
-        if (compressedData.get() != (byte) 0x031) throw new GdxRuntimeException("Invalid KTX Header");
-        if (compressedData.get() != (byte) 0x031) throw new GdxRuntimeException("Invalid KTX Header");
-        if (compressedData.get() != (byte) 0x0BB) throw new GdxRuntimeException("Invalid KTX Header");
-        if (compressedData.get() != (byte) 0x00D) throw new GdxRuntimeException("Invalid KTX Header");
-        if (compressedData.get() != (byte) 0x00A) throw new GdxRuntimeException("Invalid KTX Header");
-        if (compressedData.get() != (byte) 0x01A) throw new GdxRuntimeException("Invalid KTX Header");
-        if (compressedData.get() != (byte) 0x00A) throw new GdxRuntimeException("Invalid KTX Header");
+        if (compressedData.get() != (byte) 0x0AB)
+            throw new GdxRuntimeException("Invalid KTX Header");
+        if (compressedData.get() != (byte) 0x04B)
+            throw new GdxRuntimeException("Invalid KTX Header");
+        if (compressedData.get() != (byte) 0x054)
+            throw new GdxRuntimeException("Invalid KTX Header");
+        if (compressedData.get() != (byte) 0x058)
+            throw new GdxRuntimeException("Invalid KTX Header");
+        if (compressedData.get() != (byte) 0x020)
+            throw new GdxRuntimeException("Invalid KTX Header");
+        if (compressedData.get() != (byte) 0x031)
+            throw new GdxRuntimeException("Invalid KTX Header");
+        if (compressedData.get() != (byte) 0x031)
+            throw new GdxRuntimeException("Invalid KTX Header");
+        if (compressedData.get() != (byte) 0x0BB)
+            throw new GdxRuntimeException("Invalid KTX Header");
+        if (compressedData.get() != (byte) 0x00D)
+            throw new GdxRuntimeException("Invalid KTX Header");
+        if (compressedData.get() != (byte) 0x00A)
+            throw new GdxRuntimeException("Invalid KTX Header");
+        if (compressedData.get() != (byte) 0x01A)
+            throw new GdxRuntimeException("Invalid KTX Header");
+        if (compressedData.get() != (byte) 0x00A)
+            throw new GdxRuntimeException("Invalid KTX Header");
         int endianTag = compressedData.getInt();
-        if (endianTag != 0x04030201 && endianTag != 0x01020304) throw new GdxRuntimeException("Invalid KTX Header");
+        if (endianTag != 0x04030201 && endianTag != 0x01020304)
+            throw new GdxRuntimeException("Invalid KTX Header");
         if (endianTag != 0x04030201)
             compressedData.order(compressedData.order() == ByteOrder.BIG_ENDIAN ? ByteOrder.LITTLE_ENDIAN : ByteOrder.BIG_ENDIAN);
         glType = compressedData.getInt();
@@ -266,7 +280,8 @@ public class KTXTextureData implements TextureData, CubemapData {
                 }
             }
         }
-        if (previousUnpackAlignment != 4) Gdx.gl.glPixelStorei(GL20.GL_UNPACK_ALIGNMENT, previousUnpackAlignment);
+        if (previousUnpackAlignment != 4)
+            Gdx.gl.glPixelStorei(GL20.GL_UNPACK_ALIGNMENT, previousUnpackAlignment);
         if (useMipMaps()) Gdx.gl.glGenerateMipmap(target);
 
         // dispose data once transfered to GPU
