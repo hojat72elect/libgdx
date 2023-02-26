@@ -1,19 +1,3 @@
-/*******************************************************************************
- * Copyright 2020 See AUTHORS file.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- ******************************************************************************/
-
 package com.badlogic.gdx.tests.math;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -324,8 +308,7 @@ public class CollisionPlaygroundTest extends GdxTest implements ApplicationListe
             Vector3 max = new Vector3(position.x + width / 2, position.y + height / 2, position.z + depth / 2);
 
             BoundingBox bounds = new BoundingBox(min, max);
-            Matrix4 transform = new Matrix4().rotate(Vector3.Y, MathUtils.random.nextFloat() * 180).rotate(Vector3.X,
-                    MathUtils.random.nextFloat() * 180);
+            Matrix4 transform = new Matrix4().rotate(Vector3.Y, MathUtils.random.nextFloat() * 180).rotate(Vector3.X, MathUtils.random.nextFloat() * 180);
 
             obb = new OrientedBoundingBox(bounds, transform);
 
@@ -333,9 +316,7 @@ public class CollisionPlaygroundTest extends GdxTest implements ApplicationListe
             com.badlogic.gdx.graphics.g3d.utils.ModelBuilder mb = new com.badlogic.gdx.graphics.g3d.utils.ModelBuilder();
             mb.begin();
             MeshPartBuilder meshPartBuilder = mb.part("obb", GL20.GL_LINES, VertexAttributes.Usage.Position, material);
-            BoxShapeBuilder.build(meshPartBuilder, obb.getCorner000(new Vector3()), obb.getCorner010(new Vector3()),
-                    obb.getCorner100(new Vector3()), obb.getCorner110(new Vector3()), obb.getCorner001(new Vector3()),
-                    obb.getCorner011(new Vector3()), obb.getCorner101(new Vector3()), obb.getCorner111(new Vector3()));
+            BoxShapeBuilder.build(meshPartBuilder, obb.getCorner000(new Vector3()), obb.getCorner010(new Vector3()), obb.getCorner100(new Vector3()), obb.getCorner110(new Vector3()), obb.getCorner001(new Vector3()), obb.getCorner011(new Vector3()), obb.getCorner101(new Vector3()), obb.getCorner111(new Vector3()));
 
             instance = new ModelInstance(mb.end());
         }

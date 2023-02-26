@@ -44,9 +44,9 @@ public class OctreeTest extends GdxTest implements ApplicationListener {
     public Environment lights;
 
     public Octree<GameObject> octree;
-    public ObjectSet<GameObject> tmpResult = new ObjectSet<GameObject>();
-    public Array<GameObject> gameObjects = new Array<GameObject>();
-    public Array<ModelInstance> octreeBounds = new Array<ModelInstance>();
+    public ObjectSet<GameObject> tmpResult = new ObjectSet<>();
+    public Array<GameObject> gameObjects = new Array<>();
+    public Array<ModelInstance> octreeBounds = new Array<>();
 
     private GameObject lastSelected;
 
@@ -69,7 +69,7 @@ public class OctreeTest extends GdxTest implements ApplicationListener {
 
         Vector3 min = new Vector3(-AREA_SIZE / 2, -AREA_SIZE / 2, -AREA_SIZE / 2);
         Vector3 max = new Vector3(AREA_SIZE / 2, AREA_SIZE / 2, AREA_SIZE / 2);
-        octree = new Octree<GameObject>(min, max, MAX_DEPTH, MAX_ITEMS_PER_NODE, new Octree.Collider<GameObject>() {
+        octree = new Octree<>(min, max, MAX_DEPTH, MAX_ITEMS_PER_NODE, new Octree.Collider<GameObject>() {
             @Override
             public boolean intersects(BoundingBox nodeBounds, GameObject geometry) {
                 return nodeBounds.intersects(geometry.box);

@@ -33,7 +33,8 @@ public class AssetsFileGenerator {
                     list.append("t:" + fileName + "\n");
                     System.out.println(fileName);
                 } else {
-                    if (fileName.endsWith(".mp3") || fileName.endsWith(".ogg") || fileName.endsWith(".wav")) continue;
+                    if (fileName.endsWith(".mp3") || fileName.endsWith(".ogg") || fileName.endsWith(".wav"))
+                        continue;
                     list.append("b:" + fileName + "\n");
                     System.out.println(fileName);
                 }
