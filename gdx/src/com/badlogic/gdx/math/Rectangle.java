@@ -177,9 +177,9 @@ public class Rectangle implements Serializable, Shape2D {
     /**
      * Sets the x and y-coordinates of the bottom left corner
      *
-     * @param x The x-coordinate
-     * @param y The y-coordinate
-     * @return this rectangle for chaining
+     * @param x The x-coordinate (bottom left corner)
+     * @param y The y-coordinate (bottom left corner)
+     * @return this rectangle for chaining.
      */
     public Rectangle setPosition(float x, float y) {
         this.x = x;
@@ -347,8 +347,7 @@ public class Rectangle implements Serializable, Shape2D {
         float maxX = x + width;
         float minY = y;
         float maxY = y + height;
-        for (int i = 0; i < vecs.length; ++i) {
-            Vector2 v = vecs[i];
+        for (Vector2 v : vecs) {
             minX = Math.min(minX, v.x);
             maxX = Math.max(maxX, v.x);
             minY = Math.min(minY, v.y);

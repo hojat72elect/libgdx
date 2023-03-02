@@ -62,4 +62,24 @@ class RectangleTest {
         assertEquals(Rectangle(0f, 0f, mockRectangle.width, mockRectangle.height), newRectangle)
 
     }
+
+    @Test
+    fun `moves the center of the rectangle successfully`() {
+        val newRectangle = mockRectangle.setCenter(0f, 0f)
+        assertEquals(Rectangle(-0.015f, 0.01f, 0.03f, -0.02f), newRectangle)
+    }
+
+    @Test
+    fun `test fitting outside of 2 Rectangles`() {
+        val fittedRectangle = mockRectangle.fitOutside(Rectangle(0f, 0f, 1f, 1f))
+        assertEquals(Rectangle(0.0f, 0.8333334f, 1.0f, -0.6666667f), fittedRectangle)
+    }
+
+    @Test
+    fun `test fitting inside of 2 Rectangles`() {
+
+        val fittedRectangle = mockRectangle.fitInside(Rectangle(0f, 0f, 1f, 1f))
+        assertEquals(Rectangle(1.25f, 0.0f, -1.5f, 1.0f), fittedRectangle)
+
+    }
 }
