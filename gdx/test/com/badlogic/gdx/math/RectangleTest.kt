@@ -49,4 +49,17 @@ class RectangleTest {
             0.0f, defaultRectangle.perimeter()
         )
     }
+
+    @Test
+    fun `gets a correct rectangle from another rectangle`() {
+        val newRectangle = Rectangle(mockRectangle)
+        assertEquals(mockRectangle, newRectangle)
+    }
+
+    @Test
+    fun `test whether coordination of rectangle can be changed correctly`() {
+        val newRectangle = mockRectangle.setX(0f).setY(0f)
+        assertEquals(Rectangle(0f, 0f, mockRectangle.width, mockRectangle.height), newRectangle)
+
+    }
 }
