@@ -1,4 +1,3 @@
-
 package com.badlogic.gdx.math;
 
 import static org.junit.Assert.assertEquals;
@@ -8,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.ObjectSet;
+
 import org.junit.Test;
 
 public class OctreeTest {
