@@ -20,7 +20,7 @@ public class OctreeTest {
         Vector3 min = new Vector3(-5f, -5f, -5f);
         Vector3 max = new Vector3(5f, 5f, 5f);
 
-        Octree<BoundingBox> octree = new Octree<>(min, max, maxDepth, maxItemsPerNode, new Octree.Collider<BoundingBox>() {
+        Octree<BoundingBox> octree = new Octree<>(min, max, maxDepth, maxItemsPerNode, new Octree.Collider<>() {
             @Override
             public boolean intersects(BoundingBox nodeBounds, BoundingBox geometry) {
                 return nodeBounds.intersects(geometry);
@@ -51,7 +51,7 @@ public class OctreeTest {
         octree.add(box2);
         assertFalse(octree.root.isLeaf());
 
-        ObjectSet<BoundingBox> result = new ObjectSet<BoundingBox>();
+        ObjectSet<BoundingBox> result = new ObjectSet<>();
         octree.getAll(result);
         assertTrue(result.contains(box1));
         assertTrue(result.contains(box2));
