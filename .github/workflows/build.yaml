@@ -34,8 +34,8 @@ jobs:
 
       - name: Build & test Java code
         run: |
-          ./gradlew testDebug
-          ./gradlew lintFix
+          ./gradlew lintDebug
+          ./gradlew test
 
       - name: Cleanup Gradle Cache
         run: |
