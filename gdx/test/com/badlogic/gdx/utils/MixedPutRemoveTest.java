@@ -14,8 +14,9 @@ public class MixedPutRemoveTest {
         long stateA = 0L, stateB = 1L;
         int gdxRepeats = 0, jdkRepeats = 0;
         long item;
-        for (int i = 0; i < 0x100000; i++) { // a million should do
-            // simple-ish RNG that repeats more than RandomXS128; we want repeats to test behavior
+        for (int i = 0; i < 0x100000; i++) {
+            // a million should do simple-ish RNG that repeats more
+            // than RandomXS128; we want repeats to test behavior
             stateA += 0xC6BC279692B5C323L;
             item = (stateA ^ stateA >>> 31) * (stateB += 0x9E3779B97F4A7C16L);
             item &= item >>> 24; // causes 64-bit state to get crammed into 40 bits, with item biased toward low bit counts
