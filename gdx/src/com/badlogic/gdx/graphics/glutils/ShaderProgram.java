@@ -115,27 +115,27 @@ public class ShaderProgram implements Disposable {
     /**
      * uniform lookup
      **/
-    private final ObjectIntMap<String> uniforms = new ObjectIntMap<String>();
+    private final ObjectIntMap<String> uniforms = new ObjectIntMap<>();
     /**
      * uniform types
      **/
-    private final ObjectIntMap<String> uniformTypes = new ObjectIntMap<String>();
+    private final ObjectIntMap<String> uniformTypes = new ObjectIntMap<>();
     /**
      * uniform sizes
      **/
-    private final ObjectIntMap<String> uniformSizes = new ObjectIntMap<String>();
+    private final ObjectIntMap<String> uniformSizes = new ObjectIntMap<>();
     /**
      * attribute lookup
      **/
-    private final ObjectIntMap<String> attributes = new ObjectIntMap<String>();
+    private final ObjectIntMap<String> attributes = new ObjectIntMap<>();
     /**
      * attribute types
      **/
-    private final ObjectIntMap<String> attributeTypes = new ObjectIntMap<String>();
+    private final ObjectIntMap<String> attributeTypes = new ObjectIntMap<>();
     /**
      * attribute sizes
      **/
-    private final ObjectIntMap<String> attributeSizes = new ObjectIntMap<String>();
+    private final ObjectIntMap<String> attributeSizes = new ObjectIntMap<>();
     /**
      * matrix float buffer
      **/
@@ -263,9 +263,6 @@ public class ShaderProgram implements Disposable {
 
     /**
      * Loads and compiles the shaders, creates a new program and links the shaders.
-     *
-     * @param vertexShader
-     * @param fragmentShader
      */
     private void compileShaders(String vertexShader, String fragmentShader) {
         vertexShaderHandle = loadShader(GL20.GL_VERTEX_SHADER, vertexShader);
@@ -349,15 +346,9 @@ public class ShaderProgram implements Disposable {
      */
     public String getLog() {
         if (isCompiled) {
-// Gdx.gl20.glGetProgramiv(program, GL20.GL_INFO_LOG_LENGTH, intbuf);
-// int infoLogLength = intbuf.get(0);
-// if (infoLogLength > 1) {
             log = Gdx.gl20.glGetProgramInfoLog(program);
-// }
-            return log;
-        } else {
-            return log;
         }
+        return log;
     }
 
     /**
