@@ -18,8 +18,6 @@ import java.nio.Buffer;
 /**
  * Draws batched quads using indices.
  *
- * @author mzechner
- * @author Nathan Sweet
  * @see Batch
  */
 public class SpriteBatch implements Batch {
@@ -29,47 +27,37 @@ public class SpriteBatch implements Batch {
      */
     @Deprecated
     public static VertexDataType defaultVertexDataType = VertexDataType.VertexArray;
-
-    private Mesh mesh;
-
     final float[] vertices;
-    int idx = 0;
-    Texture lastTexture = null;
-    float invTexWidth = 0, invTexHeight = 0;
-
-    boolean drawing = false;
-
     private final Matrix4 transformMatrix = new Matrix4();
     private final Matrix4 projectionMatrix = new Matrix4();
     private final Matrix4 combinedMatrix = new Matrix4();
-
+    private final ShaderProgram shader;
+    private final Color color = new Color(1, 1, 1, 1);
+    /**
+     * Number of render calls since the last {@link #begin()}.
+     **/
+    public int renderCalls = 0;
+    /**
+     * Number of rendering calls, ever. Will not be reset unless set manually.
+     **/
+    public int totalRenderCalls = 0;
+    /**
+     * The maximum number of sprites rendered in one batch so far.
+     **/
+    public int maxSpritesInBatch = 0;
+    int idx = 0;
+    Texture lastTexture = null;
+    float invTexWidth = 0, invTexHeight = 0;
+    boolean drawing = false;
+    float colorPacked = Color.WHITE_FLOAT_BITS;
+    private Mesh mesh;
     private boolean blendingDisabled = false;
     private int blendSrcFunc = GL20.GL_SRC_ALPHA;
     private int blendDstFunc = GL20.GL_ONE_MINUS_SRC_ALPHA;
     private int blendSrcFuncAlpha = GL20.GL_SRC_ALPHA;
     private int blendDstFuncAlpha = GL20.GL_ONE_MINUS_SRC_ALPHA;
-
-    private final ShaderProgram shader;
     private ShaderProgram customShader = null;
     private boolean ownsShader;
-
-    private final Color color = new Color(1, 1, 1, 1);
-    float colorPacked = Color.WHITE_FLOAT_BITS;
-
-    /**
-     * Number of render calls since the last {@link #begin()}.
-     **/
-    public int renderCalls = 0;
-
-    /**
-     * Number of rendering calls, ever. Will not be reset unless set manually.
-     **/
-    public int totalRenderCalls = 0;
-
-    /**
-     * The maximum number of sprites rendered in one batch so far.
-     **/
-    public int maxSpritesInBatch = 0;
 
     /**
      * Constructs a new SpriteBatch with a size of 1000, one buffer, and the default shader.
@@ -102,7 +90,8 @@ public class SpriteBatch implements Batch {
      */
     public SpriteBatch(int size, ShaderProgram defaultShader) {
         // 32767 is max vertex index, so 32767 / 4 vertices per sprite = 8191 sprites max.
-        if (size > 8191) throw new IllegalArgumentException("Can't have more than 8191 sprites per batch: " + size);
+        if (size > 8191)
+            throw new IllegalArgumentException("Can't have more than 8191 sprites per batch: " + size);
 
         VertexDataType vertexDataType = (Gdx.gl30 != null) ? VertexDataType.VertexBufferObjectWithVAO : defaultVertexDataType;
 
@@ -164,13 +153,15 @@ public class SpriteBatch implements Batch {
                 + "}";
 
         ShaderProgram shader = new ShaderProgram(vertexShader, fragmentShader);
-        if (!shader.isCompiled()) throw new IllegalArgumentException("Error compiling shader: " + shader.getLog());
+        if (!shader.isCompiled())
+            throw new IllegalArgumentException("Error compiling shader: " + shader.getLog());
         return shader;
     }
 
     @Override
     public void begin() {
-        if (drawing) throw new IllegalStateException("SpriteBatch.end must be called before begin.");
+        if (drawing)
+            throw new IllegalStateException("SpriteBatch.end must be called before begin.");
         renderCalls = 0;
 
         Gdx.gl.glDepthMask(false);
@@ -183,7 +174,8 @@ public class SpriteBatch implements Batch {
 
     @Override
     public void end() {
-        if (!drawing) throw new IllegalStateException("SpriteBatch.begin must be called before end.");
+        if (!drawing)
+            throw new IllegalStateException("SpriteBatch.begin must be called before end.");
         if (idx > 0) flush();
         lastTexture = null;
         drawing = false;
@@ -191,12 +183,6 @@ public class SpriteBatch implements Batch {
         GL20 gl = Gdx.gl;
         gl.glDepthMask(true);
         if (isBlendingEnabled()) gl.glDisable(GL20.GL_BLEND);
-    }
-
-    @Override
-    public void setColor(Color tint) {
-        color.set(tint);
-        colorPacked = tint.toFloatBits();
     }
 
     @Override
@@ -211,9 +197,9 @@ public class SpriteBatch implements Batch {
     }
 
     @Override
-    public void setPackedColor(float packedColor) {
-        Color.abgr8888ToColor(color, packedColor);
-        this.colorPacked = packedColor;
+    public void setColor(Color tint) {
+        color.set(tint);
+        colorPacked = tint.toFloatBits();
     }
 
     @Override
@@ -222,8 +208,15 @@ public class SpriteBatch implements Batch {
     }
 
     @Override
+    public void setPackedColor(float packedColor) {
+        Color.abgr8888ToColor(color, packedColor);
+        this.colorPacked = packedColor;
+    }
+
+    @Override
     public void draw(Texture texture, float x, float y, float originX, float originY, float width, float height, float scaleX, float scaleY, float rotation, int srcX, int srcY, int srcWidth, int srcHeight, boolean flipX, boolean flipY) {
-        if (!drawing) throw new IllegalStateException("SpriteBatch.begin must be called before draw.");
+        if (!drawing)
+            throw new IllegalStateException("SpriteBatch.begin must be called before draw.");
 
         float[] vertices = this.vertices;
 
@@ -352,7 +345,8 @@ public class SpriteBatch implements Batch {
 
     @Override
     public void draw(Texture texture, float x, float y, float width, float height, int srcX, int srcY, int srcWidth, int srcHeight, boolean flipX, boolean flipY) {
-        if (!drawing) throw new IllegalStateException("SpriteBatch.begin must be called before draw.");
+        if (!drawing)
+            throw new IllegalStateException("SpriteBatch.begin must be called before draw.");
 
         float[] vertices = this.vertices;
 
@@ -409,7 +403,8 @@ public class SpriteBatch implements Batch {
 
     @Override
     public void draw(Texture texture, float x, float y, int srcX, int srcY, int srcWidth, int srcHeight) {
-        if (!drawing) throw new IllegalStateException("SpriteBatch.begin must be called before draw.");
+        if (!drawing)
+            throw new IllegalStateException("SpriteBatch.begin must be called before draw.");
 
         float[] vertices = this.vertices;
 
@@ -454,7 +449,8 @@ public class SpriteBatch implements Batch {
 
     @Override
     public void draw(Texture texture, float x, float y, float width, float height, float u, float v, float u2, float v2) {
-        if (!drawing) throw new IllegalStateException("SpriteBatch.begin must be called before draw.");
+        if (!drawing)
+            throw new IllegalStateException("SpriteBatch.begin must be called before draw.");
 
         float[] vertices = this.vertices;
 
@@ -500,7 +496,8 @@ public class SpriteBatch implements Batch {
 
     @Override
     public void draw(Texture texture, float x, float y, float width, float height) {
-        if (!drawing) throw new IllegalStateException("SpriteBatch.begin must be called before draw.");
+        if (!drawing)
+            throw new IllegalStateException("SpriteBatch.begin must be called before draw.");
 
         float[] vertices = this.vertices;
 
@@ -545,7 +542,8 @@ public class SpriteBatch implements Batch {
 
     @Override
     public void draw(Texture texture, float[] spriteVertices, int offset, int count) {
-        if (!drawing) throw new IllegalStateException("SpriteBatch.begin must be called before draw.");
+        if (!drawing)
+            throw new IllegalStateException("SpriteBatch.begin must be called before draw.");
 
         int verticesLength = vertices.length;
         int remainingVertices = verticesLength;
@@ -579,7 +577,8 @@ public class SpriteBatch implements Batch {
 
     @Override
     public void draw(TextureRegion region, float x, float y, float width, float height) {
-        if (!drawing) throw new IllegalStateException("SpriteBatch.begin must be called before draw.");
+        if (!drawing)
+            throw new IllegalStateException("SpriteBatch.begin must be called before draw.");
 
         float[] vertices = this.vertices;
 
@@ -626,7 +625,8 @@ public class SpriteBatch implements Batch {
 
     @Override
     public void draw(TextureRegion region, float x, float y, float originX, float originY, float width, float height, float scaleX, float scaleY, float rotation) {
-        if (!drawing) throw new IllegalStateException("SpriteBatch.begin must be called before draw.");
+        if (!drawing)
+            throw new IllegalStateException("SpriteBatch.begin must be called before draw.");
 
         float[] vertices = this.vertices;
 
@@ -745,7 +745,8 @@ public class SpriteBatch implements Batch {
 
     @Override
     public void draw(TextureRegion region, float x, float y, float originX, float originY, float width, float height, float scaleX, float scaleY, float rotation, boolean clockwise) {
-        if (!drawing) throw new IllegalStateException("SpriteBatch.begin must be called before draw.");
+        if (!drawing)
+            throw new IllegalStateException("SpriteBatch.begin must be called before draw.");
 
         float[] vertices = this.vertices;
 
@@ -880,7 +881,8 @@ public class SpriteBatch implements Batch {
 
     @Override
     public void draw(TextureRegion region, float width, float height, Affine2 transform) {
-        if (!drawing) throw new IllegalStateException("SpriteBatch.begin must be called before draw.");
+        if (!drawing)
+            throw new IllegalStateException("SpriteBatch.begin must be called before draw.");
 
         float[] vertices = this.vertices;
 
@@ -1026,15 +1028,15 @@ public class SpriteBatch implements Batch {
     }
 
     @Override
-    public Matrix4 getTransformMatrix() {
-        return transformMatrix;
-    }
-
-    @Override
     public void setProjectionMatrix(Matrix4 projection) {
         if (drawing) flush();
         projectionMatrix.set(projection);
         if (drawing) setupMatrices();
+    }
+
+    @Override
+    public Matrix4 getTransformMatrix() {
+        return transformMatrix;
     }
 
     @Override
@@ -1063,6 +1065,14 @@ public class SpriteBatch implements Batch {
     }
 
     @Override
+    public ShaderProgram getShader() {
+        if (customShader == null) {
+            return shader;
+        }
+        return customShader;
+    }
+
+    @Override
     public void setShader(ShaderProgram shader) {
         if (shader == customShader) // avoid unnecessary flushing in case we are drawing
             return;
@@ -1075,14 +1085,6 @@ public class SpriteBatch implements Batch {
             else this.shader.bind();
             setupMatrices();
         }
-    }
-
-    @Override
-    public ShaderProgram getShader() {
-        if (customShader == null) {
-            return shader;
-        }
-        return customShader;
     }
 
     @Override

@@ -1,11 +1,5 @@
 package com.badlogic.gdx.graphics.g2d;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
@@ -18,6 +12,12 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Renders bitmap fonts. The font consists of 2 files: an image file or {@link TextureRegion} containing the glyphs and a file in
@@ -41,10 +41,10 @@ public class BitmapFont implements Disposable {
     static private final int PAGES = 0x10000 / PAGE_SIZE;
 
     final BitmapFontData data;
-    Array<TextureRegion> regions;
     private final BitmapFontCache cache;
-    private boolean flipped;
+    Array<TextureRegion> regions;
     boolean integer;
+    private boolean flipped;
     private boolean ownsTexture;
 
     /**
@@ -184,13 +184,21 @@ public class BitmapFont implements Disposable {
         load(data);
     }
 
+    static int indexOf(CharSequence text, char ch, int start) {
+        final int n = text.length();
+        for (; start < n; start++)
+            if (text.charAt(start) == ch) return start;
+        return n;
+    }
+
     protected void load(BitmapFontData data) {
         for (Glyph[] page : data.glyphs) {
             if (page == null) continue;
             for (Glyph glyph : page)
                 if (glyph != null) data.setGlyphRegion(glyph, regions.get(glyph.page));
         }
-        if (data.missingGlyph != null) data.setGlyphRegion(data.missingGlyph, regions.get(data.missingGlyph.page));
+        if (data.missingGlyph != null)
+            data.setGlyphRegion(data.missingGlyph, regions.get(data.missingGlyph.page));
     }
 
     /**
@@ -494,17 +502,11 @@ public class BitmapFont implements Disposable {
         }
     }
 
-    static int indexOf(CharSequence text, char ch, int start) {
-        final int n = text.length();
-        for (; start < n; start++)
-            if (text.charAt(start) == ch) return start;
-        return n;
-    }
-
     /**
      * Backing data for a {@link BitmapFont}.
      */
     static public class BitmapFontData {
+        public final Glyph[][] glyphs = new Glyph[PAGES][];
         /**
          * The name of the font, or null.
          */
@@ -549,8 +551,6 @@ public class BitmapFont implements Disposable {
          * file, it needs to be set manually depending on how the glyphs are rendered on the backing textures.
          */
         public float cursorX;
-
-        public final Glyph[][] glyphs = new Glyph[PAGES][];
         /**
          * The glyph to display for characters not in the font. May be null.
          */
@@ -611,7 +611,8 @@ public class BitmapFont implements Disposable {
                 // At least lineHeight and base are required.
                 if (common.length < 3) throw new GdxRuntimeException("Invalid common header.");
 
-                if (!common[1].startsWith("lineHeight=")) throw new GdxRuntimeException("Missing: lineHeight");
+                if (!common[1].startsWith("lineHeight="))
+                    throw new GdxRuntimeException("Missing: lineHeight");
                 lineHeight = Integer.parseInt(common[1].substring(11));
 
                 if (!common[2].startsWith("base=")) throw new GdxRuntimeException("Missing: base");
@@ -631,7 +632,8 @@ public class BitmapFont implements Disposable {
                 for (int p = 0; p < pageCount; p++) {
                     // Read each "page" info line.
                     line = reader.readLine();
-                    if (line == null) throw new GdxRuntimeException("Missing additional page definitions.");
+                    if (line == null)
+                        throw new GdxRuntimeException("Missing additional page definitions.");
 
                     // Expect ID to mean "index".
                     Matcher matcher = Pattern.compile(".*id=(\\d+)").matcher(line);
@@ -696,7 +698,8 @@ public class BitmapFont implements Disposable {
                         }
                     }
 
-                    if (glyph.width > 0 && glyph.height > 0) descent = Math.min(baseLine + glyph.yoffset, descent);
+                    if (glyph.width > 0 && glyph.height > 0)
+                        descent = Math.min(baseLine + glyph.yoffset, descent);
                 }
                 descent += padBottom;
 

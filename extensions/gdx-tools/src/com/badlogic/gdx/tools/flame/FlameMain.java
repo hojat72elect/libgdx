@@ -104,43 +104,10 @@ public class FlameMain extends JFrame implements AssetErrorListener {
             DEFAULT_TEMPLATE_PFX = "defaultTemplate.pfx", DEFAULT_SKIN = "uiskin.json";
 
     public static final int EVT_ASSET_RELOADED = 0;
-
-    static class ControllerData {
-        public boolean enabled = true;
-        public ParticleController controller;
-
-        public ControllerData(ParticleController emitter) {
-            controller = emitter;
-        }
-    }
-
-    private static class InfluencerWrapper<T> {
-        String string;
-        Class<Influencer> type;
-
-        public InfluencerWrapper(String string, Class<Influencer> type) {
-            this.string = string;
-            this.type = type;
-        }
-
-        @Override
-        public String toString() {
-            return string;
-        }
-    }
-
-    public enum ControllerType {
-        Billboard("Billboard", new InfluencerWrapper[]{new InfluencerWrapper("Single Color", ColorInfluencer.Single.class), new InfluencerWrapper("Random Color", ColorInfluencer.Random.class), new InfluencerWrapper("Single Region", RegionInfluencer.Single.class), new InfluencerWrapper("Random Region", RegionInfluencer.Random.class), new InfluencerWrapper("Animated Region", RegionInfluencer.Animated.class), new InfluencerWrapper("Scale", ScaleInfluencer.class), new InfluencerWrapper("Spawn", SpawnInfluencer.class), new InfluencerWrapper("Dynamics", DynamicsInfluencer.class)}), PointSprite("Point Sprite", new InfluencerWrapper[]{new InfluencerWrapper("Single Color", ColorInfluencer.Single.class), new InfluencerWrapper("Random Color", ColorInfluencer.Random.class), new InfluencerWrapper("Single Region", RegionInfluencer.Single.class), new InfluencerWrapper("Random Region", RegionInfluencer.Random.class), new InfluencerWrapper("Animated Region", RegionInfluencer.Animated.class), new InfluencerWrapper("Scale", ScaleInfluencer.class), new InfluencerWrapper("Spawn", SpawnInfluencer.class), new InfluencerWrapper("Dynamics", DynamicsInfluencer.class)}), ModelInstance("Model Instance", new InfluencerWrapper[]{new InfluencerWrapper("Single Color", ColorInfluencer.Single.class), new InfluencerWrapper("Random Color", ColorInfluencer.Random.class), new InfluencerWrapper("Single Model", ModelInfluencer.Single.class), new InfluencerWrapper("Random Model", ModelInfluencer.Random.class), new InfluencerWrapper("Scale", ScaleInfluencer.class), new InfluencerWrapper("Spawn", SpawnInfluencer.class), new InfluencerWrapper("Dynamics", DynamicsInfluencer.class)}), ParticleController("Particle Controller", new InfluencerWrapper[]{new InfluencerWrapper("Single Particle Controller", ParticleControllerInfluencer.Single.class), new InfluencerWrapper("Random Particle Controller", ParticleControllerInfluencer.Random.class), new InfluencerWrapper("Scale", ScaleInfluencer.class), new InfluencerWrapper("Spawn", SpawnInfluencer.class), new InfluencerWrapper("Dynamics", DynamicsInfluencer.class)});
-
-        public String desc;
-        public InfluencerWrapper[] wrappers;
-
-        private ControllerType(String desc, InfluencerWrapper[] wrappers) {
-            this.desc = desc;
-            this.wrappers = wrappers;
-        }
-    }
-
+    /**
+     * READ only
+     */
+    public Array<ControllerData> controllersData;
     LwjglCanvas lwjglCanvas;
     JPanel controllerPropertiesPanel;
     JPanel editorPropertiesPanel;
@@ -155,13 +122,9 @@ public class FlameMain extends JFrame implements AssetErrorListener {
     TextureAtlas textureAtlas;
     JsonWriter.OutputType jsonOutputType = JsonWriter.OutputType.minimal;
     boolean jsonPrettyPrint = false;
-
-    private ParticleEffect effect;
-    /**
-     * READ only
-     */
-    public Array<ControllerData> controllersData;
     ParticleSystem particleSystem;
+    String lastDir;
+    private ParticleEffect effect;
 
     public FlameMain() {
         super("Flame");
@@ -188,6 +151,23 @@ public class FlameMain extends JFrame implements AssetErrorListener {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                try {
+                    UIManager.setLookAndFeel(info.getClassName());
+                } catch (Throwable ignored) {
+                }
+                break;
+            }
+        }
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FlameMain();
+            }
+        });
     }
 
     public ControllerType getControllerType() {
@@ -539,31 +519,247 @@ public class FlameMain extends JFrame implements AssetErrorListener {
         return !hasSameInfluencer;
     }
 
+    public AppRenderer getRenderer() {
+        return renderer;
+    }
+
+    public File showFileLoadDialog() {
+        return showFileDialog("Open", FileDialog.LOAD);
+    }
+
+    public File showFileSaveDialog() {
+        return showFileDialog("Save", FileDialog.SAVE);
+    }
+
+    private File showFileDialog(String title, int mode) {
+        FileDialog dialog = new FileDialog(this, title, mode);
+        if (lastDir != null) dialog.setDirectory(lastDir);
+        dialog.setVisible(true);
+        final String file = dialog.getFile();
+        final String dir = dialog.getDirectory();
+        if (dir == null || file == null || file.trim().length() == 0) return null;
+        lastDir = dir;
+        return new File(dir, file);
+    }
+
+    @Override
+    public void error(AssetDescriptor asset, Throwable throwable) {
+        throwable.printStackTrace();
+    }
+
+    public PointSpriteParticleBatch getPointSpriteBatch() {
+        return renderer.pointSpriteBatch;
+    }
+
+    public BillboardParticleBatch getBillboardBatch() {
+        return renderer.billboardBatch;
+    }
+
+    public ModelInstanceParticleBatch getModelInstanceParticleBatch() {
+        return renderer.modelInstanceParticleBatch;
+    }
+
+    public Texture getTexture() {
+        return renderer.billboardBatch.getTexture();
+    }
+
+    public void setTexture(Texture texture) {
+        renderer.billboardBatch.setTexture(texture);
+        renderer.pointSpriteBatch.setTexture(texture);
+    }
+
+    public TextureAtlas getAtlas(Texture texture) {
+        Array<TextureAtlas> atlases = assetManager.getAll(TextureAtlas.class, new Array<TextureAtlas>());
+        for (TextureAtlas atlas : atlases) {
+            if (atlas.getTextures().contains(texture)) return atlas;
+        }
+        return null;
+    }
+
+    public TextureAtlas getAtlas() {
+        return getAtlas(renderer.billboardBatch.getTexture());
+    }
+
+    public void setAtlas(TextureAtlas atlas) {
+        this.textureAtlas = atlas;
+        setTexture(atlas.getTextures().first());
+    }
+
+    public String getAtlasFilename() {
+        if (textureAtlas == null) {
+            return null;
+        }
+        return assetManager.getAssetFileName(textureAtlas);
+    }
+
+    public boolean isUsingDefaultTexture() {
+        return renderer.billboardBatch.getTexture() == assetManager.get(DEFAULT_BILLBOARD_PARTICLE, Texture.class);
+    }
+
+    public Array<ParticleEffect> getParticleEffects(Array<ParticleController> controllers, Array<ParticleEffect> out) {
+        out.clear();
+        assetManager.getAll(ParticleEffect.class, out);
+        for (int i = 0; i < out.size; ) {
+            ParticleEffect effect = out.get(i);
+            Array<ParticleController> effectControllers = effect.getControllers();
+            boolean remove = true;
+            for (ParticleController controller : controllers) {
+                if (effectControllers.contains(controller, true)) {
+                    remove = false;
+                    break;
+                }
+            }
+
+            if (remove) {
+                out.removeIndex(i);
+                continue;
+            }
+
+            ++i;
+        }
+
+        return out;
+    }
+
+    public void saveEffect(File file) {
+        Writer fileWriter = null;
+        try {
+            ParticleEffectLoader loader = (ParticleEffectLoader) assetManager.getLoader(ParticleEffect.class);
+            loader.save(effect, new ParticleEffectSaveParameter(new FileHandle(file.getAbsolutePath()), assetManager, particleSystem.getBatches(), jsonOutputType, jsonPrettyPrint));
+        } catch (Exception ex) {
+            System.out.println("Error saving effect: " + file.getAbsolutePath());
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error saving effect.");
+        } finally {
+            StreamUtils.closeQuietly(fileWriter);
+        }
+    }
+
+    public ParticleEffect openEffect(File file, boolean replaceCurrentWorkspace) {
+        try {
+            ParticleEffect loadedEffect = load(file.getAbsolutePath(), ParticleEffect.class, null, new ParticleEffectLoader.ParticleEffectLoadParameter(particleSystem.getBatches()));
+            loadedEffect = loadedEffect.copy();
+            loadedEffect.init();
+            if (replaceCurrentWorkspace) {
+                effect = loadedEffect;
+                controllersData.clear();
+                particleSystem.removeAll();
+                particleSystem.add(effect);
+                for (ParticleController controller : effect.getControllers())
+                    controllersData.add(new ControllerData(controller));
+                rebuildActiveControllers();
+            }
+            reloadRows();
+            return loadedEffect;
+        } catch (Exception ex) {
+            System.out.println("Error loading effect: " + file.getAbsolutePath());
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error opening effect.");
+        }
+        return null;
+    }
+
+    public <T> T load(String resource, Class<T> type, AssetLoader loader, AssetLoaderParameters<T> params) {
+        String resolvedPath = resource.replaceAll("\\\\", "/");
+        boolean exist = assetManager.isLoaded(resolvedPath, type);
+        T oldAsset = null;
+        if (exist) {
+            oldAsset = assetManager.get(resolvedPath, type);
+            for (int i = assetManager.getReferenceCount(resolvedPath); i > 0; --i)
+                assetManager.unload(resolvedPath);
+        }
+
+        AssetLoader<T, AssetLoaderParameters<T>> currentLoader = assetManager.getLoader(type);
+        if (loader != null) assetManager.setLoader(type, loader);
+
+        assetManager.setLoader(ParticleEffect.class, new ParticleEffectLoader(new FileHandleResolver() {
+            @Override
+            public FileHandle resolve(String fileName) {
+                FileHandle attempt = Gdx.files.absolute(fileName);
+                if (attempt.exists()) return attempt;
+                if (DEFAULT_BILLBOARD_PARTICLE.equals(attempt.name()))
+                    return Gdx.files.internal(DEFAULT_BILLBOARD_PARTICLE);
+                if (DEFAULT_MODEL_PARTICLE.equals(attempt.name()))
+                    return Gdx.files.internal(DEFAULT_MODEL_PARTICLE);
+                if (DEFAULT_TEMPLATE_PFX.equals(attempt.name()))
+                    return Gdx.files.internal(DEFAULT_TEMPLATE_PFX);
+                return attempt;
+            }
+        }));
+
+        assetManager.load(resolvedPath, type, params);
+        assetManager.finishLoading();
+        T res = assetManager.get(resolvedPath);
+        if (currentLoader != null) assetManager.setLoader(type, currentLoader);
+
+        if (exist) EventManager.get().fire(EVT_ASSET_RELOADED, new Object[]{oldAsset, res});
+
+        return res;
+    }
+
+    public void restart() {
+        effect.init();
+        effect.start();
+    }
+
+    public enum ControllerType {
+        Billboard("Billboard", new InfluencerWrapper[]{new InfluencerWrapper("Single Color", ColorInfluencer.Single.class), new InfluencerWrapper("Random Color", ColorInfluencer.Random.class), new InfluencerWrapper("Single Region", RegionInfluencer.Single.class), new InfluencerWrapper("Random Region", RegionInfluencer.Random.class), new InfluencerWrapper("Animated Region", RegionInfluencer.Animated.class), new InfluencerWrapper("Scale", ScaleInfluencer.class), new InfluencerWrapper("Spawn", SpawnInfluencer.class), new InfluencerWrapper("Dynamics", DynamicsInfluencer.class)}), PointSprite("Point Sprite", new InfluencerWrapper[]{new InfluencerWrapper("Single Color", ColorInfluencer.Single.class), new InfluencerWrapper("Random Color", ColorInfluencer.Random.class), new InfluencerWrapper("Single Region", RegionInfluencer.Single.class), new InfluencerWrapper("Random Region", RegionInfluencer.Random.class), new InfluencerWrapper("Animated Region", RegionInfluencer.Animated.class), new InfluencerWrapper("Scale", ScaleInfluencer.class), new InfluencerWrapper("Spawn", SpawnInfluencer.class), new InfluencerWrapper("Dynamics", DynamicsInfluencer.class)}), ModelInstance("Model Instance", new InfluencerWrapper[]{new InfluencerWrapper("Single Color", ColorInfluencer.Single.class), new InfluencerWrapper("Random Color", ColorInfluencer.Random.class), new InfluencerWrapper("Single Model", ModelInfluencer.Single.class), new InfluencerWrapper("Random Model", ModelInfluencer.Random.class), new InfluencerWrapper("Scale", ScaleInfluencer.class), new InfluencerWrapper("Spawn", SpawnInfluencer.class), new InfluencerWrapper("Dynamics", DynamicsInfluencer.class)}), ParticleController("Particle Controller", new InfluencerWrapper[]{new InfluencerWrapper("Single Particle Controller", ParticleControllerInfluencer.Single.class), new InfluencerWrapper("Random Particle Controller", ParticleControllerInfluencer.Random.class), new InfluencerWrapper("Scale", ScaleInfluencer.class), new InfluencerWrapper("Spawn", SpawnInfluencer.class), new InfluencerWrapper("Dynamics", DynamicsInfluencer.class)});
+
+        public String desc;
+        public InfluencerWrapper[] wrappers;
+
+        private ControllerType(String desc, InfluencerWrapper[] wrappers) {
+            this.desc = desc;
+            this.wrappers = wrappers;
+        }
+    }
+
+    static class ControllerData {
+        public boolean enabled = true;
+        public ParticleController controller;
+
+        public ControllerData(ParticleController emitter) {
+            controller = emitter;
+        }
+    }
+
+    private static class InfluencerWrapper<T> {
+        String string;
+        Class<Influencer> type;
+
+        public InfluencerWrapper(String string, Class<Influencer> type) {
+            this.string = string;
+            this.type = type;
+        }
+
+        @Override
+        public String toString() {
+            return string;
+        }
+    }
+
     class AppRenderer implements ApplicationListener {
+        // Render
+        public PerspectiveCamera worldCamera;
+        boolean isUpdate = true;
+        TextButton playPauseButton;
+        StringBuilder stringBuilder;
+        PointSpriteParticleBatch pointSpriteBatch;
+        BillboardParticleBatch billboardBatch;
+        ModelInstanceParticleBatch modelInstanceParticleBatch;
         // Stats
         private float maxActiveTimer;
         private int maxActive, lastMaxActive;
-        boolean isUpdate = true;
-
         // Controls
         private CameraInputController cameraInputController;
-
         // UI
         private Stage ui;
-        TextButton playPauseButton;
         private Label fpsLabel, pointCountLabel, billboardCountLabel, modelInstanceCountLabel, maxLabel;
-        StringBuilder stringBuilder;
-
-        // Render
-        public PerspectiveCamera worldCamera;
         private boolean isDrawXYZ, isDrawXZPlane, isDrawXYPlane;
         private Array<Model> models;
         private ModelInstance xyzInstance, xzPlaneInstance, xyPlaneInstance;
         private Environment environment;
         private ModelBatch modelBatch;
-        PointSpriteParticleBatch pointSpriteBatch;
-        BillboardParticleBatch billboardBatch;
-        ModelInstanceParticleBatch modelInstanceParticleBatch;
 
         public void create() {
             if (ui != null) return;
@@ -756,207 +952,5 @@ public class FlameMain extends JFrame implements AssetErrorListener {
         public boolean IsDrawXYPlane() {
             return isDrawXYPlane;
         }
-    }
-
-    public static void main(String[] args) {
-        for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-                try {
-                    UIManager.setLookAndFeel(info.getClassName());
-                } catch (Throwable ignored) {
-                }
-                break;
-            }
-        }
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FlameMain();
-            }
-        });
-    }
-
-    public AppRenderer getRenderer() {
-        return renderer;
-    }
-
-    String lastDir;
-
-    public File showFileLoadDialog() {
-        return showFileDialog("Open", FileDialog.LOAD);
-    }
-
-    public File showFileSaveDialog() {
-        return showFileDialog("Save", FileDialog.SAVE);
-    }
-
-    private File showFileDialog(String title, int mode) {
-        FileDialog dialog = new FileDialog(this, title, mode);
-        if (lastDir != null) dialog.setDirectory(lastDir);
-        dialog.setVisible(true);
-        final String file = dialog.getFile();
-        final String dir = dialog.getDirectory();
-        if (dir == null || file == null || file.trim().length() == 0) return null;
-        lastDir = dir;
-        return new File(dir, file);
-    }
-
-    @Override
-    public void error(AssetDescriptor asset, Throwable throwable) {
-        throwable.printStackTrace();
-    }
-
-    public PointSpriteParticleBatch getPointSpriteBatch() {
-        return renderer.pointSpriteBatch;
-    }
-
-    public BillboardParticleBatch getBillboardBatch() {
-        return renderer.billboardBatch;
-    }
-
-    public ModelInstanceParticleBatch getModelInstanceParticleBatch() {
-        return renderer.modelInstanceParticleBatch;
-    }
-
-    public void setAtlas(TextureAtlas atlas) {
-        this.textureAtlas = atlas;
-        setTexture(atlas.getTextures().first());
-    }
-
-    public void setTexture(Texture texture) {
-        renderer.billboardBatch.setTexture(texture);
-        renderer.pointSpriteBatch.setTexture(texture);
-    }
-
-    public Texture getTexture() {
-        return renderer.billboardBatch.getTexture();
-    }
-
-    public TextureAtlas getAtlas(Texture texture) {
-        Array<TextureAtlas> atlases = assetManager.getAll(TextureAtlas.class, new Array<TextureAtlas>());
-        for (TextureAtlas atlas : atlases) {
-            if (atlas.getTextures().contains(texture)) return atlas;
-        }
-        return null;
-    }
-
-    public TextureAtlas getAtlas() {
-        return getAtlas(renderer.billboardBatch.getTexture());
-    }
-
-    public String getAtlasFilename() {
-        if (textureAtlas == null) {
-            return null;
-        }
-        return assetManager.getAssetFileName(textureAtlas);
-    }
-
-    public boolean isUsingDefaultTexture() {
-        return renderer.billboardBatch.getTexture() == assetManager.get(DEFAULT_BILLBOARD_PARTICLE, Texture.class);
-    }
-
-    public Array<ParticleEffect> getParticleEffects(Array<ParticleController> controllers, Array<ParticleEffect> out) {
-        out.clear();
-        assetManager.getAll(ParticleEffect.class, out);
-        for (int i = 0; i < out.size; ) {
-            ParticleEffect effect = out.get(i);
-            Array<ParticleController> effectControllers = effect.getControllers();
-            boolean remove = true;
-            for (ParticleController controller : controllers) {
-                if (effectControllers.contains(controller, true)) {
-                    remove = false;
-                    break;
-                }
-            }
-
-            if (remove) {
-                out.removeIndex(i);
-                continue;
-            }
-
-            ++i;
-        }
-
-        return out;
-    }
-
-    public void saveEffect(File file) {
-        Writer fileWriter = null;
-        try {
-            ParticleEffectLoader loader = (ParticleEffectLoader) assetManager.getLoader(ParticleEffect.class);
-            loader.save(effect, new ParticleEffectSaveParameter(new FileHandle(file.getAbsolutePath()), assetManager, particleSystem.getBatches(), jsonOutputType, jsonPrettyPrint));
-        } catch (Exception ex) {
-            System.out.println("Error saving effect: " + file.getAbsolutePath());
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error saving effect.");
-        } finally {
-            StreamUtils.closeQuietly(fileWriter);
-        }
-    }
-
-    public ParticleEffect openEffect(File file, boolean replaceCurrentWorkspace) {
-        try {
-            ParticleEffect loadedEffect = load(file.getAbsolutePath(), ParticleEffect.class, null, new ParticleEffectLoader.ParticleEffectLoadParameter(particleSystem.getBatches()));
-            loadedEffect = loadedEffect.copy();
-            loadedEffect.init();
-            if (replaceCurrentWorkspace) {
-                effect = loadedEffect;
-                controllersData.clear();
-                particleSystem.removeAll();
-                particleSystem.add(effect);
-                for (ParticleController controller : effect.getControllers())
-                    controllersData.add(new ControllerData(controller));
-                rebuildActiveControllers();
-            }
-            reloadRows();
-            return loadedEffect;
-        } catch (Exception ex) {
-            System.out.println("Error loading effect: " + file.getAbsolutePath());
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error opening effect.");
-        }
-        return null;
-    }
-
-    public <T> T load(String resource, Class<T> type, AssetLoader loader, AssetLoaderParameters<T> params) {
-        String resolvedPath = resource.replaceAll("\\\\", "/");
-        boolean exist = assetManager.isLoaded(resolvedPath, type);
-        T oldAsset = null;
-        if (exist) {
-            oldAsset = assetManager.get(resolvedPath, type);
-            for (int i = assetManager.getReferenceCount(resolvedPath); i > 0; --i)
-                assetManager.unload(resolvedPath);
-        }
-
-        AssetLoader<T, AssetLoaderParameters<T>> currentLoader = assetManager.getLoader(type);
-        if (loader != null) assetManager.setLoader(type, loader);
-
-        assetManager.setLoader(ParticleEffect.class, new ParticleEffectLoader(new FileHandleResolver() {
-            @Override
-            public FileHandle resolve(String fileName) {
-                FileHandle attempt = Gdx.files.absolute(fileName);
-                if (attempt.exists()) return attempt;
-                if (DEFAULT_BILLBOARD_PARTICLE.equals(attempt.name()))
-                    return Gdx.files.internal(DEFAULT_BILLBOARD_PARTICLE);
-                if (DEFAULT_MODEL_PARTICLE.equals(attempt.name()))
-                    return Gdx.files.internal(DEFAULT_MODEL_PARTICLE);
-                if (DEFAULT_TEMPLATE_PFX.equals(attempt.name()))
-                    return Gdx.files.internal(DEFAULT_TEMPLATE_PFX);
-                return attempt;
-            }
-        }));
-
-        assetManager.load(resolvedPath, type, params);
-        assetManager.finishLoading();
-        T res = assetManager.get(resolvedPath);
-        if (currentLoader != null) assetManager.setLoader(type, currentLoader);
-
-        if (exist) EventManager.get().fire(EVT_ASSET_RELOADED, new Object[]{oldAsset, res});
-
-        return res;
-    }
-
-    public void restart() {
-        effect.init();
-        effect.start();
     }
 }

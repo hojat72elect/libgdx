@@ -1,12 +1,12 @@
 package com.badlogic.gdx.utils;
 
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.reflect.ArrayReflection;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.utils.reflect.ArrayReflection;
 
 /**
  * A resizable, ordered or unordered array of objects. If unordered, this class avoids a memory copy when removing elements (the
@@ -103,6 +103,27 @@ public class Array<T> implements Iterable<T> {
         System.arraycopy(array, start, items, 0, size);
     }
 
+    /**
+     * @see #Array(Class)
+     */
+    static public <T> Array<T> of(Class<T> arrayType) {
+        return new Array(arrayType);
+    }
+
+    /**
+     * @see #Array(boolean, int, Class)
+     */
+    static public <T> Array<T> of(boolean ordered, int capacity, Class<T> arrayType) {
+        return new Array(ordered, capacity, arrayType);
+    }
+
+    /**
+     * @see #Array(Object[])
+     */
+    static public <T> Array<T> with(T... array) {
+        return new Array(array);
+    }
+
     public void add(T value) {
         T[] items = this.items;
         if (size == items.length) items = resize(Math.max(8, (int) (size * 1.75f)));
@@ -154,23 +175,27 @@ public class Array<T> implements Iterable<T> {
     public void addAll(T[] array, int start, int count) {
         T[] items = this.items;
         int sizeNeeded = size + count;
-        if (sizeNeeded > items.length) items = resize(Math.max(Math.max(8, sizeNeeded), (int) (size * 1.75f)));
+        if (sizeNeeded > items.length)
+            items = resize(Math.max(Math.max(8, sizeNeeded), (int) (size * 1.75f)));
         System.arraycopy(array, start, items, size, count);
         size = sizeNeeded;
     }
 
     public T get(int index) {
-        if (index >= size) throw new IndexOutOfBoundsException("index can't be >= size: " + index + " >= " + size);
+        if (index >= size)
+            throw new IndexOutOfBoundsException("index can't be >= size: " + index + " >= " + size);
         return items[index];
     }
 
     public void set(int index, T value) {
-        if (index >= size) throw new IndexOutOfBoundsException("index can't be >= size: " + index + " >= " + size);
+        if (index >= size)
+            throw new IndexOutOfBoundsException("index can't be >= size: " + index + " >= " + size);
         items[index] = value;
     }
 
     public void insert(int index, T value) {
-        if (index > size) throw new IndexOutOfBoundsException("index can't be > size: " + index + " > " + size);
+        if (index > size)
+            throw new IndexOutOfBoundsException("index can't be > size: " + index + " > " + size);
         T[] items = this.items;
         if (size == items.length) items = resize(Math.max(8, (int) (size * 1.75f)));
         if (ordered) System.arraycopy(items, index, items, index + 1, size - index);
@@ -184,16 +209,20 @@ public class Array<T> implements Iterable<T> {
      * indices before the insertion.
      */
     public void insertRange(int index, int count) {
-        if (index > size) throw new IndexOutOfBoundsException("index can't be > size: " + index + " > " + size);
+        if (index > size)
+            throw new IndexOutOfBoundsException("index can't be > size: " + index + " > " + size);
         int sizeNeeded = size + count;
-        if (sizeNeeded > items.length) items = resize(Math.max(Math.max(8, sizeNeeded), (int) (size * 1.75f)));
+        if (sizeNeeded > items.length)
+            items = resize(Math.max(Math.max(8, sizeNeeded), (int) (size * 1.75f)));
         System.arraycopy(items, index, items, index + count, size - index);
         size = sizeNeeded;
     }
 
     public void swap(int first, int second) {
-        if (first >= size) throw new IndexOutOfBoundsException("first can't be >= size: " + first + " >= " + size);
-        if (second >= size) throw new IndexOutOfBoundsException("second can't be >= size: " + second + " >= " + size);
+        if (first >= size)
+            throw new IndexOutOfBoundsException("first can't be >= size: " + first + " >= " + size);
+        if (second >= size)
+            throw new IndexOutOfBoundsException("second can't be >= size: " + second + " >= " + size);
         T[] items = this.items;
         T firstValue = items[first];
         items[first] = items[second];
@@ -313,7 +342,8 @@ public class Array<T> implements Iterable<T> {
      * Removes and returns the item at the specified index.
      */
     public T removeIndex(int index) {
-        if (index >= size) throw new IndexOutOfBoundsException("index can't be >= size: " + index + " >= " + size);
+        if (index >= size)
+            throw new IndexOutOfBoundsException("index can't be >= size: " + index + " >= " + size);
         T[] items = this.items;
         T value = items[index];
         size--;
@@ -328,8 +358,10 @@ public class Array<T> implements Iterable<T> {
      */
     public void removeRange(int start, int end) {
         int n = size;
-        if (end >= n) throw new IndexOutOfBoundsException("end can't be >= size: " + end + " >= " + size);
-        if (start > end) throw new IndexOutOfBoundsException("start can't be > end: " + start + " > " + end);
+        if (end >= n)
+            throw new IndexOutOfBoundsException("end can't be >= size: " + end + " >= " + size);
+        if (start > end)
+            throw new IndexOutOfBoundsException("start can't be > end: " + start + " > " + end);
         T[] items = this.items;
         int count = end - start + 1, lastIndex = n - count;
         if (ordered) System.arraycopy(items, start + count, items, start, n - (start + count));
@@ -445,7 +477,8 @@ public class Array<T> implements Iterable<T> {
         if (additionalCapacity < 0)
             throw new IllegalArgumentException("additionalCapacity must be >= 0: " + additionalCapacity);
         int sizeNeeded = size + additionalCapacity;
-        if (sizeNeeded > items.length) resize(Math.max(Math.max(8, sizeNeeded), (int) (size * 1.75f)));
+        if (sizeNeeded > items.length)
+            resize(Math.max(Math.max(8, sizeNeeded), (int) (size * 1.75f)));
         return items;
     }
 
@@ -557,8 +590,10 @@ public class Array<T> implements Iterable<T> {
      * Use the {@link Predicate.PredicateIterable} constructor for nested or multithreaded iteration.
      */
     public Iterable<T> select(Predicate<T> predicate) {
-        if (Collections.allocateIterators) return new Predicate.PredicateIterable<T>(this, predicate);
-        if (predicateIterable == null) predicateIterable = new Predicate.PredicateIterable<T>(this, predicate);
+        if (Collections.allocateIterators)
+            return new Predicate.PredicateIterable<T>(this, predicate);
+        if (predicateIterable == null)
+            predicateIterable = new Predicate.PredicateIterable<T>(this, predicate);
         else predicateIterable.set(this, predicate);
         return predicateIterable;
     }
@@ -623,7 +658,7 @@ public class Array<T> implements Iterable<T> {
         Object[] items1 = this.items, items2 = array.items;
         for (int i = 0; i < n; i++) {
             Object o1 = items1[i], o2 = items2[i];
-            if (!(o1 == null ? o2 == null : o1.equals(o2))) return false;
+            if (!(java.util.Objects.equals(o1, o2))) return false;
         }
         return true;
     }
@@ -669,27 +704,6 @@ public class Array<T> implements Iterable<T> {
             buffer.append(items[i]);
         }
         return buffer.toString();
-    }
-
-    /**
-     * @see #Array(Class)
-     */
-    static public <T> Array<T> of(Class<T> arrayType) {
-        return new Array(arrayType);
-    }
-
-    /**
-     * @see #Array(boolean, int, Class)
-     */
-    static public <T> Array<T> of(boolean ordered, int capacity, Class<T> arrayType) {
-        return new Array(ordered, capacity, arrayType);
-    }
-
-    /**
-     * @see #Array(Object[])
-     */
-    static public <T> Array<T> with(T... array) {
-        return new Array(array);
     }
 
     static public class ArrayIterator<T> implements Iterator<T>, Iterable<T> {
@@ -762,13 +776,10 @@ public class Array<T> implements Iterable<T> {
          */
         public ArrayIterator<T> iterator() {
             if (Collections.allocateIterators) return new ArrayIterator(array, allowRemove);
-// lastAcquire.getBuffer().setLength(0);
-// new Throwable().printStackTrace(new java.io.PrintWriter(lastAcquire));
+
             if (iterator1 == null) {
                 iterator1 = new ArrayIterator(array, allowRemove);
                 iterator2 = new ArrayIterator(array, allowRemove);
-// iterator1.iterable = this;
-// iterator2.iterable = this;
             }
             if (!iterator1.valid) {
                 iterator1.index = 0;
