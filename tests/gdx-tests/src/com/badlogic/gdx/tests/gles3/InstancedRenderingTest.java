@@ -18,11 +18,10 @@ import java.nio.FloatBuffer;
 @GdxTestConfig(requireGL30 = true)
 public class InstancedRenderingTest extends GdxTest {
 
-    ShaderProgram shader;
-    Mesh mesh;
-
     private final static int INSTANCE_COUNT_SQRT = 100;
     private final static int INSTANCE_COUNT = INSTANCE_COUNT_SQRT * INSTANCE_COUNT_SQRT;
+    ShaderProgram shader;
+    Mesh mesh;
 
     @Override
     public void create() {

@@ -1,11 +1,5 @@
 package com.badlogic.gdx.graphics;
 
-import java.nio.Buffer;
-import java.nio.FloatBuffer;
-import java.nio.ShortBuffer;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
@@ -29,6 +23,12 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+
+import java.nio.Buffer;
+import java.nio.FloatBuffer;
+import java.nio.ShortBuffer;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>
@@ -54,20 +54,15 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * @author mzechner, Dave Clayton <contact@redskyforge.com>, Xoppa
  */
 public class Mesh implements Disposable {
-    public enum VertexDataType {
-        VertexArray, VertexBufferObject, VertexBufferObjectSubData, VertexBufferObjectWithVAO
-    }
-
     /**
      * list of all meshes
      **/
-    static final Map<Application, Array<Mesh>> meshes = new HashMap<Application, Array<Mesh>>();
-
+    static final Map<Application, Array<Mesh>> meshes = new HashMap<>();
     final VertexData vertices;
     final IndexData indices;
-    boolean autoBind = true;
     final boolean isVertexArray;
-
+    private final Vector3 tmpV = new Vector3();
+    boolean autoBind = true;
     InstanceData instances;
     boolean isInstanced = false;
 
@@ -132,14 +127,6 @@ public class Mesh implements Disposable {
         addManagedMesh(Gdx.app, this);
     }
 
-    private VertexData makeVertexBuffer(boolean isStatic, int maxVertices, VertexAttributes vertexAttributes) {
-        if (Gdx.gl30 != null) {
-            return new VertexBufferObjectWithVAO(isStatic, maxVertices, vertexAttributes);
-        } else {
-            return new VertexBufferObject(isStatic, maxVertices, vertexAttributes);
-        }
-    }
-
     /**
      * Creates a new Mesh with the given attributes. This is an expert method with no error checking. Use at your own risk.
      *
@@ -189,6 +176,126 @@ public class Mesh implements Disposable {
         }
 
         addManagedMesh(Gdx.app, this);
+    }
+
+    private static void addManagedMesh(Application app, Mesh mesh) {
+        Array<Mesh> managedResources = meshes.get(app);
+        if (managedResources == null) managedResources = new Array<>();
+        managedResources.add(mesh);
+        meshes.put(app, managedResources);
+    }
+
+    /**
+     * Invalidates all meshes so the next time they are rendered new VBO handles are generated.
+     */
+    public static void invalidateAllMeshes(Application app) {
+        Array<Mesh> meshesArray = meshes.get(app);
+        if (meshesArray == null) return;
+        for (int i = 0; i < meshesArray.size; i++) {
+            meshesArray.get(i).vertices.invalidate();
+            meshesArray.get(i).indices.invalidate();
+        }
+    }
+
+    /**
+     * Will clear the managed mesh cache. I wouldn't use this if i was you :)
+     */
+    public static void clearAllMeshes(Application app) {
+        meshes.remove(app);
+    }
+
+    public static String getManagedStatus() {
+        StringBuilder builder = new StringBuilder();
+        int i = 0;
+        builder.append("Managed meshes/app: { ");
+        for (Application app : meshes.keySet()) {
+            builder.append(meshes.get(app).size);
+            builder.append(" ");
+        }
+        builder.append("}");
+        return builder.toString();
+    }
+
+    /**
+     * Method to transform the positions in the float array. Normals will be kept as is. This is a potentially slow operation, use
+     * with care.
+     *
+     * @param matrix     the transformation matrix
+     * @param vertices   the float array
+     * @param vertexSize the number of floats in each vertex
+     * @param offset     the offset within a vertex to the position
+     * @param dimensions the size of the position
+     * @param start      the vertex to start with
+     * @param count      the amount of vertices to transform
+     */
+    public static void transform(final Matrix4 matrix, final float[] vertices, int vertexSize, int offset, int dimensions, int start, int count) {
+        if (offset < 0 || dimensions < 1 || (offset + dimensions) > vertexSize)
+            throw new IndexOutOfBoundsException();
+        if (start < 0 || count < 1 || ((start + count) * vertexSize) > vertices.length)
+            throw new IndexOutOfBoundsException("start = " + start + ", count = " + count + ", vertexSize = " + vertexSize + ", length = " + vertices.length);
+
+        final Vector3 tmp = new Vector3();
+
+        int idx = offset + (start * vertexSize);
+        switch (dimensions) {
+            case 1:
+                for (int i = 0; i < count; i++) {
+                    tmp.set(vertices[idx], 0, 0).mul(matrix);
+                    vertices[idx] = tmp.x;
+                    idx += vertexSize;
+                }
+                break;
+            case 2:
+                for (int i = 0; i < count; i++) {
+                    tmp.set(vertices[idx], vertices[idx + 1], 0).mul(matrix);
+                    vertices[idx] = tmp.x;
+                    vertices[idx + 1] = tmp.y;
+                    idx += vertexSize;
+                }
+                break;
+            case 3:
+                for (int i = 0; i < count; i++) {
+                    tmp.set(vertices[idx], vertices[idx + 1], vertices[idx + 2]).mul(matrix);
+                    vertices[idx] = tmp.x;
+                    vertices[idx + 1] = tmp.y;
+                    vertices[idx + 2] = tmp.z;
+                    idx += vertexSize;
+                }
+                break;
+        }
+    }
+
+    /**
+     * Method to transform the texture coordinates (UV) in the float array. This is a potentially slow operation, use with care.
+     *
+     * @param matrix     the transformation matrix
+     * @param vertices   the float array
+     * @param vertexSize the number of floats in each vertex
+     * @param offset     the offset within a vertex to the texture location
+     * @param start      the vertex to start with
+     * @param count      the amount of vertices to transform
+     */
+    public static void transformUV(final Matrix3 matrix, final float[] vertices, int vertexSize, int offset, int start, int count) {
+        if (start < 0 || count < 1 || ((start + count) * vertexSize) > vertices.length)
+            throw new IndexOutOfBoundsException("start = " + start + ", count = " + count + ", vertexSize = " + vertexSize + ", length = " + vertices.length);
+
+        final Vector2 tmp = new Vector2();
+
+        int idx = offset + (start * vertexSize);
+        for (int i = 0; i < count; i++) {
+            tmp.set(vertices[idx], vertices[idx + 1]).mul(matrix);
+            vertices[idx] = tmp.x;
+            vertices[idx + 1] = tmp.y;
+            idx += vertexSize;
+        }
+    }
+
+    private VertexData makeVertexBuffer(boolean isStatic, int maxVertices, VertexAttributes vertexAttributes) {
+        if (Gdx.gl30 != null) {
+            return new VertexBufferObjectWithVAO(isStatic, maxVertices, vertexAttributes);
+        } else {
+            return new VertexBufferObject(isStatic, maxVertices, vertexAttributes);
+        }
     }
 
     public Mesh enableInstancedRendering(boolean isStatic, int maxInstances, VertexAttribute... attributes) {
@@ -606,7 +713,8 @@ public class Mesh implements Disposable {
      */
     public void unbind(final ShaderProgram shader, final int[] locations) {
         vertices.unbind(shader, locations);
-        if (instances != null && instances.getNumInstances() > 0) instances.unbind(shader, locations);
+        if (instances != null && instances.getNumInstances() > 0)
+            instances.unbind(shader, locations);
         if (indices.getNumIndices() > 0) indices.unbind();
     }
 
@@ -864,8 +972,6 @@ public class Mesh implements Disposable {
         return extendBoundingBox(out, offset, count, null);
     }
 
-    private final Vector3 tmpV = new Vector3();
-
     /**
      * Extends the specified {@link BoundingBox} with the specified part.
      *
@@ -956,7 +1062,8 @@ public class Mesh implements Disposable {
      */
     public float calculateRadiusSquared(final float centerX, final float centerY, final float centerZ, int offset, int count, final Matrix4 transform) {
         int numIndices = getNumIndices();
-        if (offset < 0 || count < 1 || offset + count > numIndices) throw new GdxRuntimeException("Not enough indices");
+        if (offset < 0 || count < 1 || offset + count > numIndices)
+            throw new GdxRuntimeException("Not enough indices");
 
         final FloatBuffer verts = vertices.getBuffer(false);
         final ShortBuffer index = indices.getBuffer(false);
@@ -1085,46 +1192,6 @@ public class Mesh implements Disposable {
         return indices.getBuffer(forWriting);
     }
 
-    private static void addManagedMesh(Application app, Mesh mesh) {
-        Array<Mesh> managedResources = meshes.get(app);
-        if (managedResources == null) managedResources = new Array<Mesh>();
-        managedResources.add(mesh);
-        meshes.put(app, managedResources);
-    }
-
-    /**
-     * Invalidates all meshes so the next time they are rendered new VBO handles are generated.
-     *
-     * @param app
-     */
-    public static void invalidateAllMeshes(Application app) {
-        Array<Mesh> meshesArray = meshes.get(app);
-        if (meshesArray == null) return;
-        for (int i = 0; i < meshesArray.size; i++) {
-            meshesArray.get(i).vertices.invalidate();
-            meshesArray.get(i).indices.invalidate();
-        }
-    }
-
-    /**
-     * Will clear the managed mesh cache. I wouldn't use this if i was you :)
-     */
-    public static void clearAllMeshes(Application app) {
-        meshes.remove(app);
-    }
-
-    public static String getManagedStatus() {
-        StringBuilder builder = new StringBuilder();
-        int i = 0;
-        builder.append("Managed meshes/app: { ");
-        for (Application app : meshes.keySet()) {
-            builder.append(meshes.get(app).size);
-            builder.append(" ");
-        }
-        builder.append("}");
-        return builder.toString();
-    }
-
     /**
      * Method to scale the positions in the mesh. Normals will be kept as is. This is a potentially slow operation, use with care.
      * It will also create a temporary float[] which will be garbage collected.
@@ -1198,54 +1265,6 @@ public class Mesh implements Disposable {
     }
 
     /**
-     * Method to transform the positions in the float array. Normals will be kept as is. This is a potentially slow operation, use
-     * with care.
-     *
-     * @param matrix     the transformation matrix
-     * @param vertices   the float array
-     * @param vertexSize the number of floats in each vertex
-     * @param offset     the offset within a vertex to the position
-     * @param dimensions the size of the position
-     * @param start      the vertex to start with
-     * @param count      the amount of vertices to transform
-     */
-    public static void transform(final Matrix4 matrix, final float[] vertices, int vertexSize, int offset, int dimensions, int start, int count) {
-        if (offset < 0 || dimensions < 1 || (offset + dimensions) > vertexSize) throw new IndexOutOfBoundsException();
-        if (start < 0 || count < 1 || ((start + count) * vertexSize) > vertices.length)
-            throw new IndexOutOfBoundsException("start = " + start + ", count = " + count + ", vertexSize = " + vertexSize + ", length = " + vertices.length);
-
-        final Vector3 tmp = new Vector3();
-
-        int idx = offset + (start * vertexSize);
-        switch (dimensions) {
-            case 1:
-                for (int i = 0; i < count; i++) {
-                    tmp.set(vertices[idx], 0, 0).mul(matrix);
-                    vertices[idx] = tmp.x;
-                    idx += vertexSize;
-                }
-                break;
-            case 2:
-                for (int i = 0; i < count; i++) {
-                    tmp.set(vertices[idx], vertices[idx + 1], 0).mul(matrix);
-                    vertices[idx] = tmp.x;
-                    vertices[idx + 1] = tmp.y;
-                    idx += vertexSize;
-                }
-                break;
-            case 3:
-                for (int i = 0; i < count; i++) {
-                    tmp.set(vertices[idx], vertices[idx + 1], vertices[idx + 2]).mul(matrix);
-                    vertices[idx] = tmp.x;
-                    vertices[idx + 1] = tmp.y;
-                    vertices[idx + 2] = tmp.z;
-                    idx += vertexSize;
-                }
-                break;
-        }
-    }
-
-    /**
      * Method to transform the texture coordinates in the mesh. This is a potentially slow operation, use with care. It will also
      * create a temporary float[] which will be garbage collected.
      *
@@ -1268,31 +1287,6 @@ public class Mesh implements Disposable {
         transformUV(matrix, vertices, vertexSize, offset, start, count);
         setVertices(vertices, 0, vertices.length);
         // TODO: setVertices(start * vertexSize, vertices, 0, vertices.length);
-    }
-
-    /**
-     * Method to transform the texture coordinates (UV) in the float array. This is a potentially slow operation, use with care.
-     *
-     * @param matrix     the transformation matrix
-     * @param vertices   the float array
-     * @param vertexSize the number of floats in each vertex
-     * @param offset     the offset within a vertex to the texture location
-     * @param start      the vertex to start with
-     * @param count      the amount of vertices to transform
-     */
-    public static void transformUV(final Matrix3 matrix, final float[] vertices, int vertexSize, int offset, int start, int count) {
-        if (start < 0 || count < 1 || ((start + count) * vertexSize) > vertices.length)
-            throw new IndexOutOfBoundsException("start = " + start + ", count = " + count + ", vertexSize = " + vertexSize + ", length = " + vertices.length);
-
-        final Vector2 tmp = new Vector2();
-
-        int idx = offset + (start * vertexSize);
-        for (int i = 0; i < count; i++) {
-            tmp.set(vertices[idx], vertices[idx + 1]).mul(matrix);
-            vertices[idx] = tmp.x;
-            vertices[idx + 1] = tmp.y;
-            idx += vertexSize;
-        }
     }
 
     /**
@@ -1396,5 +1390,9 @@ public class Mesh implements Disposable {
      */
     public Mesh copy(boolean isStatic) {
         return copy(isStatic, false, null);
+    }
+
+    public enum VertexDataType {
+        VertexArray, VertexBufferObject, VertexBufferObjectSubData, VertexBufferObjectWithVAO
     }
 }
