@@ -20,9 +20,12 @@ public class MipMap2D extends GdxTest {
     @Override
     public void create() {
         String vertexShader = "uniform float u_offset;      \n" + "attribute vec4 a_position;   \n" + "attribute vec2 a_texCoord;   \n" + "varying vec2 v_texCoord;     \n" + "void main()                  \n" + "{                            \n" + "   gl_Position = a_position; \n" + "   gl_Position.x += u_offset;\n" + "   v_texCoord = a_texCoord;  \n" + "}                            \n";
+
         String fragmentShader = "#ifdef GL_ES\n" + "precision mediump float;\n" + "#endif\n" + "varying vec2 v_texCoord;                            \n" + "uniform sampler2D s_texture;                        \n" + "void main()                                         \n" + "{                                                   \n" + "  gl_FragColor = texture2D( s_texture, v_texCoord );\n" + "}                                                   \n";
+
         shader = new ShaderProgram(vertexShader, fragmentShader);
         mesh = new Mesh(true, 4, 6, new VertexAttribute(Usage.Position, 4, "a_position"), new VertexAttribute(Usage.TextureCoordinates, 2, "a_texCoord"));
+
         float[] vertices = {-0.5f, 0.5f, 0.0f, 1.5f, // Position 0
                 0.0f, 0.0f, // TexCoord 0
                 -0.5f, -0.5f, 0.0f, 0.75f, // Position 1
@@ -32,7 +35,9 @@ public class MipMap2D extends GdxTest {
                 0.5f, 0.5f, 0.0f, 1.5f, // Position 3
                 1.0f, 0.0f // TexCoord 3
         };
+
         short[] indices = {0, 1, 2, 0, 2, 3};
+
         mesh.setVertices(vertices);
         mesh.setIndices(indices);
         createTexture();

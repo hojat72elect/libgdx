@@ -43,6 +43,7 @@ import com.badlogic.gdx.tests.g3d.TextureRegion3DTest;
 import com.badlogic.gdx.tests.g3d.utils.DefaultTextureBinderTest;
 import com.badlogic.gdx.tests.g3d.voxel.VoxelTest;
 import com.badlogic.gdx.tests.gles2.HelloTriangle;
+import com.badlogic.gdx.tests.gles2.MipMap2D;
 import com.badlogic.gdx.tests.gles2.SimpleVertexShader;
 import com.badlogic.gdx.tests.gles2.VertexArrayTest;
 import com.badlogic.gdx.tests.gles3.GL30Texture3DTest;
@@ -169,6 +170,7 @@ public class GdxTests {
             MeshShaderTest.class,
             MeshWithCustomAttributesTest.class,
             MipMapTest.class,
+            MipMap2D.class,
             ModelTest.class,
             ModelCacheTest.class,
             MoveSpriteExample.class,
