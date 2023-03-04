@@ -35,36 +35,49 @@ public abstract class Box2DTest implements ApplicationListener, InputProcessor {
      * the renderer
      **/
     protected Box2DDebugRenderer renderer;
-
-    SpriteBatch batch;
-    BitmapFont font;
-
     /**
      * our box2D world
      **/
     protected World world;
-
     /**
      * ground body to connect the mouse joint to
      **/
     protected Body groundBody;
-
     /**
      * our mouse joint
      **/
     protected MouseJoint mouseJoint = null;
-
     /**
      * a hit body
      **/
     protected Body hitBody = null;
-
-    protected abstract void createWorld(World world);
-
     /**
      * temp vector
      **/
     protected Vector2 tmp = new Vector2();
+    SpriteBatch batch;
+    BitmapFont font;
+    /**
+     * we instantiate this vector and the callback here so we don't irritate the GC
+     **/
+    Vector3 testPoint = new Vector3();
+    QueryCallback callback = new QueryCallback() {
+        @Override
+        public boolean reportFixture(Fixture fixture) {
+            // if the hit point is inside the fixture of the body
+            // we report it
+            if (fixture.testPoint(testPoint.x, testPoint.y)) {
+                hitBody = fixture.getBody();
+                return false;
+            } else return true;
+        }
+    };
+    /**
+     * another temporary vector
+     **/
+    Vector2 target = new Vector2();
+
+    protected abstract void createWorld(World world);
 
     @Override
     public void render() {
@@ -143,22 +156,6 @@ public abstract class Box2DTest implements ApplicationListener, InputProcessor {
         return false;
     }
 
-    /**
-     * we instantiate this vector and the callback here so we don't irritate the GC
-     **/
-    Vector3 testPoint = new Vector3();
-    QueryCallback callback = new QueryCallback() {
-        @Override
-        public boolean reportFixture(Fixture fixture) {
-            // if the hit point is inside the fixture of the body
-            // we report it
-            if (fixture.testPoint(testPoint.x, testPoint.y)) {
-                hitBody = fixture.getBody();
-                return false;
-            } else return true;
-        }
-    };
-
     @Override
     public boolean touchDown(int x, int y, int pointer, int button) {
         // translate the mouse coordinates to world coordinates
@@ -189,11 +186,6 @@ public abstract class Box2DTest implements ApplicationListener, InputProcessor {
 
         return false;
     }
-
-    /**
-     * another temporary vector
-     **/
-    Vector2 target = new Vector2();
 
     @Override
     public boolean touchDragged(int x, int y, int pointer) {

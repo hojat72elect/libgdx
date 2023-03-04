@@ -12,8 +12,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 /**
  * Demonstrates support of progressive JPEG.
- *
- * @author HD_92 (blueriverteam@gmail.com)
  */
 public class ProgressiveJPEGTest extends GdxTest {
     private SpriteBatch batch;

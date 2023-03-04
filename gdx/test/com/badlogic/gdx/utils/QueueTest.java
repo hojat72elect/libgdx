@@ -1,16 +1,18 @@
 package com.badlogic.gdx.utils;
 
-import static org.junit.Assert.*;
-
-import java.util.Iterator;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.fail;
 
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Iterator;
+
 public class QueueTest {
     @Test
     public void addFirstAndLastTest() {
-        Queue<Integer> queue = new Queue<Integer>();
+        Queue<Integer> queue = new Queue<>();
         queue.addFirst(1);
         queue.addLast(2);
         queue.addFirst(3);
@@ -24,7 +26,7 @@ public class QueueTest {
 
     @Test
     public void removeLastTest() {
-        Queue<Integer> queue = new Queue<Integer>();
+        Queue<Integer> queue = new Queue<>();
         queue.addLast(1);
         queue.addLast(2);
         queue.addLast(3);
@@ -51,7 +53,7 @@ public class QueueTest {
 
     @Test
     public void removeFirstTest() {
-        Queue<Integer> queue = new Queue<Integer>();
+        Queue<Integer> queue = new Queue<>();
         queue.addLast(1);
         queue.addLast(2);
         queue.addLast(3);
@@ -78,7 +80,7 @@ public class QueueTest {
 
     @Test
     public void resizableQueueTest() {
-        final Queue<Integer> q = new Queue<Integer>(8);
+        final Queue<Integer> q = new Queue<>(8);
 
         assertEquals("New queue is not empty!", 0, q.size);
 
@@ -124,7 +126,7 @@ public class QueueTest {
      */
     @Test
     public void resizableDequeTest() {
-        final Queue<Integer> q = new Queue<Integer>(8);
+        final Queue<Integer> q = new Queue<>(8);
 
         assertEquals("New deque is not empty!", 0, q.size);
 
@@ -167,7 +169,7 @@ public class QueueTest {
 
     @Test
     public void getTest() {
-        final Queue<Integer> q = new Queue<Integer>(7);
+        final Queue<Integer> q = new Queue<>(7);
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {
                 q.addLast(j);
@@ -194,7 +196,7 @@ public class QueueTest {
 
     @Test
     public void removeTest() {
-        final Queue<Integer> q = new Queue<Integer>();
+        final Queue<Integer> q = new Queue<>();
 
         // Test head < tail.
         for (int j = 0; j <= 6; j++)
@@ -236,7 +238,7 @@ public class QueueTest {
 
     @Test
     public void indexOfTest() {
-        final Queue<Integer> q = new Queue<Integer>();
+        final Queue<Integer> q = new Queue<>();
 
         // Test head < tail.
         for (int j = 0; j <= 6; j++)
@@ -332,7 +334,7 @@ public class QueueTest {
 
     @Test
     public void toStringTest() {
-        Queue<Integer> q = new Queue<Integer>(1);
+        Queue<Integer> q = new Queue<>(1);
         assertEquals("[]", q.toString());
         q.addLast(4);
         assertEquals("[4]", q.toString());
@@ -344,8 +346,8 @@ public class QueueTest {
 
     @Test
     public void hashEqualsTest() {
-        Queue<Integer> q1 = new Queue<Integer>();
-        Queue<Integer> q2 = new Queue<Integer>();
+        Queue<Integer> q1 = new Queue<>();
+        Queue<Integer> q2 = new Queue<>();
 
         assertEqualsAndHash(q1, q2);
         q1.addFirst(1);

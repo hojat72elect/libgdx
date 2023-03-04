@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.joints.FrictionJointDef;
 
 public class ApplyForce extends Box2DTest {
+    private final Vector2 tmp = new Vector2();
     Body m_body;
 
     @Override
@@ -133,8 +134,6 @@ public class ApplyForce extends Box2DTest {
             shape.dispose();
         }
     }
-
-    private final Vector2 tmp = new Vector2();
 
     public boolean keyDown(int keyCode) {
         if (keyCode == Keys.W) {
