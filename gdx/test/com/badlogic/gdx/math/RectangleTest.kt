@@ -1,5 +1,6 @@
 package com.badlogic.gdx.math
 
+import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -7,6 +8,16 @@ class RectangleTest {
     private val mockRectangleString = "[5.0,-4.1,0.03,-0.02]"
     private val mockRectangle = Rectangle(5f, -4.1f, 0.03f, -0.02f)
     private val defaultRectangle = Rectangle()
+
+
+    @Test
+    fun ` general test for the Rectangle`() {
+        val r1 = Rectangle(0f, 0f, 1f, 1f)
+        val r2 = Rectangle(1f, 0f, 2f, 1f)
+        Assert.assertTrue(r1.overlaps(r1))
+        Assert.assertFalse(r1.overlaps(r2))
+        Assert.assertTrue(r1.contains(0f, 0f))
+    }
 
     @Test
     fun `test converting a Rectangle to string`() {
