@@ -23,17 +23,16 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  * Cycles viewports while rendering with SpriteBatch.
  */
 public class ViewportTest3 extends GdxTest {
-    Array<Viewport> viewports;
-    Viewport viewport;
-    Array<String> names;
-    String name;
-
-    private PerspectiveCamera camera;
     public Environment environment;
     public DirectionalLight shadowLight;
     public ModelBuilder modelBuilder;
     public ModelBatch modelBatch;
     public ModelInstance boxInstance;
+    Array<Viewport> viewports;
+    Viewport viewport;
+    Array<String> names;
+    String name;
+    private PerspectiveCamera camera;
 
     public void create() {
         modelBatch = new ModelBatch();

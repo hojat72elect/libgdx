@@ -45,7 +45,12 @@ public abstract class Camera {
      * the inverse combined projection and view matrix
      **/
     public final Matrix4 invProjectionView = new Matrix4();
-
+    /**
+     * the frustum
+     **/
+    public final Frustum frustum = new Frustum();
+    private final Vector3 tmpVec = new Vector3();
+    private final Ray ray = new Ray(new Vector3(), new Vector3());
     /**
      * the near clipping plane distance, has to be positive
      **/
@@ -54,7 +59,6 @@ public abstract class Camera {
      * the far clipping plane distance, has to be positive
      **/
     public float far = 100;
-
     /**
      * the viewport width
      **/
@@ -63,14 +67,6 @@ public abstract class Camera {
      * the viewport height
      **/
     public float viewportHeight = 0;
-
-    /**
-     * the frustum
-     **/
-    public final Frustum frustum = new Frustum();
-
-    private final Vector3 tmpVec = new Vector3();
-    private final Ray ray = new Ray(new Vector3(), new Vector3());
 
     /**
      * Recalculates the projection and view matrix of this camera and the {@link Frustum} planes. Use this after you've
