@@ -50,7 +50,7 @@ public class SpriteBatch implements Batch {
     float invTexWidth = 0, invTexHeight = 0;
     boolean drawing = false;
     float colorPacked = Color.WHITE_FLOAT_BITS;
-    private Mesh mesh;
+    private final Mesh mesh;
     private boolean blendingDisabled = false;
     private int blendSrcFunc = GL20.GL_SRC_ALPHA;
     private int blendDstFunc = GL20.GL_ONE_MINUS_SRC_ALPHA;

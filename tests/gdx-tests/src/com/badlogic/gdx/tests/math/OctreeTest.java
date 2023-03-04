@@ -30,12 +30,11 @@ import com.badlogic.gdx.utils.ObjectSet;
 import java.util.Random;
 
 public class OctreeTest extends GdxTest implements ApplicationListener {
+    public static final int MAX_DEPTH = 8;
+    public static final int MAX_ITEMS_PER_NODE = 200;
     private static final float AREA_SIZE = 100;
     private static final int BOXES = 5000;
     private static final int REMOVE_BOXES = 500;
-    public static final int MAX_DEPTH = 8;
-    public static final int MAX_ITEMS_PER_NODE = 200;
-
     public boolean octreeVisible = true;
 
     public PerspectiveCamera cam;
@@ -70,6 +69,8 @@ public class OctreeTest extends GdxTest implements ApplicationListener {
         Vector3 min = new Vector3(-AREA_SIZE / 2, -AREA_SIZE / 2, -AREA_SIZE / 2);
         Vector3 max = new Vector3(AREA_SIZE / 2, AREA_SIZE / 2, AREA_SIZE / 2);
         octree = new Octree<>(min, max, MAX_DEPTH, MAX_ITEMS_PER_NODE, new Octree.Collider<GameObject>() {
+            final Vector3 tmp = new Vector3();
+
             @Override
             public boolean intersects(BoundingBox nodeBounds, GameObject geometry) {
                 return nodeBounds.intersects(geometry.box);
@@ -79,8 +80,6 @@ public class OctreeTest extends GdxTest implements ApplicationListener {
             public boolean intersects(Frustum frustum, GameObject geometry) {
                 return frustum.boundsInFrustum(geometry.box);
             }
-
-            final Vector3 tmp = new Vector3();
 
             @Override
             public float intersects(Ray ray, GameObject geometry) {
