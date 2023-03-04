@@ -1,9 +1,9 @@
 package com.badlogic.gdx.math.collision;
 
-import java.io.Serializable;
-
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
+
+import java.io.Serializable;
 
 /**
  * Encapsulates a ray having a starting position and a unit length direction.
@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector3;
  */
 public class Ray implements Serializable {
     private static final long serialVersionUID = -620692054835390878L;
+    static Vector3 tmp = new Vector3();
     public final Vector3 origin = new Vector3();
     public final Vector3 direction = new Vector3();
 
@@ -46,8 +47,6 @@ public class Ray implements Serializable {
     public Vector3 getEndPoint(final Vector3 out, final float distance) {
         return out.set(direction).scl(distance).add(origin);
     }
-
-    static Vector3 tmp = new Vector3();
 
     /**
      * Multiplies the ray by the given matrix. Use this to transform a ray into another coordinate system.

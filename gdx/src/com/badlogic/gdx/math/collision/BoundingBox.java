@@ -1,10 +1,10 @@
 package com.badlogic.gdx.math.collision;
 
-import java.io.Serializable;
-import java.util.List;
-
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Encapsulates an axis aligned bounding box represented by a minimum and a maximum Vector. Additionally you can query for the
@@ -30,6 +30,40 @@ public class BoundingBox implements Serializable {
 
     private final Vector3 cnt = new Vector3();
     private final Vector3 dim = new Vector3();
+
+    /**
+     * Constructs a new bounding box with the minimum and maximum vector set to zeros.
+     */
+    public BoundingBox() {
+        clr();
+    }
+
+    /**
+     * Constructs a new bounding box from the given bounding box.
+     *
+     * @param bounds The bounding box to copy
+     */
+    public BoundingBox(BoundingBox bounds) {
+        this.set(bounds);
+    }
+
+    /**
+     * Constructs the new bounding box using the given minimum and maximum vector.
+     *
+     * @param minimum The minimum vector
+     * @param maximum The maximum vector
+     */
+    public BoundingBox(Vector3 minimum, Vector3 maximum) {
+        this.set(minimum, maximum);
+    }
+
+    static final float min(final float a, final float b) {
+        return a > b ? b : a;
+    }
+
+    static final float max(final float a, final float b) {
+        return a > b ? a : b;
+    }
 
     /**
      * @param out The {@link Vector3} to receive the center of the bounding box.
@@ -117,32 +151,6 @@ public class BoundingBox implements Serializable {
      */
     public Vector3 getMax(final Vector3 out) {
         return out.set(max);
-    }
-
-    /**
-     * Constructs a new bounding box with the minimum and maximum vector set to zeros.
-     */
-    public BoundingBox() {
-        clr();
-    }
-
-    /**
-     * Constructs a new bounding box from the given bounding box.
-     *
-     * @param bounds The bounding box to copy
-     */
-    public BoundingBox(BoundingBox bounds) {
-        this.set(bounds);
-    }
-
-    /**
-     * Constructs the new bounding box using the given minimum and maximum vector.
-     *
-     * @param minimum The minimum vector
-     * @param maximum The maximum vector
-     */
-    public BoundingBox(Vector3 minimum, Vector3 maximum) {
-        this.set(minimum, maximum);
     }
 
     /**
@@ -373,13 +381,5 @@ public class BoundingBox implements Serializable {
      */
     public BoundingBox ext(float x, float y, float z) {
         return this.set(min.set(min(min.x, x), min(min.y, y), min(min.z, z)), max.set(max(max.x, x), max(max.y, y), max(max.z, z)));
-    }
-
-    static final float min(final float a, final float b) {
-        return a > b ? b : a;
-    }
-
-    static final float max(final float a, final float b) {
-        return a > b ? a : b;
     }
 }
