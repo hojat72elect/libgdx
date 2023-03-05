@@ -1,34 +1,36 @@
 package com.badlogic.gdx.utils;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class FlushablePoolTest {
     @Test
     public void initializeFlushablePoolTest1() {
-        FlushablePoolClass flushablePool = new FlushablePoolClass();
+        com.badlogic.gdx.utils.FlushablePoolTest.FakeFlushablePool flushablePool = new com.badlogic.gdx.utils.FlushablePoolTest.FakeFlushablePool();
         assertEquals(0, flushablePool.getFree());
         assertEquals(Integer.MAX_VALUE, flushablePool.max);
     }
 
     @Test
     public void initializeFlushablePoolTest2() {
-        FlushablePoolClass flushablePool = new FlushablePoolClass(10);
+        com.badlogic.gdx.utils.FlushablePoolTest.FakeFlushablePool flushablePool = new com.badlogic.gdx.utils.FlushablePoolTest.FakeFlushablePool(10);
         assertEquals(0, flushablePool.getFree());
         assertEquals(Integer.MAX_VALUE, flushablePool.max);
     }
 
     @Test
     public void initializeFlushablePoolTest3() {
-        FlushablePoolClass flushablePool = new FlushablePoolClass(10, 10);
+        com.badlogic.gdx.utils.FlushablePoolTest.FakeFlushablePool flushablePool = new com.badlogic.gdx.utils.FlushablePoolTest.FakeFlushablePool(10, 10);
         assertEquals(0, flushablePool.getFree());
         assertEquals(10, flushablePool.max);
     }
 
     @Test
     public void obtainTest() {
-        FlushablePoolClass flushablePool = new FlushablePoolClass(10, 10);
+        com.badlogic.gdx.utils.FlushablePoolTest.FakeFlushablePool flushablePool = new com.badlogic.gdx.utils.FlushablePoolTest.FakeFlushablePool(10, 10);
         flushablePool.newObject();
         assertEquals(0, flushablePool.obtained.size);
         flushablePool.obtain();
@@ -39,7 +41,7 @@ public class FlushablePoolTest {
 
     @Test
     public void flushTest() {
-        FlushablePoolClass flushablePool = new FlushablePoolClass(10, 10);
+        com.badlogic.gdx.utils.FlushablePoolTest.FakeFlushablePool flushablePool = new com.badlogic.gdx.utils.FlushablePoolTest.FakeFlushablePool(10, 10);
         flushablePool.newObject();
         flushablePool.obtain();
         assertEquals(1, flushablePool.obtained.size);
@@ -50,7 +52,7 @@ public class FlushablePoolTest {
     @Test
     public void freeTest() {
         // Create the flushable pool.
-        FlushablePoolClass flushablePool = new FlushablePoolClass(10, 10);
+        com.badlogic.gdx.utils.FlushablePoolTest.FakeFlushablePool flushablePool = new com.badlogic.gdx.utils.FlushablePoolTest.FakeFlushablePool(10, 10);
         flushablePool.newObject();
         flushablePool.newObject();
 
@@ -71,7 +73,7 @@ public class FlushablePoolTest {
     @Test
     public void freeAllTest() {
         // Create the flushable pool.
-        FlushablePoolClass flushablePool = new FlushablePoolClass(5, 5);
+        com.badlogic.gdx.utils.FlushablePoolTest.FakeFlushablePool flushablePool = new com.badlogic.gdx.utils.FlushablePoolTest.FakeFlushablePool(5, 5);
         flushablePool.newObject();
         flushablePool.newObject();
 
@@ -97,17 +99,17 @@ public class FlushablePoolTest {
     /**
      * Test implementation class of FlushablePool.
      */
-    private class FlushablePoolClass extends FlushablePool<String> {
+    private class FakeFlushablePool extends FlushablePool<String> {
 
-        FlushablePoolClass() {
+        FakeFlushablePool() {
             super();
         }
 
-        FlushablePoolClass(int initialCapacity) {
+        FakeFlushablePool(int initialCapacity) {
             super(initialCapacity);
         }
 
-        FlushablePoolClass(int initialCapacity, int max) {
+        FakeFlushablePool(int initialCapacity, int max) {
             super(initialCapacity, max);
         }
 
