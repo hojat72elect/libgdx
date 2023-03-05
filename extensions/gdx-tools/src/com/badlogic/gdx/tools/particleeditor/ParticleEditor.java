@@ -1,17 +1,5 @@
 package com.badlogic.gdx.tools.particleeditor;
 
-import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.geom.AffineTransform;
-import java.io.File;
-import java.util.HashMap;
-
-import javax.swing.*;
-import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.border.CompoundBorder;
-import javax.swing.plaf.basic.BasicSplitPaneUI;
-
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Gdx;
@@ -37,18 +25,46 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
+import java.awt.BorderLayout;
+import java.awt.Canvas;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.geom.AffineTransform;
+import java.io.File;
+import java.util.HashMap;
+
+import javax.swing.BorderFactory;
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.border.CompoundBorder;
+import javax.swing.plaf.basic.BasicSplitPaneUI;
+
 public class ParticleEditor extends JFrame {
     public static final String DEFAULT_PARTICLE = "particle.png";
 
     public static final String DEFAULT_PREMULT_PARTICLE = "pre_particle.png";
-
+    final HashMap<ParticleEmitter, ParticleData> particleData = new HashMap();
     public Renderer renderer;
     Canvas lwjglCanvas;
     JPanel rowsPanel;
     JPanel editRowsPanel;
     EffectPanel effectPanel;
     PreviewImagePanel previewImagePanel;
-    private JSplitPane splitPane;
     OrthographicCamera worldCamera;
     OrthographicCamera textCamera;
     NumericValue pixelsPerMeter;
@@ -61,8 +77,8 @@ public class ParticleEditor extends JFrame {
 
     ParticleEffect effect = new ParticleEffect();
     File effectFile;
-    final HashMap<ParticleEmitter, ParticleData> particleData = new HashMap();
     JCheckBox renderGridCheckBox;
+    private JSplitPane splitPane;
 
     public ParticleEditor() {
         super("Particle Editor");
@@ -82,6 +98,23 @@ public class ParticleEditor extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                try {
+                    UIManager.setLookAndFeel(info.getClassName());
+                } catch (Throwable ignored) {
+                }
+                break;
+            }
+        }
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ParticleEditor();
+            }
+        });
     }
 
     private void createCanvas() {
@@ -282,7 +315,13 @@ public class ParticleEditor extends JFrame {
         splitPane.setDividerLocation(325);
     }
 
+    static class ParticleData {
+        public boolean enabled = true;
+    }
+
     class Renderer implements ApplicationListener, InputProcessor {
+        public Sprite bgImage; // BOZO - Add setting background image to UI.
+        public CustomShading customShading;
         private float maxActiveTimer;
         private int maxActive, lastMaxActive;
         private boolean mouseDown;
@@ -290,13 +329,8 @@ public class ParticleEditor extends JFrame {
         private int mouseX, mouseY;
         private BitmapFont font;
         private SpriteBatch spriteBatch;
-
         private ShapeRenderer shapeRenderer;
         private com.badlogic.gdx.graphics.Color lineColor;
-
-        public Sprite bgImage; // BOZO - Add setting background image to UI.
-
-        public CustomShading customShading;
 
         public void create() {
             if (spriteBatch != null) return;
@@ -331,59 +365,6 @@ public class ParticleEditor extends JFrame {
             OrthoCamController orthoCamController = new OrthoCamController(worldCamera);
             Gdx.input.setInputProcessor(new InputMultiplexer(orthoCamController, this));
             resize(lwjglCanvas.getWidth(), lwjglCanvas.getHeight());
-        }
-
-        private class OrthoCamController extends InputAdapter {
-            final OrthographicCamera camera;
-            final Vector3 curr = new Vector3();
-            final Vector3 last = new Vector3(-1, -1, -1);
-            final Vector3 delta = new Vector3();
-
-            boolean canDrag = false;
-
-            public OrthoCamController(OrthographicCamera camera) {
-                this.camera = camera;
-            }
-
-            @Override
-            public boolean scrolled(float amountX, float amountY) {
-                worldCamera.zoom += amountY * 0.01f;
-                worldCamera.zoom = MathUtils.clamp(worldCamera.zoom, 0.01f, 5000);
-                worldCamera.update();
-                return super.scrolled(amountX, amountY);
-            }
-
-            @Override
-            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-                if (button == Input.Buttons.LEFT) {
-                    canDrag = true;
-                } else {
-                    canDrag = false;
-                }
-                return super.touchDown(screenX, screenY, pointer, button);
-            }
-
-            @Override
-            public boolean touchDragged(int x, int y, int pointer) {
-                if (!canDrag) return false;
-
-                camera.unproject(curr.set(x, y, 0));
-                if (!(last.x == -1 && last.y == -1 && last.z == -1)) {
-                    camera.unproject(delta.set(last.x, last.y, 0));
-                    delta.sub(curr);
-                    camera.position.add(delta.x, delta.y, 0);
-                }
-                last.set(x, y, 0);
-                camera.update();
-                return false;
-            }
-
-            @Override
-            public boolean touchUp(int x, int y, int pointer, int button) {
-                last.set(-1, -1, -1);
-                canDrag = false;
-                return false;
-            }
         }
 
         @Override
@@ -612,26 +593,58 @@ public class ParticleEditor extends JFrame {
                 bgImage.setSize(width, height);
             }
         }
-    }
 
-    static class ParticleData {
-        public boolean enabled = true;
-    }
+        private class OrthoCamController extends InputAdapter {
+            final OrthographicCamera camera;
+            final Vector3 curr = new Vector3();
+            final Vector3 last = new Vector3(-1, -1, -1);
+            final Vector3 delta = new Vector3();
 
-    public static void main(String[] args) {
-        for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-                try {
-                    UIManager.setLookAndFeel(info.getClassName());
-                } catch (Throwable ignored) {
+            boolean canDrag = false;
+
+            public OrthoCamController(OrthographicCamera camera) {
+                this.camera = camera;
+            }
+
+            @Override
+            public boolean scrolled(float amountX, float amountY) {
+                worldCamera.zoom += amountY * 0.01f;
+                worldCamera.zoom = MathUtils.clamp(worldCamera.zoom, 0.01f, 5000);
+                worldCamera.update();
+                return super.scrolled(amountX, amountY);
+            }
+
+            @Override
+            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                if (button == Input.Buttons.LEFT) {
+                    canDrag = true;
+                } else {
+                    canDrag = false;
                 }
-                break;
+                return super.touchDown(screenX, screenY, pointer, button);
+            }
+
+            @Override
+            public boolean touchDragged(int x, int y, int pointer) {
+                if (!canDrag) return false;
+
+                camera.unproject(curr.set(x, y, 0));
+                if (!(last.x == -1 && last.y == -1 && last.z == -1)) {
+                    camera.unproject(delta.set(last.x, last.y, 0));
+                    delta.sub(curr);
+                    camera.position.add(delta.x, delta.y, 0);
+                }
+                last.set(x, y, 0);
+                camera.update();
+                return false;
+            }
+
+            @Override
+            public boolean touchUp(int x, int y, int pointer, int button) {
+                last.set(-1, -1, -1);
+                canDrag = false;
+                return false;
             }
         }
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ParticleEditor();
-            }
-        });
     }
 }
