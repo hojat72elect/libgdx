@@ -2,7 +2,7 @@ package com.badlogic.gdx.tests;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.KotlinInputAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -52,7 +52,7 @@ public class TextureAtlasTest extends GdxTest {
 
         Gdx.gl.glClearColor(0, 1, 0, 1);
 
-        Gdx.input.setInputProcessor(new InputAdapter() {
+        Gdx.input.setInputProcessor(new KotlinInputAdapter() {
             public boolean keyUp(int keycode) {
                 if (keycode == Keys.UP) {
                     badlogicSmall.flip(false, true);

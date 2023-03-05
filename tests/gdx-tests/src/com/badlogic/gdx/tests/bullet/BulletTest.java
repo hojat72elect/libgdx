@@ -1,7 +1,7 @@
 package com.badlogic.gdx.tests.bullet;
 
 import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.KotlinInputAdapter;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.FloatCounter;
@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.PerformanceCounter;
 /**
  * @author xoppa
  */
-public class BulletTest extends InputAdapter implements ApplicationListener, GestureListener {
+public class BulletTest extends KotlinInputAdapter implements ApplicationListener, GestureListener {
     public StringBuilder performance = new StringBuilder();
     public String instructions = "Tap to shoot\nLong press to toggle debug mode\nSwipe for next test\nCtrl+drag to rotate\nScroll to zoom";
     public PerformanceCounter performanceCounter = new PerformanceCounter(this.getClass().getSimpleName());

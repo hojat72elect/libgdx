@@ -17,7 +17,7 @@
 package com.badlogic.gdx.tests;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.KotlinInputAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -41,7 +41,7 @@ public class BitmapFontFlipTest extends GdxTest {
 
 	@Override
 	public void create () {
-		Gdx.input.setInputProcessor(new InputAdapter() {
+		Gdx.input.setInputProcessor(new KotlinInputAdapter() {
 			public boolean touchDown (int x, int y, int pointer, int newParam) {
 				renderMode = (renderMode + 1) % 4;
 				return false;

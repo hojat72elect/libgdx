@@ -2,7 +2,7 @@ package com.badlogic.gdx.tests;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.KotlinInputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -108,7 +108,7 @@ public class InterpolationTest extends GdxTest {
         table.add(scroll).expandX().left().width(100);
         stage.addActor(table);
 
-        Gdx.input.setInputProcessor(new InputMultiplexer(new InputAdapter() {
+        Gdx.input.setInputProcessor(new InputMultiplexer(new KotlinInputAdapter() {
             public boolean scrolled(float amountX, float amountY) {
                 if (!Gdx.input.isKeyPressed(Keys.CONTROL_LEFT)) return false;
                 duration -= amountY / 15f;
@@ -116,7 +116,7 @@ public class InterpolationTest extends GdxTest {
                 return true;
             }
 
-        }, stage, new InputAdapter() {
+        }, stage, new KotlinInputAdapter() {
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
                 if (!Float.isNaN(time)) // if "walking" was interrupted by this touch down event
                     startPosition.set(getPosition(time)); // set startPosition to the current position

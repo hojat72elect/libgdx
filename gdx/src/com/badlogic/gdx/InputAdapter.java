@@ -2,8 +2,6 @@ package com.badlogic.gdx;
 
 /**
  * An adapter class for {@link InputProcessor}. You can derive from this and only override what you are interested in.
- *
- * @author mzechner
  */
 public class InputAdapter implements InputProcessor {
     public boolean keyDown(int keycode) {

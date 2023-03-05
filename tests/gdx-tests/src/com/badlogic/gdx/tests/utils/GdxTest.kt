@@ -1,9 +1,9 @@
 package com.badlogic.gdx.tests.utils
 
 import com.badlogic.gdx.ApplicationListener
-import com.badlogic.gdx.InputAdapter
+import com.badlogic.gdx.KotlinInputAdapter
 
-abstract class GdxTest : InputAdapter(), ApplicationListener {
+abstract class GdxTest : KotlinInputAdapter(), ApplicationListener {
 
     override fun create() {
 

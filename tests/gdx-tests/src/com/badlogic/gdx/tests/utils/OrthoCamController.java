@@ -1,10 +1,10 @@
 package com.badlogic.gdx.tests.utils;
 
-import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.KotlinInputAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 
-public class OrthoCamController extends InputAdapter {
+public class OrthoCamController extends KotlinInputAdapter {
     final OrthographicCamera camera;
     final Vector3 curr = new Vector3();
     final Vector3 last = new Vector3(-1, -1, -1);

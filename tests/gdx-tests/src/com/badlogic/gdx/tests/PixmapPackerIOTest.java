@@ -2,7 +2,7 @@ package com.badlogic.gdx.tests;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.KotlinInputAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -81,10 +81,10 @@ public class PixmapPackerIOTest extends GdxTest {
         pixmap5.dispose();
 
         packer.updateTextureAtlas(atlas, TextureFilter.Nearest, TextureFilter.Nearest, false);
-        textureRegions = new Array<TextureRegion>();
+        textureRegions = new Array<>();
         packer.updateTextureRegions(textureRegions, TextureFilter.Nearest, TextureFilter.Nearest, false);
         Gdx.app.log("PixmapPackerTest", "Number of updated textures: " + atlas.getTextures().size);
-        Gdx.input.setInputProcessor(new InputAdapter() {
+        Gdx.input.setInputProcessor(new KotlinInputAdapter() {
             @Override
             public boolean keyDown(int keycode) {
                 if (keycode >= Input.Keys.NUM_0 && keycode <= Input.Keys.NUM_9) {

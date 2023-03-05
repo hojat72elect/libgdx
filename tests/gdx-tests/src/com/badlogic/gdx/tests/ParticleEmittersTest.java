@@ -1,7 +1,7 @@
 package com.badlogic.gdx.tests;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.KotlinInputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
@@ -47,7 +47,7 @@ public class ParticleEmittersTest extends GdxTest {
 
         setupUI();
 
-        InputProcessor inputProcessor = new InputAdapter() {
+        InputProcessor inputProcessor = new KotlinInputAdapter() {
 
             public boolean touchDragged(int x, int y, int pointer) {
                 if (latestEffect != null) latestEffect.setPosition(x, Gdx.graphics.getHeight() - y);
