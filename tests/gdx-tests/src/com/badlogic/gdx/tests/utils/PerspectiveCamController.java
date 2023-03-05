@@ -1,14 +1,14 @@
 package com.badlogic.gdx.tests.utils;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.KotlinInputAdapter;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Plane;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
-public class PerspectiveCamController extends KotlinInputAdapter {
+public class PerspectiveCamController extends InputAdapter {
     private final static Vector3 tmpV = new Vector3();
 
     public PerspectiveCamera cam;

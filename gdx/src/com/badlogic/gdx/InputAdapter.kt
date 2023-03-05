@@ -4,7 +4,7 @@ package com.badlogic.gdx
  * An adapter class for {@link InputProcessor}. You can derive from
  * this and only override what you are interested in.
  */
-open class KotlinInputAdapter : InputProcessor {
+open class InputAdapter : InputProcessor {
     override fun keyDown(keycode: Int) = false
 
     override fun keyUp(keycode: Int) = false

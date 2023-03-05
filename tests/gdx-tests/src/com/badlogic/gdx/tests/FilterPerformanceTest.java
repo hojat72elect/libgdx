@@ -1,7 +1,7 @@
 package com.badlogic.gdx.tests;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.KotlinInputAdapter;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -52,7 +52,7 @@ public class FilterPerformanceTest extends GdxTest {
         sprite2 = new Sprite(texture, 0, 0, 855, 480);
         font = new BitmapFont(Gdx.files.internal("data/font.fnt"), Gdx.files.internal("data/font.png"), false);
 
-        Gdx.input.setInputProcessor(new KotlinInputAdapter() {
+        Gdx.input.setInputProcessor(new InputAdapter() {
             public boolean touchDown(int x, int y, int pointer, int newParam) {
                 mode++;
                 if (mode == filters.length * 2) mode = 0;

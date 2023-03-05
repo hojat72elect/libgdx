@@ -3,7 +3,7 @@ package com.badlogic.gdx.tests.lwjgl3;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.KotlinInputAdapter;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
@@ -37,7 +37,7 @@ public class Lwjgl3DebugStarter {
                 texture = new Texture("data/badlogic.jpg");
                 batch = new SpriteBatch();
                 font = new BitmapFont();
-                Gdx.input.setInputProcessor(new KotlinInputAdapter() {
+                Gdx.input.setInputProcessor(new InputAdapter() {
 
                     @Override
                     public boolean keyDown(int keycode) {

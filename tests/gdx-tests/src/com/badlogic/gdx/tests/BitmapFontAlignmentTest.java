@@ -3,7 +3,7 @@ package com.badlogic.gdx.tests;
 
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.KotlinInputAdapter;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -27,7 +27,7 @@ public class BitmapFontAlignmentTest extends GdxTest {
 
 	@Override
 	public void create () {
-		Gdx.input.setInputProcessor(new KotlinInputAdapter() {
+		Gdx.input.setInputProcessor(new InputAdapter() {
 			public boolean touchDown (int x, int y, int pointer, int newParam) {
 				renderMode = (renderMode + 1) % 6;
 				return false;

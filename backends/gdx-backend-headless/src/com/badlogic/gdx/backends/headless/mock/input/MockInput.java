@@ -2,7 +2,7 @@ package com.badlogic.gdx.backends.headless.mock.input;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.KotlinInputAdapter;
+import com.badlogic.gdx.InputAdapter;
 
 /**
  * The headless backend does its best to mock elements. This is intended to make code-sharing between server and client as simple
@@ -227,7 +227,7 @@ public class MockInput implements Input {
     @Override
     public InputProcessor getInputProcessor() {
         if (mockInputProcessor == null) {
-            mockInputProcessor = new KotlinInputAdapter();
+            mockInputProcessor = new InputAdapter();
         }
         return mockInputProcessor;
     }

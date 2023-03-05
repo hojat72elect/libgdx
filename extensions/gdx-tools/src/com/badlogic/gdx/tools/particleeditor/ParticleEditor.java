@@ -4,7 +4,7 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.KotlinInputAdapter;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
@@ -594,7 +594,7 @@ public class ParticleEditor extends JFrame {
             }
         }
 
-        private class OrthoCamController extends KotlinInputAdapter {
+        private class OrthoCamController extends InputAdapter {
             final OrthographicCamera camera;
             final Vector3 curr = new Vector3();
             final Vector3 last = new Vector3(-1, -1, -1);

@@ -2,7 +2,7 @@ package com.badlogic.gdx.input;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.KotlinInputAdapter;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.Timer;
@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.Timer.Task;
  *
  * @author mzechner
  */
-public class GestureDetector extends KotlinInputAdapter {
+public class GestureDetector extends InputAdapter {
     final GestureListener listener;
     private final VelocityTracker tracker = new VelocityTracker();
     private final Vector2 pointer2 = new Vector2();

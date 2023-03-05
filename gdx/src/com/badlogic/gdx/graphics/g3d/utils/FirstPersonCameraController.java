@@ -2,7 +2,7 @@ package com.badlogic.gdx.graphics.g3d.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.KotlinInputAdapter;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.IntIntMap;
@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.IntIntMap;
  *
  * @author badlogic
  */
-public class FirstPersonCameraController extends KotlinInputAdapter {
+public class FirstPersonCameraController extends InputAdapter {
     protected final Camera camera;
     protected final IntIntMap keys = new IntIntMap();
     protected final Vector3 tmp = new Vector3();

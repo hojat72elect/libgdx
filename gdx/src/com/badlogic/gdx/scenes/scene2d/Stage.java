@@ -4,7 +4,7 @@ import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.KotlinInputAdapter;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
@@ -50,7 +50,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  * @author mzechner
  * @author Nathan Sweet
  */
-public class Stage extends KotlinInputAdapter implements Disposable {
+public class Stage extends InputAdapter implements Disposable {
     /**
      * True if any actor has ever had debug enabled.
      */

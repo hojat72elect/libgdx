@@ -2,7 +2,7 @@ package com.badlogic.gdx.tests;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.KotlinInputAdapter;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
@@ -53,7 +53,7 @@ public class ViewportTest1 extends GdxTest {
         stage.setViewport(viewports.first());
         label.setText(names.first());
 
-        Gdx.input.setInputProcessor(new InputMultiplexer(new KotlinInputAdapter() {
+        Gdx.input.setInputProcessor(new InputMultiplexer(new InputAdapter() {
             public boolean keyDown(int keycode) {
                 if (keycode == Input.Keys.SPACE) {
                     int index = (viewports.indexOf(stage.getViewport(), true) + 1) % viewports.size;
