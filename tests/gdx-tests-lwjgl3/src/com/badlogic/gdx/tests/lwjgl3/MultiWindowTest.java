@@ -1,20 +1,19 @@
-
 package com.badlogic.gdx.tests.lwjgl3;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Graphics.DisplayMode;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3WindowAdapter;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3WindowAdapter;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3WindowConfiguration;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Pixmap.Blending;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.tests.NoncontinuousRenderingTest;
@@ -27,6 +26,14 @@ import com.badlogic.gdx.utils.ScreenUtils;
 public class MultiWindowTest {
     static Texture sharedTexture;
     static SpriteBatch sharedSpriteBatch;
+
+    public static void main(String[] argv) {
+        Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+        config.setTitle("Multi-window test");
+        config.useVsync(true);
+        config.setOpenGLEmulation(Lwjgl3ApplicationConfiguration.GLEmulation.ANGLE_GLES20, 0, 0);
+        new Lwjgl3Application(new MainWindow(), config);
+    }
 
     public static class MainWindow extends ApplicationAdapter {
         Class[] childWindowClasses = {NoncontinuousRenderingTest.class, ShaderCollectionTest.class, Basic3DSceneTest.class,
@@ -90,13 +97,5 @@ public class MultiWindowTest {
                 throw new GdxRuntimeException("Couldn't instantiate app listener", t);
             }
         }
-    }
-
-    public static void main(String[] argv) {
-        Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-        config.setTitle("Multi-window test");
-        config.useVsync(true);
-        config.setOpenGLEmulation(Lwjgl3ApplicationConfiguration.GLEmulation.ANGLE_GLES20, 0, 0);
-        new Lwjgl3Application(new MainWindow(), config);
     }
 }

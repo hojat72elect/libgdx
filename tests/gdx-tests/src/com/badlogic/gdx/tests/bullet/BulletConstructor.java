@@ -14,9 +14,9 @@ import com.badlogic.gdx.physics.bullet.dynamics.btRigidBody.btRigidBodyConstruct
  * (entity) itself.
  */
 public class BulletConstructor extends BaseWorld.Constructor<BulletEntity> {
+    private final static Vector3 tmpV = new Vector3();
     public btRigidBodyConstructionInfo bodyInfo = null;
     public btCollisionShape shape = null;
-    private final static Vector3 tmpV = new Vector3();
 
     /**
      * Specify null for the shape to use only the renderable part of this entity and not the physics part.
