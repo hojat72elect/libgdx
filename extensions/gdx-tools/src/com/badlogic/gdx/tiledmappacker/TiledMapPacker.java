@@ -1,30 +1,5 @@
 package com.badlogic.gdx.tiledmappacker;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.resolvers.AbsoluteFileHandleResolver;
@@ -47,6 +22,31 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 /**
  * Given one or more TMX tilemaps, packs all tileset resources used across the maps, or the resources used per map, into a
  * single, or multiple (one per map), {@link TextureAtlas} and produces a new TMX file to be loaded with an AtlasTiledMapLoader
@@ -57,46 +57,19 @@ import com.badlogic.gdx.utils.ObjectMap;
  * <p>
  * The new TMX map file will contains a new property, namely "atlas", whose value will enable the AtlasTiledMapLoader to correctly
  * read the associated TextureAtlas representing the tileset.
- *
- * @author David Fraska and others (initial implementation, tell me who you are!)
- * @author Manuel Bua
  */
 public class TiledMapPacker {
-    private TexturePacker packer;
-    private TiledMap map;
-
-    private TmxMapLoader mapLoader = new TmxMapLoader(new AbsoluteFileHandleResolver());
-    private TiledMapPackerSettings settings;
-
     private static final String TilesetsOutputDir = "tileset";
     static String AtlasOutputName = "packed";
-
-    private HashMap<String, IntArray> tilesetUsedIds = new HashMap<String, IntArray>();
-    private ObjectMap<String, TiledMapTileSet> tilesetsToPack;
-
     static File inputDir;
     static File outputDir;
+    private TexturePacker packer;
+    private TiledMap map;
+    private TmxMapLoader mapLoader = new TmxMapLoader(new AbsoluteFileHandleResolver());
+    private TiledMapPackerSettings settings;
+    private HashMap<String, IntArray> tilesetUsedIds = new HashMap<String, IntArray>();
+    private ObjectMap<String, TiledMapTileSet> tilesetsToPack;
     private FileHandle currentDir;
-
-    private static class TmxFilter implements FilenameFilter {
-        public TmxFilter() {
-        }
-
-        @Override
-        public boolean accept(File dir, String name) {
-            return (name.endsWith(".tmx"));
-        }
-    }
-
-    private static class DirFilter implements FilenameFilter {
-        public DirFilter() {
-        }
-
-        @Override
-        public boolean accept(File f, String s) {
-            return (new File(f, s).isDirectory());
-        }
-    }
 
     /**
      * Constructs a new preprocessor by using the default packing settings
@@ -110,6 +83,189 @@ public class TiledMapPacker {
      */
     public TiledMapPacker(TiledMapPackerSettings settings) {
         this.settings = settings;
+    }
+
+    private static void setProperty(Document doc, Node parent, String name, String value) {
+        Node properties = getFirstChildNodeByName(parent, "properties");
+        Node property = getFirstChildByNameAttrValue(properties, "property", "name", name);
+
+        NamedNodeMap attributes = property.getAttributes();
+        Node valueNode = attributes.getNamedItem("value");
+        if (valueNode == null) {
+            valueNode = doc.createAttribute("value");
+            valueNode.setNodeValue(value);
+            attributes.setNamedItem(valueNode);
+        } else {
+            valueNode.setNodeValue(value);
+        }
+    }
+
+    /**
+     * If the child node doesn't exist, it is created.
+     */
+    private static Node getFirstChildNodeByName(Node parent, String child) {
+        NodeList childNodes = parent.getChildNodes();
+        for (int i = 0; i < childNodes.getLength(); i++) {
+            if (childNodes.item(i).getNodeName().equals(child)) {
+                return childNodes.item(i);
+            }
+        }
+
+        Node newNode = parent.getOwnerDocument().createElement(child);
+
+        if (childNodes.item(0) != null) return parent.insertBefore(newNode, childNodes.item(0));
+        else return parent.appendChild(newNode);
+    }
+
+    /**
+     * If the child node or attribute doesn't exist, it is created. Usage example: Node property =
+     * getFirstChildByAttrValue(properties, "property", "name");
+     */
+    private static Node getFirstChildByNameAttrValue(Node node, String childName, String attr, String value) {
+        NodeList childNodes = node.getChildNodes();
+        for (int i = 0; i < childNodes.getLength(); i++) {
+            if (childNodes.item(i).getNodeName().equals(childName)) {
+                NamedNodeMap attributes = childNodes.item(i).getAttributes();
+                Node attribute = attributes.getNamedItem(attr);
+                if (attribute.getNodeValue().equals(value)) return childNodes.item(i);
+            }
+        }
+
+        Node newNode = node.getOwnerDocument().createElement(childName);
+        NamedNodeMap attributes = newNode.getAttributes();
+
+        Attr nodeAttr = node.getOwnerDocument().createAttribute(attr);
+        nodeAttr.setNodeValue(value);
+        attributes.setNamedItem(nodeAttr);
+
+        if (childNodes.item(0) != null) {
+            return node.insertBefore(newNode, childNodes.item(0));
+        } else {
+            return node.appendChild(newNode);
+        }
+    }
+
+    /**
+     * Processes a directory of Tile Maps, compressing each tile set contained in any map once.
+     *
+     * @param args args[0]: the input directory containing the tmx files (and tile sets, relative to the path listed in the tmx
+     *             file). args[1]: The output directory for the tmx files, should be empty before running. args[2-4] options
+     */
+    public static void main(String[] args) {
+        final Settings texturePackerSettings = new Settings();
+        texturePackerSettings.paddingX = 2;
+        texturePackerSettings.paddingY = 2;
+        texturePackerSettings.edgePadding = true;
+        texturePackerSettings.duplicatePadding = true;
+        texturePackerSettings.bleed = true;
+        texturePackerSettings.alias = true;
+        texturePackerSettings.useIndexes = true;
+
+        final TiledMapPackerSettings packerSettings = new TiledMapPackerSettings();
+
+        if (args.length == 0) {
+            printUsage();
+            System.exit(0);
+        } else if (args.length == 1) {
+            inputDir = new File(args[0]);
+            outputDir = new File(inputDir, "../output/");
+        } else if (args.length == 2) {
+            inputDir = new File(args[0]);
+            outputDir = new File(args[1]);
+        } else {
+            inputDir = new File(args[0]);
+            outputDir = new File(args[1]);
+            processExtraArgs(args, packerSettings);
+        }
+
+        TiledMapPacker packer = new TiledMapPacker(packerSettings);
+        LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+        config.forceExit = false;
+        config.width = 100;
+        config.height = 50;
+        config.title = "TiledMapPacker";
+        new LwjglApplication(new ApplicationListener() {
+
+            @Override
+            public void resume() {
+            }
+
+            @Override
+            public void resize(int width, int height) {
+            }
+
+            @Override
+            public void render() {
+            }
+
+            @Override
+            public void pause() {
+            }
+
+            @Override
+            public void dispose() {
+            }
+
+            @Override
+            public void create() {
+                TiledMapPacker packer = new TiledMapPacker(packerSettings);
+
+                if (!inputDir.exists()) {
+                    System.out.println(inputDir.getAbsolutePath());
+                    throw new RuntimeException("Input directory does not exist: " + inputDir);
+                }
+
+                try {
+                    packer.processInputDir(texturePackerSettings);
+                } catch (IOException e) {
+                    throw new RuntimeException("Error processing map: " + e.getMessage());
+                }
+                System.out.println("Finished processing.");
+                Gdx.app.exit();
+            }
+        }, config);
+    }
+
+    private static void processExtraArgs(String[] args, TiledMapPackerSettings packerSettings) {
+        String stripUnused = "--strip-unused";
+        String combineTilesets = "--combine-tilesets";
+        String verbose = "-v";
+
+        int length = args.length - 2;
+        String[] argsNotDir = new String[length];
+        System.arraycopy(args, 2, argsNotDir, 0, length);
+
+        for (String string : argsNotDir) {
+            if (stripUnused.equals(string)) {
+                packerSettings.stripUnusedTiles = true;
+
+            } else if (combineTilesets.equals(string)) {
+                packerSettings.combineTilesets = true;
+
+            } else if (verbose.equals(string)) {
+                packerSettings.verbose = true;
+
+            } else {
+                System.out.println("\nOption \"" + string + "\" not recognized.\n");
+                printUsage();
+                System.exit(0);
+            }
+        }
+    }
+
+    private static void printUsage() {
+        System.out.println("Usage: INPUTDIR [OUTPUTDIR] [--strip-unused] [--combine-tilesets] [-v]");
+        System.out.println("Processes a directory of Tiled .tmx maps. Unable to process maps with XML");
+        System.out.println("tile layer format.");
+        System.out.println("  --strip-unused             omits all tiles that are not used. Speeds up");
+        System.out.println("                             the processing. Smaller tilesets.");
+        System.out.println("  --combine-tilesets         instead of creating a tileset for each map,");
+        System.out.println("                             this combines the tilesets into some kind");
+        System.out.println("                             of monster tileset. Has problems with tileset");
+        System.out.println("                             location. Has problems with nested folders.");
+        System.out.println("                             Not recommended.");
+        System.out.println("  -v                         outputs which tiles are stripped and included");
+        System.out.println();
     }
 
     /**
@@ -390,187 +546,24 @@ public class TiledMapPacker {
         }
     }
 
-    private static void setProperty(Document doc, Node parent, String name, String value) {
-        Node properties = getFirstChildNodeByName(parent, "properties");
-        Node property = getFirstChildByNameAttrValue(properties, "property", "name", name);
+    private static class TmxFilter implements FilenameFilter {
+        public TmxFilter() {
+        }
 
-        NamedNodeMap attributes = property.getAttributes();
-        Node valueNode = attributes.getNamedItem("value");
-        if (valueNode == null) {
-            valueNode = doc.createAttribute("value");
-            valueNode.setNodeValue(value);
-            attributes.setNamedItem(valueNode);
-        } else {
-            valueNode.setNodeValue(value);
+        @Override
+        public boolean accept(File dir, String name) {
+            return (name.endsWith(".tmx"));
         }
     }
 
-    /**
-     * If the child node doesn't exist, it is created.
-     */
-    private static Node getFirstChildNodeByName(Node parent, String child) {
-        NodeList childNodes = parent.getChildNodes();
-        for (int i = 0; i < childNodes.getLength(); i++) {
-            if (childNodes.item(i).getNodeName().equals(child)) {
-                return childNodes.item(i);
-            }
+    private static class DirFilter implements FilenameFilter {
+        public DirFilter() {
         }
 
-        Node newNode = parent.getOwnerDocument().createElement(child);
-
-        if (childNodes.item(0) != null) return parent.insertBefore(newNode, childNodes.item(0));
-        else return parent.appendChild(newNode);
-    }
-
-    /**
-     * If the child node or attribute doesn't exist, it is created. Usage example: Node property =
-     * getFirstChildByAttrValue(properties, "property", "name");
-     */
-    private static Node getFirstChildByNameAttrValue(Node node, String childName, String attr, String value) {
-        NodeList childNodes = node.getChildNodes();
-        for (int i = 0; i < childNodes.getLength(); i++) {
-            if (childNodes.item(i).getNodeName().equals(childName)) {
-                NamedNodeMap attributes = childNodes.item(i).getAttributes();
-                Node attribute = attributes.getNamedItem(attr);
-                if (attribute.getNodeValue().equals(value)) return childNodes.item(i);
-            }
+        @Override
+        public boolean accept(File f, String s) {
+            return (new File(f, s).isDirectory());
         }
-
-        Node newNode = node.getOwnerDocument().createElement(childName);
-        NamedNodeMap attributes = newNode.getAttributes();
-
-        Attr nodeAttr = node.getOwnerDocument().createAttribute(attr);
-        nodeAttr.setNodeValue(value);
-        attributes.setNamedItem(nodeAttr);
-
-        if (childNodes.item(0) != null) {
-            return node.insertBefore(newNode, childNodes.item(0));
-        } else {
-            return node.appendChild(newNode);
-        }
-    }
-
-    /**
-     * Processes a directory of Tile Maps, compressing each tile set contained in any map once.
-     *
-     * @param args args[0]: the input directory containing the tmx files (and tile sets, relative to the path listed in the tmx
-     *             file). args[1]: The output directory for the tmx files, should be empty before running. args[2-4] options
-     */
-    public static void main(String[] args) {
-        final Settings texturePackerSettings = new Settings();
-        texturePackerSettings.paddingX = 2;
-        texturePackerSettings.paddingY = 2;
-        texturePackerSettings.edgePadding = true;
-        texturePackerSettings.duplicatePadding = true;
-        texturePackerSettings.bleed = true;
-        texturePackerSettings.alias = true;
-        texturePackerSettings.useIndexes = true;
-
-        final TiledMapPackerSettings packerSettings = new TiledMapPackerSettings();
-
-        if (args.length == 0) {
-            printUsage();
-            System.exit(0);
-        } else if (args.length == 1) {
-            inputDir = new File(args[0]);
-            outputDir = new File(inputDir, "../output/");
-        } else if (args.length == 2) {
-            inputDir = new File(args[0]);
-            outputDir = new File(args[1]);
-        } else {
-            inputDir = new File(args[0]);
-            outputDir = new File(args[1]);
-            processExtraArgs(args, packerSettings);
-        }
-
-        TiledMapPacker packer = new TiledMapPacker(packerSettings);
-        LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-        config.forceExit = false;
-        config.width = 100;
-        config.height = 50;
-        config.title = "TiledMapPacker";
-        new LwjglApplication(new ApplicationListener() {
-
-            @Override
-            public void resume() {
-            }
-
-            @Override
-            public void resize(int width, int height) {
-            }
-
-            @Override
-            public void render() {
-            }
-
-            @Override
-            public void pause() {
-            }
-
-            @Override
-            public void dispose() {
-            }
-
-            @Override
-            public void create() {
-                TiledMapPacker packer = new TiledMapPacker(packerSettings);
-
-                if (!inputDir.exists()) {
-                    System.out.println(inputDir.getAbsolutePath());
-                    throw new RuntimeException("Input directory does not exist: " + inputDir);
-                }
-
-                try {
-                    packer.processInputDir(texturePackerSettings);
-                } catch (IOException e) {
-                    throw new RuntimeException("Error processing map: " + e.getMessage());
-                }
-                System.out.println("Finished processing.");
-                Gdx.app.exit();
-            }
-        }, config);
-    }
-
-    private static void processExtraArgs(String[] args, TiledMapPackerSettings packerSettings) {
-        String stripUnused = "--strip-unused";
-        String combineTilesets = "--combine-tilesets";
-        String verbose = "-v";
-
-        int length = args.length - 2;
-        String[] argsNotDir = new String[length];
-        System.arraycopy(args, 2, argsNotDir, 0, length);
-
-        for (String string : argsNotDir) {
-            if (stripUnused.equals(string)) {
-                packerSettings.stripUnusedTiles = true;
-
-            } else if (combineTilesets.equals(string)) {
-                packerSettings.combineTilesets = true;
-
-            } else if (verbose.equals(string)) {
-                packerSettings.verbose = true;
-
-            } else {
-                System.out.println("\nOption \"" + string + "\" not recognized.\n");
-                printUsage();
-                System.exit(0);
-            }
-        }
-    }
-
-    private static void printUsage() {
-        System.out.println("Usage: INPUTDIR [OUTPUTDIR] [--strip-unused] [--combine-tilesets] [-v]");
-        System.out.println("Processes a directory of Tiled .tmx maps. Unable to process maps with XML");
-        System.out.println("tile layer format.");
-        System.out.println("  --strip-unused             omits all tiles that are not used. Speeds up");
-        System.out.println("                             the processing. Smaller tilesets.");
-        System.out.println("  --combine-tilesets         instead of creating a tileset for each map,");
-        System.out.println("                             this combines the tilesets into some kind");
-        System.out.println("                             of monster tileset. Has problems with tileset");
-        System.out.println("                             location. Has problems with nested folders.");
-        System.out.println("                             Not recommended.");
-        System.out.println("  -v                         outputs which tiles are stripped and included");
-        System.out.println();
     }
 
     public static class TiledMapPackerSettings {
