@@ -2,9 +2,9 @@ name: Build and Publish
 
 on:
   push:
-    branches: [ master ]
+    branches: [ Hojat_Main_Branch ]
   workflow_dispatch:
-    branches: [ master ]
+    branches: [ Hojat_Main_Branch ]
   release:
     types: [ published ]
 

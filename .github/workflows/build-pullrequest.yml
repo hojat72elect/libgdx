@@ -2,7 +2,7 @@ name: Build pull request
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ Hojat_Main_Branch ]
 permissions: 
   contents: read
 
