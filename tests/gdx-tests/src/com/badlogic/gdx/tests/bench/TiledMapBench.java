@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,7 +14,6 @@
 package com.badlogic.gdx.tests.bench;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -36,15 +32,13 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class TiledMapBench extends GdxTest {
 
-	private TiledMap map;
 	private TiledMapRenderer renderer;
 	private OrthographicCamera camera;
-	private OrthoCamController cameraController;
-	private AssetManager assetManager;
-	private Texture tiles;
-	private Texture texture;
 	private BitmapFont font;
 	private SpriteBatch batch;
+
+	public TiledMapBench () {
+	}
 
 	@Override
 	public void create () {
@@ -55,14 +49,15 @@ public class TiledMapBench extends GdxTest {
 		camera.setToOrtho(false, (w / h) * 320, 320);
 		camera.update();
 
-		cameraController = new OrthoCamController(camera);
+		OrthoCamController cameraController = new OrthoCamController(camera);
 		Gdx.input.setInputProcessor(cameraController);
 
 		font = new BitmapFont();
 		batch = new SpriteBatch();
 
+		com.badlogic.gdx.maps.tiled.TiledMap map;
 		{
-			tiles = new Texture(Gdx.files.internal("data/maps/tiled/tiles.png"));
+			Texture tiles = new Texture(Gdx.files.internal("data/maps/tiled/tiles.png"));
 			TextureRegion[][] splitTiles = TextureRegion.split(tiles, 32, 32);
 			map = new TiledMap();
 			MapLayers layers = map.getLayers();

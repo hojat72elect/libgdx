@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,8 +21,22 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.physics.bullet.collision.btConvexHullShape;
 import com.badlogic.gdx.physics.bullet.collision.btShapeHull;
 
-/** @author xoppa */
 public class ConvexHullTest extends BaseBulletTest {
+
+	public static btConvexHullShape createConvexHullShape (final Model model, boolean optimize) {
+		final Mesh mesh = model.meshes.get(0);
+		final btConvexHullShape shape = new btConvexHullShape(mesh.getVerticesBuffer(false), mesh.getNumVertices(),
+			mesh.getVertexSize());
+		if (!optimize) return shape;
+		// now optimize the shape
+		final btShapeHull hull = new btShapeHull(shape);
+		hull.buildHull(shape.getMargin());
+		final btConvexHullShape result = new btConvexHullShape(hull);
+		// delete the temporary shape
+		shape.dispose();
+		hull.dispose();
+		return result;
+	}
 
 	@Override
 	public void create () {
@@ -50,20 +61,5 @@ public class ConvexHullTest extends BaseBulletTest {
 	public boolean tap (float x, float y, int count, int button) {
 		shoot(x, y);
 		return true;
-	}
-
-	public static btConvexHullShape createConvexHullShape (final Model model, boolean optimize) {
-		final Mesh mesh = model.meshes.get(0);
-		final btConvexHullShape shape = new btConvexHullShape(mesh.getVerticesBuffer(false), mesh.getNumVertices(),
-			mesh.getVertexSize());
-		if (!optimize) return shape;
-		// now optimize the shape
-		final btShapeHull hull = new btShapeHull(shape);
-		hull.buildHull(shape.getMargin());
-		final btConvexHullShape result = new btConvexHullShape(hull);
-		// delete the temporary shape
-		shape.dispose();
-		hull.dispose();
-		return result;
 	}
 }

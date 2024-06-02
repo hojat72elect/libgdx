@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,21 +12,18 @@
  ******************************************************************************/
 /*
  * Copyright 2010 Mario Zechner (contact@badlogicgames.com), Nathan Sweet (admin@esotericsoftware.com)
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
  * License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
  * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
 
 package com.badlogic.gdx.tests.box2d;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
@@ -47,6 +41,10 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
+@SuppressWarnings("DefaultLocale")
 public class ContactListenerTest extends Box2DTest implements ContactListener {
 
 	@Override
@@ -177,9 +175,9 @@ public class ContactListenerTest extends Box2DTest implements ContactListener {
 
 	@Override
 	public void beginContact (Contact contact) {
-		System.out.println(String.format("beginContact() addr=%d", getContactAddr(contact)));
-		System.out.println(String.format("beginContact() addrA=%d, addrB=%d", getFixtureAddrA(contact), getFixtureAddrB(contact)));
-		System.out.println(String.format("beginContact() fixA=%s, fixB=%s", contact.getFixtureA(), contact.getFixtureB()));
+		System.out.printf("beginContact() addr=%d%n", getContactAddr(contact));
+		System.out.printf("beginContact() addrA=%d, addrB=%d%n", getFixtureAddrA(contact), getFixtureAddrB(contact));
+		System.out.printf("beginContact() fixA=%s, fixB=%s%n", contact.getFixtureA(), contact.getFixtureB());
 
 		final Body toRemove = contact.getFixtureA().getBody().getType() == BodyType.DynamicBody ? contact.getFixtureA().getBody()
 			: contact.getFixtureB().getBody();
@@ -193,9 +191,9 @@ public class ContactListenerTest extends Box2DTest implements ContactListener {
 
 	@Override
 	public void endContact (Contact contact) {
-		System.out.println(String.format("  endContact() addr=%d", getContactAddr(contact)));
-		System.out.println(String.format("  endContact() addrA=%d, addrB=%d", getFixtureAddrA(contact), getFixtureAddrB(contact)));
-		System.out.println(String.format("  endContact() fixA=%s, fixB=%s", contact.getFixtureA(), contact.getFixtureB()));
+		System.out.printf("  endContact() addr=%d%n", getContactAddr(contact));
+		System.out.printf("  endContact() addrA=%d, addrB=%d%n", getFixtureAddrA(contact), getFixtureAddrB(contact));
+		System.out.printf("  endContact() fixA=%s, fixB=%s%n", contact.getFixtureA(), contact.getFixtureB());
 
 		final Fixture fixtureA = contact.getFixtureA();
 		final Fixture fixtureB = contact.getFixtureB();

@@ -1,11 +1,11 @@
 /*
  * Copyright (C) 2009 The Android Open Source Project
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
  * License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
  * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
@@ -13,10 +13,6 @@
 
 package com.badlogic.gdx.backends.android.surfaceview;
 
-import javax.microedition.khronos.egl.EGL10;
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.egl.EGLContext;
-import javax.microedition.khronos.egl.EGLDisplay;
 import android.content.Context;
 import android.graphics.PixelFormat;
 import android.opengl.GLSurfaceView;
@@ -27,26 +23,27 @@ import android.view.KeyEvent;
 import android.view.inputmethod.BaseInputConnection;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
+
 import com.badlogic.gdx.Input.OnscreenKeyboardType;
 import com.badlogic.gdx.backends.android.DefaultAndroidInput;
 
-/** A simple GLSurfaceView sub-class that demonstrates how to perform OpenGL ES 2.0 rendering into a GL Surface. Note the
- * following important details:
- * <p/>
- * - The class must use a custom context factory to enable 2.0 rendering. See ContextFactory class definition below.
- * <p/>
- * - The class must use a custom EGLConfigChooser to be able to select an EGLConfig that supports 2.0. This is done by providing a
- * config specification to eglChooseConfig() that has the attribute EGL10.ELG_RENDERABLE_TYPE containing the EGL_OPENGL_ES2_BIT
- * flag set. See ConfigChooser class definition below.
- * <p/>
- * - The class must select the surface's format, then choose an EGLConfig that matches it exactly (with regards to
- * red/green/blue/alpha channels bit depths). Failure to do so would result in an EGL_BAD_MATCH error. */
-public class GLSurfaceView20 extends GLSurfaceView {
-	static String TAG = "GL2JNIView";
-	private static final boolean DEBUG = false;
+import javax.microedition.khronos.egl.EGL10;
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.egl.EGLContext;
+import javax.microedition.khronos.egl.EGLDisplay;
 
-	final ResolutionStrategy resolutionStrategy;
+/** A simple GLSurfaceView sub-class that demonstrates how to perform OpenGL ES 2.0 rendering into a GL Surface. Note the
+ * following important details: - The class must use a custom context factory to enable 2.0 rendering. See ContextFactory class
+ * definition below. - The class must use a custom EGLConfigChooser to be able to select an EGLConfig that supports 2.0. This is
+ * done by providing a config specification to eglChooseConfig() that has the attribute EGL10.ELG_RENDERABLE_TYPE containing the
+ * EGL_OPENGL_ES2_BIT flag set. See ConfigChooser class definition below. - The class must select the surface's format, then
+ * choose an EGLConfig that matches it exactly (with regards to red/green/blue/alpha channels bit depths). Failure to do so would
+ * result in an EGL_BAD_MATCH error. */
+public class GLSurfaceView20 extends GLSurfaceView {
+	private static final boolean DEBUG = false;
+	static String TAG = "GL2JNIView";
 	static int targetGLESVersion;
+	final ResolutionStrategy resolutionStrategy;
 	public OnscreenKeyboardType onscreenKeyboardType = OnscreenKeyboardType.Default;
 
 	public GLSurfaceView20 (Context context, ResolutionStrategy resolutionStrategy, int targetGLESVersion) {
@@ -65,6 +62,16 @@ public class GLSurfaceView20 extends GLSurfaceView {
 		this.resolutionStrategy = resolutionStrategy;
 		init(translucent, depth, stencil);
 
+	}
+
+	static boolean checkEglError (String prompt, EGL10 egl) {
+		int error;
+		boolean result = true;
+		while ((error = egl.eglGetError()) != EGL10.EGL_SUCCESS) {
+			result = false;
+			Log.e(TAG, String.format("%s: EGL error: 0x%x", prompt, error));
+		}
+		return result;
 	}
 
 	@Override
@@ -162,17 +169,23 @@ public class GLSurfaceView20 extends GLSurfaceView {
 		}
 	}
 
-	static boolean checkEglError (String prompt, EGL10 egl) {
-		int error;
-		boolean result = true;
-		while ((error = egl.eglGetError()) != EGL10.EGL_SUCCESS) {
-			result = false;
-			Log.e(TAG, String.format("%s: EGL error: 0x%x", prompt, error));
-		}
-		return result;
-	}
-
 	private static class ConfigChooser implements GLSurfaceView.EGLConfigChooser {
+
+		/*
+		 * This EGL config specification is used to specify 2.0 rendering. We use a minimum size of 4 bits for red/green/blue, but
+		 * will perform actual matching in chooseConfig() below.
+		 */
+		private static final int EGL_OPENGL_ES2_BIT = 4;
+		private static final int[] s_configAttribs2 = {EGL10.EGL_RED_SIZE, 4, EGL10.EGL_GREEN_SIZE, 4, EGL10.EGL_BLUE_SIZE, 4,
+			EGL10.EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT, EGL10.EGL_NONE};
+		// Subclasses can adjust these values:
+		protected int mRedSize;
+		protected int mGreenSize;
+		protected int mBlueSize;
+		protected int mAlphaSize;
+		protected int mDepthSize;
+		protected int mStencilSize;
+		private final int[] mValue = new int[1];
 
 		public ConfigChooser (int r, int g, int b, int a, int depth, int stencil) {
 			mRedSize = r;
@@ -182,14 +195,6 @@ public class GLSurfaceView20 extends GLSurfaceView {
 			mDepthSize = depth;
 			mStencilSize = stencil;
 		}
-
-		/*
-		 * This EGL config specification is used to specify 2.0 rendering. We use a minimum size of 4 bits for red/green/blue, but
-		 * will perform actual matching in chooseConfig() below.
-		 */
-		private static int EGL_OPENGL_ES2_BIT = 4;
-		private static int[] s_configAttribs2 = {EGL10.EGL_RED_SIZE, 4, EGL10.EGL_GREEN_SIZE, 4, EGL10.EGL_BLUE_SIZE, 4,
-			EGL10.EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT, EGL10.EGL_NONE};
 
 		public EGLConfig chooseConfig (EGL10 egl, EGLDisplay display) {
 
@@ -282,20 +287,11 @@ public class GLSurfaceView20 extends GLSurfaceView {
 				if (egl.eglGetConfigAttrib(display, config, attribute, value)) {
 					Log.w(TAG, String.format("  %s: %d\n", name, value[0]));
 				} else {
-					// Log.w(TAG, String.format(" %s: failed\n", name));
+
 					while (egl.eglGetError() != EGL10.EGL_SUCCESS)
 						;
 				}
 			}
 		}
-
-		// Subclasses can adjust these values:
-		protected int mRedSize;
-		protected int mGreenSize;
-		protected int mBlueSize;
-		protected int mAlphaSize;
-		protected int mDepthSize;
-		protected int mStencilSize;
-		private int[] mValue = new int[1];
 	}
 }

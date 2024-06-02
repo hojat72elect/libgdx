@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2022 See AUTHORS file.
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
  *   http://www.apache.org/licenses/LICENSE-2.0
- *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,8 +12,6 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.tests.gles31;
-
-import java.nio.IntBuffer;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -33,14 +28,17 @@ import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-/** see https://www.khronos.org/opengl/wiki/Vertex_Rendering#Indirect_rendering
- * 
- * Example of indirect commands. Note that commands could be defined directly in GPU via a comput shader. Also note that multi
- * draw (glMultiDrawElementsIndirect) requires an extension to GLES 3.1
- * 
+import java.nio.IntBuffer;
+
+/** see <a href="https://www.khronos.org/opengl/wiki/Vertex_Rendering#Indirect_rendering">This doc</a> which is an example of
+ * indirect commands. Note that commands could be defined directly in GPU via a comput shader. Also note that multi draw
+ * (glMultiDrawElementsIndirect) requires an extension to GLES 3.1
+ *
  * @author mgsx */
 @GdxTestConfig(requireGL31 = true)
 public class GL31IndirectDrawingIndexedTest extends GdxTest {
+	private static final int commandInts = 5;
+	private static final int commandStride = commandInts * 4;
 	static String vsCode = "attribute vec4 a_position;\n" + //
 		"attribute vec4 a_color;\n" + //
 		"uniform mat4 u_projTrans;\n" + //
@@ -49,22 +47,16 @@ public class GL31IndirectDrawingIndexedTest extends GdxTest {
 		"    v_color = a_color;\n" + //
 		"    gl_Position =  u_projTrans * a_position;\n" + //
 		"}"; //
-
 	static String fsCode = "varying vec4 v_color;\n" + //
 		"void main(){\n" + //
 		"    gl_FragColor = v_color;\n" + //
 		"}"; //
-
+	private final Matrix4 transform = new Matrix4();
+	int nbCommands = 2;
 	private int drawCommands;
 	private Mesh mesh;
-
 	private ShaderProgram shader;
-	private Matrix4 transform = new Matrix4();
 	private float time;
-
-	private static final int commandInts = 5;
-	private static final int commandStride = commandInts * 4;
-	int nbCommands = 2;
 
 	@Override
 	public void create () {
@@ -128,7 +120,7 @@ public class GL31IndirectDrawingIndexedTest extends GdxTest {
 		mesh.bind(shader);
 
 		Gdx.gl.glBindBuffer(GL31.GL_DRAW_INDIRECT_BUFFER, drawCommands);
-		Gdx.gl31.glDrawElementsIndirect(GL20.GL_TRIANGLES, GL20.GL_UNSIGNED_SHORT, commandStride * commandIndex);
+		Gdx.gl31.glDrawElementsIndirect(GL20.GL_TRIANGLES, GL20.GL_UNSIGNED_SHORT, (long)commandStride * commandIndex);
 		mesh.unbind(shader);
 	}
 }

@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,6 +12,15 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.backends.android;
+
+import android.content.res.AssetFileDescriptor;
+import android.content.res.AssetManager;
+
+import com.badlogic.gdx.Files.FileType;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.utils.StreamUtils;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -26,18 +32,8 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;
 
-import android.content.res.AssetFileDescriptor;
-import android.content.res.AssetManager;
-
-import com.badlogic.gdx.Files.FileType;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.badlogic.gdx.utils.StreamUtils;
-
-/** @author mzechner
- * @author Nathan Sweet */
 public class AndroidFileHandle extends FileHandle {
+	private static final String TAG = "AndroidFileHandle";
 	// The asset manager, or null if this is not an internal file.
 	final private AssetManager assets;
 
@@ -53,15 +49,15 @@ public class AndroidFileHandle extends FileHandle {
 
 	public FileHandle child (String name) {
 		name = name.replace('\\', '/');
-		if (file.getPath().length() == 0) return new AndroidFileHandle(assets, new File(name), type);
+		if (file.getPath().isEmpty()) return new AndroidFileHandle(assets, new File(name), type);
 		return new AndroidFileHandle(assets, new File(file, name), type);
 	}
 
 	public FileHandle sibling (String name) {
 		name = name.replace('\\', '/');
-		if (file.getPath().length() == 0) throw new GdxRuntimeException("Cannot get the sibling of the root.");
+		if (file.getPath().isEmpty()) throw new GdxRuntimeException("Cannot get the sibling of the root.");
 		return Gdx.files.getFileHandle(new File(file.getParent(), name).getPath(), type); // this way we can find the sibling even
-																														// if it's inside the obb
+		// if it's inside the obb
 	}
 
 	public FileHandle parent () {
@@ -238,8 +234,8 @@ public class AndroidFileHandle extends FileHandle {
 					try {
 						fileDescriptor.close();
 					} catch (IOException e) {
+						android.util.Log.e(TAG, e.toString());
 					}
-					;
 				}
 			}
 		}

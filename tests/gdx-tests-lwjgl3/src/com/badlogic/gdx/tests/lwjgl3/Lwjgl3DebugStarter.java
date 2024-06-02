@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,8 +12,6 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.tests.lwjgl3;
-
-import java.awt.image.BufferedImage;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
@@ -38,13 +33,14 @@ import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import java.awt.image.BufferedImage;
+
 public class Lwjgl3DebugStarter {
-	public static void main (String[] argv) throws NoSuchFieldException, SecurityException, ClassNotFoundException {
+	public static void main (String[] argv) throws SecurityException {
 		GdxTest test = new GdxTest() {
-			float r = 0;
+			final FPSLogger fps = new FPSLogger();
 			SpriteBatch batch;
 			BitmapFont font;
-			FPSLogger fps = new FPSLogger();
 			Texture texture;
 
 			@Override
@@ -65,7 +61,7 @@ public class Lwjgl3DebugStarter {
 						Gdx.app.log("LifecycleListener", "Application dispose()");
 					}
 				});
-				BufferedImage image = new BufferedImage(10, 10, BufferedImage.TYPE_4BYTE_ABGR);
+				new BufferedImage(10, 10, BufferedImage.TYPE_4BYTE_ABGR);
 				texture = new Texture("data/badlogic.jpg");
 				batch = new SpriteBatch();
 				font = new BitmapFont();
@@ -89,13 +85,7 @@ public class Lwjgl3DebugStarter {
 
 						if (character == 'f') {
 							Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
-// DisplayMode[] modes = Gdx.graphics.getDisplayModes();
-// for(DisplayMode mode: modes) {
-// if(mode.width == 1920 && mode.height == 1080) {
-// Gdx.graphics.setFullscreenMode(mode);
-// break;
-// }
-// }
+
 						}
 						if (character == 'w') {
 							Gdx.graphics.setWindowedMode(MathUtils.random(400, 800), MathUtils.random(400, 800));
@@ -132,8 +122,6 @@ public class Lwjgl3DebugStarter {
 					}
 				});
 			}
-
-			long start = System.nanoTime();
 
 			@Override
 			public void render () {

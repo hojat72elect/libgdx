@@ -1,14 +1,14 @@
 
 package com.badlogic.gdx.tests.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /** Shared class for desktop launchers.
- * 
+ * <p>
  * options: --gl30, --gl31, --gl32 enable GLES 3.x (default is GLES 2.0) --glErrors enable GLProfiler and log any GL errors.
  * (default is disabled) */
 public class CommandLineOptions {
@@ -21,21 +21,29 @@ public class CommandLineOptions {
 	public boolean logGLErrors = false;
 
 	public CommandLineOptions (String[] argv) {
-		Array<String> args = new Array<String>(argv);
+		Array<String> args = new Array<>(argv);
 		for (String arg : args) {
 			if (arg.startsWith("-")) {
-				if (arg.equals("--gl30"))
+				switch (arg) {
+				case "--gl30":
 					gl30 = true;
-				else if (arg.equals("--gl31"))
+					break;
+				case "--gl31":
 					gl31 = true;
-				else if (arg.equals("--gl32"))
+					break;
+				case "--gl32":
 					gl32 = true;
-				else if (arg.equals("--glErrors"))
+					break;
+				case "--glErrors":
 					logGLErrors = true;
-				else if (arg.equals("--angle"))
+					break;
+				case "--angle":
 					angle = true;
-				else
+					break;
+				default:
 					System.err.println("skip unrecognized option " + arg);
+					break;
+				}
 			} else {
 				startupTestName = arg;
 			}
@@ -47,12 +55,13 @@ public class CommandLineOptions {
 
 	public boolean isTestCompatible (String testName) {
 		final Class<? extends GdxTest> clazz = GdxTests.forName(testName);
+		assert clazz != null;
 		GdxTestConfig config = clazz.getAnnotation(GdxTestConfig.class);
 		if (config != null) {
 			if (config.requireGL32() && !gl32) return false;
 			if (config.requireGL31() && !(gl31 || gl32)) return false;
 			if (config.requireGL30() && !(gl30 || gl31 || gl32)) return false;
-			if (config.OnlyGL20() && (gl30 || gl31 || gl32)) return false;
+			return !config.OnlyGL20() || (!gl30 && !gl31 && !gl32);
 		}
 		return true;
 	}

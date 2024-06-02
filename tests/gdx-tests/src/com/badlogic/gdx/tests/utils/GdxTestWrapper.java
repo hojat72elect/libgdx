@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.profiling.GLErrorListener;
 import com.badlogic.gdx.graphics.profiling.GLProfiler;
 
 public class GdxTestWrapper implements ApplicationListener {
-	private ApplicationListener app;
-	private boolean logGLErrors;
+	private final ApplicationListener app;
+	private final boolean logGLErrors;
 
 	public GdxTestWrapper (ApplicationListener delegates, boolean logGLErrors) {
 		super();

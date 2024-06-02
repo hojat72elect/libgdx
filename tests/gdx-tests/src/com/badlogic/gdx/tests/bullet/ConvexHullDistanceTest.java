@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,21 +22,35 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.bullet.collision.Collision;
+import com.badlogic.gdx.physics.bullet.collision.ContactResultCallback;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionDispatcher;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionObject;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionObjectWrapper;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionWorld;
-import com.badlogic.gdx.physics.bullet.collision.ContactResultCallback;
 import com.badlogic.gdx.physics.bullet.collision.btConvexHullShape;
 import com.badlogic.gdx.physics.bullet.collision.btDbvtBroadphase;
 import com.badlogic.gdx.physics.bullet.collision.btDefaultCollisionConfiguration;
 import com.badlogic.gdx.physics.bullet.collision.btManifoldPoint;
 import com.badlogic.gdx.physics.bullet.collision.btShapeHull;
 
-/** @author xoppa, didum */
 public class ConvexHullDistanceTest extends BaseBulletTest {
 	private ConvexHullDistance distance;
 	private ShapeRenderer shapeRenderer;
+
+	public static btConvexHullShape createConvexHullShape (final Model model, boolean optimize) {
+		final Mesh mesh = model.meshes.get(0);
+		final btConvexHullShape shape = new btConvexHullShape(mesh.getVerticesBuffer(false), mesh.getNumVertices(),
+			mesh.getVertexSize());
+		if (!optimize) return shape;
+		// now optimize the shape
+		final btShapeHull hull = new btShapeHull(shape);
+		hull.buildHull(shape.getMargin());
+		final btConvexHullShape result = new btConvexHullShape(hull);
+		// delete the temporary shape
+		shape.dispose();
+		hull.dispose();
+		return result;
+	}
 
 	@Override
 	public void create () {
@@ -58,7 +69,7 @@ public class ConvexHullDistanceTest extends BaseBulletTest {
 		for (float y = 10f; y < 50f; y += 5f)
 			world.add("car", -2f + (float)Math.random() * 4f, y, -2f + (float)Math.random() * 4f).setColor(
 				0.25f + 0.5f * (float)Math.random(), 0.25f + 0.5f * (float)Math.random(), 0.25f + 0.5f * (float)Math.random(), 1f);
-		distance = new ConvexHullDistance();
+		distance = new com.badlogic.gdx.tests.bullet.ConvexHullDistanceTest.ConvexHullDistance();
 		shapeRenderer = new ShapeRenderer();
 	}
 
@@ -95,32 +106,14 @@ public class ConvexHullDistanceTest extends BaseBulletTest {
 		shapeRenderer.end();
 	}
 
-	public static btConvexHullShape createConvexHullShape (final Model model, boolean optimize) {
-		final Mesh mesh = model.meshes.get(0);
-		final btConvexHullShape shape = new btConvexHullShape(mesh.getVerticesBuffer(false), mesh.getNumVertices(),
-			mesh.getVertexSize());
-		if (!optimize) return shape;
-		// now optimize the shape
-		final btShapeHull hull = new btShapeHull(shape);
-		hull.buildHull(shape.getMargin());
-		final btConvexHullShape result = new btConvexHullShape(hull);
-		// delete the temporary shape
-		shape.dispose();
-		hull.dispose();
-		return result;
-	}
-
-	private class ConvexHullDistance {
-		private btDefaultCollisionConfiguration collisionConfiguration;
-		private btCollisionDispatcher dispatcher;
-		private btDbvtBroadphase pairCache;
-		private btCollisionWorld collisionWorld;
+	private static class ConvexHullDistance {
+		private final btCollisionWorld collisionWorld;
 		Vector3[] vectors = new Vector3[] {new Vector3(), new Vector3()};
 
 		public ConvexHullDistance () {
-			collisionConfiguration = new btDefaultCollisionConfiguration();
-			dispatcher = new btCollisionDispatcher(collisionConfiguration);
-			pairCache = new btDbvtBroadphase();
+			btDefaultCollisionConfiguration collisionConfiguration = new btDefaultCollisionConfiguration();
+			btCollisionDispatcher dispatcher = new btCollisionDispatcher(collisionConfiguration);
+			btDbvtBroadphase pairCache = new btDbvtBroadphase();
 			collisionWorld = new btCollisionWorld(dispatcher, pairCache, collisionConfiguration);
 		}
 

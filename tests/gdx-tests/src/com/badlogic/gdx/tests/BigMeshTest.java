@@ -31,28 +31,9 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class BigMeshTest extends GdxTest {
 
-	/** copied from {@link ModelBatch} */
-	protected static class RenderablePool extends FlushablePool<Renderable> {
-		@Override
-		protected Renderable newObject () {
-			return new Renderable();
-		}
-
-		@Override
-		public Renderable obtain () {
-			Renderable renderable = super.obtain();
-			renderable.environment = null;
-			renderable.material = null;
-			renderable.meshPart.set("", null, 0, 0, 0);
-			renderable.shader = null;
-			renderable.userData = null;
-			return renderable;
-		}
-	}
-
+	private final Array<RenderableProvider> renderableProviders = new Array<>();
 	private Camera camera;
 	private ModelBatch batch;
-	private final Array<RenderableProvider> renderableProviders = new Array<RenderableProvider>();
 
 	@Override
 	public void create () {
@@ -71,7 +52,6 @@ public class BigMeshTest extends GdxTest {
 
 		final VertexAttributes attributes = new VertexAttributes(VertexAttribute.Position(), VertexAttribute.Normal(),
 			VertexAttribute.TexCoords(0));
-		final long attributesMask = attributes.getMask();
 
 		ModelBuilder mb = new ModelBuilder();
 
@@ -120,14 +100,14 @@ public class BigMeshTest extends GdxTest {
 	}
 
 	private void trace (RenderableProvider rp, String label) {
-		Array<Renderable> renderables = new Array<Renderable>();
+		Array<Renderable> renderables = new Array<>();
 		Pool<Renderable> pool = new RenderablePool();
 		rp.getRenderables(renderables, pool);
 		System.out.println(label + ":");
 		System.out.println("- renderables: " + renderables.size);
 		for (Renderable r : renderables) {
 			Mesh mesh = r.meshPart.mesh;
-			System.out.println("-- renderable [" + String.valueOf(r.meshPart.id) + "]: ");
+			System.out.println("-- renderable [" + r.meshPart.id + "]: ");
 			System.out.println("-- mesh part offset: " + r.meshPart.offset);
 			System.out.println("-- mesh part size: " + r.meshPart.size);
 			System.out.println("-- mesh num vertices: " + mesh.getNumVertices());
@@ -146,6 +126,25 @@ public class BigMeshTest extends GdxTest {
 		batch.begin(camera);
 		batch.render(renderableProviders);
 		batch.end();
+	}
+
+	/** copied from {@link ModelBatch} */
+	protected static class RenderablePool extends FlushablePool<Renderable> {
+		@Override
+		protected Renderable newObject () {
+			return new Renderable();
+		}
+
+		@Override
+		public Renderable obtain () {
+			Renderable renderable = super.obtain();
+			renderable.environment = null;
+			renderable.material = null;
+			renderable.meshPart.set("", null, 0, 0, 0);
+			renderable.shader = null;
+			renderable.userData = null;
+			return renderable;
+		}
 	}
 
 }

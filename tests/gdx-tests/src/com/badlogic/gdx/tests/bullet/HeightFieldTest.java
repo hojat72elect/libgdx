@@ -17,20 +17,13 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.bullet.collision.btHeightfieldTerrainShape;
 import com.badlogic.gdx.physics.bullet.collision.btSphereShape;
-import com.badlogic.gdx.tests.g3d.HeightField;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
 
-/** Demonstration of Bullets {@link btHeightfieldTerrainShape}.
- * @author JamesTKhan */
+/** Demonstration of Bullets {@link btHeightfieldTerrainShape}. */
 public class HeightFieldTest extends BaseBulletTest {
-	private HeightField field;
 	private Texture texture;
-	private BulletEntity terrainEntity;
-	private FloatBuffer floatBuffer;
-	private btHeightfieldTerrainShape terrainShape;
 
 	@Override
 	public void create () {
@@ -46,8 +39,10 @@ public class HeightFieldTest extends BaseBulletTest {
 	private void createTerrain (float size, float heightScale) {
 		// Create the height field model
 		Pixmap data = new Pixmap(Gdx.files.internal("data/g3d/heightmap.png"));
-		field = new HeightField(true, data, true, VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal
-			| VertexAttributes.Usage.ColorUnpacked | VertexAttributes.Usage.TextureCoordinates);
+		com.badlogic.gdx.tests.g3d.HeightField field = new com.badlogic.gdx.tests.g3d.HeightField(true, data, true,
+			com.badlogic.gdx.graphics.VertexAttributes.Usage.Position | com.badlogic.gdx.graphics.VertexAttributes.Usage.Normal
+				| com.badlogic.gdx.graphics.VertexAttributes.Usage.ColorUnpacked
+				| com.badlogic.gdx.graphics.VertexAttributes.Usage.TextureCoordinates);
 		data.dispose();
 		field.corner00.set(-size / 2, 0, -size / 2);
 		field.corner10.set(size / 2, 0, -size / 2);
@@ -75,16 +70,17 @@ public class HeightFieldTest extends BaseBulletTest {
 		// We are responsible for maintaining the float buffer
 		ByteBuffer byteBuffer = ByteBuffer.allocateDirect(field.data.length * 4);
 		byteBuffer.order(ByteOrder.nativeOrder());
-		floatBuffer = byteBuffer.asFloatBuffer();
+		java.nio.FloatBuffer floatBuffer = byteBuffer.asFloatBuffer();
 		floatBuffer.put(field.data);
 		floatBuffer.position(0);
 
 		// Create the terrain physics shape
-		terrainShape = new btHeightfieldTerrainShape(field.width, field.height, floatBuffer, 1f, minHeight, maxHeight, 1, true);
+		com.badlogic.gdx.physics.bullet.collision.btHeightfieldTerrainShape terrainShape = new com.badlogic.gdx.physics.bullet.collision.btHeightfieldTerrainShape(
+			field.width, field.height, floatBuffer, 1f, minHeight, maxHeight, 1, true);
 		terrainShape.setLocalScaling(new Vector3((size) / ((field.width - 1)), heightScale, (size) / ((field.height - 1))));
 
 		world.addConstructor("terrain", new BulletConstructor(terrain, terrainShape));
-		terrainEntity = world.add("terrain", 0, 0f, 0);
+		BulletEntity terrainEntity = world.add("terrain", 0, 0f, 0);
 
 		// Align the physics body with the models height
 		float adjustedHeight = (maxHeight + minHeight) / 2f * heightScale;

@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2020 See AUTHORS file.
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
  *   http://www.apache.org/licenses/LICENSE-2.0
- *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -34,7 +31,11 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.shapebuilders.BoxShapeBuilder;
-import com.badlogic.gdx.math.*;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Quaternion;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.math.collision.OrientedBoundingBox;
 import com.badlogic.gdx.math.collision.Ray;
@@ -46,20 +47,16 @@ import java.util.Random;
 public class OrientedBoundingBoxTest extends GdxTest implements ApplicationListener {
 
 	private static final int NUM_BOXES = 100;
-
-	private PerspectiveCamera camera;
-	private CameraInputController cameraController;
-	private ModelBatch modelBatch;
-
-	private SpriteBatch batch;
-	private BitmapFont font;
-
 	private static final Color COLOR_STANDARD = Color.BLUE;
 	private static final Color COLOR_MOUSE_OVER = Color.GREEN;
 	private static final Color COLOR_INTERSECTION = Color.GOLD;
-
+	private PerspectiveCamera camera;
+	private CameraInputController cameraController;
+	private ModelBatch modelBatch;
+	private SpriteBatch batch;
+	private BitmapFont font;
 	private long seed;
-	private Array<Box> boxes = new Array<>();
+	private final Array<Box> boxes = new Array<>();
 
 	@Override
 	public void create () {
@@ -86,7 +83,7 @@ public class OrientedBoundingBoxTest extends GdxTest implements ApplicationListe
 		// Clear the list
 		boxes.clear();
 		for (int i = 0; i < NUM_BOXES; i++) {
-			boxes.add(new Box());
+			boxes.add(new com.badlogic.gdx.tests.math.collision.OrientedBoundingBoxTest.Box());
 		}
 	}
 
@@ -178,7 +175,7 @@ public class OrientedBoundingBoxTest extends GdxTest implements ApplicationListe
 		return super.keyUp(keycode);
 	}
 
-	class Box {
+	static class Box {
 		private final OrientedBoundingBox orientedBoundingBox;
 		public Model model;
 		public ModelInstance instance;
@@ -242,6 +239,7 @@ public class OrientedBoundingBoxTest extends GdxTest implements ApplicationListe
 		public void updateColor (Color color) {
 			Material material = instance.materials.get(0);
 			ColorAttribute attribute = (ColorAttribute)material.get(ColorAttribute.Diffuse);
+			assert attribute != null;
 			attribute.color.set(color);
 		}
 	}

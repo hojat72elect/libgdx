@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,35 +18,22 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.bullet.collision.ContactResultCallback;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionDispatcher;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionObject;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionObjectWrapper;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionWorld;
-import com.badlogic.gdx.physics.bullet.collision.ContactResultCallback;
 import com.badlogic.gdx.physics.bullet.collision.btDbvtBroadphase;
 import com.badlogic.gdx.physics.bullet.collision.btDefaultCollisionConfiguration;
 import com.badlogic.gdx.physics.bullet.collision.btManifoldPoint;
 
-/** @author xoppa */
 public class CollisionWorldTest extends BaseBulletTest {
 	BulletEntity movingBox;
 	boolean hit = false;
 	Color normalColor = new Color();
 	btCollisionObject other;
-
-	public class TestContactResultCallback extends ContactResultCallback {
-		@Override
-		public float addSingleResult (btManifoldPoint cp, btCollisionObjectWrapper colObj0Wrap, int partId0, int index0,
-			btCollisionObjectWrapper colObj1Wrap, int partId1, int index1) {
-			hit = true;
-			other = colObj0Wrap.getCollisionObject() == movingBox.body ? colObj1Wrap.getCollisionObject()
-				: colObj0Wrap.getCollisionObject();
-
-			return 0f;
-		}
-	}
-
 	TestContactResultCallback contactCB;
+	Color tmpColor = new Color();
 
 	@Override
 	public BulletWorld createWorld () {
@@ -89,8 +73,6 @@ public class CollisionWorldTest extends BaseBulletTest {
 		normalColor.set(0.5f + 0.5f * (float)Math.random(), 0.5f + 0.5f * (float)Math.random(), 0.5f + 0.5f * (float)Math.random(),
 			1f);
 	}
-
-	Color tmpColor = new Color();
 
 	@Override
 	public void render () {
@@ -134,5 +116,17 @@ public class CollisionWorldTest extends BaseBulletTest {
 	public void dispose () {
 		super.dispose();
 		movingBox = null;
+	}
+
+	public class TestContactResultCallback extends ContactResultCallback {
+		@Override
+		public float addSingleResult (btManifoldPoint cp, btCollisionObjectWrapper colObj0Wrap, int partId0, int index0,
+			btCollisionObjectWrapper colObj1Wrap, int partId1, int index1) {
+			hit = true;
+			other = colObj0Wrap.getCollisionObject() == movingBox.body ? colObj1Wrap.getCollisionObject()
+				: colObj0Wrap.getCollisionObject();
+
+			return 0f;
+		}
 	}
 }

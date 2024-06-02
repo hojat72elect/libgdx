@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,7 +26,17 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import com.badlogic.gdx.*;
+
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.ApplicationLogger;
+import com.badlogic.gdx.Audio;
+import com.badlogic.gdx.Files;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
+import com.badlogic.gdx.LifecycleListener;
+import com.badlogic.gdx.Net;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.backends.android.surfaceview.FillResolutionStrategy;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
@@ -38,11 +45,13 @@ import com.badlogic.gdx.utils.SnapshotArray;
 
 /** An implementation of the {@link Application} interface for Android. Create an {@link Activity} that derives from this class.
  * In the Activity#onCreate(Bundle) method call the {@link #initialize(ApplicationListener)} method specifying the configuration
- * for the {@link GLSurfaceView}.
- * 
- * @author mzechner */
+ * for the {@link GLSurfaceView}. */
 public class AndroidDaydream extends DreamService implements AndroidApplicationBase {
 
+	protected final Array<Runnable> runnables = new Array<Runnable>();
+	protected final Array<Runnable> executedRunnables = new Array<Runnable>();
+	protected final SnapshotArray<LifecycleListener> lifecycleListeners = new SnapshotArray<LifecycleListener>(
+		LifecycleListener.class);
 	protected AndroidGraphics graphics;
 	protected AndroidInput input;
 	protected AndroidAudio audio;
@@ -52,15 +61,12 @@ public class AndroidDaydream extends DreamService implements AndroidApplicationB
 	protected ApplicationListener listener;
 	protected Handler handler;
 	protected boolean firstResume = true;
-	protected final Array<Runnable> runnables = new Array<Runnable>();
-	protected final Array<Runnable> executedRunnables = new Array<Runnable>();
-	protected final SnapshotArray<LifecycleListener> lifecycleListeners = new SnapshotArray<LifecycleListener>(
-		LifecycleListener.class);
 	protected int logLevel = LOG_INFO;
 	protected ApplicationLogger applicationLogger;
 
 	/** This method has to be called in the Activity#onCreate(Bundle) method. It sets up all the things necessary to get input,
 	 * render via OpenGL and so on. Uses a default {@link AndroidApplicationConfiguration}.
+	 *
 	 * @param listener the {@link ApplicationListener} implementing the program logic */
 	public void initialize (ApplicationListener listener) {
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
@@ -70,6 +76,7 @@ public class AndroidDaydream extends DreamService implements AndroidApplicationB
 	/** This method has to be called in the Activity#onCreate(Bundle) method. It sets up all the things necessary to get input,
 	 * render via OpenGL and so on. You can configure other aspects of the application with the rest of the fields in the
 	 * {@link AndroidApplicationConfiguration} instance.
+	 *
 	 * @param listener the {@link ApplicationListener} implementing the program logic
 	 * @param config the {@link AndroidApplicationConfiguration}, defining various settings of the application (use accelerometer,
 	 *           etc.). */
@@ -81,6 +88,7 @@ public class AndroidDaydream extends DreamService implements AndroidApplicationB
 	 * render via OpenGL and so on. Uses a default {@link AndroidApplicationConfiguration}.
 	 * <p>
 	 * Note: you have to add the returned view to your layout!
+	 *
 	 * @param listener the {@link ApplicationListener} implementing the program logic
 	 * @return the {@link GLSurfaceView} of the application */
 	public View initializeForView (ApplicationListener listener) {
@@ -93,6 +101,7 @@ public class AndroidDaydream extends DreamService implements AndroidApplicationB
 	 * {@link AndroidApplicationConfiguration} instance.
 	 * <p>
 	 * Note: you have to add the returned view to your layout!
+	 *
 	 * @param listener the {@link ApplicationListener} implementing the program logic
 	 * @param config the {@link AndroidApplicationConfiguration}, defining various settings of the application (use accelerometer,
 	 *           etc.).
@@ -281,8 +290,7 @@ public class AndroidDaydream extends DreamService implements AndroidApplicationB
 	@Override
 	public void onConfigurationChanged (Configuration config) {
 		super.onConfigurationChanged(config);
-		boolean keyboardAvailable = false;
-		if (config.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO) keyboardAvailable = true;
+		boolean keyboardAvailable = config.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO;
 		input.setKeyboardAvailable(keyboardAvailable);
 	}
 
@@ -327,23 +335,23 @@ public class AndroidDaydream extends DreamService implements AndroidApplicationB
 	}
 
 	@Override
-	public void setLogLevel (int logLevel) {
-		this.logLevel = logLevel;
-	}
-
-	@Override
 	public int getLogLevel () {
 		return logLevel;
 	}
 
 	@Override
-	public void setApplicationLogger (ApplicationLogger applicationLogger) {
-		this.applicationLogger = applicationLogger;
+	public void setLogLevel (int logLevel) {
+		this.logLevel = logLevel;
 	}
 
 	@Override
 	public ApplicationLogger getApplicationLogger () {
 		return applicationLogger;
+	}
+
+	@Override
+	public void setApplicationLogger (ApplicationLogger applicationLogger) {
+		this.applicationLogger = applicationLogger;
 	}
 
 	@Override

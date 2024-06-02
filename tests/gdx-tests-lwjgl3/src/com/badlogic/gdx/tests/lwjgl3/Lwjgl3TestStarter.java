@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -44,9 +41,7 @@ public class Lwjgl3TestStarter {
 
 	static CommandLineOptions options;
 
-	/** Runs libgdx tests.
-	 * 
-	 * some options can be passed, see {@link CommandLineOptions}
+	/** Runs libgdx tests. some options can be passed, see {@link CommandLineOptions}
 	 * 
 	 * @param argv command line arguments */
 	public static void main (String[] argv) {
@@ -153,7 +148,7 @@ public class Lwjgl3TestStarter {
 			container.add(scroll).expand().fill();
 			container.row();
 
-			lastClickedTestButton = (TextButton)table.findActor(prefs.getString("LastTest"));
+			lastClickedTestButton = table.findActor(prefs.getString("LastTest"));
 			if (lastClickedTestButton != null) {
 				lastClickedTestButton.setColor(Color.CYAN);
 				scroll.layout();

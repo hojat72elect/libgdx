@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,9 +12,6 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.tests.gwt;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
@@ -41,6 +35,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ScreenUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GwtTest extends GdxTest {
 	ShaderProgram shader;
@@ -75,7 +72,7 @@ public class GwtTest extends GdxTest {
 		numSprites = Integer.parseInt(params);
 
 		batch = new SpriteBatch();
-		positions = new ArrayList<Vector2>();
+		positions = new ArrayList<>();
 		for (int i = 0; i < numSprites; i++) {
 			positions.add(new Vector2(MathUtils.random() * Gdx.graphics.getWidth(), MathUtils.random() * Gdx.graphics.getHeight()));
 		}
@@ -113,21 +110,5 @@ public class GwtTest extends GdxTest {
 		cache.setPosition(200, 200);
 		cache.draw(batch);
 		batch.end();
-	}
-
-	@Override
-	public void resume () {
-	}
-
-	@Override
-	public void resize (int width, int height) {
-	}
-
-	@Override
-	public void pause () {
-	}
-
-	@Override
-	public void dispose () {
 	}
 }

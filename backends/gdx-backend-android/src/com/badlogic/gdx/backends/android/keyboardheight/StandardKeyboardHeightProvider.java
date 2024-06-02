@@ -35,26 +35,18 @@ import android.widget.PopupWindow;
  * opened and closed. */
 public class StandardKeyboardHeightProvider extends PopupWindow implements KeyboardHeightProvider {
 
-	/** The tag for logging purposes */
-	private final static String TAG = "sample_KeyboardHeightProvider";
-
-	/** The keyboard height observer */
-	private KeyboardHeightObserver observer;
-
 	/** The cached landscape height of the keyboard */
 	private static int keyboardLandscapeHeight;
-
 	/** The cached portrait height of the keyboard */
 	private static int keyboardPortraitHeight;
-
 	/** The view that is used to calculate the keyboard height */
-	private View popupView;
-
+	private final View popupView;
 	/** The parent view */
-	private View parentView;
-
+	private final View parentView;
 	/** The root activity that uses this KeyboardHeightProvider */
-	private Activity activity;
+	private final Activity activity;
+	/** The keyboard height observer */
+	private KeyboardHeightObserver observer;
 
 	/** Construct a new KeyboardHeightProvider
 	 *
@@ -83,9 +75,7 @@ public class StandardKeyboardHeightProvider extends PopupWindow implements Keybo
 
 			@Override
 			public void onGlobalLayout () {
-				if (popupView != null) {
-					handleOnGlobalLayout();
-				}
+				handleOnGlobalLayout();
 			}
 		});
 	}

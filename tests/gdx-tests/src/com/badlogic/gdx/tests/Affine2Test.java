@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
  *   http://www.apache.org/licenses/LICENSE-2.0
- *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,6 +23,36 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 public class Affine2Test extends GdxTest {
 
 	static public final float TOLERANCE = 0.005f;
+
+	private static void check (boolean condition) {
+		if (!condition) throw new GdxRuntimeException("");
+	}
+
+	private static void check (boolean condition, String msg) {
+		if (!condition) throw new GdxRuntimeException(msg);
+	}
+
+	private static void checkEqual (Matrix3 matrix, Affine2 affine) {
+		checkEqual(matrix, new Matrix3().set(affine));
+	}
+
+	private static void checkEqual (Affine2 a, Affine2 b) {
+		checkEqual(new Matrix3().set(a), new Matrix3().set(b));
+	}
+
+	private static void checkEqual (Matrix3 a, Matrix3 b) {
+		for (int i = 0; i < 9; i++)
+			check(MathUtils.isEqual(a.val[i], b.val[i], TOLERANCE), "matrices are not equal");
+	}
+
+	private static void checkEqual (Matrix3 matrix, float[] vals) {
+		for (int i = 0; i < 9; i++)
+			check(MathUtils.isEqual(matrix.val[i], vals[i], TOLERANCE), "matrices are not equal");
+	}
+
+	private static void checkEqual (float a, float b) {
+		check(MathUtils.isEqual(a, b, TOLERANCE));
+	}
 
 	@Override
 	public void create () {
@@ -121,35 +148,5 @@ public class Affine2Test extends GdxTest {
 		check(didThrow);
 
 		System.out.println("All tests passed.");
-	}
-
-	private static void check (boolean condition) {
-		if (!condition) throw new GdxRuntimeException("");
-	}
-
-	private static void check (boolean condition, String msg) {
-		if (!condition) throw new GdxRuntimeException(msg);
-	}
-
-	private static void checkEqual (Matrix3 matrix, Affine2 affine) {
-		checkEqual(matrix, new Matrix3().set(affine));
-	}
-
-	private static void checkEqual (Affine2 a, Affine2 b) {
-		checkEqual(new Matrix3().set(a), new Matrix3().set(b));
-	}
-
-	private static void checkEqual (Matrix3 a, Matrix3 b) {
-		for (int i = 0; i < 9; i++)
-			check(MathUtils.isEqual(a.val[i], b.val[i], TOLERANCE), "matrices are not equal");
-	}
-
-	private static void checkEqual (Matrix3 matrix, float[] vals) {
-		for (int i = 0; i < 9; i++)
-			check(MathUtils.isEqual(matrix.val[i], vals[i], TOLERANCE), "matrices are not equal");
-	}
-
-	private static void checkEqual (float a, float b) {
-		check(MathUtils.isEqual(a, b, TOLERANCE));
 	}
 }

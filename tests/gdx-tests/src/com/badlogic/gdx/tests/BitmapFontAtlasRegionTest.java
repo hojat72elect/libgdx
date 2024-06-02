@@ -13,16 +13,14 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 
 public class BitmapFontAtlasRegionTest extends GdxTest {
-	private SpriteBatch batch;
-	private AssetManager assets;
-
-	private BitmapFont[] fonts;
-	private String[] testStrings;
-
 	private static final String FONT_1 = "data/default.fnt";
 	private static final String FONT_2 = "data/font.fnt";
 	private static final String FONT_3 = "data/verdana39.fnt";
 	private static final String ATLAS = "data/atlased-fonts.txt";
+	private SpriteBatch batch;
+	private AssetManager assets;
+	private BitmapFont[] fonts;
+	private String[] testStrings;
 
 	@Override
 	public void create () {

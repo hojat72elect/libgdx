@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -35,33 +32,15 @@ public class BitmapFontDistanceFieldTest extends GdxTest {
 	private static final String TEXT = "Ta";
 	private static final Color COLOR = Color.BLACK;
 	private static final float[] SCALES = {0.25f, 0.5f, 1, 2, 4};
-
-	private static class DistanceFieldShader extends ShaderProgram {
-		public DistanceFieldShader () {
-			super(Gdx.files.internal("data/shaders/distancefield.vert"), Gdx.files.internal("data/shaders/distancefield.frag"));
-			if (!isCompiled()) {
-				throw new RuntimeException("Shader compilation failed:\n" + getLog());
-			}
-		}
-
-		/** @param smoothing a value between 0 and 1 */
-		public void setSmoothing (float smoothing) {
-			float delta = 0.5f * MathUtils.clamp(smoothing, 0, 1);
-			setUniformf("u_lower", 0.5f - delta);
-			setUniformf("u_upper", 0.5f + delta);
-		}
-	}
-
+	private final GlyphLayout layout = new GlyphLayout();
 	private OrthographicCamera camera;
 	private SpriteBatch spriteBatch;
-
 	private Texture regularTexture;
 	private Texture distanceFieldTexture;
 	private BitmapFont descriptionFont;
 	private BitmapFont regularFont;
 	private BitmapFont distanceFieldFont;
 	private DistanceFieldShader distanceFieldShader;
-	private GlyphLayout layout = new GlyphLayout();
 
 	@Override
 	public void create () {
@@ -108,7 +87,7 @@ public class BitmapFontDistanceFieldTest extends GdxTest {
 		spriteBatch.setShader(null);
 		descriptionFont.draw(spriteBatch, description, x, y);
 		spriteBatch.flush();
-		y += 10 + 2 * descriptionFont.getLineHeight();
+		y += (int)(10 + 2 * descriptionFont.getLineHeight());
 
 		// set filters for each page
 		TextureFilter minFilter = linearFiltering ? TextureFilter.MipMapLinearNearest : TextureFilter.Nearest;
@@ -131,14 +110,10 @@ public class BitmapFontDistanceFieldTest extends GdxTest {
 				distanceFieldShader.setSmoothing(smoothing / scale);
 			}
 			font.draw(spriteBatch, layout, x, y);
-			y += font.getLineHeight();
+			y += (int)font.getLineHeight();
 			spriteBatch.flush();
 		}
 		return (int)Math.ceil(maxWidth);
-	}
-
-	private float getBaselineShift (float shift) {
-		return shift;
 	}
 
 	@Override
@@ -158,5 +133,21 @@ public class BitmapFontDistanceFieldTest extends GdxTest {
 		regularFont.dispose();
 		distanceFieldFont.dispose();
 		distanceFieldShader.dispose();
+	}
+
+	private static class DistanceFieldShader extends ShaderProgram {
+		public DistanceFieldShader () {
+			super(Gdx.files.internal("data/shaders/distancefield.vert"), Gdx.files.internal("data/shaders/distancefield.frag"));
+			if (!isCompiled()) {
+				throw new RuntimeException("Shader compilation failed:\n" + getLog());
+			}
+		}
+
+		/** @param smoothing a value between 0 and 1 */
+		public void setSmoothing (float smoothing) {
+			float delta = 0.5f * MathUtils.clamp(smoothing, 0, 1);
+			setUniformf("u_lower", 0.5f - delta);
+			setUniformf("u_upper", 0.5f + delta);
+		}
 	}
 }

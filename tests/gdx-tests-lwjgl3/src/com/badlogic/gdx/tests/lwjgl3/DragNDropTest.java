@@ -15,11 +15,7 @@ import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-/** Tests for GLFW's drop callback.
- * 
- * External files (e.g from the desktop) can be dragged into the GLFW window.
- * 
- * @author mbrlabs */
+/** Tests for GLFW's drop callback. External files (e.g from the desktop) can be dragged into the GLFW window. */
 public class DragNDropTest extends GdxTest {
 
 	private Skin skin;
@@ -28,7 +24,7 @@ public class DragNDropTest extends GdxTest {
 
 	@Override
 	public void create () {
-		BufferedImage image = new BufferedImage(10, 10, BufferedImage.TYPE_4BYTE_ABGR);
+		new BufferedImage(10, 10, BufferedImage.TYPE_4BYTE_ABGR);
 		stage = new Stage();
 		skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 		Gdx.input.setInputProcessor(stage);
@@ -46,29 +42,13 @@ public class DragNDropTest extends GdxTest {
 		stage.draw();
 	}
 
-	@Override
-	public void resize (int width, int height) {
-	}
-
-	@Override
-	public void resume () {
-	}
-
-	@Override
-	public void pause () {
-	}
-
-	@Override
-	public void dispose () {
-	}
-
 	public void addFiles (String[] files) {
 		for (String file : files) {
 			root.add(new Label(file, skin)).left().row();
 		}
 	}
 
-	public static void main (String[] argv) throws NoSuchFieldException, SecurityException, ClassNotFoundException {
+	public static void main (String[] argv) throws SecurityException {
 		final DragNDropTest test = new DragNDropTest();
 
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();

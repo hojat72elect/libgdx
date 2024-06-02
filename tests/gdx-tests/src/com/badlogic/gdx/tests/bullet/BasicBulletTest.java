@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -49,7 +46,6 @@ import com.badlogic.gdx.physics.bullet.dynamics.btSequentialImpulseConstraintSol
 import com.badlogic.gdx.physics.bullet.linearmath.btDefaultMotionState;
 import com.badlogic.gdx.utils.Array;
 
-/** @author xoppa */
 public class BasicBulletTest extends BulletTest {
 	ModelBatch modelBatch;
 	Environment lights;
@@ -63,12 +59,12 @@ public class BasicBulletTest extends BulletTest {
 	Vector3 gravity = new Vector3(0, -9.81f, 0);
 	Vector3 tempVector = new Vector3();
 
-	Array<Model> models = new Array<Model>();
-	Array<ModelInstance> instances = new Array<ModelInstance>();
-	Array<btDefaultMotionState> motionStates = new Array<btDefaultMotionState>();
-	Array<btRigidBodyConstructionInfo> bodyInfos = new Array<btRigidBodyConstructionInfo>();
-	Array<btCollisionShape> shapes = new Array<btCollisionShape>();
-	Array<btRigidBody> bodies = new Array<btRigidBody>();
+	Array<Model> models = new Array<>();
+	Array<ModelInstance> instances = new Array<>();
+	Array<btDefaultMotionState> motionStates = new Array<>();
+	Array<btRigidBodyConstructionInfo> bodyInfos = new Array<>();
+	Array<btCollisionShape> shapes = new Array<>();
+	Array<btRigidBody> bodies = new Array<>();
 
 	@Override
 	public void create () {
@@ -159,7 +155,7 @@ public class BasicBulletTest extends BulletTest {
 
 		performanceCounter.tick();
 		performanceCounter.start();
-		((btDynamicsWorld)collisionWorld).stepSimulation(Gdx.graphics.getDeltaTime(), 5);
+		collisionWorld.stepSimulation(Gdx.graphics.getDeltaTime(), 5);
 		performanceCounter.stop();
 
 		int c = motionStates.size;

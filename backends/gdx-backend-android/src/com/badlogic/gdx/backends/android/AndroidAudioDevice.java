@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,19 +21,17 @@ import com.badlogic.gdx.audio.AudioDevice;
 
 /** Implementation of the {@link AudioDevice} interface for Android using the AudioTrack class. You will need to set the
  * permission android.permission.RECORD_AUDIO in your manifest file.
+ *
  * @author mzechner */
 class AndroidAudioDevice implements AudioDevice {
 	/** the audio track **/
 	private final AudioTrack track;
-
-	/** the mighty buffer **/
-	private short[] buffer = new short[1024];
-
 	/** whether this device is in mono or stereo mode **/
 	private final boolean isMono;
-
 	/** the latency in samples **/
 	private final int latency;
+	/** the mighty buffer **/
+	private short[] buffer = new short[1024];
 
 	AndroidAudioDevice (int samplingRate, boolean isMono) {
 		this.isMono = isMono;

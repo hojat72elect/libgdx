@@ -6,8 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-/** Placeholder class that's wired up with all backends so i can quickly test out issues...
- * @author badlogic */
+/** Placeholder class that's wired up with all backends so i can quickly test out issues... */
 public class IssueTest extends GdxTest {
 	SpriteBatch batch;
 	Texture img;

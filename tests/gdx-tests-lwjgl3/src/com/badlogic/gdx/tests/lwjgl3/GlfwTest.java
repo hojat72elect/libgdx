@@ -14,8 +14,7 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 
 public class GlfwTest {
-	private static long windowHandle;
-	private static GLFWErrorCallback errorCallback = GLFWErrorCallback.createPrint(System.err);
+	private static final GLFWErrorCallback errorCallback = GLFWErrorCallback.createPrint(System.err);
 
 	public static void main (String[] argv) {
 		GLFW.glfwSetErrorCallback(errorCallback);
@@ -34,7 +33,7 @@ public class GlfwTest {
 		}
 		GLFWVidMode mode = modes.get(7);
 		System.out.println("Mode: " + mode.width() + "x" + mode.height());
-		windowHandle = glfwCreateWindow(mode.width(), mode.height(), "Test", glfwGetPrimaryMonitor(), 0);
+		long windowHandle = glfwCreateWindow(mode.width(), mode.height(), "Test", glfwGetPrimaryMonitor(), 0);
 		if (windowHandle == 0) {
 			throw new RuntimeException("Couldn't create window");
 		}

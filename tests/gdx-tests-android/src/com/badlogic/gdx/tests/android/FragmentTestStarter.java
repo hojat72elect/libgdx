@@ -1,15 +1,11 @@
 
 package com.badlogic.gdx.tests.android;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +15,16 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.ListFragment;
+
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication;
 import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.tests.utils.GdxTests;
+
+import java.util.List;
 
 public class FragmentTestStarter extends FragmentActivity implements AndroidFragmentApplication.Callbacks {
 
@@ -77,19 +79,19 @@ public class FragmentTestStarter extends FragmentActivity implements AndroidFrag
 		public void onCreate (Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			List<String> testNames = GdxTests.getNames();
-			setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, testNames));
+			setListAdapter(new ArrayAdapter<>(requireActivity(), android.R.layout.simple_list_item_1, testNames));
 			prefs = getActivity().getSharedPreferences("libgdx-tests", Context.MODE_PRIVATE);
 		}
 
 		@Override
-		public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		public View onCreateView (@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			View view = super.onCreateView(inflater, container, savedInstanceState);
 			((ListView)view.findViewById(android.R.id.list)).setSelectionFromTop(prefs.getInt("index", 0), prefs.getInt("top", 0));
 			return view;
 		}
 
 		@Override
-		public void onListItemClick (ListView listView, View view, int position, long id) {
+		public void onListItemClick (@NonNull ListView listView, @NonNull View view, int position, long id) {
 			super.onListItemClick(listView, view, position, id);
 
 			Object o = this.getListAdapter().getItem(position);
@@ -100,7 +102,7 @@ public class FragmentTestStarter extends FragmentActivity implements AndroidFrag
 		}
 
 		@Override
-		public void onAttach (Activity activity) {
+		public void onAttach (@NonNull Activity activity) {
 			super.onAttach(activity);
 			if (activity instanceof FragmentTestStarter) {
 				this.activity = (FragmentTestStarter)activity;
@@ -111,6 +113,8 @@ public class FragmentTestStarter extends FragmentActivity implements AndroidFrag
 
 	public static class TestViewFragment extends AndroidFragmentApplication {
 
+		GdxTest test;
+
 		public static TestViewFragment newInstance (String testName) {
 			Bundle arguments = new Bundle();
 			arguments.putString("test", testName);
@@ -119,8 +123,6 @@ public class FragmentTestStarter extends FragmentActivity implements AndroidFrag
 			return fragment;
 		}
 
-		GdxTest test;
-
 		@Override
 		public void onCreate (Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
@@ -128,7 +130,7 @@ public class FragmentTestStarter extends FragmentActivity implements AndroidFrag
 		}
 
 		@Override
-		public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		public View onCreateView (@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 			config.useImmersiveMode = true;
 			return initializeForView(test, config);

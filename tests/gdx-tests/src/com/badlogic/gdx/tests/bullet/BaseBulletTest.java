@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,7 +13,6 @@
 
 package com.badlogic.gdx.tests.bullet;
 
-import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
@@ -36,17 +32,13 @@ import com.badlogic.gdx.graphics.g3d.utils.DepthShaderProvider;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
-import com.badlogic.gdx.physics.bullet.Bullet;
 import com.badlogic.gdx.physics.bullet.dynamics.btRigidBody;
 import com.badlogic.gdx.physics.bullet.linearmath.LinearMath;
 import com.badlogic.gdx.physics.bullet.linearmath.btIDebugDraw.DebugDrawModes;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
-/** @author xoppa */
 public class BaseBulletTest extends BulletTest {
-	// Set this to the path of the lib to use it on desktop instead of default lib.
-	private final static String customDesktopLib = null;// "D:\\Xoppa\\code\\libgdx\\extensions\\gdx-bullet\\jni\\vs\\gdxBullet\\x64\\Debug\\gdxBullet.dll";
 
 	private static boolean initialized = false;
 
@@ -55,10 +47,8 @@ public class BaseBulletTest extends BulletTest {
 	public static void init () {
 		if (initialized) return;
 		// Need to initialize bullet before using it.
-		if (Gdx.app.getType() == ApplicationType.Desktop && customDesktopLib != null) {
-			System.load(customDesktopLib);
-		} else
-			Bullet.init();
+		com.badlogic.gdx.Gdx.app.getType();
+		com.badlogic.gdx.physics.bullet.Bullet.init();
 		Gdx.app.log("Bullet", "Version = " + LinearMath.btGetVersion());
 		initialized = true;
 	}
@@ -71,7 +61,7 @@ public class BaseBulletTest extends BulletTest {
 	public ObjLoader objLoader = new ObjLoader();
 	public ModelBuilder modelBuilder = new ModelBuilder();
 	public ModelBatch modelBatch;
-	public Array<Disposable> disposables = new Array<Disposable>();
+	public Array<Disposable> disposables = new Array<>();
 	private int debugMode = DebugDrawModes.DBG_NoDebug;
 
 	protected final static Vector3 tmpV1 = new Vector3(), tmpV2 = new Vector3();

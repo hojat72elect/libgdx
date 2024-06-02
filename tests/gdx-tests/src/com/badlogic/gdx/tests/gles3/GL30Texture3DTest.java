@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2022 See AUTHORS file.
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
  *   http://www.apache.org/licenses/LICENSE-2.0
- *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,8 +12,6 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.tests.gles3;
-
-import java.nio.IntBuffer;
 
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
@@ -32,6 +27,8 @@ import com.badlogic.gdx.graphics.glutils.CustomTexture3DData;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.tests.utils.GdxTestConfig;
+
+import java.nio.IntBuffer;
 
 @GdxTestConfig(requireGL30 = true)
 public class GL30Texture3DTest extends GdxTest {
@@ -94,14 +91,13 @@ public class GL30Texture3DTest extends GdxTest {
 	@Override
 	public void create () {
 		int size = 8;
-		int w = size, h = size, d = size;
-		CustomTexture3DData data = new CustomTexture3DData(w, h, d, 0, GL30.GL_RGBA, GL30.GL_RGBA8, GL30.GL_UNSIGNED_BYTE);
+		CustomTexture3DData data = new CustomTexture3DData(size, size, size, 0, GL30.GL_RGBA, GL30.GL_RGBA8, GL30.GL_UNSIGNED_BYTE);
 		IntBuffer buffer = data.getPixels().asIntBuffer();
 		Color c = new Color(Color.BLACK);
-		for (int z = 0; z < d; z++) {
-			for (int y = 0; y < h; y++) {
-				for (int x = 0; x < w; x++) {
-					buffer.put(c.set(x / (float)(w - 1), y / (float)(h - 1), z / (float)(d - 1), 1).toIntBits());
+		for (int z = 0; z < size; z++) {
+			for (int y = 0; y < size; y++) {
+				for (int x = 0; x < size; x++) {
+					buffer.put(c.set(x / (float)(size - 1), y / (float)(size - 1), z / (float)(size - 1), 1).toIntBits());
 				}
 			}
 		}

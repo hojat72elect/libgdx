@@ -11,24 +11,6 @@ import com.badlogic.gdx.physics.bullet.dynamics.btDiscreteDynamicsWorld;
 import com.badlogic.gdx.physics.bullet.dynamics.btSequentialImpulseConstraintSolver;
 
 public class CollisionDispatcherTest extends BaseBulletTest {
-	public static class MyCollisionDispatcher extends CustomCollisionDispatcher {
-		public MyCollisionDispatcher (btCollisionConfiguration collisionConfiguration) {
-			super(collisionConfiguration);
-		}
-
-		@Override
-		public boolean needsCollision (btCollisionObject body0, btCollisionObject body1) {
-			if (body0.getUserValue() % 2 == 0 || body1.getUserValue() % 2 == 0) return super.needsCollision(body0, body1);
-			return false;
-		}
-
-		@Override
-		public boolean needsResponse (btCollisionObject body0, btCollisionObject body1) {
-			if (body0.getUserValue() % 2 == 0 || body1.getUserValue() % 2 == 0) return super.needsCollision(body0, body1);
-			return false;
-		}
-	}
-
 	@Override
 	public BulletWorld createWorld () {
 		btDefaultCollisionConfiguration collisionConfiguration = new btDefaultCollisionConfiguration();
@@ -59,5 +41,23 @@ public class CollisionDispatcherTest extends BaseBulletTest {
 	public boolean tap (float x, float y, int count, int button) {
 		shoot(x, y);
 		return true;
+	}
+
+	public static class MyCollisionDispatcher extends CustomCollisionDispatcher {
+		public MyCollisionDispatcher (btCollisionConfiguration collisionConfiguration) {
+			super(collisionConfiguration);
+		}
+
+		@Override
+		public boolean needsCollision (btCollisionObject body0, btCollisionObject body1) {
+			if (body0.getUserValue() % 2 == 0 || body1.getUserValue() % 2 == 0) return super.needsCollision(body0, body1);
+			return false;
+		}
+
+		@Override
+		public boolean needsResponse (btCollisionObject body0, btCollisionObject body1) {
+			if (body0.getUserValue() % 2 == 0 || body1.getUserValue() % 2 == 0) return super.needsCollision(body0, body1);
+			return false;
+		}
 	}
 }

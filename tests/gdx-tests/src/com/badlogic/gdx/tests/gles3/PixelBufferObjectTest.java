@@ -1,11 +1,6 @@
 
 package com.badlogic.gdx.tests.gles3;
 
-import java.nio.Buffer;
-import java.nio.ByteBuffer;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
@@ -16,11 +11,46 @@ import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.tests.utils.GdxTestConfig;
 import com.badlogic.gdx.utils.BufferUtils;
 
+import java.nio.Buffer;
+import java.nio.ByteBuffer;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 @GdxTestConfig(requireGL30 = true)
 public class PixelBufferObjectTest extends GdxTest {
 
+	private SpriteBatch batch;
+	private PBOUpload demo1, demo2;
+
+	@Override
+	public void create () {
+		batch = new SpriteBatch();
+
+		demo1 = new PBOUpload(false);
+		demo1.start();
+		demo2 = new PBOUpload(true);
+		demo2.start();
+
+	}
+
+	@Override
+	public void render () {
+		demo1.update();
+		demo2.update();
+
+		batch.begin();
+		if (demo1.isTextureReady()) {
+			batch.draw(demo1.getTexture(), 0, 0, (float)Gdx.graphics.getWidth() / 2, (float)Gdx.graphics.getHeight() / 2);
+		}
+		if (demo2.isTextureReady()) {
+			batch.draw(demo2.getTexture(), (float)Gdx.graphics.getWidth() / 2, 0, (float)Gdx.graphics.getWidth() / 2,
+				(float)Gdx.graphics.getHeight() / 2);
+		}
+		batch.end();
+	}
+
 	static class PBOUpload {
-		private Texture texture;
+		private final boolean useSubImage;
 		protected Lock lock;
 		protected Pixmap pixmap;
 		protected int pixmapSizeBytes;
@@ -29,7 +59,7 @@ public class PixelBufferObjectTest extends GdxTest {
 		protected boolean pboTransferComplete;
 		protected Buffer mappedBuffer;
 		protected int pboHandle;
-		private final boolean useSubImage;
+		private Texture texture;
 
 		public PBOUpload (boolean useSubImage) {
 			super();
@@ -114,35 +144,5 @@ public class PixelBufferObjectTest extends GdxTest {
 		public Texture getTexture () {
 			return texture;
 		}
-	}
-
-	private SpriteBatch batch;
-	private PBOUpload demo1, demo2;
-
-	@Override
-	public void create () {
-		batch = new SpriteBatch();
-
-		demo1 = new PBOUpload(false);
-		demo1.start();
-		demo2 = new PBOUpload(true);
-		demo2.start();
-
-	}
-
-	@Override
-	public void render () {
-		demo1.update();
-		demo2.update();
-
-		batch.begin();
-		if (demo1.isTextureReady()) {
-			batch.draw(demo1.getTexture(), 0, 0, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
-		}
-		if (demo2.isTextureReady()) {
-			batch.draw(demo2.getTexture(), Gdx.graphics.getWidth() / 2, 0, Gdx.graphics.getWidth() / 2,
-				Gdx.graphics.getHeight() / 2);
-		}
-		batch.end();
 	}
 }

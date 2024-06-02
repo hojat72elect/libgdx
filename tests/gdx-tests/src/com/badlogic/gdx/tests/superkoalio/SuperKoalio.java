@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,7 +17,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -42,59 +38,38 @@ import com.badlogic.gdx.utils.ScreenUtils;
 /** Super Mario Brothers-like very basic platformer, using a tile map built using <a href="http://www.mapeditor.org/">Tiled</a>
  * and a tileset and sprites by <a href="http://www.vickiwenderlich.com/">Vicky Wenderlich</a>
  * </p>
- *
+ * <p>
  * Shows simple platformer collision detection as well as on-the-fly map modifications through destructible blocks!
+ *
  * @author mzechner */
 public class SuperKoalio extends GdxTest {
-	/** The player character, has state and state time, */
-	static class Koala {
-		static float WIDTH;
-		static float HEIGHT;
-		static float MAX_VELOCITY = 10f;
-		static float JUMP_VELOCITY = 40f;
-		static float DAMPING = 0.87f;
-
-		enum State {
-			Standing, Walking, Jumping
-		}
-
-		final Vector2 position = new Vector2();
-		final Vector2 velocity = new Vector2();
-		State state = State.Walking;
-		float stateTime = 0;
-		boolean facesRight = true;
-		boolean grounded = false;
-	}
-
-	private TiledMap map;
-	private OrthogonalTiledMapRenderer renderer;
-	private OrthographicCamera camera;
-	private Texture koalaTexture;
-	private Animation<TextureRegion> stand;
-	private Animation<TextureRegion> walk;
-	private Animation<TextureRegion> jump;
-	private Koala koala;
-	private Pool<Rectangle> rectPool = new Pool<Rectangle>() {
+	private static final float GRAVITY = -2.5f;
+	private final Pool<Rectangle> rectPool = new Pool<Rectangle>() {
 		@Override
 		protected Rectangle newObject () {
 			return new Rectangle();
 		}
 	};
-	private Array<Rectangle> tiles = new Array<Rectangle>();
-
-	private static final float GRAVITY = -2.5f;
-
+	private final Array<Rectangle> tiles = new Array<>();
+	private TiledMap map;
+	private OrthogonalTiledMapRenderer renderer;
+	private OrthographicCamera camera;
+	private Animation<TextureRegion> stand;
+	private Animation<TextureRegion> walk;
+	private Animation<TextureRegion> jump;
+	private Koala koala;
 	private boolean debug = false;
 	private ShapeRenderer debugRenderer;
 
 	@Override
 	public void create () {
 		// load the koala frames, split them, and assign them to Animations
-		koalaTexture = new Texture("data/maps/tiled/super-koalio/koalio.png");
+		com.badlogic.gdx.graphics.Texture koalaTexture = new com.badlogic.gdx.graphics.Texture(
+			"data/maps/tiled/super-koalio/koalio.png");
 		TextureRegion[] regions = TextureRegion.split(koalaTexture, 18, 26)[0];
-		stand = new Animation(0, regions[0]);
-		jump = new Animation(0, regions[1]);
-		walk = new Animation(0.15f, regions[2], regions[3], regions[4]);
+		stand = new Animation<>(0, regions[0]);
+		jump = new Animation<>(0, regions[1]);
+		walk = new Animation<>(0.15f, regions[2], regions[3], regions[4]);
 		walk.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
 
 		// figure out the width and height of the koala for collision
@@ -140,7 +115,7 @@ public class SuperKoalio extends GdxTest {
 		renderer.render();
 
 		// render the koala
-		renderKoala(deltaTime);
+		renderKoala();
 
 		// render debug rectangles
 		if (debug) renderDebug();
@@ -283,7 +258,7 @@ public class SuperKoalio extends GdxTest {
 		}
 	}
 
-	private void renderKoala (float deltaTime) {
+	private void renderKoala () {
 		// based on the koala state, get the animation frame
 		TextureRegion frame = null;
 		switch (koala.state) {
@@ -331,7 +306,22 @@ public class SuperKoalio extends GdxTest {
 		debugRenderer.end();
 	}
 
-	@Override
-	public void dispose () {
+	/** The player character, has state and state time, */
+	static class Koala {
+		static float WIDTH;
+		static float HEIGHT;
+		static float MAX_VELOCITY = 10f;
+		static float JUMP_VELOCITY = 40f;
+		static float DAMPING = 0.87f;
+		final Vector2 position = new Vector2();
+		final Vector2 velocity = new Vector2();
+		State state = State.Walking;
+		float stateTime = 0;
+		boolean facesRight = true;
+		boolean grounded = false;
+
+		enum State {
+			Standing, Walking, Jumping
+		}
 	}
 }

@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
  *   http://www.apache.org/licenses/LICENSE-2.0
- *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,14 +25,26 @@ import android.view.Display;
 import android.view.DisplayCutout;
 import android.view.View;
 import android.view.WindowManager.LayoutParams;
+
 import com.badlogic.gdx.AbstractGraphics;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.LifecycleListener;
-import com.badlogic.gdx.backends.android.surfaceview.*;
-import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.backends.android.surfaceview.GLSurfaceView20;
+import com.badlogic.gdx.backends.android.surfaceview.GdxEglConfigChooser;
+import com.badlogic.gdx.backends.android.surfaceview.ResolutionStrategy;
+import com.badlogic.gdx.graphics.Cubemap;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.Cursor.SystemCursor;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.GL31;
+import com.badlogic.gdx.graphics.GL32;
+import com.badlogic.gdx.graphics.Mesh;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.TextureArray;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.GLVersion;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
@@ -62,8 +71,14 @@ public class AndroidGraphics extends AbstractGraphics implements Renderer {
 	 * {@link AndroidGraphics#pause} variable never be set to false. As a result, the {@link AndroidGraphics#pause()} method will
 	 * kill the current process to avoid ANR */
 	static volatile boolean enforceContinuousRendering = false;
-
+	protected final AndroidApplicationConfiguration config;
 	final GLSurfaceView20 view;
+	protected long lastFrameTime = System.nanoTime();
+	protected float deltaTime = 0;
+	protected long frameStart = System.nanoTime();
+	protected long frameId = -1;
+	protected int frames = 0;
+	protected int fps;
 	int width;
 	int height;
 	int safeInsetLeft, safeInsetTop, safeInsetBottom, safeInsetRight;
@@ -73,27 +88,18 @@ public class AndroidGraphics extends AbstractGraphics implements Renderer {
 	EGLContext eglContext;
 	GLVersion glVersion;
 	String extensions;
-
-	protected long lastFrameTime = System.nanoTime();
-	protected float deltaTime = 0;
-	protected long frameStart = System.nanoTime();
-	protected long frameId = -1;
-	protected int frames = 0;
-	protected int fps;
-
 	volatile boolean created = false;
 	volatile boolean running = false;
 	volatile boolean pause = false;
 	volatile boolean resume = false;
 	volatile boolean destroy = false;
-
+	int[] value = new int[1];
+	final Object synch = new Object();
 	private float ppiX = 0;
 	private float ppiY = 0;
 	private float ppcX = 0;
 	private float ppcY = 0;
 	private float density = 1;
-
-	protected final AndroidApplicationConfiguration config;
 	private BufferFormat bufferFormat = new BufferFormat(8, 8, 8, 0, 16, 0, 0, false);
 	private boolean isContinuous = true;
 
@@ -365,16 +371,12 @@ public class AndroidGraphics extends AbstractGraphics implements Renderer {
 		bufferFormat = new BufferFormat(r, g, b, a, d, s, samples, coverageSample);
 	}
 
-	int[] value = new int[1];
-
 	private int getAttrib (EGL10 egl, EGLDisplay display, EGLConfig config, int attrib, int defValue) {
 		if (egl.eglGetConfigAttrib(display, config, attrib, value)) {
 			return value[0];
 		}
 		return defValue;
 	}
-
-	Object synch = new Object();
 
 	void resume () {
 		synchronized (synch) {
@@ -447,10 +449,10 @@ public class AndroidGraphics extends AbstractGraphics implements Renderer {
 		}
 		lastFrameTime = time;
 
-		boolean lrunning = false;
-		boolean lpause = false;
-		boolean ldestroy = false;
-		boolean lresume = false;
+		boolean lrunning;
+		boolean lpause;
+		boolean ldestroy;
+		boolean lresume;
 
 		synchronized (synch) {
 			lrunning = running;
@@ -622,7 +624,7 @@ public class AndroidGraphics extends AbstractGraphics implements Renderer {
 
 	@Override
 	public Monitor getPrimaryMonitor () {
-		return new AndroidMonitor(0, 0, "Primary Monitor");
+		return new com.badlogic.gdx.backends.android.AndroidGraphics.AndroidMonitor(0, 0, "Primary Monitor");
 	}
 
 	@Override
@@ -728,7 +730,7 @@ public class AndroidGraphics extends AbstractGraphics implements Renderer {
 		int refreshRate = MathUtils.roundPositive(display.getRefreshRate());
 		int bitsPerPixel = config.r + config.g + config.b + config.a;
 
-		return new AndroidDisplayMode(width, height, refreshRate, bitsPerPixel);
+		return new com.badlogic.gdx.backends.android.AndroidGraphics.AndroidDisplayMode(width, height, refreshRate, bitsPerPixel);
 	}
 
 	@Override
@@ -751,6 +753,11 @@ public class AndroidGraphics extends AbstractGraphics implements Renderer {
 	}
 
 	@Override
+	public boolean isContinuousRendering () {
+		return isContinuous;
+	}
+
+	@Override
 	public void setContinuousRendering (boolean isContinuous) {
 		if (view != null) {
 			// ignore setContinuousRendering(false) while pausing
@@ -758,11 +765,6 @@ public class AndroidGraphics extends AbstractGraphics implements Renderer {
 			int renderMode = this.isContinuous ? GLSurfaceView.RENDERMODE_CONTINUOUSLY : GLSurfaceView.RENDERMODE_WHEN_DIRTY;
 			view.setRenderMode(renderMode);
 		}
-	}
-
-	@Override
-	public boolean isContinuousRendering () {
-		return isContinuous;
 	}
 
 	@Override
@@ -792,13 +794,13 @@ public class AndroidGraphics extends AbstractGraphics implements Renderer {
 		AndroidCursor.setSystemCursor(view, systemCursor);
 	}
 
-	private class AndroidDisplayMode extends DisplayMode {
+	private static class AndroidDisplayMode extends DisplayMode {
 		protected AndroidDisplayMode (int width, int height, int refreshRate, int bitsPerPixel) {
 			super(width, height, refreshRate, bitsPerPixel);
 		}
 	}
 
-	private class AndroidMonitor extends Monitor {
+	private static class AndroidMonitor extends Monitor {
 		public AndroidMonitor (int virtualX, int virtualY, String name) {
 			super(virtualX, virtualY, name);
 		}

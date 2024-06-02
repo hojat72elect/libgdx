@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2020 See AUTHORS file.
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
  *   http://www.apache.org/licenses/LICENSE-2.0
- *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -52,25 +49,18 @@ public class CollisionPlaygroundTest extends GdxTest implements ApplicationListe
 
 	private static final int NUM_SHAPES = 30;
 	private static final int RANGE = 4;
-
-	private int PRIMITIVE_TYPE = GL20.GL_LINES;
-
 	private static final Color COLOR_STANDARD = Color.BLUE;
 	private static final Color COLOR_MOUSE_OVER = Color.GREEN;
 	private static final Color COLOR_INTERSECTION = Color.GOLD;
-
+	private final int PRIMITIVE_TYPE = GL20.GL_LINES;
+	private final List<Shape> shapes = new ArrayList<>();
 	private PerspectiveCamera camera;
 	private CameraInputController cameraController;
 	private PerspectiveCamera collisionCamera;
-
 	private ModelBatch modelBatch;
-
 	private SpriteBatch batch;
 	private BitmapFont font;
-
 	private ModelInstance frustum;
-	private List<Shape> shapes = new ArrayList<>();
-
 	private long seed;
 
 	@Override
@@ -188,7 +178,7 @@ public class CollisionPlaygroundTest extends GdxTest implements ApplicationListe
 			shapes.add(new Sphere());
 			break;
 		case 2:
-			shapes.add(new OBB());
+			shapes.add(new com.badlogic.gdx.tests.math.CollisionPlaygroundTest.OBB());
 			break;
 		default:
 			shapes.add(new AABB());
@@ -208,7 +198,7 @@ public class CollisionPlaygroundTest extends GdxTest implements ApplicationListe
 		return new ModelInstance(mb.end());
 	}
 
-	abstract class Shape {
+	abstract static class Shape {
 		ModelInstance instance;
 
 		abstract boolean isColliding (Frustum frustum);
@@ -218,6 +208,7 @@ public class CollisionPlaygroundTest extends GdxTest implements ApplicationListe
 		void updateColor (Color color) {
 			Material material = instance.materials.get(0);
 			ColorAttribute attribute = (ColorAttribute)material.get(ColorAttribute.Diffuse);
+			assert attribute != null;
 			attribute.color.set(color);
 		}
 
@@ -230,88 +221,8 @@ public class CollisionPlaygroundTest extends GdxTest implements ApplicationListe
 		}
 	}
 
-	class AABB extends Shape {
-		private final BoundingBox aabb;
-
-		@Override
-		public boolean isColliding (Frustum frustum) {
-			return Intersector.intersectFrustumBounds(frustum, aabb);
-		}
-
-		@Override
-		public boolean isColliding (Ray ray) {
-			return Intersector.intersectRayBoundsFast(ray, aabb);
-		}
-
-		AABB () {
-			Vector3 position = randomPosition();
-
-			float width = MathUtils.random(0.01f, 1f);
-			float height = MathUtils.random(0.01f, 1f);
-			float depth = MathUtils.random(0.01f, 1f);
-
-			Vector3 min = new Vector3(position.x - width / 2, position.y - height / 2, position.z - depth / 2);
-			Vector3 max = new Vector3(position.x + width / 2, position.y + height / 2, position.z + depth / 2);
-			aabb = new BoundingBox(min, max);
-
-			Matrix4 transform = new Matrix4().setToTranslation(position);
-
-			Material material = new Material(ColorAttribute.createDiffuse(COLOR_STANDARD));
-			com.badlogic.gdx.graphics.g3d.utils.ModelBuilder mb = new com.badlogic.gdx.graphics.g3d.utils.ModelBuilder();
-			mb.begin();
-			MeshPartBuilder meshPartBuilder = mb.part("aabb", PRIMITIVE_TYPE, VertexAttributes.Usage.Position, material);
-			meshPartBuilder.setVertexTransform(transform);
-			BoxShapeBuilder.build(meshPartBuilder, width, height, depth);
-
-			instance = new ModelInstance(mb.end());
-		}
-	}
-
-	class Sphere extends Shape {
-		private final com.badlogic.gdx.math.collision.Sphere sphere;
-
-		@Override
-		public boolean isColliding (Frustum frustum) {
-			return frustum.sphereInFrustum(sphere.center, sphere.radius);
-		}
-
-		@Override
-		public boolean isColliding (Ray ray) {
-			return Intersector.intersectRaySphere(ray, sphere.center, sphere.radius, null);
-		}
-
-		Sphere () {
-			Vector3 position = randomPosition();
-
-			float diameter = MathUtils.random(0.01f, 1f);
-
-			sphere = new com.badlogic.gdx.math.collision.Sphere(position, diameter / 2);
-
-			Matrix4 transform = new Matrix4().setToTranslation(position);
-
-			Material material = new Material(ColorAttribute.createDiffuse(COLOR_STANDARD));
-			com.badlogic.gdx.graphics.g3d.utils.ModelBuilder mb = new com.badlogic.gdx.graphics.g3d.utils.ModelBuilder();
-			mb.begin();
-			MeshPartBuilder meshPartBuilder = mb.part("sphere", PRIMITIVE_TYPE, VertexAttributes.Usage.Position, material);
-			meshPartBuilder.setVertexTransform(transform);
-			SphereShapeBuilder.build(meshPartBuilder, diameter, diameter, diameter, 16, 16);
-
-			instance = new ModelInstance(mb.end());
-		}
-	}
-
-	class OBB extends Shape {
+	static class OBB extends Shape {
 		private final OrientedBoundingBox obb;
-
-		@Override
-		public boolean isColliding (Frustum frustum) {
-			return Intersector.intersectFrustumBounds(frustum, obb);
-		}
-
-		@Override
-		public boolean isColliding (Ray ray) {
-			return Intersector.intersectRayOrientedBoundsFast(ray, obb);
-		}
 
 		OBB () {
 			Vector3 position = randomPosition();
@@ -338,6 +249,86 @@ public class CollisionPlaygroundTest extends GdxTest implements ApplicationListe
 				obb.getCorner011(new Vector3()), obb.getCorner101(new Vector3()), obb.getCorner111(new Vector3()));
 
 			instance = new ModelInstance(mb.end());
+		}
+
+		@Override
+		public boolean isColliding (Frustum frustum) {
+			return Intersector.intersectFrustumBounds(frustum, obb);
+		}
+
+		@Override
+		public boolean isColliding (Ray ray) {
+			return Intersector.intersectRayOrientedBoundsFast(ray, obb);
+		}
+	}
+
+	class AABB extends Shape {
+		private final BoundingBox aabb;
+
+		AABB () {
+			Vector3 position = randomPosition();
+
+			float width = MathUtils.random(0.01f, 1f);
+			float height = MathUtils.random(0.01f, 1f);
+			float depth = MathUtils.random(0.01f, 1f);
+
+			Vector3 min = new Vector3(position.x - width / 2, position.y - height / 2, position.z - depth / 2);
+			Vector3 max = new Vector3(position.x + width / 2, position.y + height / 2, position.z + depth / 2);
+			aabb = new BoundingBox(min, max);
+
+			Matrix4 transform = new Matrix4().setToTranslation(position);
+
+			Material material = new Material(ColorAttribute.createDiffuse(COLOR_STANDARD));
+			com.badlogic.gdx.graphics.g3d.utils.ModelBuilder mb = new com.badlogic.gdx.graphics.g3d.utils.ModelBuilder();
+			mb.begin();
+			MeshPartBuilder meshPartBuilder = mb.part("aabb", PRIMITIVE_TYPE, VertexAttributes.Usage.Position, material);
+			meshPartBuilder.setVertexTransform(transform);
+			BoxShapeBuilder.build(meshPartBuilder, width, height, depth);
+
+			instance = new ModelInstance(mb.end());
+		}
+
+		@Override
+		public boolean isColliding (Frustum frustum) {
+			return Intersector.intersectFrustumBounds(frustum, aabb);
+		}
+
+		@Override
+		public boolean isColliding (Ray ray) {
+			return Intersector.intersectRayBoundsFast(ray, aabb);
+		}
+	}
+
+	class Sphere extends Shape {
+		private final com.badlogic.gdx.math.collision.Sphere sphere;
+
+		Sphere () {
+			Vector3 position = randomPosition();
+
+			float diameter = MathUtils.random(0.01f, 1f);
+
+			sphere = new com.badlogic.gdx.math.collision.Sphere(position, diameter / 2);
+
+			Matrix4 transform = new Matrix4().setToTranslation(position);
+
+			Material material = new Material(ColorAttribute.createDiffuse(COLOR_STANDARD));
+			com.badlogic.gdx.graphics.g3d.utils.ModelBuilder mb = new com.badlogic.gdx.graphics.g3d.utils.ModelBuilder();
+			mb.begin();
+			MeshPartBuilder meshPartBuilder = mb.part("sphere", PRIMITIVE_TYPE, VertexAttributes.Usage.Position, material);
+			meshPartBuilder.setVertexTransform(transform);
+			SphereShapeBuilder.build(meshPartBuilder, diameter, diameter, diameter, 16, 16);
+
+			instance = new ModelInstance(mb.end());
+		}
+
+		@Override
+		public boolean isColliding (Frustum frustum) {
+			return frustum.sphereInFrustum(sphere.center, sphere.radius);
+		}
+
+		@Override
+		public boolean isColliding (Ray ray) {
+			return Intersector.intersectRaySphere(ray, sphere.center, sphere.radius, null);
 		}
 	}
 

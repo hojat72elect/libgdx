@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,12 +22,11 @@ import com.badlogic.gdx.physics.bullet.collision.btCollisionObject;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionShape;
 import com.badlogic.gdx.physics.bullet.dynamics.btRigidBody.btRigidBodyConstructionInfo;
 
-/** @author xoppa Holds the information necessary to create a bullet btRigidBody. This class should outlive the btRigidBody
- *         (entity) itself. */
+/** Holds the information necessary to create a bullet btRigidBody. This class should outlive the btRigidBody (entity) itself. */
 public class BulletConstructor extends BaseWorld.Constructor<BulletEntity> {
+	private final static Vector3 tmpV = new Vector3();
 	public btRigidBodyConstructionInfo bodyInfo = null;
 	public btCollisionShape shape = null;
-	private final static Vector3 tmpV = new Vector3();
 
 	/** Specify null for the shape to use only the renderable part of this entity and not the physics part. */
 	public BulletConstructor (final Model model, final float mass, final btCollisionShape shape) {

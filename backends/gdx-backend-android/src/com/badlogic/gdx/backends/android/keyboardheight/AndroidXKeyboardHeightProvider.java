@@ -5,23 +5,23 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.view.View;
+
 import androidx.core.graphics.Insets;
 import androidx.core.view.OnApplyWindowInsetsListener;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
 import org.jetbrains.annotations.NotNull;
 
 public class AndroidXKeyboardHeightProvider implements KeyboardHeightProvider {
 
+	/** The cached landscape height of the keyboard */
+	private static int keyboardLandscapeHeight;
+	/** The cached portrait height of the keyboard */
+	private static int keyboardPortraitHeight;
 	private final View view;
 	private final Activity activity;
 	private KeyboardHeightObserver observer;
-
-	/** The cached landscape height of the keyboard */
-	private static int keyboardLandscapeHeight;
-
-	/** The cached portrait height of the keyboard */
-	private static int keyboardPortraitHeight;
 
 	public AndroidXKeyboardHeightProvider (final Activity activity) {
 		this.view = activity.findViewById(android.R.id.content);

@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -36,19 +33,17 @@ import com.badlogic.gdx.physics.bullet.dynamics.btSequentialImpulseConstraintSol
 import com.badlogic.gdx.physics.bullet.linearmath.btIDebugDraw;
 import com.badlogic.gdx.utils.PerformanceCounter;
 
-/** @author xoppa Bullet physics world that holds all bullet entities and constructors. */
+/** Bullet physics world that holds all bullet entities and constructors. */
 public class BulletWorld extends BaseWorld<BulletEntity> {
-	public DebugDrawer debugDrawer = null;
-	public boolean renderMeshes = true;
-
 	public final btCollisionConfiguration collisionConfiguration;
 	public final btCollisionDispatcher dispatcher;
 	public final btBroadphaseInterface broadphase;
 	public final btConstraintSolver solver;
 	public final btCollisionWorld collisionWorld;
-	public PerformanceCounter performanceCounter;
 	public final Vector3 gravity;
-
+	public DebugDrawer debugDrawer = null;
+	public boolean renderMeshes = true;
+	public PerformanceCounter performanceCounter;
 	public int maxSubSteps = 5;
 	public float fixedTimeStep = 1f / 60f;
 
@@ -139,13 +134,13 @@ public class BulletWorld extends BaseWorld<BulletEntity> {
 		if (collisionConfiguration != null) collisionConfiguration.dispose();
 	}
 
+	public int getDebugMode () {
+		return (debugDrawer == null) ? 0 : debugDrawer.getDebugMode();
+	}
+
 	public void setDebugMode (final int mode) {
 		if (mode == btIDebugDraw.DebugDrawModes.DBG_NoDebug && debugDrawer == null) return;
 		if (debugDrawer == null) collisionWorld.setDebugDrawer(debugDrawer = new DebugDrawer());
 		debugDrawer.setDebugMode(mode);
-	}
-
-	public int getDebugMode () {
-		return (debugDrawer == null) ? 0 : debugDrawer.getDebugMode();
 	}
 }

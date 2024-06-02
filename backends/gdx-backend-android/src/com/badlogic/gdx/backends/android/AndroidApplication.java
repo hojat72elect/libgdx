@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,20 +27,37 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import com.badlogic.gdx.*;
+import androidx.annotation.NonNull;
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.ApplicationLogger;
+import com.badlogic.gdx.Audio;
+import com.badlogic.gdx.Files;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
+import com.badlogic.gdx.LifecycleListener;
+import com.badlogic.gdx.Net;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.backends.android.keyboardheight.AndroidXKeyboardHeightProvider;
 import com.badlogic.gdx.backends.android.keyboardheight.KeyboardHeightProvider;
 import com.badlogic.gdx.backends.android.keyboardheight.StandardKeyboardHeightProvider;
 import com.badlogic.gdx.backends.android.surfaceview.FillResolutionStrategy;
-import com.badlogic.gdx.utils.*;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Clipboard;
+import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.utils.SnapshotArray;
 
 /** An implementation of the {@link Application} interface for Android. Create an {@link Activity} that derives from this class.
  * In the {@link Activity#onCreate(Bundle)} method call the {@link #initialize(ApplicationListener)} method specifying the
- * configuration for the GLSurfaceView.
- * 
- * @author mzechner */
+ * configuration for the GLSurfaceView. */
 public class AndroidApplication extends Activity implements AndroidApplicationBase {
 
+	protected final Array<Runnable> runnables = new Array<>();
+	protected final Array<Runnable> executedRunnables = new Array<>();
+	protected final SnapshotArray<LifecycleListener> lifecycleListeners = new SnapshotArray<LifecycleListener>(
+		LifecycleListener.class);
+	private final Array<AndroidEventListener> androidEventListeners = new Array<AndroidEventListener>();
+	public Handler handler;
 	protected AndroidGraphics graphics;
 	protected AndroidInput input;
 	protected AndroidAudio audio;
@@ -51,25 +65,18 @@ public class AndroidApplication extends Activity implements AndroidApplicationBa
 	protected AndroidNet net;
 	protected AndroidClipboard clipboard;
 	protected ApplicationListener listener;
-	public Handler handler;
 	protected boolean firstResume = true;
-	protected final Array<Runnable> runnables = new Array<Runnable>();
-	protected final Array<Runnable> executedRunnables = new Array<Runnable>();
-	protected final SnapshotArray<LifecycleListener> lifecycleListeners = new SnapshotArray<LifecycleListener>(
-		LifecycleListener.class);
-	private final Array<AndroidEventListener> androidEventListeners = new Array<AndroidEventListener>();
 	protected int logLevel = LOG_INFO;
 	protected ApplicationLogger applicationLogger;
 	protected boolean useImmersiveMode = false;
+	protected boolean renderUnderCutout = false;
 	private int wasFocusChanged = -1;
 	private boolean isWaitingForAudio = false;
 	private KeyboardHeightProvider keyboardHeightProvider;
 
-	protected boolean renderUnderCutout = false;
-
 	/** This method has to be called in the {@link Activity#onCreate(Bundle)} method. It sets up all the things necessary to get
 	 * input, render via OpenGL and so on. Uses a default {@link AndroidApplicationConfiguration}.
-	 * 
+	 *
 	 * @param listener the {@link ApplicationListener} implementing the program logic **/
 	public void initialize (ApplicationListener listener) {
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
@@ -79,7 +86,7 @@ public class AndroidApplication extends Activity implements AndroidApplicationBa
 	/** This method has to be called in the {@link Activity#onCreate(Bundle)} method. It sets up all the things necessary to get
 	 * input, render via OpenGL and so on. You can configure other aspects of the application with the rest of the fields in the
 	 * {@link AndroidApplicationConfiguration} instance.
-	 * 
+	 *
 	 * @param listener the {@link ApplicationListener} implementing the program logic
 	 * @param config the {@link AndroidApplicationConfiguration}, defining various settings of the application (use accelerometer,
 	 *           etc.). */
@@ -91,7 +98,7 @@ public class AndroidApplication extends Activity implements AndroidApplicationBa
 	 * input, render via OpenGL and so on. Uses a default {@link AndroidApplicationConfiguration}.
 	 * <p>
 	 * Note: you have to add the returned view to your layout!
-	 * 
+	 *
 	 * @param listener the {@link ApplicationListener} implementing the program logic
 	 * @return the GLSurfaceView of the application */
 	public View initializeForView (ApplicationListener listener) {
@@ -104,7 +111,7 @@ public class AndroidApplication extends Activity implements AndroidApplicationBa
 	 * {@link AndroidApplicationConfiguration} instance.
 	 * <p>
 	 * Note: you have to add the returned view to your layout!
-	 * 
+	 *
 	 * @param listener the {@link ApplicationListener} implementing the program logic
 	 * @param config the {@link AndroidApplicationConfiguration}, defining various settings of the application (use accelerometer,
 	 *           etc.).
@@ -375,10 +382,9 @@ public class AndroidApplication extends Activity implements AndroidApplicationBa
 	}
 
 	@Override
-	public void onConfigurationChanged (Configuration config) {
+	public void onConfigurationChanged (@NonNull Configuration config) {
 		super.onConfigurationChanged(config);
-		boolean keyboardAvailable = false;
-		if (config.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO) keyboardAvailable = true;
+		boolean keyboardAvailable = config.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO;
 		input.setKeyboardAvailable(keyboardAvailable);
 	}
 
@@ -423,23 +429,23 @@ public class AndroidApplication extends Activity implements AndroidApplicationBa
 	}
 
 	@Override
-	public void setLogLevel (int logLevel) {
-		this.logLevel = logLevel;
-	}
-
-	@Override
 	public int getLogLevel () {
 		return logLevel;
 	}
 
 	@Override
-	public void setApplicationLogger (ApplicationLogger applicationLogger) {
-		this.applicationLogger = applicationLogger;
+	public void setLogLevel (int logLevel) {
+		this.logLevel = logLevel;
 	}
 
 	@Override
 	public ApplicationLogger getApplicationLogger () {
 		return applicationLogger;
+	}
+
+	@Override
+	public void setApplicationLogger (ApplicationLogger applicationLogger) {
+		this.applicationLogger = applicationLogger;
 	}
 
 	@Override

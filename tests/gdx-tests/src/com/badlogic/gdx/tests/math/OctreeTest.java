@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2020 See AUTHORS file.
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
  *   http://www.apache.org/licenses/LICENSE-2.0
- *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -46,12 +43,11 @@ import com.badlogic.gdx.utils.ObjectSet;
 import java.util.Random;
 
 public class OctreeTest extends GdxTest implements ApplicationListener {
+	public static final int MAX_DEPTH = 8;
+	public static final int MAX_ITEMS_PER_NODE = 200;
 	private static final float AREA_SIZE = 100;
 	private static final int BOXES = 5000;
 	private static final int REMOVE_BOXES = 500;
-	public static final int MAX_DEPTH = 8;
-	public static final int MAX_ITEMS_PER_NODE = 200;
-
 	public boolean octreeVisible = true;
 
 	public PerspectiveCamera cam;
@@ -60,9 +56,9 @@ public class OctreeTest extends GdxTest implements ApplicationListener {
 	public Environment lights;
 
 	public Octree<GameObject> octree;
-	public ObjectSet<GameObject> tmpResult = new ObjectSet<GameObject>();
-	public Array<GameObject> gameObjects = new Array<GameObject>();
-	public Array<ModelInstance> octreeBounds = new Array<ModelInstance>();
+	public ObjectSet<GameObject> tmpResult = new ObjectSet<>();
+	public Array<GameObject> gameObjects = new Array<>();
+	public Array<ModelInstance> octreeBounds = new Array<>();
 
 	private GameObject lastSelected;
 
@@ -85,7 +81,9 @@ public class OctreeTest extends GdxTest implements ApplicationListener {
 
 		Vector3 min = new Vector3(-AREA_SIZE / 2, -AREA_SIZE / 2, -AREA_SIZE / 2);
 		Vector3 max = new Vector3(AREA_SIZE / 2, AREA_SIZE / 2, AREA_SIZE / 2);
-		octree = new Octree<GameObject>(min, max, MAX_DEPTH, MAX_ITEMS_PER_NODE, new Octree.Collider<GameObject>() {
+		octree = new Octree<>(min, max, MAX_DEPTH, MAX_ITEMS_PER_NODE, new Octree.Collider<GameObject>() {
+			final Vector3 tmp = new Vector3();
+
 			@Override
 			public boolean intersects (BoundingBox nodeBounds, GameObject geometry) {
 				return nodeBounds.intersects(geometry.box);
@@ -95,8 +93,6 @@ public class OctreeTest extends GdxTest implements ApplicationListener {
 			public boolean intersects (Frustum frustum, GameObject geometry) {
 				return frustum.boundsInFrustum(geometry.box);
 			}
-
-			final Vector3 tmp = new Vector3();
 
 			@Override
 			public float intersects (Ray ray, GameObject geometry) {

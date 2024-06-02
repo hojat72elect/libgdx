@@ -9,7 +9,6 @@ public interface AndroidFiles extends Files {
 	 *
 	 * @param mainVersion - version code of the main expansion file
 	 * @param patchVersion - version code of the patch expansion file
-	 *
 	 * @return true if the APK expansion file could be opened, false otherwise */
 	boolean setAPKExpansion (int mainVersion, int patchVersion);
 

@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,12 +12,12 @@
  ******************************************************************************/
 /*
  * Copyright 2010 Mario Zechner (contact@badlogicgames.com), Nathan Sweet (admin@esotericsoftware.com)
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
  * License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
  * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
@@ -43,13 +40,12 @@ public class CollisionFiltering extends Box2DTest {
 	private final static short k_smallGroup = 1;
 	private final static short k_largeGroup = -1;
 
-	private final static short k_defaultCategory = 0x0001;
 	private final static short k_triangleCategory = 0x0002;
 	private final static short k_boxCategory = 0x0004;
 	private final static short k_circleCategory = 0x0008;
 
 	private final static short k_triangleMask = -1;
-	private final static short k_boxMask = -1 ^ k_triangleCategory;
+	private final static short k_boxMask = ~k_triangleCategory;
 	private final static short k_circleMask = -1;
 
 	@Override

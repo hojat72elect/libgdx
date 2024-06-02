@@ -13,24 +13,35 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+
 import androidx.fragment.app.Fragment;
-import com.badlogic.gdx.*;
+import androidx.annotation.NonNull;
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.ApplicationLogger;
+import com.badlogic.gdx.Audio;
+import com.badlogic.gdx.Files;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
+import com.badlogic.gdx.LifecycleListener;
+import com.badlogic.gdx.Net;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.backends.android.surfaceview.FillResolutionStrategy;
-import com.badlogic.gdx.utils.*;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Clipboard;
+import com.badlogic.gdx.utils.GdxNativesLoader;
+import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.utils.SnapshotArray;
 
 /** Implementation of the {@link AndroidApplicationBase} that is based on the {@link Fragment} class. This class is similar in use
- * to the {@link AndroidApplication} class, which is based on an {@link Activity}.
- * 
- * @author Bartol Karuza (me@bartolkaruza.com) */
+ * to the {@link AndroidApplication} class, which is based on an {@link Activity}. */
 public class AndroidFragmentApplication extends Fragment implements AndroidApplicationBase {
 
-	/** Callbacks interface for letting the fragment interact with the Activitiy, parent fragment or target fragment.
-	 * 
-	 * @author Bartol Karuza (me@bartolkaruza.com) */
-	public interface Callbacks {
-		void exit ();
-	}
-
+	protected final Array<Runnable> runnables = new Array<>();
+	protected final Array<Runnable> executedRunnables = new Array<>();
+	protected final SnapshotArray<LifecycleListener> lifecycleListeners = new SnapshotArray<>(LifecycleListener.class);
+	private final Array<AndroidEventListener> androidEventListeners = new Array<>();
+	public Handler handler;
 	protected AndroidGraphics graphics;
 	protected AndroidInput input;
 	protected AndroidAudio audio;
@@ -38,20 +49,13 @@ public class AndroidFragmentApplication extends Fragment implements AndroidAppli
 	protected AndroidNet net;
 	protected AndroidClipboard clipboard;
 	protected ApplicationListener listener;
-	public Handler handler;
 	protected boolean firstResume = true;
-	protected final Array<Runnable> runnables = new Array<Runnable>();
-	protected final Array<Runnable> executedRunnables = new Array<Runnable>();
-	protected final SnapshotArray<LifecycleListener> lifecycleListeners = new SnapshotArray<LifecycleListener>(
-		LifecycleListener.class);
-	private final Array<AndroidEventListener> androidEventListeners = new Array<AndroidEventListener>();
 	protected int logLevel = LOG_INFO;
 	protected ApplicationLogger applicationLogger;
-
 	protected Callbacks callbacks;
 
 	@Override
-	public void onAttach (Activity activity) {
+	public void onAttach (@NonNull Activity activity) {
 		if (activity instanceof Callbacks) {
 			this.callbacks = (Callbacks)activity;
 		} else if (getParentFragment() instanceof Callbacks) {
@@ -102,7 +106,7 @@ public class AndroidFragmentApplication extends Fragment implements AndroidAppli
 	 * <p/>
 	 * Note: you have to return the returned view from the
 	 * {@link Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)}!
-	 * 
+	 *
 	 * @param listener the {@link ApplicationListener} implementing the program logic
 	 * @return the GLSurfaceView of the application */
 	public View initializeForView (ApplicationListener listener) {
@@ -117,7 +121,7 @@ public class AndroidFragmentApplication extends Fragment implements AndroidAppli
 	 * <p/>
 	 * Note: you have to return the returned view from
 	 * {@link Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)}
-	 * 
+	 *
 	 * @param listener the {@link ApplicationListener} implementing the program logic
 	 * @param config the {@link AndroidApplicationConfiguration}, defining various settings of the application (use accelerometer,
 	 *           etc.).
@@ -296,10 +300,9 @@ public class AndroidFragmentApplication extends Fragment implements AndroidAppli
 	}
 
 	@Override
-	public void onConfigurationChanged (Configuration config) {
+	public void onConfigurationChanged (@NonNull Configuration config) {
 		super.onConfigurationChanged(config);
-		boolean keyboardAvailable = false;
-		if (config.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO) keyboardAvailable = true;
+		boolean keyboardAvailable = config.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO;
 		input.setKeyboardAvailable(keyboardAvailable);
 	}
 
@@ -348,23 +351,23 @@ public class AndroidFragmentApplication extends Fragment implements AndroidAppli
 	}
 
 	@Override
-	public void setLogLevel (int logLevel) {
-		this.logLevel = logLevel;
-	}
-
-	@Override
 	public int getLogLevel () {
 		return logLevel;
 	}
 
 	@Override
-	public void setApplicationLogger (ApplicationLogger applicationLogger) {
-		this.applicationLogger = applicationLogger;
+	public void setLogLevel (int logLevel) {
+		this.logLevel = logLevel;
 	}
 
 	@Override
 	public ApplicationLogger getApplicationLogger () {
 		return applicationLogger;
+	}
+
+	@Override
+	public void setApplicationLogger (ApplicationLogger applicationLogger) {
+		this.applicationLogger = applicationLogger;
 	}
 
 	@Override
@@ -477,5 +480,12 @@ public class AndroidFragmentApplication extends Fragment implements AndroidAppli
 		}
 
 		return false;
+	}
+
+	/** Callbacks interface for letting the fragment interact with the Activitiy, parent fragment or target fragment.
+	 *
+	 * @author Bartol Karuza (me@bartolkaruza.com) */
+	public interface Callbacks {
+		void exit ();
 	}
 }

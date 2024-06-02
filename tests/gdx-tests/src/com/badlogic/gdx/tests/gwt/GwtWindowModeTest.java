@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
  *   http://www.apache.org/licenses/LICENSE-2.0
- *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,11 +23,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.tests.utils.GdxTest;
 
 public class GwtWindowModeTest extends GdxTest {
-	private Stage stage;
-	TextButton changeModeButton;
 	private final String windowedInstructions = "click for Full screen Mode";
-	private final String fullScreenInstructions = "click for window Mode";
-	private final String notSupported = "Changing the display mode is not supported";
+	TextButton changeModeButton;
+	private Stage stage;
 
 	public void create () {
 		stage = new Stage();
@@ -38,8 +33,8 @@ public class GwtWindowModeTest extends GdxTest {
 		Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 
 		changeModeButton = new TextButton(windowedInstructions, skin);
-		changeModeButton.setSize(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
-		changeModeButton.setPosition(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 4);
+		changeModeButton.setSize((float)Gdx.graphics.getWidth() / 2, (float)Gdx.graphics.getHeight() / 2);
+		changeModeButton.setPosition((float)Gdx.graphics.getWidth() / 4, (float)Gdx.graphics.getHeight() / 4);
 		stage.addActor(changeModeButton);
 
 		changeModeButton.addListener(new ClickListener() {
@@ -55,6 +50,7 @@ public class GwtWindowModeTest extends GdxTest {
 		});
 		if (!Gdx.graphics.supportsDisplayModeChange()) {
 			changeModeButton.setDisabled(true);
+			String notSupported = "Changing the display mode is not supported";
 			changeModeButton.setText(notSupported);
 		}
 	}
@@ -69,6 +65,7 @@ public class GwtWindowModeTest extends GdxTest {
 		stage.getViewport().update(width, height, true);
 		if (Gdx.graphics.supportsDisplayModeChange()) {
 			if (Gdx.graphics.isFullscreen()) {
+				String fullScreenInstructions = "click for window Mode";
 				changeModeButton.setText(fullScreenInstructions);
 			} else {
 				changeModeButton.setText(windowedInstructions);

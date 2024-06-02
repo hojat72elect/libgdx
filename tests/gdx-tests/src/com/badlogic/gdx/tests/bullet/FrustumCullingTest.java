@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -41,7 +38,6 @@ import com.badlogic.gdx.physics.bullet.collision.btPairCachingGhostObject;
 import com.badlogic.gdx.physics.bullet.collision.btPersistentManifoldArray;
 import com.badlogic.gdx.utils.Array;
 
-/** @author Xoppa */
 public class FrustumCullingTest extends BaseBulletTest {
 	/** Only show entities inside the frustum */
 	final static int CULL_FRUSTUM = 1;
@@ -49,64 +45,56 @@ public class FrustumCullingTest extends BaseBulletTest {
 	final static int FRUSTUM_CAM = 2;
 
 	final static boolean USE_BULLET_FRUSTUM_CULLING = true;
-
-	int state = 0; // 0 = No culling, look from above
-
 	final static int BOXCOUNT = 200;
-
 	final static float BOX_X_MIN = -25;
 	final static float BOX_Y_MIN = -25;
 	final static float BOX_Z_MIN = -25;
-
 	final static float BOX_X_MAX = 25;
 	final static float BOX_Y_MAX = 25;
 	final static float BOX_Z_MAX = 25;
-
 	final static float SPEED_X = 360f / 7f;
 	final static float SPEED_Y = 360f / 19f;
 	final static float SPEED_Z = 360f / 13f;
-
 	final static Vector3 tmpV = new Vector3();
 	final static Matrix4 tmpM = new Matrix4();
-
-	final static int ptrs[] = new int[512];
-	final static Array<btCollisionObject> visibleObjects = new Array<btCollisionObject>();
+	final static int[] pointers = new int[512];
+	private final Array<BulletEntity> visibleEntities = new Array<>();
+	int state = 0; // 0 = No culling, look from above
+	private float angleX, angleY, angleZ;
+	private btPairCachingGhostObject frustumObject;
+	private BulletEntity frustumEntity;
+	private btPersistentManifoldArray tempManifoldArr;
+	private PerspectiveCamera frustumCam;
+	private PerspectiveCamera overviewCam;
 
 	public static btPairCachingGhostObject createFrustumObject (final Vector3... points) {
 		final btPairCachingGhostObject result = new TestPairCachingGhostObject();
-		final boolean USE_COMPOUND = true;
 		// Using a compound shape is not necessary, but it's good practice to create shapes around the center.
-		if (USE_COMPOUND) {
+		{
 			final Vector3 centerNear = new Vector3(points[2]).sub(points[0]).scl(0.5f).add(points[0]);
 			final Vector3 centerFar = new Vector3(points[6]).sub(points[4]).scl(0.5f).add(points[4]);
 			final Vector3 center = new Vector3(centerFar).sub(centerNear).scl(0.5f).add(centerNear);
 			final btConvexHullShape hullShape = new btConvexHullShape();
-			for (int i = 0; i < points.length; i++)
-				hullShape.addPoint(tmpV.set(points[i]).sub(center));
+			for (Vector3 point : points)
+				hullShape.addPoint(tmpV.set(point).sub(center));
 			final btCompoundShape shape = new btCompoundShape();
 			shape.addChildShape(tmpM.setToTranslation(center), hullShape);
-			result.setCollisionShape(shape);
-		} else {
-			final btConvexHullShape shape = new btConvexHullShape();
-			for (int i = 0; i < points.length; i++)
-				shape.addPoint(points[i]);
 			result.setCollisionShape(shape);
 		}
 		result.setCollisionFlags(btCollisionObject.CollisionFlags.CF_NO_CONTACT_RESPONSE);
 		return result;
 	}
 
-	public static Array<BulletEntity> getEntitiesCollidingWithObject (final BulletWorld world, final btCollisionObject object,
-		final Array<BulletEntity> out, final btPersistentManifoldArray tmpArr) {
+	public static void getEntitiesCollidingWithObject (final BulletWorld world, final btCollisionObject object,
+		final com.badlogic.gdx.utils.Array<BulletEntity> out) {
 		// Fetch the array of contacts
 		btBroadphasePairArray arr = world.broadphase.getOverlappingPairCache().getOverlappingPairArray();
 		// Get the user values (which are indices in the entities array) of all objects colliding with the object
-		final int n = arr.getCollisionObjectsValue(ptrs, object);
+		final int n = arr.getCollisionObjectsValue(pointers, object);
 		// Fill the array of entities
 		out.clear();
 		for (int i = 0; i < n; i++)
-			out.add(world.entities.get(ptrs[i]));
-		return out;
+			out.add(world.entities.get(pointers[i]));
 	}
 
 	public static Model createFrustumModel (final Vector3... p) {
@@ -123,14 +111,6 @@ public class FrustumCullingTest extends BaseBulletTest {
 		mpb.index((short)0, (short)4, (short)1, (short)5, (short)2, (short)6, (short)3, (short)7);
 		return builder.end();
 	}
-
-	private float angleX, angleY, angleZ;
-	private btPairCachingGhostObject frustumObject;
-	private BulletEntity frustumEntity;
-	private final Array<BulletEntity> visibleEntities = new Array<BulletEntity>();
-	private btPersistentManifoldArray tempManifoldArr;
-	private PerspectiveCamera frustumCam;
-	private PerspectiveCamera overviewCam;
 
 	@Override
 	public void create () {
@@ -214,7 +194,7 @@ public class FrustumCullingTest extends BaseBulletTest {
 	protected void renderWorld () {
 		if (world.performanceCounter != null) world.performanceCounter.start();
 		if (USE_BULLET_FRUSTUM_CULLING)
-			getEntitiesCollidingWithObject(world, frustumObject, visibleEntities, tempManifoldArr);
+			getEntitiesCollidingWithObject(world, frustumObject, visibleEntities);
 		else {
 			visibleEntities.clear();
 			for (int i = 0; i < world.entities.size; i++) {

@@ -23,7 +23,6 @@ import com.badlogic.gdx.tests.Box2DTest;
 import com.badlogic.gdx.tests.Box2DTestCollection;
 import com.badlogic.gdx.tests.BufferUtilsTest;
 import com.badlogic.gdx.tests.ClipboardTest;
-import com.badlogic.gdx.tests.TiledMapObjectPropertyTest;
 import com.badlogic.gdx.tests.ColorTest;
 import com.badlogic.gdx.tests.ComplexActionTest;
 import com.badlogic.gdx.tests.CustomShaderSpriteBatchTest;
@@ -89,6 +88,7 @@ import com.badlogic.gdx.tests.TextButtonTest;
 import com.badlogic.gdx.tests.TextureAtlasTest;
 import com.badlogic.gdx.tests.TiledMapAtlasAssetManagerTest;
 import com.badlogic.gdx.tests.TiledMapObjectLoadingTest;
+import com.badlogic.gdx.tests.TiledMapObjectPropertyTest;
 import com.badlogic.gdx.tests.TimeUtilsTest;
 import com.badlogic.gdx.tests.UITest;
 import com.badlogic.gdx.tests.VertexBufferObjectShaderTest;
@@ -100,9 +100,9 @@ import com.badlogic.gdx.tests.g3d.ShadowMappingTest;
 import com.badlogic.gdx.tests.g3d.TextureArrayTest;
 import com.badlogic.gdx.tests.gles2.VertexArrayTest;
 import com.badlogic.gdx.tests.gles3.GL30Texture3DTest;
+import com.badlogic.gdx.tests.gles3.InstancedRenderingTest;
 import com.badlogic.gdx.tests.gles3.NonPowerOfTwoTest;
 import com.badlogic.gdx.tests.gles3.UniformBufferObjectsTest;
-import com.badlogic.gdx.tests.gles3.InstancedRenderingTest;
 import com.badlogic.gdx.tests.gwt.GwtInputTest;
 import com.badlogic.gdx.tests.gwt.GwtWindowModeTest;
 import com.badlogic.gdx.tests.math.CollisionPlaygroundTest;
@@ -269,7 +269,6 @@ public class GwtTestWrapper extends AbstractTestWrapper {
 				return new FilterPerformanceTest();
 			}
 		});
-// new GwtInstancer() {public GdxTest instance(){return new FlickScrollPaneTest();}}, // FIXME this messes up stuff, why?
 		tests.add(new GwtInstancer() {
 			public GdxTest instance () {
 				return new FrameBufferTest();
@@ -411,9 +410,6 @@ public class GwtTestWrapper extends AbstractTestWrapper {
 				return new OpenBrowserExample();
 			}
 		});
-// tests.add(new GwtInstancer() { public GdxTest instance () { return new NoncontinuousRenderingTest(); } // FIXME doesn't compile
-// due to
-// the use of Thread
 		tests.add(new GwtInstancer() {
 			public GdxTest instance () {
 				return new OrientedBoundingBoxTest();
@@ -444,8 +440,6 @@ public class GwtTestWrapper extends AbstractTestWrapper {
 				return new PixmapTest();
 			}
 		});
-		// new GwtInstancer() {public GdxTest instance(){return new PixmapBlendingTest();}}, // FIXME no idea why this doesn't
-		// work
 		tests.add(new GwtInstancer() {
 			public GdxTest instance () {
 				return new PreferencesTest();
@@ -471,10 +465,6 @@ public class GwtTestWrapper extends AbstractTestWrapper {
 				return new Scene2dTest();
 			}
 		});
-
-// new GwtInstancer() {public GdxTest instance(){return new RunnablePostTest();}}, // Goes into infinite loop
-// new GwtInstancer() {public GdxTest instance(){return new ScrollPaneTest();}}, // FIXME this messes up stuff, why?
-// new GwtInstancer() {public GdxTest instance(){return new ShaderMultitextureTest();}}, // FIXME fucks up stuff
 		tests.add(new GwtInstancer() {
 			public GdxTest instance () {
 				return new ShadowMappingTest();
@@ -535,7 +525,7 @@ public class GwtTestWrapper extends AbstractTestWrapper {
 				return new SystemCursorTest();
 			}
 		});
-		// new GwtInstancer() {public GdxTest instance(){return new StagePerformanceTest();}}, // FIXME borks out
+
 		tests.add(new GwtInstancer() {
 			public GdxTest instance () {
 				return new TableTest();

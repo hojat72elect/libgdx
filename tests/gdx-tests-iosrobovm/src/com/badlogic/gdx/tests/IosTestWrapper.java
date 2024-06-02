@@ -10,13 +10,13 @@ public class IosTestWrapper extends AbstractTestWrapper {
 		Instancer[] tests = new Instancer[GdxTests.tests.size()];
 		int i = 0;
 		for (final Class<? extends GdxTest> aClass : GdxTests.tests) {
-			tests[i] = new IosInstancer(aClass);
+			tests[i] = new com.badlogic.gdx.tests.IosTestWrapper.IosInstancer(aClass);
 			i++;
 		}
 		return tests;
 	}
 
-	class IosInstancer implements Instancer {
+	static class IosInstancer implements Instancer {
 		final Class<? extends GdxTest> clazz;
 
 		IosInstancer (Class<? extends GdxTest> clazz) {

@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,6 +12,19 @@
  ******************************************************************************/
 
 package com.badlogic.gdx.tests.lwjgl;
+
+import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl.LwjglFiles;
+import com.badlogic.gdx.backends.lwjgl.LwjglPreferences;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.tests.utils.CommandLineOptions;
+import com.badlogic.gdx.tests.utils.GdxTest;
+import com.badlogic.gdx.tests.utils.GdxTestWrapper;
+import com.badlogic.gdx.tests.utils.GdxTests;
+import com.badlogic.gdx.utils.SharedLibraryLoader;
 
 import java.awt.BorderLayout;
 import java.awt.HeadlessException;
@@ -34,19 +44,6 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 
-import com.badlogic.gdx.Preferences;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.backends.lwjgl.LwjglFiles;
-import com.badlogic.gdx.backends.lwjgl.LwjglPreferences;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.badlogic.gdx.tests.utils.CommandLineOptions;
-import com.badlogic.gdx.tests.utils.GdxTest;
-import com.badlogic.gdx.tests.utils.GdxTestWrapper;
-import com.badlogic.gdx.tests.utils.GdxTests;
-import com.badlogic.gdx.utils.SharedLibraryLoader;
-
 public class LwjglTestStarter extends JFrame {
 	static CommandLineOptions options;
 
@@ -61,7 +58,7 @@ public class LwjglTestStarter extends JFrame {
 	}
 
 	/** Runs the {@link GdxTest} with the given name.
-	 * 
+	 *
 	 * @param testName the name of a test class
 	 * @return {@code true} if the test was found and run, {@code false} otherwise */
 	public static boolean runTest (String testName) {
@@ -90,6 +87,23 @@ public class LwjglTestStarter extends JFrame {
 		}
 		new LwjglApplication(new GdxTestWrapper(test, options.logGLErrors), config);
 		return true;
+	}
+
+	/** Runs a libGDX test. If no arguments are provided on the command line, shows a list of tests to choose from. If an argument
+	 * is present, the test with that name will immediately be run. Additional options can be passed, see
+	 * {@link CommandLineOptions}
+	 *
+	 * @param argv command line arguments */
+	public static void main (String[] argv) throws Exception {
+		options = new CommandLineOptions(argv);
+		if (options.startupTestName != null) {
+			if (runTest(options.startupTestName)) {
+				return;
+				// Otherwise, fall back to showing the list
+			}
+		}
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		new LwjglTestStarter();
 	}
 
 	class TestList extends JPanel {
@@ -136,26 +150,6 @@ public class LwjglTestStarter extends JFrame {
 			add(pane, BorderLayout.CENTER);
 			add(button, BorderLayout.SOUTH);
 
-			// GdxTest test = GdxTests.newTest("BitmapFontFlipTest");
-			// new LwjglApplication(test, "Test", 480, 320, test.needsGL20());
 		}
-	}
-
-	/** Runs a libGDX test.
-	 * 
-	 * If no arguments are provided on the command line, shows a list of tests to choose from. If an argument is present, the test
-	 * with that name will immediately be run. Additional options can be passed, see {@link CommandLineOptions}
-	 * 
-	 * @param argv command line arguments */
-	public static void main (String[] argv) throws Exception {
-		options = new CommandLineOptions(argv);
-		if (options.startupTestName != null) {
-			if (runTest(options.startupTestName)) {
-				return;
-				// Otherwise, fall back to showing the list
-			}
-		}
-		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		new LwjglTestStarter();
 	}
 }

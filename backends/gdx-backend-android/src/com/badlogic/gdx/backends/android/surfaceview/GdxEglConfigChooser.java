@@ -1,11 +1,11 @@
 /*
  * Copyright (C) 2009 The Android Open Source Project
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
  * License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
  * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
@@ -13,23 +13,25 @@
 
 package com.badlogic.gdx.backends.android.surfaceview;
 
-import javax.microedition.khronos.egl.EGL10;
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.egl.EGLDisplay;
-
 import android.opengl.GLSurfaceView;
 import android.opengl.GLSurfaceView.EGLConfigChooser;
 import android.util.Log;
 
+import javax.microedition.khronos.egl.EGL10;
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.egl.EGLDisplay;
+
 /** {@link EGLConfigChooser} implementation for GLES 1.x and 2.0. Let's hope this really works for all devices. Includes MSAA/CSAA
  * config selection if requested. Taken from GLSurfaceView20, heavily modified to accommodate MSAA/CSAA.
+ *
  * @author mzechner */
 public class GdxEglConfigChooser implements GLSurfaceView.EGLConfigChooser {
-	private static final int EGL_OPENGL_ES2_BIT = 4;
 	public static final int EGL_COVERAGE_BUFFERS_NV = 0x30E0;
 	public static final int EGL_COVERAGE_SAMPLES_NV = 0x30E1;
+	private static final int EGL_OPENGL_ES2_BIT = 4;
 	private static final String TAG = "GdxEglConfigChooser";
-
+	protected final int[] mConfigAttribs;
+	private final int[] mValue = new int[1];
 	protected int mRedSize;
 	protected int mGreenSize;
 	protected int mBlueSize;
@@ -37,8 +39,6 @@ public class GdxEglConfigChooser implements GLSurfaceView.EGLConfigChooser {
 	protected int mDepthSize;
 	protected int mStencilSize;
 	protected int mNumSamples;
-	protected final int[] mConfigAttribs;
-	private int[] mValue = new int[1];
 
 	public GdxEglConfigChooser (int r, int g, int b, int a, int depth, int stencil, int numSamples) {
 		mRedSize = r;
@@ -68,15 +68,7 @@ public class GdxEglConfigChooser implements GLSurfaceView.EGLConfigChooser {
 		EGLConfig[] configs = new EGLConfig[numConfigs];
 		egl.eglChooseConfig(display, mConfigAttribs, configs, numConfigs, num_config);
 
-		// FIXME remove this.
-		// printConfigs(egl, display, configs);
-
-		// chose the best one, taking into account multi sampling.
-		EGLConfig config = chooseConfig(egl, display, configs);
-
-		// FIXME print the chosen config
-		// printConfigs(egl, display, new EGLConfig[] { config });
-		return config;
+		return chooseConfig(egl, display, configs);// chose the best one, taking into account multi sampling.
 	}
 
 	public EGLConfig chooseConfig (EGL10 egl, EGLDisplay display, EGLConfig[] configs) {
@@ -191,10 +183,7 @@ public class GdxEglConfigChooser implements GLSurfaceView.EGLConfigChooser {
 			if (egl.eglGetConfigAttrib(display, config, attribute, value)) {
 				Log.w(TAG, String.format("  %s: %d\n", name, value[0]));
 			} else {
-				// Log.w(TAG, String.format(" %s: failed\n", name));
 				egl.eglGetError();
-// while (egl.eglGetError() != EGL10.EGL_SUCCESS)
-// ;
 			}
 		}
 	}

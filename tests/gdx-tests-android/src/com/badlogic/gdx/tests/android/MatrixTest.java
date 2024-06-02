@@ -48,7 +48,7 @@ public class MatrixTest extends GdxTest {
 
 		long startTime = System.nanoTime();
 		int ops = 0;
-		while (System.nanoTime() - startTime < 5000000000l) {
+		while (System.nanoTime() - startTime < 5000000000L) {
 			Matrix.multiplyMM(a1, 0, a2, 0, a3, 0);
 			ops++;
 		}
@@ -57,14 +57,14 @@ public class MatrixTest extends GdxTest {
 		// warm up
 		startTime = System.nanoTime();
 		ops = 0;
-		while (System.nanoTime() - startTime < 2000000000l) {
+		while (System.nanoTime() - startTime < 2000000000L) {
 			m1.mul(m2);
 			ops++;
 		}
 
 		startTime = System.nanoTime();
 		ops = 0;
-		while (System.nanoTime() - startTime < 5000000000l) {
+		while (System.nanoTime() - startTime < 5000000000L) {
 			m1.mul(m2);
 			ops++;
 		}

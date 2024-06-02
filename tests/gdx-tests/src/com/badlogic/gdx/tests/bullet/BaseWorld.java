@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,17 +23,9 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 /** @author xoppa No physics, simple base class for rendering a bunch of entities. */
 public class BaseWorld<T extends BaseEntity> implements Disposable {
-	public static abstract class Constructor<T extends BaseEntity> implements Disposable {
-		public Model model = null;
-
-		public abstract T construct (final float x, final float y, final float z);
-
-		public abstract T construct (final Matrix4 transform);
-	}
-
-	private final ObjectMap<String, Constructor<T>> constructors = new ObjectMap<String, Constructor<T>>();
-	protected final Array<T> entities = new Array<T>();
-	private final Array<Model> models = new Array<Model>();
+	protected final Array<T> entities = new Array<>();
+	private final ObjectMap<String, Constructor<T>> constructors = new ObjectMap<>();
+	private final Array<Model> models = new Array<>();
 
 	public void addConstructor (final String name, final Constructor<T> constructor) {
 		constructors.put(name, constructor);
@@ -91,5 +80,13 @@ public class BaseWorld<T extends BaseEntity> implements Disposable {
 		constructors.clear();
 
 		models.clear();
+	}
+
+	public static abstract class Constructor<T extends BaseEntity> implements Disposable {
+		public Model model = null;
+
+		public abstract T construct (final float x, final float y, final float z);
+
+		public abstract T construct (final Matrix4 transform);
 	}
 }
