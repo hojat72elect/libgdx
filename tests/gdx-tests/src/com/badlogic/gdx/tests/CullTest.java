@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -84,15 +81,17 @@ public class CullTest extends GdxTest implements ApplicationListener {
 		modelBatch.begin(cam);
 
 		int visible = 0;
-		for (int i = 0; i < instances.length; i++) {
-			instances[i].transform.getTranslation(pos);
+		for (com.badlogic.gdx.graphics.g3d.ModelInstance instance : instances) {
+			instance.transform.getTranslation(pos);
 			if (cam.frustum.sphereInFrustum(pos, 1)) {
-				((ColorAttribute)instances[i].materials.get(0).get(ColorAttribute.Diffuse)).color.set(Color.WHITE);
+				((ColorAttribute)instance.materials.get(0).get(ColorAttribute.Diffuse)).color
+					.set(com.badlogic.gdx.graphics.Color.WHITE);
 				visible++;
 			} else {
-				((ColorAttribute)instances[i].materials.get(0).get(ColorAttribute.Diffuse)).color.set(Color.RED);
+				((ColorAttribute)instance.materials.get(0).get(ColorAttribute.Diffuse)).color
+					.set(com.badlogic.gdx.graphics.Color.RED);
 			}
-			modelBatch.render(instances[i]);
+			modelBatch.render(instance);
 		}
 		modelBatch.end();
 

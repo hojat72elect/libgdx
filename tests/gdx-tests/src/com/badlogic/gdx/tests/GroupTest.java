@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -64,11 +61,11 @@ public class GroupTest extends GdxTest {
 
 		region = new TextureRegion(new Texture(Gdx.files.internal("data/group-debug.png")));
 
-		group2 = new TestGroup("group2");
+		group2 = new TestGroup();
 		group2.setTransform(true);
 		stage.addActor(group2);
 
-		group1 = new TestGroup("group1");
+		group1 = new TestGroup();
 		group1.setTransform(true);
 		group2.addActor(group1);
 
@@ -182,14 +179,12 @@ public class GroupTest extends GdxTest {
 	}
 
 	class TestGroup extends Group {
-		private String name;
 		Vector2 toScreenCoordinates = new Vector2();
 		Vector2 localToParentCoordinates = new Vector2();
 		float testX = 25;
 		float testY = 25;
 
-		public TestGroup (String name) {
-			this.name = name;
+		public TestGroup () {
 
 			addListener(new InputListener() {
 				public boolean mouseMoved (InputEvent event, float x, float y) {

@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -47,19 +44,19 @@ public class MatrixJNITest extends GdxTest {
 		Matrix4.mulVec(mat1.val, fvec);
 		Matrix4.mulVec(mat1.val, fvecs, 0, 3, 5);
 		check(vec, fvec);
-		check(vec, fvecs, 3, 5);
+		check(vec, fvecs, 3);
 
 		vec.prj(mat1);
 		Matrix4.prj(mat1.val, fvec);
 		Matrix4.prj(mat1.val, fvecs, 0, 3, 5);
 		check(vec, fvec);
-		check(vec, fvecs, 3, 5);
+		check(vec, fvecs, 3);
 
 		vec.rot(mat1);
 		Matrix4.rot(mat1.val, fvec);
 		Matrix4.rot(mat1.val, fvecs, 0, 3, 5);
 		check(vec, fvec);
-		check(vec, fvecs, 3, 5);
+		check(vec, fvecs, 3);
 
 		if (mat1.det() != Matrix4.det(mat1.val)) throw new GdxRuntimeException("det doesn't work");
 
@@ -130,8 +127,8 @@ public class MatrixJNITest extends GdxTest {
 		if (vec.x != fvec[0] || vec.y != fvec[1] || vec.z != fvec[2]) throw new GdxRuntimeException("vectors are not equal");
 	}
 
-	private void check (Vector3 vec, float[] fvec, int numVecs, int stride) {
-		int offset = 0;
+	private void check (Vector3 vec, float[] fvec, int numVecs) {
+
 		for (int i = 0; i < numVecs; i++) {
 			if (vec.x != fvec[0] || vec.y != fvec[1] || vec.z != fvec[2]) throw new GdxRuntimeException("vectors are not equal");
 		}
@@ -152,7 +149,7 @@ public class MatrixJNITest extends GdxTest {
 
 		Matrix4 m2 = new Matrix4().rotateTowardDirection(direction, up);
 
-		assertEquals(m1, m2, EPSILON);
+		assertEquals(m1, m2);
 	}
 
 	public void testRotateTowardTarget () {
@@ -165,33 +162,33 @@ public class MatrixJNITest extends GdxTest {
 
 		Matrix4 m2 = new Matrix4().translate(position).rotateTowardTarget(target, up);
 
-		assertEquals(m1, m2, EPSILON);
+		assertEquals(m1, m2);
 	}
 
-	private static void assertEquals (Matrix4 expected, Matrix4 actual, float delta) {
-		assertEquals(expected.val[Matrix4.M00], actual.val[Matrix4.M00], delta);
-		assertEquals(expected.val[Matrix4.M01], actual.val[Matrix4.M01], delta);
-		assertEquals(expected.val[Matrix4.M02], actual.val[Matrix4.M02], delta);
-		assertEquals(expected.val[Matrix4.M03], actual.val[Matrix4.M03], delta);
+	private static void assertEquals (Matrix4 expected, Matrix4 actual) {
+		assertEquals(expected.val[Matrix4.M00], actual.val[Matrix4.M00]);
+		assertEquals(expected.val[Matrix4.M01], actual.val[Matrix4.M01]);
+		assertEquals(expected.val[Matrix4.M02], actual.val[Matrix4.M02]);
+		assertEquals(expected.val[Matrix4.M03], actual.val[Matrix4.M03]);
 
-		assertEquals(expected.val[Matrix4.M10], actual.val[Matrix4.M10], delta);
-		assertEquals(expected.val[Matrix4.M11], actual.val[Matrix4.M11], delta);
-		assertEquals(expected.val[Matrix4.M12], actual.val[Matrix4.M12], delta);
-		assertEquals(expected.val[Matrix4.M13], actual.val[Matrix4.M13], delta);
+		assertEquals(expected.val[Matrix4.M10], actual.val[Matrix4.M10]);
+		assertEquals(expected.val[Matrix4.M11], actual.val[Matrix4.M11]);
+		assertEquals(expected.val[Matrix4.M12], actual.val[Matrix4.M12]);
+		assertEquals(expected.val[Matrix4.M13], actual.val[Matrix4.M13]);
 
-		assertEquals(expected.val[Matrix4.M20], actual.val[Matrix4.M20], delta);
-		assertEquals(expected.val[Matrix4.M21], actual.val[Matrix4.M21], delta);
-		assertEquals(expected.val[Matrix4.M22], actual.val[Matrix4.M22], delta);
-		assertEquals(expected.val[Matrix4.M23], actual.val[Matrix4.M23], delta);
+		assertEquals(expected.val[Matrix4.M20], actual.val[Matrix4.M20]);
+		assertEquals(expected.val[Matrix4.M21], actual.val[Matrix4.M21]);
+		assertEquals(expected.val[Matrix4.M22], actual.val[Matrix4.M22]);
+		assertEquals(expected.val[Matrix4.M23], actual.val[Matrix4.M23]);
 
-		assertEquals(expected.val[Matrix4.M30], actual.val[Matrix4.M30], delta);
-		assertEquals(expected.val[Matrix4.M31], actual.val[Matrix4.M31], delta);
-		assertEquals(expected.val[Matrix4.M32], actual.val[Matrix4.M32], delta);
-		assertEquals(expected.val[Matrix4.M33], actual.val[Matrix4.M33], delta);
+		assertEquals(expected.val[Matrix4.M30], actual.val[Matrix4.M30]);
+		assertEquals(expected.val[Matrix4.M31], actual.val[Matrix4.M31]);
+		assertEquals(expected.val[Matrix4.M32], actual.val[Matrix4.M32]);
+		assertEquals(expected.val[Matrix4.M33], actual.val[Matrix4.M33]);
 	}
 
-	private static void assertEquals (float expected, float actual, float delta) {
-		if (Math.abs(expected - actual) > delta)
+	private static void assertEquals (float expected, float actual) {
+		if (Math.abs(expected - actual) > MatrixJNITest.EPSILON)
 			throw new GdxRuntimeException("assertion failed: expected " + expected + " actual " + actual);
 	}
 }

@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,18 +19,45 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.tests.bullet.*;
+import com.badlogic.gdx.tests.bullet.BasicBulletTest;
+import com.badlogic.gdx.tests.bullet.BasicShapesTest;
+import com.badlogic.gdx.tests.bullet.BulletTest;
+import com.badlogic.gdx.tests.bullet.CharacterTest;
+import com.badlogic.gdx.tests.bullet.CollisionDispatcherTest;
+import com.badlogic.gdx.tests.bullet.CollisionTest;
+import com.badlogic.gdx.tests.bullet.CollisionWorldTest;
+import com.badlogic.gdx.tests.bullet.ConstraintsTest;
+import com.badlogic.gdx.tests.bullet.ContactCacheTest;
+import com.badlogic.gdx.tests.bullet.ContactCallbackTest;
+import com.badlogic.gdx.tests.bullet.ContactCallbackTest2;
+import com.badlogic.gdx.tests.bullet.ConvexHullDistanceTest;
+import com.badlogic.gdx.tests.bullet.ConvexHullTest;
+import com.badlogic.gdx.tests.bullet.FrustumCullingTest;
+import com.badlogic.gdx.tests.bullet.GimpactTest;
+import com.badlogic.gdx.tests.bullet.HeightFieldTest;
+import com.badlogic.gdx.tests.bullet.ImportTest;
+import com.badlogic.gdx.tests.bullet.InternalTickTest;
+import com.badlogic.gdx.tests.bullet.KinematicTest;
+import com.badlogic.gdx.tests.bullet.MeshShapeTest;
+import com.badlogic.gdx.tests.bullet.OcclusionCullingTest;
+import com.badlogic.gdx.tests.bullet.PairCacheTest;
+import com.badlogic.gdx.tests.bullet.RayCastTest;
+import com.badlogic.gdx.tests.bullet.RayPickRagdollTest;
+import com.badlogic.gdx.tests.bullet.ShootTest;
+import com.badlogic.gdx.tests.bullet.SoftBodyTest;
+import com.badlogic.gdx.tests.bullet.SoftMeshTest;
+import com.badlogic.gdx.tests.bullet.TriangleRaycastTest;
+import com.badlogic.gdx.tests.bullet.VehicleFilterTest;
+import com.badlogic.gdx.tests.bullet.VehicleTest;
 import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.Align;
 
-/** @author xoppa */
 public class BulletTestCollection extends GdxTest implements InputProcessor, GestureListener {
 	protected final BulletTest[] tests = {new BasicBulletTest(), new ShootTest(), new BasicShapesTest(), new KinematicTest(),
 		new ConstraintsTest(), new MeshShapeTest(), new GimpactTest(), new ConvexHullTest(), new ConvexHullDistanceTest(),
@@ -47,7 +71,6 @@ public class BulletTestCollection extends GdxTest implements InputProcessor, Ges
 
 	private Application app = null;
 
-	private BitmapFont font;
 	private Stage hud;
 	private Label fpsLabel;
 	private Label titleLabel;
@@ -78,7 +101,8 @@ public class BulletTestCollection extends GdxTest implements InputProcessor, Ges
 		cameraController.translateTarget = false;
 		Gdx.input.setInputProcessor(new InputMultiplexer(cameraController, this, new GestureDetector(this)));
 
-		font = new BitmapFont(Gdx.files.internal("data/lsans-15.fnt"), false);
+		com.badlogic.gdx.graphics.g2d.BitmapFont font = new com.badlogic.gdx.graphics.g2d.BitmapFont(
+			com.badlogic.gdx.Gdx.files.internal("data/lsans-15.fnt"), false);
 		hud = new Stage();
 		hud.addActor(fpsLabel = new Label(" ", new Label.LabelStyle(font, Color.WHITE)));
 		fpsLabel.setPosition(0, 0);
@@ -135,7 +159,7 @@ public class BulletTestCollection extends GdxTest implements InputProcessor, Ges
 	@Override
 	public boolean keyUp (int keycode) {
 		boolean result = tests[testIndex].keyUp(keycode);
-		if ((result == false) && (keycode == Keys.SPACE || keycode == Keys.MENU)) {
+		if ((!result) && (keycode == Keys.SPACE || keycode == Keys.MENU)) {
 			next();
 			result = true;
 		}
@@ -184,7 +208,7 @@ public class BulletTestCollection extends GdxTest implements InputProcessor, Ges
 
 	@Override
 	public boolean fling (float velocityX, float velocityY, int button) {
-		if (tests[testIndex].fling(velocityX, velocityY, button) == false) next();
+		if (!tests[testIndex].fling(velocityX, velocityY, button)) next();
 		return true;
 	}
 

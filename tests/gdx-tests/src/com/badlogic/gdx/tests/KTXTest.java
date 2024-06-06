@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -44,8 +41,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-/** Simple test and example for the KTX/ZKTX file format
- * @author Vincent Bousquet */
+/** Simple test and example for the KTX/ZKTX file format */
 public class KTXTest extends GdxTest {
 
 	// 3D texture cubemap example
@@ -71,8 +67,8 @@ public class KTXTest extends GdxTest {
 
 		// Cubemap test
 
-		String cubemapVS = "" //
-			+ "attribute vec3 a_position;\n"//
+		//
+		String cubemapVS = "attribute vec3 a_position;\n"//
 			+ "uniform mat4 u_projViewTrans;\n"//
 			+ "uniform mat4 u_worldTrans;\n"//
 			+ "\n"//
@@ -84,8 +80,8 @@ public class KTXTest extends GdxTest {
 			+ "   v_cubeMapUV = normalize(g_position.xyz);\n"//
 			+ "   gl_Position = u_projViewTrans * g_position;\n"//
 			+ "}";
-		String cubemapFS = ""//
-			+ "#ifdef GL_ES\n"//
+		//
+		String cubemapFS = "#ifdef GL_ES\n"//
 			+ "precision mediump float;\n"//
 			+ "#endif\n"//
 			+ "uniform samplerCube u_environmentCubemap;\n"//
@@ -118,8 +114,8 @@ public class KTXTest extends GdxTest {
 		Gdx.input.setInputProcessor(new InputMultiplexer(this, inputController = new CameraInputController(perspectiveCamera)));
 
 		// 2D texture test
-		String etc1aVS = "" //
-			+ "uniform mat4 u_projTrans;\n"//
+		//
+		String etc1aVS = "uniform mat4 u_projTrans;\n"//
 			+ "\n"//
 			+ "attribute vec4 a_position;\n"//
 			+ "attribute vec2 a_texCoord0;\n"//
@@ -133,8 +129,8 @@ public class KTXTest extends GdxTest {
 			+ "   v_texCoord = a_texCoord0;\n"//
 			+ "   v_color = a_color;\n"//
 			+ "}\n";//
-		String etc1aFS = ""//
-			+ "#ifdef GL_ES\n"//
+		//
+		String etc1aFS = "#ifdef GL_ES\n"//
 			+ "precision mediump float;\n"//
 			+ "#endif\n"//
 			+ "uniform sampler2D u_texture;\n"//
@@ -183,7 +179,7 @@ public class KTXTest extends GdxTest {
 		float w = s * image.getWidth(), h = s * image.getHeight() / 2, x = -w / 2, y = -h / 2;
 		batch.setShader(null);
 		batch.disableBlending();
-		batch.draw(image, -pw / 2, -ph / 2, pw, ph, 0, 1, 1, 0);
+		batch.draw(image, (float)-pw / 2, (float)-ph / 2, pw, ph, 0, 1, 1, 0);
 		batch.setShader(etc1aShader);
 		batch.enableBlending();
 		batch.draw(image, x, y, w, h, 0, 0.5f, 1, 0);
@@ -202,15 +198,6 @@ public class KTXTest extends GdxTest {
 
 	public boolean needsGL20 () {
 		return true;
-	}
-
-	public void resume () {
-	}
-
-	public void resize (int width, int height) {
-	}
-
-	public void pause () {
 	}
 
 }

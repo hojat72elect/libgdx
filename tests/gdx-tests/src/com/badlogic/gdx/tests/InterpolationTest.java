@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -42,13 +39,14 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class InterpolationTest extends GdxTest {
 	Stage stage;
-	private Skin skin;
-	private Table table;
 	List<String> list;
-	String interpolationNames[], selectedInterpolation;
-	private ShapeRenderer renderer;
+	String[] interpolationNames;
+	String selectedInterpolation;
 	float graphSize, steps, time = 0, duration = 2.5f;
 	Vector2 startPosition = new Vector2(), targetPosition = new Vector2(), position = new Vector2();
+	private Skin skin;
+	private Table table;
+	private ShapeRenderer renderer;
 
 	/** resets {@link #startPosition} and {@link #targetPosition} */
 	void resetPositions () {
@@ -88,8 +86,8 @@ public class InterpolationTest extends GdxTest {
 
 		// see how many fields are actually interpolations (for safety; other fields may be added with future)
 		int interpolationMembers = 0;
-		for (int i = 0; i < interpolationFields.length; i++)
-			if (ClassReflection.isAssignableFrom(Interpolation.class, interpolationFields[i].getDeclaringClass()))
+		for (Field interpolationField : interpolationFields)
+			if (ClassReflection.isAssignableFrom(Interpolation.class, interpolationField.getDeclaringClass()))
 				interpolationMembers++;
 
 		// get interpolation names
@@ -99,7 +97,7 @@ public class InterpolationTest extends GdxTest {
 				interpolationNames[i] = interpolationFields[i].getName();
 		selectedInterpolation = interpolationNames[0];
 
-		list = new List(skin);
+		list = new List<>(skin);
 		list.setItems(interpolationNames);
 		list.addListener(new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
@@ -141,7 +139,8 @@ public class InterpolationTest extends GdxTest {
 	public void render () {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		float bottomLeftX = Gdx.graphics.getWidth() / 2 - graphSize / 2, bottomLeftY = Gdx.graphics.getHeight() / 2 - graphSize / 2;
+		float bottomLeftX = (float)Gdx.graphics.getWidth() / 2 - graphSize / 2,
+			bottomLeftY = (float)Gdx.graphics.getHeight() / 2 - graphSize / 2;
 
 		// only show up to two decimals
 		String text = String.valueOf(duration);

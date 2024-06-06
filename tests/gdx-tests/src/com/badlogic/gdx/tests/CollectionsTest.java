@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,7 +15,7 @@ package com.badlogic.gdx.tests;
 
 import java.util.HashMap;
 import java.util.Iterator;
-
+import com.badlogic.gdx.utils.ObjectMap.Entry;
 import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
@@ -51,20 +48,20 @@ import com.badlogic.gdx.utils.reflect.Method;
 /** Tests for the collection classes. Currently, only equals() and hashCode() methods are tested. */
 public class CollectionsTest extends GdxTest {
 	// Objects to use for test keys/values; no duplicates may exist. All arrays are 10 elements.
-	private Object[] values = {"just", "some", "random", "values", true, false, 50, "nope", "yeah", 53};
-	private Object[] valuesWithNulls = {"just", "some", null, "values", true, false, 50, "nope", "yeah", 53};
-	private Integer[] intValues = {42, 13, 0, -44, 56, 561, 61, -532, -1, 32};
-	private Float[] floatValues = {4f, 3.14f, 0f, 5f, 2f, -5f, 43f, 643f, 3525f, 32f};
-	private Long[] longValues = {5L, 3L, 41432L, 0L, -4312L, -532L, 1L, 4L, 1362L};
-	private Byte[] byteValues = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-	private Short[] shortValues = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-	private Character[] charValues = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+	private final Object[] values = {"just", "some", "random", "values", true, false, 50, "nope", "yeah", 53};
+	private final Object[] valuesWithNulls = {"just", "some", null, "values", true, false, 50, "nope", "yeah", 53};
+	private final Integer[] intValues = {42, 13, 0, -44, 56, 561, 61, -532, -1, 32};
+	private final Float[] floatValues = {4f, 3.14f, 0f, 5f, 2f, -5f, 43f, 643f, 3525f, 32f};
+	private final Long[] longValues = {5L, 3L, 41432L, 0L, -4312L, -532L, 1L, 4L, 1362L};
+	private final Byte[] byteValues = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+	private final Short[] shortValues = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+	private final Character[] charValues = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
 
 	// 49 String keys that all have the same two hashCode() results
 	// It is extremely easy to generate String keys that have colliding hashCode()s, so we check to make
 	// sure ObjectSet and OrderedSet can tolerate them in case of low-complexity malicious use.
 	// If they can tolerate these problem values, then ObjectMap and others should too.
-	private String[] problemValues = ("21oo 0oq1 0opP 0ooo 0pPo 21pP 21q1 1Poo 1Pq1 1PpP 0q31 0pR1 0q2P 0q1o 232P 231o 2331 0pQP 22QP"
+	private final String[] problemValues = ("21oo 0oq1 0opP 0ooo 0pPo 21pP 21q1 1Poo 1Pq1 1PpP 0q31 0pR1 0q2P 0q1o 232P 231o 2331 0pQP 22QP"
 		+ " 22Po 22R1 1QQP 1R1o 1QR1 1R2P 1R31 1QPo 1Qup 1S7p 0r8Q 0r7p 0r92 23X2 2492 248Q 247p 22vQ"
 		+ " 22up 1S92 1S8Q 23WQ 23Vp 22w2 1QvQ 1Qw2 1RVp 1RWQ 1RX2 0qX2").split(" ");
 
@@ -166,7 +163,7 @@ public class CollectionsTest extends GdxTest {
 			it = ((Iterable)anotherMap).iterator();
 			iterationCount = 0;
 			while (it.hasNext()) {
-				Object entry = it.next();
+
 				if (iterationCount == i) {
 					it.remove();
 				}
@@ -180,14 +177,14 @@ public class CollectionsTest extends GdxTest {
 		assertEquals(map, otherMap);
 
 		int[] clear = {0, 1, 2, 3, keys.length - 1, keys.length, keys.length + 1, 10, 1000};
-		for (int i = 0, n = clear.length; i < n; i++) {
+		for (int j : clear) {
 			for (int ii = 0, nn = keys.length; ii < nn; ii++) {
 				invoke("put", map, keys[ii], values[ii]);
 				invoke("put", otherMap, keys[ii], values[ii]);
 			}
 			assertEquals(map, otherMap);
 
-			invoke("clear", map, clear[i]);
+			invoke("clear", map, j);
 			otherMap = newInstance(mapClass);
 			assertEquals(map, otherMap);
 		}
@@ -303,11 +300,11 @@ public class CollectionsTest extends GdxTest {
 	private void testSet (Class<?> setClass, Object[] values) {
 		System.out.println(setClass);
 		Object set = newInstance(setClass);
-		for (int i = 0, n = values.length; i < n; i++)
-			invoke("add", set, values[i]);
+		for (Object value : values)
+			invoke("add", set, value);
 		Object otherSet = newInstance(setClass);
-		for (int i = 0, n = values.length; i < n; i++)
-			invoke("add", otherSet, values[i]);
+		for (Object value : values)
+			invoke("add", otherSet, value);
 		Object thirdSet = newInstance(setClass);
 		for (int i = 0, n = values.length; i < n; i++)
 			invoke("add", thirdSet, values[n - i - 1]);
@@ -336,9 +333,8 @@ public class CollectionsTest extends GdxTest {
 		hm.put("test", null);
 
 		ObjectMap.Entries s = hm.entries();
-		Iterator i = s.iterator();
-		while (i.hasNext()) {
-			ObjectMap.Entry m = (ObjectMap.Entry)i.next();
+		for (Object o : s) {
+			Entry m = (Entry)o;
 			assertEquals(hm.containsKey(m.key), true);
 			assertEquals(hm.containsValue(m.value, false), true);
 		}
@@ -476,7 +472,7 @@ public class CollectionsTest extends GdxTest {
 		for (int i = 0, n = values.length; i < n; i += 2)
 			m.put((Float)values[i], (Node)values[i + 1]);
 
-		BinaryHeap<Node> h = new BinaryHeap<Node>();
+		BinaryHeap<Node> h = new BinaryHeap<>();
 
 		h.add(m.get(44.683983f));
 		if (h.pop().getValue() != 44.683983f) throw new RuntimeException("Should be 44.683983");

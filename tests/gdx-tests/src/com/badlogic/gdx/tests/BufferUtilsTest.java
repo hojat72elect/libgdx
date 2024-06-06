@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
  *   http://www.apache.org/licenses/LICENSE-2.0
- *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,9 +27,6 @@ public class BufferUtilsTest extends GdxTest {
 
 	@Override
 	public void create () {
-		// Not emulated in gwt
-		// ByteBuffer bytebuffer = BufferUtils.newUnsafeByteBuffer(1000 * 1000);
-		// BufferUtils.disposeUnsafeByteBuffer(bytebuffer);
 
 		ByteBuffer bb = BufferUtils.newByteBuffer(8);
 		CharBuffer cb = BufferUtils.newCharBuffer(8);
@@ -153,8 +147,8 @@ public class BufferUtilsTest extends GdxTest {
 		long start = TimeUtils.nanoTime();
 		for (int j = 0; j < NUM_MB; j++) {
 			((Buffer)bb).clear();
-			for (int i = 0; i < len; i++)
-				bb.put(bytes[i]);
+			for (byte aByte : bytes)
+				bb.put(aByte);
 		}
 		Gdx.app.log("BufferUtilsTest", "ByteBuffer relative put: " + (TimeUtils.nanoTime() - start) / 1000000000.0f);
 
@@ -193,8 +187,8 @@ public class BufferUtilsTest extends GdxTest {
 		long start = TimeUtils.nanoTime();
 		for (int j = 0; j < NUM_MB; j++) {
 			((Buffer)sb).clear();
-			for (int i = 0; i < len; i++)
-				sb.put(shorts[i]);
+			for (short aShort : shorts)
+				sb.put(aShort);
 		}
 		Gdx.app.log("BufferUtilsTest", "ShortBuffer relative put: " + (TimeUtils.nanoTime() - start) / 1000000000.0f);
 
@@ -233,8 +227,8 @@ public class BufferUtilsTest extends GdxTest {
 		long start = TimeUtils.nanoTime();
 		for (int j = 0; j < NUM_MB; j++) {
 			((Buffer)ib).clear();
-			for (int i = 0; i < len; i++)
-				ib.put(ints[i]);
+			for (int anInt : ints)
+				ib.put(anInt);
 		}
 		Gdx.app.log("BufferUtilsTest", "IntBuffer relative put: " + (TimeUtils.nanoTime() - start) / 1000000000.0f);
 
@@ -273,8 +267,8 @@ public class BufferUtilsTest extends GdxTest {
 		long start = TimeUtils.nanoTime();
 		for (int j = 0; j < NUM_MB; j++) {
 			((Buffer)lb).clear();
-			for (int i = 0; i < len; i++)
-				lb.put(longs[i]);
+			for (long aLong : longs)
+				lb.put(aLong);
 		}
 		Gdx.app.log("BufferUtilsTest", "LongBuffer relative put: " + (TimeUtils.nanoTime() - start) / 1000000000.0f);
 
@@ -313,8 +307,8 @@ public class BufferUtilsTest extends GdxTest {
 		long start = TimeUtils.nanoTime();
 		for (int j = 0; j < NUM_MB; j++) {
 			((Buffer)fb).clear();
-			for (int i = 0; i < len; i++)
-				fb.put(floats[i]);
+			for (float aFloat : floats)
+				fb.put(aFloat);
 		}
 		Gdx.app.log("BufferUtilsTest", "FloatBuffer relative put: " + (TimeUtils.nanoTime() - start) / 1000000000.0f);
 
@@ -353,8 +347,8 @@ public class BufferUtilsTest extends GdxTest {
 		long start = TimeUtils.nanoTime();
 		for (int j = 0; j < NUM_MB; j++) {
 			((Buffer)db).clear();
-			for (int i = 0; i < len; i++)
-				db.put(doubles[i]);
+			for (double aDouble : doubles)
+				db.put(aDouble);
 		}
 		Gdx.app.log("BufferUtilsTest", "DoubleBuffer relative put: " + (TimeUtils.nanoTime() - start) / 1000000000.0f);
 

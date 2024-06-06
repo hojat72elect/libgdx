@@ -2,8 +2,15 @@
 package com.badlogic.gdx.tests;
 
 import com.badlogic.gdx.tests.utils.GdxTest;
-import com.badlogic.gdx.utils.*;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
+import com.badlogic.gdx.utils.IntIntMap;
+import com.badlogic.gdx.utils.IntMap;
+import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
+import com.badlogic.gdx.utils.LongMap;
+import com.badlogic.gdx.utils.ObjectFloatMap;
+import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.reflect.ArrayReflection;
 
 import java.util.ArrayList;
@@ -13,13 +20,16 @@ import java.util.Map;
 public class JsonTest extends GdxTest {
 	Json json;
 
+	static Object arrayToList (Object array) {
+		if (array == null || !array.getClass().isArray()) return array;
+		ArrayList list = new ArrayList(ArrayReflection.getLength(array));
+		for (int i = 0, n = ArrayReflection.getLength(array); i < n; i++)
+			list.add(arrayToList(ArrayReflection.get(array, i)));
+		return list;
+	}
+
 	public void create () {
 		json = new Json();
-
-// json.fromJson(Test1.class, //
-// "{byteArrayField:[-1\n,-2]}"
-// );
-// if (true) return;
 
 		Test1 test = new Test1();
 		test.booleanField = true;
@@ -35,25 +45,25 @@ public class JsonTest extends GdxTest {
 		test.CharacterField = 'X';
 		test.ShortField = -12345;
 		test.IntegerField = -123456;
-		test.LongField = -123456789l;
+		test.LongField = -123456789L;
 		test.FloatField = -123.3f;
 		test.DoubleField = -0.121231d;
 		test.stringField = "stringvalue";
 		test.byteArrayField = new byte[] {2, 1, 0, -1, -2};
-		test.map = new ObjectMap();
+		test.map = new ObjectMap<>();
 		test.map.put("one", 1);
 		test.map.put("two", 2);
 		test.map.put("nine", 9);
-		test.stringArray = new Array();
+		test.stringArray = new Array<>();
 		test.stringArray.add("meow");
 		test.stringArray.add("moo");
 		test.objectArray = new Array();
 		test.objectArray.add("meow");
 		test.objectArray.add(new Test1());
-		test.longMap = new LongMap<String>(4);
+		test.longMap = new LongMap<>(4);
 		test.longMap.put(42L, "The Answer");
 		test.longMap.put(0x9E3779B97F4A7C15L, "Golden Ratio");
-		test.stringFloatMap = new ObjectFloatMap<String>(4);
+		test.stringFloatMap = new ObjectFloatMap<>(4);
 		test.stringFloatMap.put("point one", 0.1f);
 		test.stringFloatMap.put("point double oh seven", 0.007f);
 		test.someEnum = SomeEnum.b;
@@ -74,13 +84,9 @@ public class JsonTest extends GdxTest {
 		test.intsToIntsUnboxed.put(3, 1);
 		test.intsToIntsUnboxed.put(105, 6);
 		test.intsToIntsUnboxed.put(8, 2);
-		// The above "should" print like this:
-		// {size:14,keyTable:[0,0,102,0,0,0,0,0,107,0,0,10,0,0,0,2,0,0,0,0,7,0,0,0,0,0,101,0,0,0,4,0,106,0,0,0,0,0,0,1,0,0,103,0,0,6,0,0,0,0,0,0,0,0,3,0,0,105,0,0,8,0,0,0],valueTable:[0,0,14,0,0,0,0,0,1,0,0,2,0,0,0,1,0,0,0,0,3,0,0,0,0,0,63,0,0,0,2,0,4,0,0,0,0,0,0,1,0,0,2,0,0,2,0,0,0,0,0,0,0,0,1,0,0,6,0,0,2,0,0,0]}
-		// This is potentially correct, but also quite large considering the contents.
-		// It would be nice to have IntIntMap look like IntMap<Integer> does, below.
 
 		// IntMap gets special treatment and is written as a kind of map.
-		test.intsToIntsBoxed = new IntMap<Integer>();
+		test.intsToIntsBoxed = new IntMap<>();
 		test.intsToIntsBoxed.put(102, 14);
 		test.intsToIntsBoxed.put(107, 1);
 		test.intsToIntsBoxed.put(10, 2);
@@ -105,9 +111,9 @@ public class JsonTest extends GdxTest {
 			sum += e.value + 1;
 		}
 		// also iterate over an Array, which does not have any problems
-		String concat = "";
+		StringBuilder concat = new StringBuilder();
 		for (String s : test.stringArray) {
-			concat += s;
+			concat.append(s);
 		}
 		// by round-tripping again, we verify that the Entries is correctly skipped
 		roundTrip(test);
@@ -116,10 +122,10 @@ public class JsonTest extends GdxTest {
 		for (IntIntMap.Entry e : test.intsToIntsUnboxed) {
 			sum2 += e.value + 1;
 		}
-		String concat2 = "";
+		java.lang.StringBuilder concat2 = new StringBuilder();
 		// also check the Array again
 		for (String s : test.stringArray) {
-			concat2 += s;
+			concat2.append(s);
 		}
 
 		System.out.println("before: " + sum + ", after: " + sum2);
@@ -131,7 +137,7 @@ public class JsonTest extends GdxTest {
 		test = new Test1();
 		roundTrip(test);
 
-		test.stringArray = new Array();
+		test.stringArray = new Array<>();
 		roundTrip(test);
 
 		test.stringArray.add("meow");
@@ -141,10 +147,10 @@ public class JsonTest extends GdxTest {
 		roundTrip(test);
 
 		TestMapGraph objectGraph = new TestMapGraph();
-		testObjectGraph(objectGraph, "exoticTypeName");
+		testObjectGraph(objectGraph);
 
 		test = new Test1();
-		test.map = new ObjectMap();
+		test.map = new ObjectMap<>();
 		roundTrip(test);
 
 		test.map.put("one", 1);
@@ -172,7 +178,7 @@ public class JsonTest extends GdxTest {
 		System.out.println("Success!");
 	}
 
-	private String roundTrip (Object object) {
+	private void roundTrip (Object object) {
 		String text = json.toJson(object);
 		System.out.println(text);
 		test(text, object);
@@ -180,12 +186,11 @@ public class JsonTest extends GdxTest {
 		text = json.prettyPrint(object, 130);
 		test(text, object);
 
-		return text;
 	}
 
-	private void testObjectGraph (TestMapGraph object, String typeName) {
+	private void testObjectGraph (JsonTest.TestMapGraph object) {
 		Json json = new Json();
-		json.setTypeName(typeName);
+		json.setTypeName("exoticTypeName");
 		json.setUsePrototypes(false);
 		json.setIgnoreUnknownFields(true);
 		json.setOutputType(OutputType.json);
@@ -245,6 +250,10 @@ public class JsonTest extends GdxTest {
 
 	private void equals (Object a, Object b) {
 		if (!a.equals(b)) throw new RuntimeException("Fail!\n" + a + "\n!=\n" + b);
+	}
+
+	public enum SomeEnum {
+		a, b, c;
 	}
 
 	static public class Test1 {
@@ -367,8 +376,7 @@ public class JsonTest extends GdxTest {
 			if (Float.floatToIntBits(floatField) != Float.floatToIntBits(other.floatField)) return false;
 			if (intField != other.intField) return false;
 			if (longField != other.longField) return false;
-			if (shortField != other.shortField) return false;
-			return true;
+			return shortField == other.shortField;
 		}
 	}
 
@@ -385,17 +393,5 @@ public class JsonTest extends GdxTest {
 			arrayMap.put("a", "b");
 			arrayMap.put("c", "d");
 		}
-	}
-
-	public enum SomeEnum {
-		a, b, c;
-	}
-
-	static Object arrayToList (Object array) {
-		if (array == null || !array.getClass().isArray()) return array;
-		ArrayList list = new ArrayList(ArrayReflection.getLength(array));
-		for (int i = 0, n = ArrayReflection.getLength(array); i < n; i++)
-			list.add(arrayToList(ArrayReflection.get(array, i)));
-		return list;
 	}
 }
