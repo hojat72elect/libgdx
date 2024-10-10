@@ -1,9 +1,5 @@
-
-
-
-
 subprojects {
-	dependencies {
-		api project(":gdx")
-	}
+    dependencies {
+        api project(":gdx")
+    }
 }

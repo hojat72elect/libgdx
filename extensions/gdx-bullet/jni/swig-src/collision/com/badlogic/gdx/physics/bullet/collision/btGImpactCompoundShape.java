@@ -12,136 +12,140 @@ import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.math.Matrix4;
 
 public class btGImpactCompoundShape extends btGImpactShapeInterface {
-	private long swigCPtr;
+    private long swigCPtr;
 
-	protected btGImpactCompoundShape (final String className, long cPtr, boolean cMemoryOwn) {
-		super(className, CollisionJNI.btGImpactCompoundShape_SWIGUpcast(cPtr), cMemoryOwn);
-		swigCPtr = cPtr;
-	}
+    protected btGImpactCompoundShape(final String className, long cPtr, boolean cMemoryOwn) {
+        super(className, CollisionJNI.btGImpactCompoundShape_SWIGUpcast(cPtr), cMemoryOwn);
+        swigCPtr = cPtr;
+    }
 
-	/** Construct a new btGImpactCompoundShape, normally you should not need this constructor it's intended for low-level usage. */
-	public btGImpactCompoundShape (long cPtr, boolean cMemoryOwn) {
-		this("btGImpactCompoundShape", cPtr, cMemoryOwn);
-		construct();
-	}
+    /**
+     * Construct a new btGImpactCompoundShape, normally you should not need this constructor it's intended for low-level usage.
+     */
+    public btGImpactCompoundShape(long cPtr, boolean cMemoryOwn) {
+        this("btGImpactCompoundShape", cPtr, cMemoryOwn);
+        construct();
+    }
 
-	@Override
-	protected void reset (long cPtr, boolean cMemoryOwn) {
-		if (!destroyed) destroy();
-		super.reset(CollisionJNI.btGImpactCompoundShape_SWIGUpcast(swigCPtr = cPtr), cMemoryOwn);
-	}
+    public btGImpactCompoundShape(boolean children_has_transform) {
+        this(CollisionJNI.new_btGImpactCompoundShape__SWIG_0(children_has_transform), true);
+    }
 
-	public static long getCPtr (btGImpactCompoundShape obj) {
-		return (obj == null) ? 0 : obj.swigCPtr;
-	}
+    public btGImpactCompoundShape() {
+        this(CollisionJNI.new_btGImpactCompoundShape__SWIG_1(), true);
+    }
 
-	@Override
-	protected void finalize () throws Throwable {
-		if (!destroyed) destroy();
-		super.finalize();
-	}
+    public static long getCPtr(btGImpactCompoundShape obj) {
+        return (obj == null) ? 0 : obj.swigCPtr;
+    }
 
-	@Override
-	protected synchronized void delete () {
-		if (swigCPtr != 0) {
-			if (swigCMemOwn) {
-				swigCMemOwn = false;
-				CollisionJNI.delete_btGImpactCompoundShape(swigCPtr);
-			}
-			swigCPtr = 0;
-		}
-		super.delete();
-	}
+    @Override
+    protected void reset(long cPtr, boolean cMemoryOwn) {
+        if (!destroyed) destroy();
+        super.reset(CollisionJNI.btGImpactCompoundShape_SWIGUpcast(swigCPtr = cPtr), cMemoryOwn);
+    }
 
-	static public class CompoundPrimitiveManager extends btPrimitiveManagerBase {
-		private long swigCPtr;
+    @Override
+    protected void finalize() throws Throwable {
+        if (!destroyed) destroy();
+        super.finalize();
+    }
 
-		protected CompoundPrimitiveManager (final String className, long cPtr, boolean cMemoryOwn) {
-			super(className, CollisionJNI.btGImpactCompoundShape_CompoundPrimitiveManager_SWIGUpcast(cPtr), cMemoryOwn);
-			swigCPtr = cPtr;
-		}
+    @Override
+    protected synchronized void delete() {
+        if (swigCPtr != 0) {
+            if (swigCMemOwn) {
+                swigCMemOwn = false;
+                CollisionJNI.delete_btGImpactCompoundShape(swigCPtr);
+            }
+            swigCPtr = 0;
+        }
+        super.delete();
+    }
 
-		/** Construct a new CompoundPrimitiveManager, normally you should not need this constructor it's intended for low-level
-		 * usage. */
-		public CompoundPrimitiveManager (long cPtr, boolean cMemoryOwn) {
-			this("CompoundPrimitiveManager", cPtr, cMemoryOwn);
-			construct();
-		}
+    public btGImpactCompoundShape.CompoundPrimitiveManager getCompoundPrimitiveManager() {
+        long cPtr = CollisionJNI.btGImpactCompoundShape_getCompoundPrimitiveManager(swigCPtr, this);
+        return (cPtr == 0) ? null : new btGImpactCompoundShape.CompoundPrimitiveManager(cPtr, false);
+    }
 
-		@Override
-		protected void reset (long cPtr, boolean cMemoryOwn) {
-			if (!destroyed) destroy();
-			super.reset(CollisionJNI.btGImpactCompoundShape_CompoundPrimitiveManager_SWIGUpcast(swigCPtr = cPtr), cMemoryOwn);
-		}
+    public void addChildShape(Matrix4 localTransform, btCollisionShape shape) {
+        CollisionJNI.btGImpactCompoundShape_addChildShape__SWIG_0(swigCPtr, this, localTransform, btCollisionShape.getCPtr(shape),
+                shape);
+    }
 
-		public static long getCPtr (CompoundPrimitiveManager obj) {
-			return (obj == null) ? 0 : obj.swigCPtr;
-		}
+    public void addChildShape(btCollisionShape shape) {
+        CollisionJNI.btGImpactCompoundShape_addChildShape__SWIG_1(swigCPtr, this, btCollisionShape.getCPtr(shape), shape);
+    }
 
-		@Override
-		protected void finalize () throws Throwable {
-			if (!destroyed) destroy();
-			super.finalize();
-		}
+    static public class CompoundPrimitiveManager extends btPrimitiveManagerBase {
+        private long swigCPtr;
 
-		@Override
-		protected synchronized void delete () {
-			if (swigCPtr != 0) {
-				if (swigCMemOwn) {
-					swigCMemOwn = false;
-					CollisionJNI.delete_btGImpactCompoundShape_CompoundPrimitiveManager(swigCPtr);
-				}
-				swigCPtr = 0;
-			}
-			super.delete();
-		}
+        protected CompoundPrimitiveManager(final String className, long cPtr, boolean cMemoryOwn) {
+            super(className, CollisionJNI.btGImpactCompoundShape_CompoundPrimitiveManager_SWIGUpcast(cPtr), cMemoryOwn);
+            swigCPtr = cPtr;
+        }
 
-		public void setCompoundShape (btGImpactCompoundShape value) {
-			CollisionJNI.btGImpactCompoundShape_CompoundPrimitiveManager_compoundShape_set(swigCPtr, this,
-				btGImpactCompoundShape.getCPtr(value), value);
-		}
+        /**
+         * Construct a new CompoundPrimitiveManager, normally you should not need this constructor it's intended for low-level
+         * usage.
+         */
+        public CompoundPrimitiveManager(long cPtr, boolean cMemoryOwn) {
+            this("CompoundPrimitiveManager", cPtr, cMemoryOwn);
+            construct();
+        }
 
-		public btGImpactCompoundShape getCompoundShape () {
-			long cPtr = CollisionJNI.btGImpactCompoundShape_CompoundPrimitiveManager_compoundShape_get(swigCPtr, this);
-			return (cPtr == 0) ? null : new btGImpactCompoundShape(cPtr, false);
-		}
+        public CompoundPrimitiveManager(btGImpactCompoundShape.CompoundPrimitiveManager compound) {
+            this(CollisionJNI.new_btGImpactCompoundShape_CompoundPrimitiveManager__SWIG_0(
+                    btGImpactCompoundShape.CompoundPrimitiveManager.getCPtr(compound), compound), true);
+        }
 
-		public CompoundPrimitiveManager (btGImpactCompoundShape.CompoundPrimitiveManager compound) {
-			this(CollisionJNI.new_btGImpactCompoundShape_CompoundPrimitiveManager__SWIG_0(
-				btGImpactCompoundShape.CompoundPrimitiveManager.getCPtr(compound), compound), true);
-		}
+        public CompoundPrimitiveManager(btGImpactCompoundShape compoundShape) {
+            this(CollisionJNI.new_btGImpactCompoundShape_CompoundPrimitiveManager__SWIG_1(
+                    btGImpactCompoundShape.getCPtr(compoundShape), compoundShape), true);
+        }
 
-		public CompoundPrimitiveManager (btGImpactCompoundShape compoundShape) {
-			this(CollisionJNI.new_btGImpactCompoundShape_CompoundPrimitiveManager__SWIG_1(
-				btGImpactCompoundShape.getCPtr(compoundShape), compoundShape), true);
-		}
+        public CompoundPrimitiveManager() {
+            this(CollisionJNI.new_btGImpactCompoundShape_CompoundPrimitiveManager__SWIG_2(), true);
+        }
 
-		public CompoundPrimitiveManager () {
-			this(CollisionJNI.new_btGImpactCompoundShape_CompoundPrimitiveManager__SWIG_2(), true);
-		}
+        public static long getCPtr(CompoundPrimitiveManager obj) {
+            return (obj == null) ? 0 : obj.swigCPtr;
+        }
 
-	}
+        @Override
+        protected void reset(long cPtr, boolean cMemoryOwn) {
+            if (!destroyed) destroy();
+            super.reset(CollisionJNI.btGImpactCompoundShape_CompoundPrimitiveManager_SWIGUpcast(swigCPtr = cPtr), cMemoryOwn);
+        }
 
-	public btGImpactCompoundShape (boolean children_has_transform) {
-		this(CollisionJNI.new_btGImpactCompoundShape__SWIG_0(children_has_transform), true);
-	}
+        @Override
+        protected void finalize() throws Throwable {
+            if (!destroyed) destroy();
+            super.finalize();
+        }
 
-	public btGImpactCompoundShape () {
-		this(CollisionJNI.new_btGImpactCompoundShape__SWIG_1(), true);
-	}
+        @Override
+        protected synchronized void delete() {
+            if (swigCPtr != 0) {
+                if (swigCMemOwn) {
+                    swigCMemOwn = false;
+                    CollisionJNI.delete_btGImpactCompoundShape_CompoundPrimitiveManager(swigCPtr);
+                }
+                swigCPtr = 0;
+            }
+            super.delete();
+        }
 
-	public btGImpactCompoundShape.CompoundPrimitiveManager getCompoundPrimitiveManager () {
-		long cPtr = CollisionJNI.btGImpactCompoundShape_getCompoundPrimitiveManager(swigCPtr, this);
-		return (cPtr == 0) ? null : new btGImpactCompoundShape.CompoundPrimitiveManager(cPtr, false);
-	}
+        public btGImpactCompoundShape getCompoundShape() {
+            long cPtr = CollisionJNI.btGImpactCompoundShape_CompoundPrimitiveManager_compoundShape_get(swigCPtr, this);
+            return (cPtr == 0) ? null : new btGImpactCompoundShape(cPtr, false);
+        }
 
-	public void addChildShape (Matrix4 localTransform, btCollisionShape shape) {
-		CollisionJNI.btGImpactCompoundShape_addChildShape__SWIG_0(swigCPtr, this, localTransform, btCollisionShape.getCPtr(shape),
-			shape);
-	}
+        public void setCompoundShape(btGImpactCompoundShape value) {
+            CollisionJNI.btGImpactCompoundShape_CompoundPrimitiveManager_compoundShape_set(swigCPtr, this,
+                    btGImpactCompoundShape.getCPtr(value), value);
+        }
 
-	public void addChildShape (btCollisionShape shape) {
-		CollisionJNI.btGImpactCompoundShape_addChildShape__SWIG_1(swigCPtr, this, btCollisionShape.getCPtr(shape), shape);
-	}
+    }
 
 }

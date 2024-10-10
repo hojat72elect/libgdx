@@ -1,16 +1,14 @@
-
-
 plugins {
-	id 'application'
+    id 'application'
 }
 
 application {
-	mainClass = 'com.badlogic.gdx.setup.GdxSetup'
+    mainClass = 'com.badlogic.gdx.setup.GdxSetup'
 }
 
 jar {
-	archiveFileName = 'gdx-setup.jar'
-	manifest {
-		attributes 'Main-Class': project.application.mainClass.get()
-	}
+    archiveFileName = 'gdx-setup.jar'
+    manifest {
+        attributes 'Main-Class': project.application.mainClass.get()
+    }
 }

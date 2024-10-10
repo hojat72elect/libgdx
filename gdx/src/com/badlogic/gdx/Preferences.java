@@ -1,5 +1,3 @@
-
-
 package com.badlogic.gdx;
 
 import java.util.Map;
@@ -11,60 +9,63 @@ import java.util.Map;
  * NSMutableDictionary will be written to the given file). CAUTION: On the desktop platform, all libGDX applications share the
  * same ".prefs" directory. To avoid collisions use specific names like "com.myname.game1.settings" instead of "settings".
  * </p>
- * 
+ *
  * <p>
  * To persist changes made to a preferences instance {@link #flush()} has to be invoked. With the exception of Android, changes
  * are cached in memory prior to flushing. On iOS changes are not synchronized between different preferences instances.
  * </p>
- * 
+ *
  * <p>
  * Use {@link Application#getPreferences(String)} to look up a specific preferences instance. Note that on several backends the
  * preferences name will be used as the filename, so make sure the name is valid for a filename.
  * </p>
- * 
- *  */
+ */
 public interface Preferences {
-	public Preferences putBoolean (String key, boolean val);
+    public Preferences putBoolean(String key, boolean val);
 
-	public Preferences putInteger (String key, int val);
+    public Preferences putInteger(String key, int val);
 
-	public Preferences putLong (String key, long val);
+    public Preferences putLong(String key, long val);
 
-	public Preferences putFloat (String key, float val);
+    public Preferences putFloat(String key, float val);
 
-	public Preferences putString (String key, String val);
+    public Preferences putString(String key, String val);
 
-	public Preferences put (Map<String, ?> vals);
+    public Preferences put(Map<String, ?> vals);
 
-	public boolean getBoolean (String key);
+    public boolean getBoolean(String key);
 
-	public int getInteger (String key);
+    public int getInteger(String key);
 
-	public long getLong (String key);
+    public long getLong(String key);
 
-	public float getFloat (String key);
+    public float getFloat(String key);
 
-	public String getString (String key);
+    public String getString(String key);
 
-	public boolean getBoolean (String key, boolean defValue);
+    public boolean getBoolean(String key, boolean defValue);
 
-	public int getInteger (String key, int defValue);
+    public int getInteger(String key, int defValue);
 
-	public long getLong (String key, long defValue);
+    public long getLong(String key, long defValue);
 
-	public float getFloat (String key, float defValue);
+    public float getFloat(String key, float defValue);
 
-	public String getString (String key, String defValue);
+    public String getString(String key, String defValue);
 
-	/** Returns a read only Map<String, Object> with all the key, objects of the preferences. */
-	public Map<String, ?> get ();
+    /**
+     * Returns a read only Map<String, Object> with all the key, objects of the preferences.
+     */
+    public Map<String, ?> get();
 
-	public boolean contains (String key);
+    public boolean contains(String key);
 
-	public void clear ();
+    public void clear();
 
-	public void remove (String key);
+    public void remove(String key);
 
-	/** Makes sure the preferences are persisted. */
-	public void flush ();
+    /**
+     * Makes sure the preferences are persisted.
+     */
+    public void flush();
 }

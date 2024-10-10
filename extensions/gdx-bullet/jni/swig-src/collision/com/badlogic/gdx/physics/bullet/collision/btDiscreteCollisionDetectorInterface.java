@@ -13,194 +13,200 @@ import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.math.Vector3;
 
 public class btDiscreteCollisionDetectorInterface extends BulletBase {
-	private long swigCPtr;
+    private long swigCPtr;
 
-	protected btDiscreteCollisionDetectorInterface (final String className, long cPtr, boolean cMemoryOwn) {
-		super(className, cPtr, cMemoryOwn);
-		swigCPtr = cPtr;
-	}
+    protected btDiscreteCollisionDetectorInterface(final String className, long cPtr, boolean cMemoryOwn) {
+        super(className, cPtr, cMemoryOwn);
+        swigCPtr = cPtr;
+    }
 
-	/** Construct a new btDiscreteCollisionDetectorInterface, normally you should not need this constructor it's intended for
-	 * low-level usage. */
-	public btDiscreteCollisionDetectorInterface (long cPtr, boolean cMemoryOwn) {
-		this("btDiscreteCollisionDetectorInterface", cPtr, cMemoryOwn);
-		construct();
-	}
+    /**
+     * Construct a new btDiscreteCollisionDetectorInterface, normally you should not need this constructor it's intended for
+     * low-level usage.
+     */
+    public btDiscreteCollisionDetectorInterface(long cPtr, boolean cMemoryOwn) {
+        this("btDiscreteCollisionDetectorInterface", cPtr, cMemoryOwn);
+        construct();
+    }
 
-	@Override
-	protected void reset (long cPtr, boolean cMemoryOwn) {
-		if (!destroyed) destroy();
-		super.reset(swigCPtr = cPtr, cMemoryOwn);
-	}
+    public static long getCPtr(btDiscreteCollisionDetectorInterface obj) {
+        return (obj == null) ? 0 : obj.swigCPtr;
+    }
 
-	public static long getCPtr (btDiscreteCollisionDetectorInterface obj) {
-		return (obj == null) ? 0 : obj.swigCPtr;
-	}
+    @Override
+    protected void reset(long cPtr, boolean cMemoryOwn) {
+        if (!destroyed) destroy();
+        super.reset(swigCPtr = cPtr, cMemoryOwn);
+    }
 
-	@Override
-	protected void finalize () throws Throwable {
-		if (!destroyed) destroy();
-		super.finalize();
-	}
+    @Override
+    protected void finalize() throws Throwable {
+        if (!destroyed) destroy();
+        super.finalize();
+    }
 
-	@Override
-	protected synchronized void delete () {
-		if (swigCPtr != 0) {
-			if (swigCMemOwn) {
-				swigCMemOwn = false;
-				CollisionJNI.delete_btDiscreteCollisionDetectorInterface(swigCPtr);
-			}
-			swigCPtr = 0;
-		}
-		super.delete();
-	}
+    @Override
+    protected synchronized void delete() {
+        if (swigCPtr != 0) {
+            if (swigCMemOwn) {
+                swigCMemOwn = false;
+                CollisionJNI.delete_btDiscreteCollisionDetectorInterface(swigCPtr);
+            }
+            swigCPtr = 0;
+        }
+        super.delete();
+    }
 
-	static public class Result extends BulletBase {
-		private long swigCPtr;
+    public void getClosestPoints(btDiscreteCollisionDetectorInterface.ClosestPointInput input,
+                                 btDiscreteCollisionDetectorInterface.Result output, btIDebugDraw debugDraw, boolean swapResults) {
+        CollisionJNI.btDiscreteCollisionDetectorInterface_getClosestPoints__SWIG_0(swigCPtr, this,
+                btDiscreteCollisionDetectorInterface.ClosestPointInput.getCPtr(input), input,
+                btDiscreteCollisionDetectorInterface.Result.getCPtr(output), output, btIDebugDraw.getCPtr(debugDraw), debugDraw,
+                swapResults);
+    }
 
-		protected Result (final String className, long cPtr, boolean cMemoryOwn) {
-			super(className, cPtr, cMemoryOwn);
-			swigCPtr = cPtr;
-		}
+    public void getClosestPoints(btDiscreteCollisionDetectorInterface.ClosestPointInput input,
+                                 btDiscreteCollisionDetectorInterface.Result output, btIDebugDraw debugDraw) {
+        CollisionJNI.btDiscreteCollisionDetectorInterface_getClosestPoints__SWIG_1(swigCPtr, this,
+                btDiscreteCollisionDetectorInterface.ClosestPointInput.getCPtr(input), input,
+                btDiscreteCollisionDetectorInterface.Result.getCPtr(output), output, btIDebugDraw.getCPtr(debugDraw), debugDraw);
+    }
 
-		/** Construct a new Result, normally you should not need this constructor it's intended for low-level usage. */
-		public Result (long cPtr, boolean cMemoryOwn) {
-			this("Result", cPtr, cMemoryOwn);
-			construct();
-		}
+    static public class Result extends BulletBase {
+        private long swigCPtr;
 
-		@Override
-		protected void reset (long cPtr, boolean cMemoryOwn) {
-			if (!destroyed) destroy();
-			super.reset(swigCPtr = cPtr, cMemoryOwn);
-		}
+        protected Result(final String className, long cPtr, boolean cMemoryOwn) {
+            super(className, cPtr, cMemoryOwn);
+            swigCPtr = cPtr;
+        }
 
-		public static long getCPtr (Result obj) {
-			return (obj == null) ? 0 : obj.swigCPtr;
-		}
+        /**
+         * Construct a new Result, normally you should not need this constructor it's intended for low-level usage.
+         */
+        public Result(long cPtr, boolean cMemoryOwn) {
+            this("Result", cPtr, cMemoryOwn);
+            construct();
+        }
 
-		@Override
-		protected void finalize () throws Throwable {
-			if (!destroyed) destroy();
-			super.finalize();
-		}
+        public static long getCPtr(Result obj) {
+            return (obj == null) ? 0 : obj.swigCPtr;
+        }
 
-		@Override
-		protected synchronized void delete () {
-			if (swigCPtr != 0) {
-				if (swigCMemOwn) {
-					swigCMemOwn = false;
-					CollisionJNI.delete_btDiscreteCollisionDetectorInterface_Result(swigCPtr);
-				}
-				swigCPtr = 0;
-			}
-			super.delete();
-		}
+        @Override
+        protected void reset(long cPtr, boolean cMemoryOwn) {
+            if (!destroyed) destroy();
+            super.reset(swigCPtr = cPtr, cMemoryOwn);
+        }
 
-		public void setShapeIdentifiersA (int partId0, int index0) {
-			CollisionJNI.btDiscreteCollisionDetectorInterface_Result_setShapeIdentifiersA(swigCPtr, this, partId0, index0);
-		}
+        @Override
+        protected void finalize() throws Throwable {
+            if (!destroyed) destroy();
+            super.finalize();
+        }
 
-		public void setShapeIdentifiersB (int partId1, int index1) {
-			CollisionJNI.btDiscreteCollisionDetectorInterface_Result_setShapeIdentifiersB(swigCPtr, this, partId1, index1);
-		}
+        @Override
+        protected synchronized void delete() {
+            if (swigCPtr != 0) {
+                if (swigCMemOwn) {
+                    swigCMemOwn = false;
+                    CollisionJNI.delete_btDiscreteCollisionDetectorInterface_Result(swigCPtr);
+                }
+                swigCPtr = 0;
+            }
+            super.delete();
+        }
 
-		public void addContactPoint (Vector3 normalOnBInWorld, Vector3 pointInWorld, float depth) {
-			CollisionJNI.btDiscreteCollisionDetectorInterface_Result_addContactPoint(swigCPtr, this, normalOnBInWorld, pointInWorld,
-				depth);
-		}
+        public void setShapeIdentifiersA(int partId0, int index0) {
+            CollisionJNI.btDiscreteCollisionDetectorInterface_Result_setShapeIdentifiersA(swigCPtr, this, partId0, index0);
+        }
 
-	}
+        public void setShapeIdentifiersB(int partId1, int index1) {
+            CollisionJNI.btDiscreteCollisionDetectorInterface_Result_setShapeIdentifiersB(swigCPtr, this, partId1, index1);
+        }
 
-	static public class ClosestPointInput extends BulletBase {
-		private long swigCPtr;
+        public void addContactPoint(Vector3 normalOnBInWorld, Vector3 pointInWorld, float depth) {
+            CollisionJNI.btDiscreteCollisionDetectorInterface_Result_addContactPoint(swigCPtr, this, normalOnBInWorld, pointInWorld,
+                    depth);
+        }
 
-		protected ClosestPointInput (final String className, long cPtr, boolean cMemoryOwn) {
-			super(className, cPtr, cMemoryOwn);
-			swigCPtr = cPtr;
-		}
+    }
 
-		/** Construct a new ClosestPointInput, normally you should not need this constructor it's intended for low-level usage. */
-		public ClosestPointInput (long cPtr, boolean cMemoryOwn) {
-			this("ClosestPointInput", cPtr, cMemoryOwn);
-			construct();
-		}
+    static public class ClosestPointInput extends BulletBase {
+        private long swigCPtr;
 
-		@Override
-		protected void reset (long cPtr, boolean cMemoryOwn) {
-			if (!destroyed) destroy();
-			super.reset(swigCPtr = cPtr, cMemoryOwn);
-		}
+        protected ClosestPointInput(final String className, long cPtr, boolean cMemoryOwn) {
+            super(className, cPtr, cMemoryOwn);
+            swigCPtr = cPtr;
+        }
 
-		public static long getCPtr (ClosestPointInput obj) {
-			return (obj == null) ? 0 : obj.swigCPtr;
-		}
+        /**
+         * Construct a new ClosestPointInput, normally you should not need this constructor it's intended for low-level usage.
+         */
+        public ClosestPointInput(long cPtr, boolean cMemoryOwn) {
+            this("ClosestPointInput", cPtr, cMemoryOwn);
+            construct();
+        }
 
-		@Override
-		protected void finalize () throws Throwable {
-			if (!destroyed) destroy();
-			super.finalize();
-		}
+        public ClosestPointInput() {
+            this(CollisionJNI.new_btDiscreteCollisionDetectorInterface_ClosestPointInput(), true);
+        }
 
-		@Override
-		protected synchronized void delete () {
-			if (swigCPtr != 0) {
-				if (swigCMemOwn) {
-					swigCMemOwn = false;
-					CollisionJNI.delete_btDiscreteCollisionDetectorInterface_ClosestPointInput(swigCPtr);
-				}
-				swigCPtr = 0;
-			}
-			super.delete();
-		}
+        public static long getCPtr(ClosestPointInput obj) {
+            return (obj == null) ? 0 : obj.swigCPtr;
+        }
 
-		public ClosestPointInput () {
-			this(CollisionJNI.new_btDiscreteCollisionDetectorInterface_ClosestPointInput(), true);
-		}
+        @Override
+        protected void reset(long cPtr, boolean cMemoryOwn) {
+            if (!destroyed) destroy();
+            super.reset(swigCPtr = cPtr, cMemoryOwn);
+        }
 
-		public void setTransformA (btTransform value) {
-			CollisionJNI.btDiscreteCollisionDetectorInterface_ClosestPointInput_transformA_set(swigCPtr, this,
-				btTransform.getCPtr(value), value);
-		}
+        @Override
+        protected void finalize() throws Throwable {
+            if (!destroyed) destroy();
+            super.finalize();
+        }
 
-		public btTransform getTransformA () {
-			long cPtr = CollisionJNI.btDiscreteCollisionDetectorInterface_ClosestPointInput_transformA_get(swigCPtr, this);
-			return (cPtr == 0) ? null : new btTransform(cPtr, false);
-		}
+        @Override
+        protected synchronized void delete() {
+            if (swigCPtr != 0) {
+                if (swigCMemOwn) {
+                    swigCMemOwn = false;
+                    CollisionJNI.delete_btDiscreteCollisionDetectorInterface_ClosestPointInput(swigCPtr);
+                }
+                swigCPtr = 0;
+            }
+            super.delete();
+        }
 
-		public void setTransformB (btTransform value) {
-			CollisionJNI.btDiscreteCollisionDetectorInterface_ClosestPointInput_transformB_set(swigCPtr, this,
-				btTransform.getCPtr(value), value);
-		}
+        public btTransform getTransformA() {
+            long cPtr = CollisionJNI.btDiscreteCollisionDetectorInterface_ClosestPointInput_transformA_get(swigCPtr, this);
+            return (cPtr == 0) ? null : new btTransform(cPtr, false);
+        }
 
-		public btTransform getTransformB () {
-			long cPtr = CollisionJNI.btDiscreteCollisionDetectorInterface_ClosestPointInput_transformB_get(swigCPtr, this);
-			return (cPtr == 0) ? null : new btTransform(cPtr, false);
-		}
+        public void setTransformA(btTransform value) {
+            CollisionJNI.btDiscreteCollisionDetectorInterface_ClosestPointInput_transformA_set(swigCPtr, this,
+                    btTransform.getCPtr(value), value);
+        }
 
-		public void setMaximumDistanceSquared (float value) {
-			CollisionJNI.btDiscreteCollisionDetectorInterface_ClosestPointInput_maximumDistanceSquared_set(swigCPtr, this, value);
-		}
+        public btTransform getTransformB() {
+            long cPtr = CollisionJNI.btDiscreteCollisionDetectorInterface_ClosestPointInput_transformB_get(swigCPtr, this);
+            return (cPtr == 0) ? null : new btTransform(cPtr, false);
+        }
 
-		public float getMaximumDistanceSquared () {
-			return CollisionJNI.btDiscreteCollisionDetectorInterface_ClosestPointInput_maximumDistanceSquared_get(swigCPtr, this);
-		}
+        public void setTransformB(btTransform value) {
+            CollisionJNI.btDiscreteCollisionDetectorInterface_ClosestPointInput_transformB_set(swigCPtr, this,
+                    btTransform.getCPtr(value), value);
+        }
 
-	}
+        public float getMaximumDistanceSquared() {
+            return CollisionJNI.btDiscreteCollisionDetectorInterface_ClosestPointInput_maximumDistanceSquared_get(swigCPtr, this);
+        }
 
-	public void getClosestPoints (btDiscreteCollisionDetectorInterface.ClosestPointInput input,
-		btDiscreteCollisionDetectorInterface.Result output, btIDebugDraw debugDraw, boolean swapResults) {
-		CollisionJNI.btDiscreteCollisionDetectorInterface_getClosestPoints__SWIG_0(swigCPtr, this,
-			btDiscreteCollisionDetectorInterface.ClosestPointInput.getCPtr(input), input,
-			btDiscreteCollisionDetectorInterface.Result.getCPtr(output), output, btIDebugDraw.getCPtr(debugDraw), debugDraw,
-			swapResults);
-	}
+        public void setMaximumDistanceSquared(float value) {
+            CollisionJNI.btDiscreteCollisionDetectorInterface_ClosestPointInput_maximumDistanceSquared_set(swigCPtr, this, value);
+        }
 
-	public void getClosestPoints (btDiscreteCollisionDetectorInterface.ClosestPointInput input,
-		btDiscreteCollisionDetectorInterface.Result output, btIDebugDraw debugDraw) {
-		CollisionJNI.btDiscreteCollisionDetectorInterface_getClosestPoints__SWIG_1(swigCPtr, this,
-			btDiscreteCollisionDetectorInterface.ClosestPointInput.getCPtr(input), input,
-			btDiscreteCollisionDetectorInterface.Result.getCPtr(output), output, btIDebugDraw.getCPtr(debugDraw), debugDraw);
-	}
+    }
 
 }

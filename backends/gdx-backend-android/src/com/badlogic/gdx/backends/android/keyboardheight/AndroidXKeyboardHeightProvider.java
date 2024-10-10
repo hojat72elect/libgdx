@@ -1,4 +1,3 @@
-
 package com.badlogic.gdx.backends.android.keyboardheight;
 
 import android.annotation.SuppressLint;
@@ -13,71 +12,73 @@ import org.jetbrains.annotations.NotNull;
 
 public class AndroidXKeyboardHeightProvider implements KeyboardHeightProvider {
 
-	private final View view;
-	private final Activity activity;
-	private KeyboardHeightObserver observer;
+    /**
+     * The cached landscape height of the keyboard
+     */
+    private static int keyboardLandscapeHeight;
+    /**
+     * The cached portrait height of the keyboard
+     */
+    private static int keyboardPortraitHeight;
+    private final View view;
+    private final Activity activity;
+    private KeyboardHeightObserver observer;
 
-	/** The cached landscape height of the keyboard */
-	private static int keyboardLandscapeHeight;
+    public AndroidXKeyboardHeightProvider(final Activity activity) {
+        this.view = activity.findViewById(android.R.id.content);
+        this.activity = activity;
+    }
 
-	/** The cached portrait height of the keyboard */
-	private static int keyboardPortraitHeight;
+    @Override
+    public void start() {
+        ViewCompat.setOnApplyWindowInsetsListener(view, new OnApplyWindowInsetsListener() {
+            @NotNull
+            @Override
+            public WindowInsetsCompat onApplyWindowInsets(@NotNull View v, @NotNull WindowInsetsCompat windowInsets) {
+                if (observer == null) return windowInsets;
+                int orientation = activity.getResources().getConfiguration().orientation;
+                boolean isVisible = windowInsets.isVisible(WindowInsetsCompat.Type.ime());
+                if (isVisible) {
+                    Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.ime());
+                    if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                        keyboardPortraitHeight = insets.bottom;
+                    } else {
+                        keyboardLandscapeHeight = insets.bottom;
+                    }
 
-	public AndroidXKeyboardHeightProvider (final Activity activity) {
-		this.view = activity.findViewById(android.R.id.content);
-		this.activity = activity;
-	}
+                    // I don't know whether I went completly insane now, but WindowInsets.Type.all() isn't existing?
+                    @SuppressLint("WrongConstant")
+                    int leftInset = windowInsets.getInsets(0xFFFFFFFF).left;
+                    @SuppressLint("WrongConstant")
+                    int rightInset = windowInsets.getInsets(0xFFFFFFFF).right;
 
-	@Override
-	public void start () {
-		ViewCompat.setOnApplyWindowInsetsListener(view, new OnApplyWindowInsetsListener() {
-			@NotNull
-			@Override
-			public WindowInsetsCompat onApplyWindowInsets (@NotNull View v, @NotNull WindowInsetsCompat windowInsets) {
-				if (observer == null) return windowInsets;
-				int orientation = activity.getResources().getConfiguration().orientation;
-				boolean isVisible = windowInsets.isVisible(WindowInsetsCompat.Type.ime());
-				if (isVisible) {
-					Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.ime());
-					if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-						keyboardPortraitHeight = insets.bottom;
-					} else {
-						keyboardLandscapeHeight = insets.bottom;
-					}
+                    observer.onKeyboardHeightChanged(insets.bottom, leftInset, rightInset, orientation);
+                } else {
+                    observer.onKeyboardHeightChanged(0, 0, 0, orientation);
+                }
 
-					// I don't know whether I went completly insane now, but WindowInsets.Type.all() isn't existing?
-					@SuppressLint("WrongConstant")
-					int leftInset = windowInsets.getInsets(0xFFFFFFFF).left;
-					@SuppressLint("WrongConstant")
-					int rightInset = windowInsets.getInsets(0xFFFFFFFF).right;
+                return windowInsets;
+            }
+        });
+    }
 
-					observer.onKeyboardHeightChanged(insets.bottom, leftInset, rightInset, orientation);
-				} else {
-					observer.onKeyboardHeightChanged(0, 0, 0, orientation);
-				}
+    @Override
+    public void close() {
+        ViewCompat.setOnApplyWindowInsetsListener(view, null);
+    }
 
-				return windowInsets;
-			}
-		});
-	}
+    @Override
+    public void setKeyboardHeightObserver(KeyboardHeightObserver observer) {
+        this.observer = observer;
+    }
 
-	@Override
-	public void close () {
-		ViewCompat.setOnApplyWindowInsetsListener(view, null);
-	}
+    @Override
+    public int getKeyboardLandscapeHeight() {
+        return keyboardLandscapeHeight;
+    }
 
-	@Override
-	public void setKeyboardHeightObserver (KeyboardHeightObserver observer) {
-		this.observer = observer;
-	}
-
-	@Override
-	public int getKeyboardLandscapeHeight () {
-		return keyboardLandscapeHeight;
-	}
-
-	@Override
-	public int getKeyboardPortraitHeight () {
-		return keyboardPortraitHeight;
-	}
+    @Override
+    public int getKeyboardPortraitHeight() {
+        return keyboardPortraitHeight;
+    }
 }

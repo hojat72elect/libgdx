@@ -1,7 +1,7 @@
 name: Fix formatting
 
-on: [push]
-permissions: 
+on: [ push ]
+permissions:
   contents: write
 
 jobs:

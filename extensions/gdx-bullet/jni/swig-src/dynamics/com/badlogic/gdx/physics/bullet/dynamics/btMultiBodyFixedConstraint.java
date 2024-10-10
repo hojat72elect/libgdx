@@ -14,82 +14,84 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.Matrix3;
 
 public class btMultiBodyFixedConstraint extends btMultiBodyConstraint {
-	private long swigCPtr;
+    private long swigCPtr;
 
-	protected btMultiBodyFixedConstraint (final String className, long cPtr, boolean cMemoryOwn) {
-		super(className, DynamicsJNI.btMultiBodyFixedConstraint_SWIGUpcast(cPtr), cMemoryOwn);
-		swigCPtr = cPtr;
-	}
+    protected btMultiBodyFixedConstraint(final String className, long cPtr, boolean cMemoryOwn) {
+        super(className, DynamicsJNI.btMultiBodyFixedConstraint_SWIGUpcast(cPtr), cMemoryOwn);
+        swigCPtr = cPtr;
+    }
 
-	/** Construct a new btMultiBodyFixedConstraint, normally you should not need this constructor it's intended for low-level
-	 * usage. */
-	public btMultiBodyFixedConstraint (long cPtr, boolean cMemoryOwn) {
-		this("btMultiBodyFixedConstraint", cPtr, cMemoryOwn);
-		construct();
-	}
+    /**
+     * Construct a new btMultiBodyFixedConstraint, normally you should not need this constructor it's intended for low-level
+     * usage.
+     */
+    public btMultiBodyFixedConstraint(long cPtr, boolean cMemoryOwn) {
+        this("btMultiBodyFixedConstraint", cPtr, cMemoryOwn);
+        construct();
+    }
 
-	@Override
-	protected void reset (long cPtr, boolean cMemoryOwn) {
-		if (!destroyed) destroy();
-		super.reset(DynamicsJNI.btMultiBodyFixedConstraint_SWIGUpcast(swigCPtr = cPtr), cMemoryOwn);
-	}
+    public btMultiBodyFixedConstraint(btMultiBody body, int link, btRigidBody bodyB, Vector3 pivotInA, Vector3 pivotInB,
+                                      Matrix3 frameInA, Matrix3 frameInB) {
+        this(DynamicsJNI.new_btMultiBodyFixedConstraint__SWIG_0(btMultiBody.getCPtr(body), body, link, btRigidBody.getCPtr(bodyB),
+                bodyB, pivotInA, pivotInB, frameInA, frameInB), true);
+    }
 
-	public static long getCPtr (btMultiBodyFixedConstraint obj) {
-		return (obj == null) ? 0 : obj.swigCPtr;
-	}
+    public btMultiBodyFixedConstraint(btMultiBody bodyA, int linkA, btMultiBody bodyB, int linkB, Vector3 pivotInA,
+                                      Vector3 pivotInB, Matrix3 frameInA, Matrix3 frameInB) {
+        this(DynamicsJNI.new_btMultiBodyFixedConstraint__SWIG_1(btMultiBody.getCPtr(bodyA), bodyA, linkA,
+                btMultiBody.getCPtr(bodyB), bodyB, linkB, pivotInA, pivotInB, frameInA, frameInB), true);
+    }
 
-	@Override
-	protected void finalize () throws Throwable {
-		if (!destroyed) destroy();
-		super.finalize();
-	}
+    public static long getCPtr(btMultiBodyFixedConstraint obj) {
+        return (obj == null) ? 0 : obj.swigCPtr;
+    }
 
-	@Override
-	protected synchronized void delete () {
-		if (swigCPtr != 0) {
-			if (swigCMemOwn) {
-				swigCMemOwn = false;
-				DynamicsJNI.delete_btMultiBodyFixedConstraint(swigCPtr);
-			}
-			swigCPtr = 0;
-		}
-		super.delete();
-	}
+    @Override
+    protected void reset(long cPtr, boolean cMemoryOwn) {
+        if (!destroyed) destroy();
+        super.reset(DynamicsJNI.btMultiBodyFixedConstraint_SWIGUpcast(swigCPtr = cPtr), cMemoryOwn);
+    }
 
-	public btMultiBodyFixedConstraint (btMultiBody body, int link, btRigidBody bodyB, Vector3 pivotInA, Vector3 pivotInB,
-		Matrix3 frameInA, Matrix3 frameInB) {
-		this(DynamicsJNI.new_btMultiBodyFixedConstraint__SWIG_0(btMultiBody.getCPtr(body), body, link, btRigidBody.getCPtr(bodyB),
-			bodyB, pivotInA, pivotInB, frameInA, frameInB), true);
-	}
+    @Override
+    protected void finalize() throws Throwable {
+        if (!destroyed) destroy();
+        super.finalize();
+    }
 
-	public btMultiBodyFixedConstraint (btMultiBody bodyA, int linkA, btMultiBody bodyB, int linkB, Vector3 pivotInA,
-		Vector3 pivotInB, Matrix3 frameInA, Matrix3 frameInB) {
-		this(DynamicsJNI.new_btMultiBodyFixedConstraint__SWIG_1(btMultiBody.getCPtr(bodyA), bodyA, linkA,
-			btMultiBody.getCPtr(bodyB), bodyB, linkB, pivotInA, pivotInB, frameInA, frameInB), true);
-	}
+    @Override
+    protected synchronized void delete() {
+        if (swigCPtr != 0) {
+            if (swigCMemOwn) {
+                swigCMemOwn = false;
+                DynamicsJNI.delete_btMultiBodyFixedConstraint(swigCPtr);
+            }
+            swigCPtr = 0;
+        }
+        super.delete();
+    }
 
-	public Vector3 getPivotInA () {
-		return DynamicsJNI.btMultiBodyFixedConstraint_getPivotInA(swigCPtr, this);
-	}
+    public Vector3 getPivotInA() {
+        return DynamicsJNI.btMultiBodyFixedConstraint_getPivotInA(swigCPtr, this);
+    }
 
-	public void setPivotInA (Vector3 pivotInA) {
-		DynamicsJNI.btMultiBodyFixedConstraint_setPivotInA(swigCPtr, this, pivotInA);
-	}
+    public void setPivotInA(Vector3 pivotInA) {
+        DynamicsJNI.btMultiBodyFixedConstraint_setPivotInA(swigCPtr, this, pivotInA);
+    }
 
-	public Vector3 getPivotInB () {
-		return DynamicsJNI.btMultiBodyFixedConstraint_getPivotInB(swigCPtr, this);
-	}
+    public Vector3 getPivotInB() {
+        return DynamicsJNI.btMultiBodyFixedConstraint_getPivotInB(swigCPtr, this);
+    }
 
-	public Matrix3 getFrameInA () {
-		return DynamicsJNI.btMultiBodyFixedConstraint_getFrameInA(swigCPtr, this);
-	}
+    public Matrix3 getFrameInA() {
+        return DynamicsJNI.btMultiBodyFixedConstraint_getFrameInA(swigCPtr, this);
+    }
 
-	public void setFrameInA (Matrix3 frameInA) {
-		DynamicsJNI.btMultiBodyFixedConstraint_setFrameInA(swigCPtr, this, frameInA);
-	}
+    public void setFrameInA(Matrix3 frameInA) {
+        DynamicsJNI.btMultiBodyFixedConstraint_setFrameInA(swigCPtr, this, frameInA);
+    }
 
-	public Matrix3 getFrameInB () {
-		return DynamicsJNI.btMultiBodyFixedConstraint_getFrameInB(swigCPtr, this);
-	}
+    public Matrix3 getFrameInB() {
+        return DynamicsJNI.btMultiBodyFixedConstraint_getFrameInB(swigCPtr, this);
+    }
 
 }

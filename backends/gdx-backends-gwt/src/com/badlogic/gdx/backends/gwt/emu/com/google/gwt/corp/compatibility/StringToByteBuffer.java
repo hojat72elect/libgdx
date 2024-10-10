@@ -26,8 +26,10 @@ package com.google.gwt.corp.compatibility;
 
 import java.nio.ByteBuffer;
 
-/** Ugly hack to get gwt internal stuff into nio, see StringByteBuffer in nio */
+/**
+ * Ugly hack to get gwt internal stuff into nio, see StringByteBuffer in nio
+ */
 
 public interface StringToByteBuffer {
-	ByteBuffer stringToByteBuffer (String s);
+    ByteBuffer stringToByteBuffer(String s);
 }

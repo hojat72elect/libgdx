@@ -11,113 +11,115 @@ package com.badlogic.gdx.physics.bullet.collision;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 
 public class btCollisionDispatcher extends btDispatcher {
-	private long swigCPtr;
+    private long swigCPtr;
 
-	protected btCollisionDispatcher (final String className, long cPtr, boolean cMemoryOwn) {
-		super(className, CollisionJNI.btCollisionDispatcher_SWIGUpcast(cPtr), cMemoryOwn);
-		swigCPtr = cPtr;
-	}
+    protected btCollisionDispatcher(final String className, long cPtr, boolean cMemoryOwn) {
+        super(className, CollisionJNI.btCollisionDispatcher_SWIGUpcast(cPtr), cMemoryOwn);
+        swigCPtr = cPtr;
+    }
 
-	/** Construct a new btCollisionDispatcher, normally you should not need this constructor it's intended for low-level usage. */
-	public btCollisionDispatcher (long cPtr, boolean cMemoryOwn) {
-		this("btCollisionDispatcher", cPtr, cMemoryOwn);
-		construct();
-	}
+    /**
+     * Construct a new btCollisionDispatcher, normally you should not need this constructor it's intended for low-level usage.
+     */
+    public btCollisionDispatcher(long cPtr, boolean cMemoryOwn) {
+        this("btCollisionDispatcher", cPtr, cMemoryOwn);
+        construct();
+    }
 
-	@Override
-	protected void reset (long cPtr, boolean cMemoryOwn) {
-		if (!destroyed) destroy();
-		super.reset(CollisionJNI.btCollisionDispatcher_SWIGUpcast(swigCPtr = cPtr), cMemoryOwn);
-	}
+    public btCollisionDispatcher(btCollisionConfiguration collisionConfiguration) {
+        this(
+                CollisionJNI.new_btCollisionDispatcher(btCollisionConfiguration.getCPtr(collisionConfiguration), collisionConfiguration),
+                true);
+    }
 
-	public static long getCPtr (btCollisionDispatcher obj) {
-		return (obj == null) ? 0 : obj.swigCPtr;
-	}
+    public static long getCPtr(btCollisionDispatcher obj) {
+        return (obj == null) ? 0 : obj.swigCPtr;
+    }
 
-	@Override
-	protected void finalize () throws Throwable {
-		if (!destroyed) destroy();
-		super.finalize();
-	}
+    public static void defaultNearCallback(btBroadphasePair collisionPair, btCollisionDispatcher dispatcher,
+                                           btDispatcherInfo dispatchInfo) {
+        CollisionJNI.btCollisionDispatcher_defaultNearCallback(collisionPair, btCollisionDispatcher.getCPtr(dispatcher), dispatcher,
+                btDispatcherInfo.getCPtr(dispatchInfo), dispatchInfo);
+    }
 
-	@Override
-	protected synchronized void delete () {
-		if (swigCPtr != 0) {
-			if (swigCMemOwn) {
-				swigCMemOwn = false;
-				CollisionJNI.delete_btCollisionDispatcher(swigCPtr);
-			}
-			swigCPtr = 0;
-		}
-		super.delete();
-	}
+    @Override
+    protected void reset(long cPtr, boolean cMemoryOwn) {
+        if (!destroyed) destroy();
+        super.reset(CollisionJNI.btCollisionDispatcher_SWIGUpcast(swigCPtr = cPtr), cMemoryOwn);
+    }
 
-	public int getDispatcherFlags () {
-		return CollisionJNI.btCollisionDispatcher_getDispatcherFlags(swigCPtr, this);
-	}
+    @Override
+    protected void finalize() throws Throwable {
+        if (!destroyed) destroy();
+        super.finalize();
+    }
 
-	public void setDispatcherFlags (int flags) {
-		CollisionJNI.btCollisionDispatcher_setDispatcherFlags(swigCPtr, this, flags);
-	}
+    @Override
+    protected synchronized void delete() {
+        if (swigCPtr != 0) {
+            if (swigCMemOwn) {
+                swigCMemOwn = false;
+                CollisionJNI.delete_btCollisionDispatcher(swigCPtr);
+            }
+            swigCPtr = 0;
+        }
+        super.delete();
+    }
 
-	public void registerCollisionCreateFunc (int proxyType0, int proxyType1, btCollisionAlgorithmCreateFunc createFunc) {
-		CollisionJNI.btCollisionDispatcher_registerCollisionCreateFunc(swigCPtr, this, proxyType0, proxyType1,
-			btCollisionAlgorithmCreateFunc.getCPtr(createFunc), createFunc);
-	}
+    public int getDispatcherFlags() {
+        return CollisionJNI.btCollisionDispatcher_getDispatcherFlags(swigCPtr, this);
+    }
 
-	public void registerClosestPointsCreateFunc (int proxyType0, int proxyType1, btCollisionAlgorithmCreateFunc createFunc) {
-		CollisionJNI.btCollisionDispatcher_registerClosestPointsCreateFunc(swigCPtr, this, proxyType0, proxyType1,
-			btCollisionAlgorithmCreateFunc.getCPtr(createFunc), createFunc);
-	}
+    public void setDispatcherFlags(int flags) {
+        CollisionJNI.btCollisionDispatcher_setDispatcherFlags(swigCPtr, this, flags);
+    }
 
-	public btPersistentManifold getManifoldByIndexInternalConst (int index) {
-		long cPtr = CollisionJNI.btCollisionDispatcher_getManifoldByIndexInternalConst(swigCPtr, this, index);
-		return (cPtr == 0) ? null : new btPersistentManifold(cPtr, false);
-	}
+    public void registerCollisionCreateFunc(int proxyType0, int proxyType1, btCollisionAlgorithmCreateFunc createFunc) {
+        CollisionJNI.btCollisionDispatcher_registerCollisionCreateFunc(swigCPtr, this, proxyType0, proxyType1,
+                btCollisionAlgorithmCreateFunc.getCPtr(createFunc), createFunc);
+    }
 
-	public btCollisionDispatcher (btCollisionConfiguration collisionConfiguration) {
-		this(
-			CollisionJNI.new_btCollisionDispatcher(btCollisionConfiguration.getCPtr(collisionConfiguration), collisionConfiguration),
-			true);
-	}
+    public void registerClosestPointsCreateFunc(int proxyType0, int proxyType1, btCollisionAlgorithmCreateFunc createFunc) {
+        CollisionJNI.btCollisionDispatcher_registerClosestPointsCreateFunc(swigCPtr, this, proxyType0, proxyType1,
+                btCollisionAlgorithmCreateFunc.getCPtr(createFunc), createFunc);
+    }
 
-	public void setNearCallback (
-		SWIGTYPE_p_f_r_btBroadphasePair_r_btCollisionDispatcher_r_q_const__btDispatcherInfo__void nearCallback) {
-		CollisionJNI.btCollisionDispatcher_setNearCallback(swigCPtr, this,
-			SWIGTYPE_p_f_r_btBroadphasePair_r_btCollisionDispatcher_r_q_const__btDispatcherInfo__void.getCPtr(nearCallback));
-	}
+    public btPersistentManifold getManifoldByIndexInternalConst(int index) {
+        long cPtr = CollisionJNI.btCollisionDispatcher_getManifoldByIndexInternalConst(swigCPtr, this, index);
+        return (cPtr == 0) ? null : new btPersistentManifold(cPtr, false);
+    }
 
-	public SWIGTYPE_p_f_r_btBroadphasePair_r_btCollisionDispatcher_r_q_const__btDispatcherInfo__void getNearCallback () {
-		long cPtr = CollisionJNI.btCollisionDispatcher_getNearCallback(swigCPtr, this);
-		return (cPtr == 0) ? null
-			: new SWIGTYPE_p_f_r_btBroadphasePair_r_btCollisionDispatcher_r_q_const__btDispatcherInfo__void(cPtr, false);
-	}
+    public SWIGTYPE_p_f_r_btBroadphasePair_r_btCollisionDispatcher_r_q_const__btDispatcherInfo__void getNearCallback() {
+        long cPtr = CollisionJNI.btCollisionDispatcher_getNearCallback(swigCPtr, this);
+        return (cPtr == 0) ? null
+                : new SWIGTYPE_p_f_r_btBroadphasePair_r_btCollisionDispatcher_r_q_const__btDispatcherInfo__void(cPtr, false);
+    }
 
-	public static void defaultNearCallback (btBroadphasePair collisionPair, btCollisionDispatcher dispatcher,
-		btDispatcherInfo dispatchInfo) {
-		CollisionJNI.btCollisionDispatcher_defaultNearCallback(collisionPair, btCollisionDispatcher.getCPtr(dispatcher), dispatcher,
-			btDispatcherInfo.getCPtr(dispatchInfo), dispatchInfo);
-	}
+    public void setNearCallback(
+            SWIGTYPE_p_f_r_btBroadphasePair_r_btCollisionDispatcher_r_q_const__btDispatcherInfo__void nearCallback) {
+        CollisionJNI.btCollisionDispatcher_setNearCallback(swigCPtr, this,
+                SWIGTYPE_p_f_r_btBroadphasePair_r_btCollisionDispatcher_r_q_const__btDispatcherInfo__void.getCPtr(nearCallback));
+    }
 
-	public btCollisionConfiguration getCollisionConfiguration () {
-		long cPtr = CollisionJNI.btCollisionDispatcher_getCollisionConfiguration(swigCPtr, this);
-		return (cPtr == 0) ? null : new btCollisionConfiguration(cPtr, false);
-	}
+    public btCollisionConfiguration getCollisionConfiguration() {
+        long cPtr = CollisionJNI.btCollisionDispatcher_getCollisionConfiguration(swigCPtr, this);
+        return (cPtr == 0) ? null : new btCollisionConfiguration(cPtr, false);
+    }
 
-	public btCollisionConfiguration getCollisionConfigurationConst () {
-		long cPtr = CollisionJNI.btCollisionDispatcher_getCollisionConfigurationConst(swigCPtr, this);
-		return (cPtr == 0) ? null : new btCollisionConfiguration(cPtr, false);
-	}
+    public void setCollisionConfiguration(btCollisionConfiguration config) {
+        CollisionJNI.btCollisionDispatcher_setCollisionConfiguration(swigCPtr, this, btCollisionConfiguration.getCPtr(config),
+                config);
+    }
 
-	public void setCollisionConfiguration (btCollisionConfiguration config) {
-		CollisionJNI.btCollisionDispatcher_setCollisionConfiguration(swigCPtr, this, btCollisionConfiguration.getCPtr(config),
-			config);
-	}
+    public btCollisionConfiguration getCollisionConfigurationConst() {
+        long cPtr = CollisionJNI.btCollisionDispatcher_getCollisionConfigurationConst(swigCPtr, this);
+        return (cPtr == 0) ? null : new btCollisionConfiguration(cPtr, false);
+    }
 
-	public final static class DispatcherFlags {
-		public final static int CD_STATIC_STATIC_REPORTED = 1;
-		public final static int CD_USE_RELATIVE_CONTACT_BREAKING_THRESHOLD = 2;
-		public final static int CD_DISABLE_CONTACTPOOL_DYNAMIC_ALLOCATION = 4;
-	}
+    public final static class DispatcherFlags {
+        public final static int CD_STATIC_STATIC_REPORTED = 1;
+        public final static int CD_USE_RELATIVE_CONTACT_BREAKING_THRESHOLD = 2;
+        public final static int CD_DISABLE_CONTACTPOOL_DYNAMIC_ALLOCATION = 4;
+    }
 
 }

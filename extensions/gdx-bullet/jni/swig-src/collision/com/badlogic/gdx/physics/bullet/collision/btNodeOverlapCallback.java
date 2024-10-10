@@ -12,69 +12,71 @@ import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 
 public class btNodeOverlapCallback extends BulletBase {
-	private long swigCPtr;
+    private long swigCPtr;
 
-	protected btNodeOverlapCallback (final String className, long cPtr, boolean cMemoryOwn) {
-		super(className, cPtr, cMemoryOwn);
-		swigCPtr = cPtr;
-	}
+    protected btNodeOverlapCallback(final String className, long cPtr, boolean cMemoryOwn) {
+        super(className, cPtr, cMemoryOwn);
+        swigCPtr = cPtr;
+    }
 
-	/** Construct a new btNodeOverlapCallback, normally you should not need this constructor it's intended for low-level usage. */
-	public btNodeOverlapCallback (long cPtr, boolean cMemoryOwn) {
-		this("btNodeOverlapCallback", cPtr, cMemoryOwn);
-		construct();
-	}
+    /**
+     * Construct a new btNodeOverlapCallback, normally you should not need this constructor it's intended for low-level usage.
+     */
+    public btNodeOverlapCallback(long cPtr, boolean cMemoryOwn) {
+        this("btNodeOverlapCallback", cPtr, cMemoryOwn);
+        construct();
+    }
 
-	@Override
-	protected void reset (long cPtr, boolean cMemoryOwn) {
-		if (!destroyed) destroy();
-		super.reset(swigCPtr = cPtr, cMemoryOwn);
-	}
+    public btNodeOverlapCallback() {
+        this(CollisionJNI.new_btNodeOverlapCallback(), true);
+        CollisionJNI.btNodeOverlapCallback_director_connect(this, swigCPtr, swigCMemOwn, true);
+    }
 
-	public static long getCPtr (btNodeOverlapCallback obj) {
-		return (obj == null) ? 0 : obj.swigCPtr;
-	}
+    public static long getCPtr(btNodeOverlapCallback obj) {
+        return (obj == null) ? 0 : obj.swigCPtr;
+    }
 
-	@Override
-	protected void finalize () throws Throwable {
-		if (!destroyed) destroy();
-		super.finalize();
-	}
+    @Override
+    protected void reset(long cPtr, boolean cMemoryOwn) {
+        if (!destroyed) destroy();
+        super.reset(swigCPtr = cPtr, cMemoryOwn);
+    }
 
-	@Override
-	protected synchronized void delete () {
-		if (swigCPtr != 0) {
-			if (swigCMemOwn) {
-				swigCMemOwn = false;
-				CollisionJNI.delete_btNodeOverlapCallback(swigCPtr);
-			}
-			swigCPtr = 0;
-		}
-		super.delete();
-	}
+    @Override
+    protected void finalize() throws Throwable {
+        if (!destroyed) destroy();
+        super.finalize();
+    }
 
-	protected void swigDirectorDisconnect () {
-		swigCMemOwn = false;
-		delete();
-	}
+    @Override
+    protected synchronized void delete() {
+        if (swigCPtr != 0) {
+            if (swigCMemOwn) {
+                swigCMemOwn = false;
+                CollisionJNI.delete_btNodeOverlapCallback(swigCPtr);
+            }
+            swigCPtr = 0;
+        }
+        super.delete();
+    }
 
-	public void swigReleaseOwnership () {
-		swigCMemOwn = false;
-		CollisionJNI.btNodeOverlapCallback_change_ownership(this, swigCPtr, false);
-	}
+    protected void swigDirectorDisconnect() {
+        swigCMemOwn = false;
+        delete();
+    }
 
-	public void swigTakeOwnership () {
-		swigCMemOwn = true;
-		CollisionJNI.btNodeOverlapCallback_change_ownership(this, swigCPtr, true);
-	}
+    public void swigReleaseOwnership() {
+        swigCMemOwn = false;
+        CollisionJNI.btNodeOverlapCallback_change_ownership(this, swigCPtr, false);
+    }
 
-	public void processNode (int subPart, int triangleIndex) {
-		CollisionJNI.btNodeOverlapCallback_processNode(swigCPtr, this, subPart, triangleIndex);
-	}
+    public void swigTakeOwnership() {
+        swigCMemOwn = true;
+        CollisionJNI.btNodeOverlapCallback_change_ownership(this, swigCPtr, true);
+    }
 
-	public btNodeOverlapCallback () {
-		this(CollisionJNI.new_btNodeOverlapCallback(), true);
-		CollisionJNI.btNodeOverlapCallback_director_connect(this, swigCPtr, swigCMemOwn, true);
-	}
+    public void processNode(int subPart, int triangleIndex) {
+        CollisionJNI.btNodeOverlapCallback_processNode(swigCPtr, this, subPart, triangleIndex);
+    }
 
 }

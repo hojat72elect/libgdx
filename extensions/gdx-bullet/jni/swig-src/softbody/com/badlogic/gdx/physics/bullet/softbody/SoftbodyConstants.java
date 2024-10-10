@@ -13,5 +13,5 @@ import com.badlogic.gdx.physics.bullet.collision.*;
 import com.badlogic.gdx.physics.bullet.dynamics.*;
 
 public interface SoftbodyConstants {
-	public final static String btSoftBodyDataName = "btSoftBodyFloatData";
+    public final static String btSoftBodyDataName = "btSoftBodyFloatData";
 }

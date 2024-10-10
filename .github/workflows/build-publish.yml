@@ -236,7 +236,7 @@ jobs:
 
   pack-natives:
     runs-on: ubuntu-20.04
-    needs: [natives-macos, natives-linux, natives-windows, natives-ios, natives-android]
+    needs: [ natives-macos, natives-linux, natives-windows, natives-ios, natives-android ]
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -390,7 +390,7 @@ jobs:
         run: |
           ./gradlew clean fetchNatives
           ./gradlew buildRunnables build
-          
+
       - name: Upload artifacts to S3
         if: env.AWS_ACCESS_KEY_ID != null
         run: |

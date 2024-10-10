@@ -17,61 +17,67 @@
 package com.badlogic.gdx.backends.iosrobovm.custom;
 
 /*<imports>*/
-import org.robovm.objc.*;
-import org.robovm.objc.annotation.*;
-import org.robovm.rt.bro.annotation.*;
-import org.robovm.rt.bro.ptr.*;
-import org.robovm.apple.foundation.*;
+
+import org.robovm.apple.foundation.NSObject;
+import org.robovm.objc.ObjCRuntime;
+import org.robovm.objc.annotation.Method;
+import org.robovm.objc.annotation.NativeClass;
+import org.robovm.objc.annotation.Property;
+import org.robovm.rt.bro.annotation.Library;
+import org.robovm.rt.bro.ptr.Ptr;
 /*</imports>*/
 
 /*<javadoc>*/
-/** @since Available in iOS 2.0 and later.
- * @deprecated Deprecated in iOS 5.0. */
+
+/**
+ * @since Available in iOS 2.0 and later.
+ * @deprecated Deprecated in iOS 5.0.
+ */
 @Deprecated
 /* </javadoc> */
 /* <annotations> */
 @Library("UIKit")
 @NativeClass
 /* </annotations> */
-/* <visibility> */public/* </visibility> */ class /* <name> */ UIAccelerometer/* </name> */
-	extends /* <extends> */NSObject/* </extends> */
-/* <implements> *//* </implements> */ {
+/* <visibility> */ public/* </visibility> */ class /* <name> */ UIAccelerometer/* </name> */
+        extends /* <extends> */NSObject/* </extends> */
+        /* <implements> *//* </implements> */ {
 
-	/* <ptr> */public static class UIAccelerometerPtr extends Ptr<UIAccelerometer, UIAccelerometerPtr> {
-	}
+    /* </ptr> */
+    /* <bind> */static {
+        ObjCRuntime.bind(UIAccelerometer.class);
+    }/* </bind> */
 
-	/* </ptr> */
-	/* <bind> */static {
-		ObjCRuntime.bind(UIAccelerometer.class);
-	}/* </bind> */
-	/* <constants> *//* </constants> */
-	/* <constructors> */
+    public UIAccelerometer() {
+    }
+    /* <constants> *//* </constants> */
+    /* <constructors> */
 
-	public UIAccelerometer () {
-	}
+    protected UIAccelerometer(SkipInit skipInit) {
+        super(skipInit);
+    }
 
-	protected UIAccelerometer (SkipInit skipInit) {
-		super(skipInit);
-	}
+    /* </properties> */
+    /* <members> *//* </members> */
+    /* <methods> */
+    @Method(selector = "sharedAccelerometer")
+    public static native UIAccelerometer getSharedAccelerometer();
 
-	/* </constructors> */
-	/* <properties> */
-	@Property(selector = "updateInterval")
-	public native double getUpdateInterval ();
+    /* </constructors> */
+    /* <properties> */
+    @Property(selector = "updateInterval")
+    public native double getUpdateInterval();
 
-	@Property(selector = "setUpdateInterval:")
-	public native void setUpdateInterval (double v);
+    @Property(selector = "setUpdateInterval:")
+    public native void setUpdateInterval(double v);
 
-	@Property(selector = "delegate")
-	public native UIAccelerometerDelegate getDelegate ();
+    @Property(selector = "delegate")
+    public native UIAccelerometerDelegate getDelegate();
 
-	@Property(selector = "setDelegate:", strongRef = true)
-	public native void setDelegate (UIAccelerometerDelegate v);
+    @Property(selector = "setDelegate:", strongRef = true)
+    public native void setDelegate(UIAccelerometerDelegate v);
 
-	/* </properties> */
-	/* <members> *//* </members> */
-	/* <methods> */
-	@Method(selector = "sharedAccelerometer")
-	public static native UIAccelerometer getSharedAccelerometer ();
-	/* </methods> */
+    /* <ptr> */public static class UIAccelerometerPtr extends Ptr<UIAccelerometer, UIAccelerometerPtr> {
+    }
+    /* </methods> */
 }

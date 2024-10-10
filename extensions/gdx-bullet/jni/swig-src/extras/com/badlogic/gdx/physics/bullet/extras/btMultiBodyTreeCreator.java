@@ -8,63 +8,63 @@
 
 package com.badlogic.gdx.physics.bullet.extras;
 
-import com.badlogic.gdx.physics.bullet.linearmath.*;
-import com.badlogic.gdx.physics.bullet.collision.*;
-import com.badlogic.gdx.physics.bullet.dynamics.*;
+import com.badlogic.gdx.physics.bullet.dynamics.btMultiBody;
 
 public class btMultiBodyTreeCreator extends MultiBodyTreeCreator {
-	private long swigCPtr;
+    private long swigCPtr;
 
-	protected btMultiBodyTreeCreator (final String className, long cPtr, boolean cMemoryOwn) {
-		super(className, ExtrasJNI.btMultiBodyTreeCreator_SWIGUpcast(cPtr), cMemoryOwn);
-		swigCPtr = cPtr;
-	}
+    protected btMultiBodyTreeCreator(final String className, long cPtr, boolean cMemoryOwn) {
+        super(className, ExtrasJNI.btMultiBodyTreeCreator_SWIGUpcast(cPtr), cMemoryOwn);
+        swigCPtr = cPtr;
+    }
 
-	/** Construct a new btMultiBodyTreeCreator, normally you should not need this constructor it's intended for low-level usage. */
-	public btMultiBodyTreeCreator (long cPtr, boolean cMemoryOwn) {
-		this("btMultiBodyTreeCreator", cPtr, cMemoryOwn);
-		construct();
-	}
+    /**
+     * Construct a new btMultiBodyTreeCreator, normally you should not need this constructor it's intended for low-level usage.
+     */
+    public btMultiBodyTreeCreator(long cPtr, boolean cMemoryOwn) {
+        this("btMultiBodyTreeCreator", cPtr, cMemoryOwn);
+        construct();
+    }
 
-	@Override
-	protected void reset (long cPtr, boolean cMemoryOwn) {
-		if (!destroyed) destroy();
-		super.reset(ExtrasJNI.btMultiBodyTreeCreator_SWIGUpcast(swigCPtr = cPtr), cMemoryOwn);
-	}
+    public btMultiBodyTreeCreator() {
+        this(ExtrasJNI.new_btMultiBodyTreeCreator(), true);
+    }
 
-	public static long getCPtr (btMultiBodyTreeCreator obj) {
-		return (obj == null) ? 0 : obj.swigCPtr;
-	}
+    public static long getCPtr(btMultiBodyTreeCreator obj) {
+        return (obj == null) ? 0 : obj.swigCPtr;
+    }
 
-	@Override
-	protected void finalize () throws Throwable {
-		if (!destroyed) destroy();
-		super.finalize();
-	}
+    @Override
+    protected void reset(long cPtr, boolean cMemoryOwn) {
+        if (!destroyed) destroy();
+        super.reset(ExtrasJNI.btMultiBodyTreeCreator_SWIGUpcast(swigCPtr = cPtr), cMemoryOwn);
+    }
 
-	@Override
-	protected synchronized void delete () {
-		if (swigCPtr != 0) {
-			if (swigCMemOwn) {
-				swigCMemOwn = false;
-				ExtrasJNI.delete_btMultiBodyTreeCreator(swigCPtr);
-			}
-			swigCPtr = 0;
-		}
-		super.delete();
-	}
+    @Override
+    protected void finalize() throws Throwable {
+        if (!destroyed) destroy();
+        super.finalize();
+    }
 
-	public btMultiBodyTreeCreator () {
-		this(ExtrasJNI.new_btMultiBodyTreeCreator(), true);
-	}
+    @Override
+    protected synchronized void delete() {
+        if (swigCPtr != 0) {
+            if (swigCMemOwn) {
+                swigCMemOwn = false;
+                ExtrasJNI.delete_btMultiBodyTreeCreator(swigCPtr);
+            }
+            swigCPtr = 0;
+        }
+        super.delete();
+    }
 
-	public int createFromBtMultiBody (btMultiBody btmb, boolean verbose) {
-		return ExtrasJNI.btMultiBodyTreeCreator_createFromBtMultiBody__SWIG_0(swigCPtr, this, btMultiBody.getCPtr(btmb), btmb,
-			verbose);
-	}
+    public int createFromBtMultiBody(btMultiBody btmb, boolean verbose) {
+        return ExtrasJNI.btMultiBodyTreeCreator_createFromBtMultiBody__SWIG_0(swigCPtr, this, btMultiBody.getCPtr(btmb), btmb,
+                verbose);
+    }
 
-	public int createFromBtMultiBody (btMultiBody btmb) {
-		return ExtrasJNI.btMultiBodyTreeCreator_createFromBtMultiBody__SWIG_1(swigCPtr, this, btMultiBody.getCPtr(btmb), btmb);
-	}
+    public int createFromBtMultiBody(btMultiBody btmb) {
+        return ExtrasJNI.btMultiBodyTreeCreator_createFromBtMultiBody__SWIG_1(swigCPtr, this, btMultiBody.getCPtr(btmb), btmb);
+    }
 
 }

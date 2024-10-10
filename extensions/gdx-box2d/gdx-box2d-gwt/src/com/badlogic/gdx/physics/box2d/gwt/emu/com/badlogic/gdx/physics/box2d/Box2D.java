@@ -1,16 +1,17 @@
-
-
 package com.badlogic.gdx.physics.box2d;
 
-/** A stub that does nothing at all, since there is no initialization necessary in case of GWT.
- *  */
+/**
+ * A stub that does nothing at all, since there is no initialization necessary in case of GWT.
+ */
 public final class Box2D {
 
-	private Box2D () {
-	}
+    private Box2D() {
+    }
 
-	/** Does nothing on GWT. */
-	public static void init () {
-	}
+    /**
+     * Does nothing on GWT.
+     */
+    public static void init() {
+    }
 
 }

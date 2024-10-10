@@ -1,5 +1,3 @@
-
-
 package com.badlogic.gdx.tests;
 
 public class EarClippingTriangulatorTest {

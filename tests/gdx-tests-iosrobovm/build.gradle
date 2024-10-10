@@ -1,9 +1,7 @@
-
-
 buildscript {
-	dependencies {
-		classpath "com.mobidevelop.robovm:robovm-gradle-plugin:${versions.robovm}"
-	}
+    dependencies {
+        classpath "com.mobidevelop.robovm:robovm-gradle-plugin:${versions.robovm}"
+    }
 }
 
 apply plugin: "robovm"
@@ -12,12 +10,12 @@ sourceCompatibility = '1.7'
 targetCompatibility = '1.7'
 
 dependencies {
-	implementation project(":tests:gdx-tests")
-	implementation project(":backends:gdx-backend-robovm")
+    implementation project(":tests:gdx-tests")
+    implementation project(":backends:gdx-backend-robovm")
 }
 
 ext {
-	mainClassName = "com.badlogic.gdx.tests.IOSRobovmTests"
+    mainClassName = "com.badlogic.gdx.tests.IOSRobovmTests"
 }
 
 launchIPhoneSimulator.dependsOn build

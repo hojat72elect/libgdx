@@ -1,7 +1,5 @@
-
-
 dependencies {
-	api gdxnatives.desktop
+    api gdxnatives.desktop
 }
 
 

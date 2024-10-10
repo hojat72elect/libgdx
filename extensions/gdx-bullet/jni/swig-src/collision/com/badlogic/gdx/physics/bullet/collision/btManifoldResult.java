@@ -11,134 +11,136 @@ package com.badlogic.gdx.physics.bullet.collision;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 
 public class btManifoldResult extends btDiscreteCollisionDetectorInterface.Result {
-	private long swigCPtr;
+    private long swigCPtr;
 
-	protected btManifoldResult (final String className, long cPtr, boolean cMemoryOwn) {
-		super(className, CollisionJNI.btManifoldResult_SWIGUpcast(cPtr), cMemoryOwn);
-		swigCPtr = cPtr;
-	}
+    protected btManifoldResult(final String className, long cPtr, boolean cMemoryOwn) {
+        super(className, CollisionJNI.btManifoldResult_SWIGUpcast(cPtr), cMemoryOwn);
+        swigCPtr = cPtr;
+    }
 
-	/** Construct a new btManifoldResult, normally you should not need this constructor it's intended for low-level usage. */
-	public btManifoldResult (long cPtr, boolean cMemoryOwn) {
-		this("btManifoldResult", cPtr, cMemoryOwn);
-		construct();
-	}
+    /**
+     * Construct a new btManifoldResult, normally you should not need this constructor it's intended for low-level usage.
+     */
+    public btManifoldResult(long cPtr, boolean cMemoryOwn) {
+        this("btManifoldResult", cPtr, cMemoryOwn);
+        construct();
+    }
 
-	@Override
-	protected void reset (long cPtr, boolean cMemoryOwn) {
-		if (!destroyed) destroy();
-		super.reset(CollisionJNI.btManifoldResult_SWIGUpcast(swigCPtr = cPtr), cMemoryOwn);
-	}
+    public btManifoldResult() {
+        this(CollisionJNI.new_btManifoldResult__SWIG_0(), true);
+    }
 
-	public static long getCPtr (btManifoldResult obj) {
-		return (obj == null) ? 0 : obj.swigCPtr;
-	}
+    public btManifoldResult(btCollisionObjectWrapper body0Wrap, btCollisionObjectWrapper body1Wrap) {
+        this(CollisionJNI.new_btManifoldResult__SWIG_1(btCollisionObjectWrapper.getCPtr(body0Wrap), body0Wrap,
+                btCollisionObjectWrapper.getCPtr(body1Wrap), body1Wrap), true);
+    }
 
-	@Override
-	protected void finalize () throws Throwable {
-		if (!destroyed) destroy();
-		super.finalize();
-	}
+    public static long getCPtr(btManifoldResult obj) {
+        return (obj == null) ? 0 : obj.swigCPtr;
+    }
 
-	@Override
-	protected synchronized void delete () {
-		if (swigCPtr != 0) {
-			if (swigCMemOwn) {
-				swigCMemOwn = false;
-				CollisionJNI.delete_btManifoldResult(swigCPtr);
-			}
-			swigCPtr = 0;
-		}
-		super.delete();
-	}
+    public static float calculateCombinedRestitution(btCollisionObject body0, btCollisionObject body1) {
+        return CollisionJNI.btManifoldResult_calculateCombinedRestitution(btCollisionObject.getCPtr(body0), body0,
+                btCollisionObject.getCPtr(body1), body1);
+    }
 
-	public btManifoldResult () {
-		this(CollisionJNI.new_btManifoldResult__SWIG_0(), true);
-	}
+    public static float calculateCombinedFriction(btCollisionObject body0, btCollisionObject body1) {
+        return CollisionJNI.btManifoldResult_calculateCombinedFriction(btCollisionObject.getCPtr(body0), body0,
+                btCollisionObject.getCPtr(body1), body1);
+    }
 
-	public btManifoldResult (btCollisionObjectWrapper body0Wrap, btCollisionObjectWrapper body1Wrap) {
-		this(CollisionJNI.new_btManifoldResult__SWIG_1(btCollisionObjectWrapper.getCPtr(body0Wrap), body0Wrap,
-			btCollisionObjectWrapper.getCPtr(body1Wrap), body1Wrap), true);
-	}
+    public static float calculateCombinedRollingFriction(btCollisionObject body0, btCollisionObject body1) {
+        return CollisionJNI.btManifoldResult_calculateCombinedRollingFriction(btCollisionObject.getCPtr(body0), body0,
+                btCollisionObject.getCPtr(body1), body1);
+    }
 
-	public void setPersistentManifold (btPersistentManifold manifoldPtr) {
-		CollisionJNI.btManifoldResult_setPersistentManifold(swigCPtr, this, btPersistentManifold.getCPtr(manifoldPtr), manifoldPtr);
-	}
+    public static float calculateCombinedSpinningFriction(btCollisionObject body0, btCollisionObject body1) {
+        return CollisionJNI.btManifoldResult_calculateCombinedSpinningFriction(btCollisionObject.getCPtr(body0), body0,
+                btCollisionObject.getCPtr(body1), body1);
+    }
 
-	public btPersistentManifold getPersistentManifoldConst () {
-		long cPtr = CollisionJNI.btManifoldResult_getPersistentManifoldConst(swigCPtr, this);
-		return (cPtr == 0) ? null : new btPersistentManifold(cPtr, false);
-	}
+    public static float calculateCombinedContactDamping(btCollisionObject body0, btCollisionObject body1) {
+        return CollisionJNI.btManifoldResult_calculateCombinedContactDamping(btCollisionObject.getCPtr(body0), body0,
+                btCollisionObject.getCPtr(body1), body1);
+    }
 
-	public btPersistentManifold getPersistentManifold () {
-		long cPtr = CollisionJNI.btManifoldResult_getPersistentManifold(swigCPtr, this);
-		return (cPtr == 0) ? null : new btPersistentManifold(cPtr, false);
-	}
+    public static float calculateCombinedContactStiffness(btCollisionObject body0, btCollisionObject body1) {
+        return CollisionJNI.btManifoldResult_calculateCombinedContactStiffness(btCollisionObject.getCPtr(body0), body0,
+                btCollisionObject.getCPtr(body1), body1);
+    }
 
-	public void refreshContactPoints () {
-		CollisionJNI.btManifoldResult_refreshContactPoints(swigCPtr, this);
-	}
+    @Override
+    protected void reset(long cPtr, boolean cMemoryOwn) {
+        if (!destroyed) destroy();
+        super.reset(CollisionJNI.btManifoldResult_SWIGUpcast(swigCPtr = cPtr), cMemoryOwn);
+    }
 
-	public btCollisionObjectWrapper getBody0Wrap () {
-		return btCollisionObjectWrapper.internalTemp(CollisionJNI.btManifoldResult_getBody0Wrap(swigCPtr, this), false);
-	}
+    @Override
+    protected void finalize() throws Throwable {
+        if (!destroyed) destroy();
+        super.finalize();
+    }
 
-	public btCollisionObjectWrapper getBody1Wrap () {
-		return btCollisionObjectWrapper.internalTemp(CollisionJNI.btManifoldResult_getBody1Wrap(swigCPtr, this), false);
-	}
+    @Override
+    protected synchronized void delete() {
+        if (swigCPtr != 0) {
+            if (swigCMemOwn) {
+                swigCMemOwn = false;
+                CollisionJNI.delete_btManifoldResult(swigCPtr);
+            }
+            swigCPtr = 0;
+        }
+        super.delete();
+    }
 
-	public void setBody0Wrap (btCollisionObjectWrapper obj0Wrap) {
-		CollisionJNI.btManifoldResult_setBody0Wrap(swigCPtr, this, btCollisionObjectWrapper.getCPtr(obj0Wrap), obj0Wrap);
-	}
+    public btPersistentManifold getPersistentManifoldConst() {
+        long cPtr = CollisionJNI.btManifoldResult_getPersistentManifoldConst(swigCPtr, this);
+        return (cPtr == 0) ? null : new btPersistentManifold(cPtr, false);
+    }
 
-	public void setBody1Wrap (btCollisionObjectWrapper obj1Wrap) {
-		CollisionJNI.btManifoldResult_setBody1Wrap(swigCPtr, this, btCollisionObjectWrapper.getCPtr(obj1Wrap), obj1Wrap);
-	}
+    public btPersistentManifold getPersistentManifold() {
+        long cPtr = CollisionJNI.btManifoldResult_getPersistentManifold(swigCPtr, this);
+        return (cPtr == 0) ? null : new btPersistentManifold(cPtr, false);
+    }
 
-	public btCollisionObject getBody0Internal () {
-		return btCollisionObject.getInstance(CollisionJNI.btManifoldResult_getBody0Internal(swigCPtr, this), false);
-	}
+    public void setPersistentManifold(btPersistentManifold manifoldPtr) {
+        CollisionJNI.btManifoldResult_setPersistentManifold(swigCPtr, this, btPersistentManifold.getCPtr(manifoldPtr), manifoldPtr);
+    }
 
-	public btCollisionObject getBody1Internal () {
-		return btCollisionObject.getInstance(CollisionJNI.btManifoldResult_getBody1Internal(swigCPtr, this), false);
-	}
+    public void refreshContactPoints() {
+        CollisionJNI.btManifoldResult_refreshContactPoints(swigCPtr, this);
+    }
 
-	public void setClosestPointDistanceThreshold (float value) {
-		CollisionJNI.btManifoldResult_closestPointDistanceThreshold_set(swigCPtr, this, value);
-	}
+    public btCollisionObjectWrapper getBody0Wrap() {
+        return btCollisionObjectWrapper.internalTemp(CollisionJNI.btManifoldResult_getBody0Wrap(swigCPtr, this), false);
+    }
 
-	public float getClosestPointDistanceThreshold () {
-		return CollisionJNI.btManifoldResult_closestPointDistanceThreshold_get(swigCPtr, this);
-	}
+    public void setBody0Wrap(btCollisionObjectWrapper obj0Wrap) {
+        CollisionJNI.btManifoldResult_setBody0Wrap(swigCPtr, this, btCollisionObjectWrapper.getCPtr(obj0Wrap), obj0Wrap);
+    }
 
-	public static float calculateCombinedRestitution (btCollisionObject body0, btCollisionObject body1) {
-		return CollisionJNI.btManifoldResult_calculateCombinedRestitution(btCollisionObject.getCPtr(body0), body0,
-			btCollisionObject.getCPtr(body1), body1);
-	}
+    public btCollisionObjectWrapper getBody1Wrap() {
+        return btCollisionObjectWrapper.internalTemp(CollisionJNI.btManifoldResult_getBody1Wrap(swigCPtr, this), false);
+    }
 
-	public static float calculateCombinedFriction (btCollisionObject body0, btCollisionObject body1) {
-		return CollisionJNI.btManifoldResult_calculateCombinedFriction(btCollisionObject.getCPtr(body0), body0,
-			btCollisionObject.getCPtr(body1), body1);
-	}
+    public void setBody1Wrap(btCollisionObjectWrapper obj1Wrap) {
+        CollisionJNI.btManifoldResult_setBody1Wrap(swigCPtr, this, btCollisionObjectWrapper.getCPtr(obj1Wrap), obj1Wrap);
+    }
 
-	public static float calculateCombinedRollingFriction (btCollisionObject body0, btCollisionObject body1) {
-		return CollisionJNI.btManifoldResult_calculateCombinedRollingFriction(btCollisionObject.getCPtr(body0), body0,
-			btCollisionObject.getCPtr(body1), body1);
-	}
+    public btCollisionObject getBody0Internal() {
+        return btCollisionObject.getInstance(CollisionJNI.btManifoldResult_getBody0Internal(swigCPtr, this), false);
+    }
 
-	public static float calculateCombinedSpinningFriction (btCollisionObject body0, btCollisionObject body1) {
-		return CollisionJNI.btManifoldResult_calculateCombinedSpinningFriction(btCollisionObject.getCPtr(body0), body0,
-			btCollisionObject.getCPtr(body1), body1);
-	}
+    public btCollisionObject getBody1Internal() {
+        return btCollisionObject.getInstance(CollisionJNI.btManifoldResult_getBody1Internal(swigCPtr, this), false);
+    }
 
-	public static float calculateCombinedContactDamping (btCollisionObject body0, btCollisionObject body1) {
-		return CollisionJNI.btManifoldResult_calculateCombinedContactDamping(btCollisionObject.getCPtr(body0), body0,
-			btCollisionObject.getCPtr(body1), body1);
-	}
+    public float getClosestPointDistanceThreshold() {
+        return CollisionJNI.btManifoldResult_closestPointDistanceThreshold_get(swigCPtr, this);
+    }
 
-	public static float calculateCombinedContactStiffness (btCollisionObject body0, btCollisionObject body1) {
-		return CollisionJNI.btManifoldResult_calculateCombinedContactStiffness(btCollisionObject.getCPtr(body0), body0,
-			btCollisionObject.getCPtr(body1), body1);
-	}
+    public void setClosestPointDistanceThreshold(float value) {
+        CollisionJNI.btManifoldResult_closestPointDistanceThreshold_set(swigCPtr, this, value);
+    }
 
 }

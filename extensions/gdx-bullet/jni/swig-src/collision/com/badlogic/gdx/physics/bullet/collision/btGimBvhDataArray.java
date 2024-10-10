@@ -12,187 +12,191 @@ import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.*;
 
 public class btGimBvhDataArray extends BulletBase {
-	private long swigCPtr;
+    private long swigCPtr;
 
-	protected btGimBvhDataArray (final String className, long cPtr, boolean cMemoryOwn) {
-		super(className, cPtr, cMemoryOwn);
-		swigCPtr = cPtr;
-	}
+    protected btGimBvhDataArray(final String className, long cPtr, boolean cMemoryOwn) {
+        super(className, cPtr, cMemoryOwn);
+        swigCPtr = cPtr;
+    }
 
-	/** Construct a new btGimBvhDataArray, normally you should not need this constructor it's intended for low-level usage. */
-	public btGimBvhDataArray (long cPtr, boolean cMemoryOwn) {
-		this("btGimBvhDataArray", cPtr, cMemoryOwn);
-		construct();
-	}
+    /**
+     * Construct a new btGimBvhDataArray, normally you should not need this constructor it's intended for low-level usage.
+     */
+    public btGimBvhDataArray(long cPtr, boolean cMemoryOwn) {
+        this("btGimBvhDataArray", cPtr, cMemoryOwn);
+        construct();
+    }
 
-	@Override
-	protected void reset (long cPtr, boolean cMemoryOwn) {
-		if (!destroyed) destroy();
-		super.reset(swigCPtr = cPtr, cMemoryOwn);
-	}
+    public btGimBvhDataArray() {
+        this(CollisionJNI.new_btGimBvhDataArray__SWIG_0(), true);
+    }
 
-	public static long getCPtr (btGimBvhDataArray obj) {
-		return (obj == null) ? 0 : obj.swigCPtr;
-	}
+    public btGimBvhDataArray(btGimBvhDataArray otherArray) {
+        this(CollisionJNI.new_btGimBvhDataArray__SWIG_1(btGimBvhDataArray.getCPtr(otherArray), otherArray), true);
+    }
 
-	@Override
-	protected void finalize () throws Throwable {
-		if (!destroyed) destroy();
-		super.finalize();
-	}
+    public static long getCPtr(btGimBvhDataArray obj) {
+        return (obj == null) ? 0 : obj.swigCPtr;
+    }
 
-	@Override
-	protected synchronized void delete () {
-		if (swigCPtr != 0) {
-			if (swigCMemOwn) {
-				swigCMemOwn = false;
-				CollisionJNI.delete_btGimBvhDataArray(swigCPtr);
-			}
-			swigCPtr = 0;
-		}
-		super.delete();
-	}
+    @Override
+    protected void reset(long cPtr, boolean cMemoryOwn) {
+        if (!destroyed) destroy();
+        super.reset(swigCPtr = cPtr, cMemoryOwn);
+    }
 
-	public btGimBvhDataArray operatorAssignment (btGimBvhDataArray other) {
-		return new btGimBvhDataArray(
-			CollisionJNI.btGimBvhDataArray_operatorAssignment(swigCPtr, this, btGimBvhDataArray.getCPtr(other), other), false);
-	}
+    @Override
+    protected void finalize() throws Throwable {
+        if (!destroyed) destroy();
+        super.finalize();
+    }
 
-	public btGimBvhDataArray () {
-		this(CollisionJNI.new_btGimBvhDataArray__SWIG_0(), true);
-	}
+    @Override
+    protected synchronized void delete() {
+        if (swigCPtr != 0) {
+            if (swigCMemOwn) {
+                swigCMemOwn = false;
+                CollisionJNI.delete_btGimBvhDataArray(swigCPtr);
+            }
+            swigCPtr = 0;
+        }
+        super.delete();
+    }
 
-	public btGimBvhDataArray (btGimBvhDataArray otherArray) {
-		this(CollisionJNI.new_btGimBvhDataArray__SWIG_1(btGimBvhDataArray.getCPtr(otherArray), otherArray), true);
-	}
+    public btGimBvhDataArray operatorAssignment(btGimBvhDataArray other) {
+        return new btGimBvhDataArray(
+                CollisionJNI.btGimBvhDataArray_operatorAssignment(swigCPtr, this, btGimBvhDataArray.getCPtr(other), other), false);
+    }
 
-	public int size () {
-		return CollisionJNI.btGimBvhDataArray_size(swigCPtr, this);
-	}
+    public int size() {
+        return CollisionJNI.btGimBvhDataArray_size(swigCPtr, this);
+    }
 
-	public GIM_BVH_DATA atConst (int n) {
-		return new GIM_BVH_DATA(CollisionJNI.btGimBvhDataArray_atConst(swigCPtr, this, n), false);
-	}
+    public GIM_BVH_DATA atConst(int n) {
+        return new GIM_BVH_DATA(CollisionJNI.btGimBvhDataArray_atConst(swigCPtr, this, n), false);
+    }
 
-	public GIM_BVH_DATA at (int n) {
-		return new GIM_BVH_DATA(CollisionJNI.btGimBvhDataArray_at(swigCPtr, this, n), false);
-	}
+    public GIM_BVH_DATA at(int n) {
+        return new GIM_BVH_DATA(CollisionJNI.btGimBvhDataArray_at(swigCPtr, this, n), false);
+    }
 
-	public GIM_BVH_DATA operatorSubscriptConst (int n) {
-		return new GIM_BVH_DATA(CollisionJNI.btGimBvhDataArray_operatorSubscriptConst(swigCPtr, this, n), false);
-	}
+    public GIM_BVH_DATA operatorSubscriptConst(int n) {
+        return new GIM_BVH_DATA(CollisionJNI.btGimBvhDataArray_operatorSubscriptConst(swigCPtr, this, n), false);
+    }
 
-	public GIM_BVH_DATA operatorSubscript (int n) {
-		return new GIM_BVH_DATA(CollisionJNI.btGimBvhDataArray_operatorSubscript(swigCPtr, this, n), false);
-	}
+    public GIM_BVH_DATA operatorSubscript(int n) {
+        return new GIM_BVH_DATA(CollisionJNI.btGimBvhDataArray_operatorSubscript(swigCPtr, this, n), false);
+    }
 
-	public void clear () {
-		CollisionJNI.btGimBvhDataArray_clear(swigCPtr, this);
-	}
+    public void clear() {
+        CollisionJNI.btGimBvhDataArray_clear(swigCPtr, this);
+    }
 
-	public void pop_back () {
-		CollisionJNI.btGimBvhDataArray_pop_back(swigCPtr, this);
-	}
+    public void pop_back() {
+        CollisionJNI.btGimBvhDataArray_pop_back(swigCPtr, this);
+    }
 
-	public void resizeNoInitialize (int newsize) {
-		CollisionJNI.btGimBvhDataArray_resizeNoInitialize(swigCPtr, this, newsize);
-	}
+    public void resizeNoInitialize(int newsize) {
+        CollisionJNI.btGimBvhDataArray_resizeNoInitialize(swigCPtr, this, newsize);
+    }
 
-	public void resize (int newsize, GIM_BVH_DATA fillData) {
-		CollisionJNI.btGimBvhDataArray_resize__SWIG_0(swigCPtr, this, newsize, GIM_BVH_DATA.getCPtr(fillData), fillData);
-	}
+    public void resize(int newsize, GIM_BVH_DATA fillData) {
+        CollisionJNI.btGimBvhDataArray_resize__SWIG_0(swigCPtr, this, newsize, GIM_BVH_DATA.getCPtr(fillData), fillData);
+    }
 
-	public void resize (int newsize) {
-		CollisionJNI.btGimBvhDataArray_resize__SWIG_1(swigCPtr, this, newsize);
-	}
+    public void resize(int newsize) {
+        CollisionJNI.btGimBvhDataArray_resize__SWIG_1(swigCPtr, this, newsize);
+    }
 
-	public GIM_BVH_DATA expandNonInitializing () {
-		return new GIM_BVH_DATA(CollisionJNI.btGimBvhDataArray_expandNonInitializing(swigCPtr, this), false);
-	}
+    public GIM_BVH_DATA expandNonInitializing() {
+        return new GIM_BVH_DATA(CollisionJNI.btGimBvhDataArray_expandNonInitializing(swigCPtr, this), false);
+    }
 
-	public GIM_BVH_DATA expand (GIM_BVH_DATA fillValue) {
-		return new GIM_BVH_DATA(
-			CollisionJNI.btGimBvhDataArray_expand__SWIG_0(swigCPtr, this, GIM_BVH_DATA.getCPtr(fillValue), fillValue), false);
-	}
+    public GIM_BVH_DATA expand(GIM_BVH_DATA fillValue) {
+        return new GIM_BVH_DATA(
+                CollisionJNI.btGimBvhDataArray_expand__SWIG_0(swigCPtr, this, GIM_BVH_DATA.getCPtr(fillValue), fillValue), false);
+    }
 
-	public GIM_BVH_DATA expand () {
-		return new GIM_BVH_DATA(CollisionJNI.btGimBvhDataArray_expand__SWIG_1(swigCPtr, this), false);
-	}
+    public GIM_BVH_DATA expand() {
+        return new GIM_BVH_DATA(CollisionJNI.btGimBvhDataArray_expand__SWIG_1(swigCPtr, this), false);
+    }
 
-	public void push_back (GIM_BVH_DATA _Val) {
-		CollisionJNI.btGimBvhDataArray_push_back(swigCPtr, this, GIM_BVH_DATA.getCPtr(_Val), _Val);
-	}
+    public void push_back(GIM_BVH_DATA _Val) {
+        CollisionJNI.btGimBvhDataArray_push_back(swigCPtr, this, GIM_BVH_DATA.getCPtr(_Val), _Val);
+    }
 
-	public int capacity () {
-		return CollisionJNI.btGimBvhDataArray_capacity(swigCPtr, this);
-	}
+    public int capacity() {
+        return CollisionJNI.btGimBvhDataArray_capacity(swigCPtr, this);
+    }
 
-	public void reserve (int _Count) {
-		CollisionJNI.btGimBvhDataArray_reserve(swigCPtr, this, _Count);
-	}
+    public void reserve(int _Count) {
+        CollisionJNI.btGimBvhDataArray_reserve(swigCPtr, this, _Count);
+    }
 
-	static public class less extends BulletBase {
-		private long swigCPtr;
+    public void swap(int index0, int index1) {
+        CollisionJNI.btGimBvhDataArray_swap(swigCPtr, this, index0, index1);
+    }
 
-		protected less (final String className, long cPtr, boolean cMemoryOwn) {
-			super(className, cPtr, cMemoryOwn);
-			swigCPtr = cPtr;
-		}
+    public void removeAtIndex(int index) {
+        CollisionJNI.btGimBvhDataArray_removeAtIndex(swigCPtr, this, index);
+    }
 
-		/** Construct a new less, normally you should not need this constructor it's intended for low-level usage. */
-		public less (long cPtr, boolean cMemoryOwn) {
-			this("less", cPtr, cMemoryOwn);
-			construct();
-		}
+    public void initializeFromBuffer(long buffer, int size, int capacity) {
+        CollisionJNI.btGimBvhDataArray_initializeFromBuffer(swigCPtr, this, buffer, size, capacity);
+    }
 
-		@Override
-		protected void reset (long cPtr, boolean cMemoryOwn) {
-			if (!destroyed) destroy();
-			super.reset(swigCPtr = cPtr, cMemoryOwn);
-		}
+    public void copyFromArray(btGimBvhDataArray otherArray) {
+        CollisionJNI.btGimBvhDataArray_copyFromArray(swigCPtr, this, btGimBvhDataArray.getCPtr(otherArray), otherArray);
+    }
 
-		public static long getCPtr (less obj) {
-			return (obj == null) ? 0 : obj.swigCPtr;
-		}
+    static public class less extends BulletBase {
+        private long swigCPtr;
 
-		@Override
-		protected void finalize () throws Throwable {
-			if (!destroyed) destroy();
-			super.finalize();
-		}
+        protected less(final String className, long cPtr, boolean cMemoryOwn) {
+            super(className, cPtr, cMemoryOwn);
+            swigCPtr = cPtr;
+        }
 
-		@Override
-		protected synchronized void delete () {
-			if (swigCPtr != 0) {
-				if (swigCMemOwn) {
-					swigCMemOwn = false;
-					CollisionJNI.delete_btGimBvhDataArray_less(swigCPtr);
-				}
-				swigCPtr = 0;
-			}
-			super.delete();
-		}
+        /**
+         * Construct a new less, normally you should not need this constructor it's intended for low-level usage.
+         */
+        public less(long cPtr, boolean cMemoryOwn) {
+            this("less", cPtr, cMemoryOwn);
+            construct();
+        }
 
-		public less () {
-			this(CollisionJNI.new_btGimBvhDataArray_less(), true);
-		}
+        public less() {
+            this(CollisionJNI.new_btGimBvhDataArray_less(), true);
+        }
 
-	}
+        public static long getCPtr(less obj) {
+            return (obj == null) ? 0 : obj.swigCPtr;
+        }
 
-	public void swap (int index0, int index1) {
-		CollisionJNI.btGimBvhDataArray_swap(swigCPtr, this, index0, index1);
-	}
+        @Override
+        protected void reset(long cPtr, boolean cMemoryOwn) {
+            if (!destroyed) destroy();
+            super.reset(swigCPtr = cPtr, cMemoryOwn);
+        }
 
-	public void removeAtIndex (int index) {
-		CollisionJNI.btGimBvhDataArray_removeAtIndex(swigCPtr, this, index);
-	}
+        @Override
+        protected void finalize() throws Throwable {
+            if (!destroyed) destroy();
+            super.finalize();
+        }
 
-	public void initializeFromBuffer (long buffer, int size, int capacity) {
-		CollisionJNI.btGimBvhDataArray_initializeFromBuffer(swigCPtr, this, buffer, size, capacity);
-	}
+        @Override
+        protected synchronized void delete() {
+            if (swigCPtr != 0) {
+                if (swigCMemOwn) {
+                    swigCMemOwn = false;
+                    CollisionJNI.delete_btGimBvhDataArray_less(swigCPtr);
+                }
+                swigCPtr = 0;
+            }
+            super.delete();
+        }
 
-	public void copyFromArray (btGimBvhDataArray otherArray) {
-		CollisionJNI.btGimBvhDataArray_copyFromArray(swigCPtr, this, btGimBvhDataArray.getCPtr(otherArray), otherArray);
-	}
+    }
 
 }

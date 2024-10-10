@@ -1,20 +1,18 @@
-
-
 configure(subprojects - project(":tests:gdx-tests-android")) {
-	apply plugin: "java"
+    apply plugin: "java"
 
-	if (JavaVersion.current().isJava9Compatible()) {
-		compileJava {
-			options.release = versions.java
-		}
-	}
-	sourceCompatibility = versions.java
-	targetCompatibility = versions.java
+    if (JavaVersion.current().isJava9Compatible()) {
+        compileJava {
+            options.release = versions.java
+        }
+    }
+    sourceCompatibility = versions.java
+    targetCompatibility = versions.java
 
-	sourceSets.main.java.srcDirs = ["src"]
-	sourceSets.main.resources.srcDirs = ["res"]
+    sourceSets.main.java.srcDirs = ["src"]
+    sourceSets.main.resources.srcDirs = ["res"]
 
-	configurations { natives }
+    configurations { natives }
 }
 
 

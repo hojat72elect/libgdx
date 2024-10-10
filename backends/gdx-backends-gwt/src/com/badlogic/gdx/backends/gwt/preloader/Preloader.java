@@ -1,5 +1,3 @@
-
-
 package com.badlogic.gdx.backends.gwt.preloader;
 
 import java.io.*;
@@ -19,341 +17,338 @@ import com.google.gwt.dom.client.ImageElement;
 
 public class Preloader {
 
-	private final AssetDownloader loader = new AssetDownloader();
+    public final String baseUrl;
+    private final AssetDownloader loader = new AssetDownloader();
+    public ObjectMap<String, Void> directories = new ObjectMap<>();
+    public ObjectMap<String, ImageElement> images = new ObjectMap<>();
+    public ObjectMap<String, Blob> audio = new ObjectMap<>();
+    public ObjectMap<String, String> texts = new ObjectMap<>();
+    public ObjectMap<String, Blob> binaries = new ObjectMap<>();
+    public ObjectMap<String, String> assetNames = new ObjectMap<>();
+    private ObjectMap<String, Asset> stillToFetchAssets = new ObjectMap<>();
 
-	public interface PreloaderCallback {
+    public Preloader(String newBaseURL) {
 
-		public void update (PreloaderState state);
+        baseUrl = newBaseURL;
 
-		public void error (String file);
+        // trigger copying of assets and creation of assets.txt
+        GWT.create(PreloaderBundle.class);
+    }
 
-	}
+    public void preload(final String assetFileUrl, final PreloaderCallback callback) {
 
-	public ObjectMap<String, Void> directories = new ObjectMap<>();
-	public ObjectMap<String, ImageElement> images = new ObjectMap<>();
-	public ObjectMap<String, Blob> audio = new ObjectMap<>();
-	public ObjectMap<String, String> texts = new ObjectMap<>();
-	public ObjectMap<String, Blob> binaries = new ObjectMap<>();
-	private ObjectMap<String, Asset> stillToFetchAssets = new ObjectMap<>();
-	public ObjectMap<String, String> assetNames = new ObjectMap<>();
+        loader.loadText(baseUrl + assetFileUrl + "?etag=" + System.currentTimeMillis(), new AssetLoaderListener<String>() {
+            @Override
+            public void onProgress(double amount) {
+            }
 
-	public static class Asset {
-		public Asset (String file, String url, AssetType type, long size, String mimeType) {
-			this.file = file;
-			this.url = url;
-			this.type = type;
-			this.size = size;
-			this.mimeType = mimeType;
-		}
+            @Override
+            public void onFailure() {
+                callback.error(assetFileUrl);
+            }
 
-		public boolean succeed;
-		public boolean failed;
-		public boolean downloadStarted;
-		public long loaded;
-		public final String file;
-		public final String url;
-		public final AssetType type;
-		public final long size;
-		public final String mimeType;
-	}
+            @Override
+            public void onSuccess(String result) {
+                String[] lines = result.split("\n");
+                Array<Asset> assets = new Array<>(lines.length);
+                for (String line : lines) {
+                    String[] tokens = line.split(":");
+                    if (tokens.length != 6) {
+                        throw new GdxRuntimeException("Invalid assets description file.");
+                    }
 
-	public static class PreloaderState {
+                    String assetTypeCode = tokens[0];
+                    String assetPathOrig = tokens[1];
+                    String assetPathMd5 = tokens[2];
+                    long size = Long.parseLong(tokens[3]);
+                    String assetMimeType = tokens[4];
+                    boolean assetPreload = tokens[5].equals("1");
 
-		public PreloaderState (Array<Asset> assets) {
-			this.assets = assets;
-		}
+                    AssetType type = AssetType.Text;
+                    if (assetTypeCode.equals("i")) type = AssetType.Image;
+                    if (assetTypeCode.equals("b")) type = AssetType.Binary;
+                    if (assetTypeCode.equals("a")) type = AssetType.Audio;
+                    if (assetTypeCode.equals("d")) type = AssetType.Directory;
+                    if (type == AssetType.Audio && !loader.isUseBrowserCache()) {
+                        size = 0;
+                    }
+                    Asset asset = new Asset(assetPathOrig.trim(), assetPathMd5.trim(), type, size, assetMimeType);
+                    assetNames.put(asset.file, asset.url);
+                    if (assetPreload || asset.file.startsWith("com/badlogic/"))
+                        assets.add(asset);
+                    else
+                        stillToFetchAssets.put(asset.file, asset);
+                }
+                final PreloaderState state = new PreloaderState(assets);
+                for (int i = 0; i < assets.size; i++) {
+                    final Asset asset = assets.get(i);
 
-		public long getDownloadedSize () {
-			long size = 0;
-			for (int i = 0; i < assets.size; i++) {
-				Asset asset = assets.get(i);
-				size += (asset.succeed || asset.failed) ? asset.size : Math.min(asset.size, asset.loaded);
-			}
-			return size;
-		}
+                    if (contains(asset.file)) {
+                        asset.loaded = asset.size;
+                        asset.succeed = true;
+                        continue;
+                    }
 
-		public long getTotalSize () {
-			long size = 0;
-			for (int i = 0; i < assets.size; i++) {
-				Asset asset = assets.get(i);
-				size += asset.size;
-			}
-			return size;
-		}
+                    asset.downloadStarted = true;
+                    loader.load(baseUrl + asset.url, asset.type, asset.mimeType, new AssetLoaderListener<Object>() {
+                        @Override
+                        public void onProgress(double amount) {
+                            asset.loaded = (long) amount;
+                            callback.update(state);
+                        }
 
-		public float getProgress () {
-			long total = getTotalSize();
-			return total == 0 ? 1 : (getDownloadedSize() / (float)total);
-		}
+                        @Override
+                        public void onFailure() {
+                            asset.failed = true;
+                            callback.error(asset.file);
+                            callback.update(state);
+                        }
 
-		public boolean hasEnded () {
-			return getDownloadedSize() == getTotalSize();
-		}
+                        @Override
+                        public void onSuccess(Object result) {
+                            putAssetInMap(result, asset);
+                            asset.succeed = true;
+                            callback.update(state);
+                        }
+                    });
+                }
+                callback.update(state);
+            }
+        });
+    }
 
-		public final Array<Asset> assets;
+    public void preloadSingleFile(final String file) {
+        if (!isNotFetchedYet(file)) return;
 
-	}
+        final Asset asset = stillToFetchAssets.get(file);
 
-	public final String baseUrl;
+        if (asset.downloadStarted) return;
 
-	public Preloader (String newBaseURL) {
+        Gdx.app.log("Preloader", "Downloading " + baseUrl + asset.file);
 
-		baseUrl = newBaseURL;
+        asset.downloadStarted = true;
 
-		// trigger copying of assets and creation of assets.txt
-		GWT.create(PreloaderBundle.class);
-	}
+        loader.load(baseUrl + asset.url, asset.type, asset.mimeType, new AssetLoaderListener<Object>() {
+            @Override
+            public void onProgress(double amount) {
+                asset.loaded = (long) amount;
+            }
 
-	public void preload (final String assetFileUrl, final PreloaderCallback callback) {
+            @Override
+            public void onFailure() {
+                asset.failed = true;
+                stillToFetchAssets.remove(file);
+            }
 
-		loader.loadText(baseUrl + assetFileUrl + "?etag=" + System.currentTimeMillis(), new AssetLoaderListener<String>() {
-			@Override
-			public void onProgress (double amount) {
-			}
+            @Override
+            public void onSuccess(Object result) {
+                putAssetInMap(result, asset);
+                stillToFetchAssets.remove(file);
+                asset.succeed = true;
+            }
+        });
 
-			@Override
-			public void onFailure () {
-				callback.error(assetFileUrl);
-			}
+    }
 
-			@Override
-			public void onSuccess (String result) {
-				String[] lines = result.split("\n");
-				Array<Asset> assets = new Array<>(lines.length);
-				for (String line : lines) {
-					String[] tokens = line.split(":");
-					if (tokens.length != 6) {
-						throw new GdxRuntimeException("Invalid assets description file.");
-					}
+    protected void putAssetInMap(Object result, Asset asset) {
+        switch (asset.type) {
+            case Text:
+                texts.put(asset.file, (String) result);
+                break;
+            case Image:
+                images.put(asset.file, (ImageElement) result);
+                break;
+            case Binary:
+                binaries.put(asset.file, (Blob) result);
+                break;
+            case Audio:
+                audio.put(asset.file, (Blob) result);
+                break;
+            case Directory:
+                directories.put(asset.file, null);
+                break;
+        }
+    }
 
-					String assetTypeCode = tokens[0];
-					String assetPathOrig = tokens[1];
-					String assetPathMd5 = tokens[2];
-					long size = Long.parseLong(tokens[3]);
-					String assetMimeType = tokens[4];
-					boolean assetPreload = tokens[5].equals("1");
+    public InputStream read(String file) {
+        if (texts.containsKey(file)) {
+            return new ByteArrayInputStream(texts.get(file).getBytes(StandardCharsets.UTF_8));
+        }
+        if (images.containsKey(file)) {
+            return new ByteArrayInputStream(new byte[1]); // FIXME, sensible?
+        }
+        if (binaries.containsKey(file)) {
+            return binaries.get(file).read();
+        }
+        if (audio.containsKey(file)) {
+            return audio.get(file).read();
+        }
+        return null;
+    }
 
-					AssetType type = AssetType.Text;
-					if (assetTypeCode.equals("i")) type = AssetType.Image;
-					if (assetTypeCode.equals("b")) type = AssetType.Binary;
-					if (assetTypeCode.equals("a")) type = AssetType.Audio;
-					if (assetTypeCode.equals("d")) type = AssetType.Directory;
-					if (type == AssetType.Audio && !loader.isUseBrowserCache()) {
-						size = 0;
-					}
-					Asset asset = new Asset(assetPathOrig.trim(), assetPathMd5.trim(), type, size, assetMimeType);
-					assetNames.put(asset.file, asset.url);
-					if (assetPreload || asset.file.startsWith("com/badlogic/"))
-						assets.add(asset);
-					else
-						stillToFetchAssets.put(asset.file, asset);
-				}
-				final PreloaderState state = new PreloaderState(assets);
-				for (int i = 0; i < assets.size; i++) {
-					final Asset asset = assets.get(i);
+    public boolean contains(String file) {
+        return texts.containsKey(file) || images.containsKey(file) || binaries.containsKey(file) || audio.containsKey(file)
+                || directories.containsKey(file);
+    }
 
-					if (contains(asset.file)) {
-						asset.loaded = asset.size;
-						asset.succeed = true;
-						continue;
-					}
+    public boolean isNotFetchedYet(String file) {
+        return stillToFetchAssets.containsKey(file);
+    }
 
-					asset.downloadStarted = true;
-					loader.load(baseUrl + asset.url, asset.type, asset.mimeType, new AssetLoaderListener<Object>() {
-						@Override
-						public void onProgress (double amount) {
-							asset.loaded = (long)amount;
-							callback.update(state);
-						}
+    public boolean isText(String file) {
+        return texts.containsKey(file);
+    }
 
-						@Override
-						public void onFailure () {
-							asset.failed = true;
-							callback.error(asset.file);
-							callback.update(state);
-						}
+    public boolean isImage(String file) {
+        return images.containsKey(file);
+    }
 
-						@Override
-						public void onSuccess (Object result) {
-							putAssetInMap(result, asset);
-							asset.succeed = true;
-							callback.update(state);
-						}
-					});
-				}
-				callback.update(state);
-			}
-		});
-	}
+    public boolean isBinary(String file) {
+        return binaries.containsKey(file);
+    }
 
-	public void preloadSingleFile (final String file) {
-		if (!isNotFetchedYet(file)) return;
+    public boolean isAudio(String file) {
+        return audio.containsKey(file);
+    }
 
-		final Asset asset = stillToFetchAssets.get(file);
+    public boolean isDirectory(String file) {
+        return directories.containsKey(file);
+    }
 
-		if (asset.downloadStarted) return;
+    private boolean isChild(String filePath, String directory) {
+        return filePath.startsWith(directory + "/") && (filePath.indexOf('/', directory.length() + 1) < 0);
+    }
 
-		Gdx.app.log("Preloader", "Downloading " + baseUrl + asset.file);
+    public FileHandle[] list(final String file) {
+        return getMatchedAssetFiles(new FilePathFilter() {
+            @Override
+            public boolean accept(String path) {
+                return isChild(path, file);
+            }
+        });
+    }
 
-		asset.downloadStarted = true;
+    public FileHandle[] list(final String file, final FileFilter filter) {
+        return getMatchedAssetFiles(new FilePathFilter() {
+            @Override
+            public boolean accept(String path) {
+                return isChild(path, file) && filter.accept(new File(path));
+            }
+        });
+    }
 
-		loader.load(baseUrl + asset.url, asset.type, asset.mimeType, new AssetLoaderListener<Object>() {
-			@Override
-			public void onProgress (double amount) {
-				asset.loaded = (long)amount;
-			}
+    public FileHandle[] list(final String file, final FilenameFilter filter) {
+        return getMatchedAssetFiles(new FilePathFilter() {
+            @Override
+            public boolean accept(String path) {
+                return isChild(path, file) && filter.accept(new File(file), path.substring(file.length() + 1));
+            }
+        });
+    }
 
-			@Override
-			public void onFailure () {
-				asset.failed = true;
-				stillToFetchAssets.remove(file);
-			}
+    public FileHandle[] list(final String file, final String suffix) {
+        return getMatchedAssetFiles(new FilePathFilter() {
+            @Override
+            public boolean accept(String path) {
+                return isChild(path, file) && path.endsWith(suffix);
+            }
+        });
+    }
 
-			@Override
-			public void onSuccess (Object result) {
-				putAssetInMap(result, asset);
-				stillToFetchAssets.remove(file);
-				asset.succeed = true;
-			}
-		});
+    public long length(String file) {
+        if (texts.containsKey(file)) {
+            return texts.get(file).getBytes(StandardCharsets.UTF_8).length;
+        }
+        if (images.containsKey(file)) {
+            return 1; // FIXME, sensible?
+        }
+        if (binaries.containsKey(file)) {
+            return binaries.get(file).length();
+        }
+        if (audio.containsKey(file)) {
+            return audio.get(file).length();
+        }
+        return 0;
+    }
 
-	}
+    private FileHandle[] getMatchedAssetFiles(FilePathFilter filter) {
+        Array<FileHandle> files = new Array<>();
+        for (String file : assetNames.keys()) {
+            if (filter.accept(file)) {
+                files.add(new GwtFileHandle(this, file, FileType.Internal));
+            }
+        }
 
-	protected void putAssetInMap (Object result, Asset asset) {
-		switch (asset.type) {
-		case Text:
-			texts.put(asset.file, (String)result);
-			break;
-		case Image:
-			images.put(asset.file, (ImageElement)result);
-			break;
-		case Binary:
-			binaries.put(asset.file, (Blob)result);
-			break;
-		case Audio:
-			audio.put(asset.file, (Blob)result);
-			break;
-		case Directory:
-			directories.put(asset.file, null);
-			break;
-		}
-	}
+        FileHandle[] filesArray = new FileHandle[files.size];
+        System.arraycopy(files.items, 0, filesArray, 0, filesArray.length);
+        return filesArray;
+    }
 
-	public InputStream read (String file) {
-		if (texts.containsKey(file)) {
-			return new ByteArrayInputStream(texts.get(file).getBytes(StandardCharsets.UTF_8));
-		}
-		if (images.containsKey(file)) {
-			return new ByteArrayInputStream(new byte[1]); // FIXME, sensible?
-		}
-		if (binaries.containsKey(file)) {
-			return binaries.get(file).read();
-		}
-		if (audio.containsKey(file)) {
-			return audio.get(file).read();
-		}
-		return null;
-	}
+    public interface PreloaderCallback {
 
-	public boolean contains (String file) {
-		return texts.containsKey(file) || images.containsKey(file) || binaries.containsKey(file) || audio.containsKey(file)
-			|| directories.containsKey(file);
-	}
+        public void update(PreloaderState state);
 
-	public boolean isNotFetchedYet (String file) {
-		return stillToFetchAssets.containsKey(file);
-	}
+        public void error(String file);
 
-	public boolean isText (String file) {
-		return texts.containsKey(file);
-	}
+    }
 
-	public boolean isImage (String file) {
-		return images.containsKey(file);
-	}
+    private interface FilePathFilter {
+        boolean accept(String path);
+    }
 
-	public boolean isBinary (String file) {
-		return binaries.containsKey(file);
-	}
+    public static class Asset {
+        public final String file;
+        public final String url;
+        public final AssetType type;
+        public final long size;
+        public final String mimeType;
+        public boolean succeed;
+        public boolean failed;
+        public boolean downloadStarted;
+        public long loaded;
+        public Asset(String file, String url, AssetType type, long size, String mimeType) {
+            this.file = file;
+            this.url = url;
+            this.type = type;
+            this.size = size;
+            this.mimeType = mimeType;
+        }
+    }
 
-	public boolean isAudio (String file) {
-		return audio.containsKey(file);
-	}
+    public static class PreloaderState {
 
-	public boolean isDirectory (String file) {
-		return directories.containsKey(file);
-	}
+        public final Array<Asset> assets;
 
-	private boolean isChild (String filePath, String directory) {
-		return filePath.startsWith(directory + "/") && (filePath.indexOf('/', directory.length() + 1) < 0);
-	}
+        public PreloaderState(Array<Asset> assets) {
+            this.assets = assets;
+        }
 
-	public FileHandle[] list (final String file) {
-		return getMatchedAssetFiles(new FilePathFilter() {
-			@Override
-			public boolean accept (String path) {
-				return isChild(path, file);
-			}
-		});
-	}
+        public long getDownloadedSize() {
+            long size = 0;
+            for (int i = 0; i < assets.size; i++) {
+                Asset asset = assets.get(i);
+                size += (asset.succeed || asset.failed) ? asset.size : Math.min(asset.size, asset.loaded);
+            }
+            return size;
+        }
 
-	public FileHandle[] list (final String file, final FileFilter filter) {
-		return getMatchedAssetFiles(new FilePathFilter() {
-			@Override
-			public boolean accept (String path) {
-				return isChild(path, file) && filter.accept(new File(path));
-			}
-		});
-	}
+        public long getTotalSize() {
+            long size = 0;
+            for (int i = 0; i < assets.size; i++) {
+                Asset asset = assets.get(i);
+                size += asset.size;
+            }
+            return size;
+        }
 
-	public FileHandle[] list (final String file, final FilenameFilter filter) {
-		return getMatchedAssetFiles(new FilePathFilter() {
-			@Override
-			public boolean accept (String path) {
-				return isChild(path, file) && filter.accept(new File(file), path.substring(file.length() + 1));
-			}
-		});
-	}
+        public float getProgress() {
+            long total = getTotalSize();
+            return total == 0 ? 1 : (getDownloadedSize() / (float) total);
+        }
 
-	public FileHandle[] list (final String file, final String suffix) {
-		return getMatchedAssetFiles(new FilePathFilter() {
-			@Override
-			public boolean accept (String path) {
-				return isChild(path, file) && path.endsWith(suffix);
-			}
-		});
-	}
+        public boolean hasEnded() {
+            return getDownloadedSize() == getTotalSize();
+        }
 
-	public long length (String file) {
-		if (texts.containsKey(file)) {
-			return texts.get(file).getBytes(StandardCharsets.UTF_8).length;
-		}
-		if (images.containsKey(file)) {
-			return 1; // FIXME, sensible?
-		}
-		if (binaries.containsKey(file)) {
-			return binaries.get(file).length();
-		}
-		if (audio.containsKey(file)) {
-			return audio.get(file).length();
-		}
-		return 0;
-	}
-
-	private interface FilePathFilter {
-		boolean accept (String path);
-	}
-
-	private FileHandle[] getMatchedAssetFiles (FilePathFilter filter) {
-		Array<FileHandle> files = new Array<>();
-		for (String file : assetNames.keys()) {
-			if (filter.accept(file)) {
-				files.add(new GwtFileHandle(this, file, FileType.Internal));
-			}
-		}
-
-		FileHandle[] filesArray = new FileHandle[files.size];
-		System.arraycopy(files.items, 0, filesArray, 0, filesArray.length);
-		return filesArray;
-	}
+    }
 }

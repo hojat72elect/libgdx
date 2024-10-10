@@ -1,11 +1,10 @@
-
-
 package org.jbox2d.collision;
 
 import org.jbox2d.common.Settings;
 import org.jbox2d.common.Vec2;
 
-/** A manifold for two touching convex shapes. Box2D supports multiple types of contact:
+/**
+ * A manifold for two touching convex shapes. Box2D supports multiple types of contact:
  * <ul>
  * <li>clip point versus plane with radius</li>
  * <li>point versus point with radius (circles)</li>
@@ -24,64 +23,75 @@ import org.jbox2d.common.Vec2;
  * </ul>
  * We store contacts in this way so that position correction can account for movement, which is critical for continuous physics.
  * All contact scenarios must be expressed in one of these types. This structure is stored across time steps, so we keep it
- * small. */
+ * small.
+ */
 public class Manifold {
 
-	public static enum ManifoldType {
-		CIRCLES, FACE_A, FACE_B
-	}
+    /**
+     * The points of contact.
+     */
+    public final ManifoldPoint[] points;
+    /**
+     * not use for Type::e_points
+     */
+    public final Vec2 localNormal;
+    /**
+     * usage depends on manifold type
+     */
+    public final Vec2 localPoint;
+    public ManifoldType type;
+    /**
+     * The number of manifold points.
+     */
+    public int pointCount;
 
-	/** The points of contact. */
-	public final ManifoldPoint[] points;
+    /**
+     * creates a manifold with 0 points, with it's points array full of instantiated ManifoldPoints.
+     */
+    public Manifold() {
+        points = new ManifoldPoint[Settings.maxManifoldPoints];
+        for (int i = 0; i < Settings.maxManifoldPoints; i++) {
+            points[i] = new ManifoldPoint();
+        }
+        localNormal = new Vec2();
+        localPoint = new Vec2();
+        pointCount = 0;
+    }
 
-	/** not use for Type::e_points */
-	public final Vec2 localNormal;
+    /**
+     * Creates this manifold as a copy of the other
+     *
+     * @param other
+     */
+    public Manifold(Manifold other) {
+        points = new ManifoldPoint[Settings.maxManifoldPoints];
+        localNormal = other.localNormal.clone();
+        localPoint = other.localPoint.clone();
+        pointCount = other.pointCount;
+        type = other.type;
+        // djm: this is correct now
+        for (int i = 0; i < Settings.maxManifoldPoints; i++) {
+            points[i] = new ManifoldPoint(other.points[i]);
+        }
+    }
 
-	/** usage depends on manifold type */
-	public final Vec2 localPoint;
+    /**
+     * copies this manifold from the given one
+     *
+     * @param cp manifold to copy from
+     */
+    public void set(Manifold cp) {
+        for (int i = 0; i < cp.pointCount; i++) {
+            points[i].set(cp.points[i]);
+        }
 
-	public ManifoldType type;
+        type = cp.type;
+        localNormal.set(cp.localNormal);
+        localPoint.set(cp.localPoint);
+        pointCount = cp.pointCount;
+    }
 
-	/** The number of manifold points. */
-	public int pointCount;
-
-	/** creates a manifold with 0 points, with it's points array full of instantiated ManifoldPoints. */
-	public Manifold () {
-		points = new ManifoldPoint[Settings.maxManifoldPoints];
-		for (int i = 0; i < Settings.maxManifoldPoints; i++) {
-			points[i] = new ManifoldPoint();
-		}
-		localNormal = new Vec2();
-		localPoint = new Vec2();
-		pointCount = 0;
-	}
-
-	/** Creates this manifold as a copy of the other
-	 * 
-	 * @param other */
-	public Manifold (Manifold other) {
-		points = new ManifoldPoint[Settings.maxManifoldPoints];
-		localNormal = other.localNormal.clone();
-		localPoint = other.localPoint.clone();
-		pointCount = other.pointCount;
-		type = other.type;
-		// djm: this is correct now
-		for (int i = 0; i < Settings.maxManifoldPoints; i++) {
-			points[i] = new ManifoldPoint(other.points[i]);
-		}
-	}
-
-	/** copies this manifold from the given one
-	 * 
-	 * @param cp manifold to copy from */
-	public void set (Manifold cp) {
-		for (int i = 0; i < cp.pointCount; i++) {
-			points[i].set(cp.points[i]);
-		}
-
-		type = cp.type;
-		localNormal.set(cp.localNormal);
-		localPoint.set(cp.localPoint);
-		pointCount = cp.pointCount;
-	}
+    public static enum ManifoldType {
+        CIRCLES, FACE_A, FACE_B
+    }
 }

@@ -1,5 +1,3 @@
-
-
 package com.badlogic.gdx.tests.bullet;
 
 import com.badlogic.gdx.graphics.g3d.Environment;
@@ -10,72 +8,74 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
 
-/** @author xoppa No physics, simple base class for rendering a bunch of entities. */
+/**
+ * @author xoppa No physics, simple base class for rendering a bunch of entities.
+ */
 public class BaseWorld<T extends BaseEntity> implements Disposable {
-	public static abstract class Constructor<T extends BaseEntity> implements Disposable {
-		public Model model = null;
+    protected final Array<T> entities = new Array<T>();
+    private final ObjectMap<String, Constructor<T>> constructors = new ObjectMap<String, Constructor<T>>();
+    private final Array<Model> models = new Array<Model>();
 
-		public abstract T construct (final float x, final float y, final float z);
+    public void addConstructor(final String name, final Constructor<T> constructor) {
+        constructors.put(name, constructor);
+        if (constructor.model != null && !models.contains(constructor.model, true)) models.add(constructor.model);
+    }
 
-		public abstract T construct (final Matrix4 transform);
-	}
+    public Constructor<T> getConstructor(final String name) {
+        return constructors.get(name);
+    }
 
-	private final ObjectMap<String, Constructor<T>> constructors = new ObjectMap<String, Constructor<T>>();
-	protected final Array<T> entities = new Array<T>();
-	private final Array<Model> models = new Array<Model>();
+    public void add(final T entity) {
+        entities.add(entity);
+    }
 
-	public void addConstructor (final String name, final Constructor<T> constructor) {
-		constructors.put(name, constructor);
-		if (constructor.model != null && !models.contains(constructor.model, true)) models.add(constructor.model);
-	}
+    public T add(final String type, float x, float y, float z) {
+        final T entity = constructors.get(type).construct(x, y, z);
+        add(entity);
+        return entity;
+    }
 
-	public Constructor<T> getConstructor (final String name) {
-		return constructors.get(name);
-	}
+    public T add(final String type, final Matrix4 transform) {
+        final T entity = constructors.get(type).construct(transform);
+        add(entity);
+        return entity;
+    }
 
-	public void add (final T entity) {
-		entities.add(entity);
-	}
+    public void render(final ModelBatch batch, final Environment lights) {
+        render(batch, lights, entities);
+    }
 
-	public T add (final String type, float x, float y, float z) {
-		final T entity = constructors.get(type).construct(x, y, z);
-		add(entity);
-		return entity;
-	}
+    public void render(final ModelBatch batch, final Environment lights, final Iterable<T> entities) {
+        for (final T e : entities) {
+            batch.render(e.modelInstance, lights);
+        }
+    }
 
-	public T add (final String type, final Matrix4 transform) {
-		final T entity = constructors.get(type).construct(transform);
-		add(entity);
-		return entity;
-	}
+    public void render(final ModelBatch batch, final Environment lights, final T entity) {
+        batch.render(entity.modelInstance, lights);
+    }
 
-	public void render (final ModelBatch batch, final Environment lights) {
-		render(batch, lights, entities);
-	}
+    public void update() {
+    }
 
-	public void render (final ModelBatch batch, final Environment lights, final Iterable<T> entities) {
-		for (final T e : entities) {
-			batch.render(e.modelInstance, lights);
-		}
-	}
+    @Override
+    public void dispose() {
+        for (int i = 0; i < entities.size; i++)
+            entities.get(i).dispose();
+        entities.clear();
 
-	public void render (final ModelBatch batch, final Environment lights, final T entity) {
-		batch.render(entity.modelInstance, lights);
-	}
+        for (Constructor<T> constructor : constructors.values())
+            constructor.dispose();
+        constructors.clear();
 
-	public void update () {
-	}
+        models.clear();
+    }
 
-	@Override
-	public void dispose () {
-		for (int i = 0; i < entities.size; i++)
-			entities.get(i).dispose();
-		entities.clear();
+    public static abstract class Constructor<T extends BaseEntity> implements Disposable {
+        public Model model = null;
 
-		for (Constructor<T> constructor : constructors.values())
-			constructor.dispose();
-		constructors.clear();
+        public abstract T construct(final float x, final float y, final float z);
 
-		models.clear();
-	}
+        public abstract T construct(final Matrix4 transform);
+    }
 }

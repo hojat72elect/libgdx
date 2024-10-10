@@ -1,5 +1,3 @@
-
-
 package com.badlogic.gdx.backends.gwt;
 
 import com.badlogic.gdx.Gdx;
@@ -15,80 +13,80 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.google.gwt.user.client.Timer;
 
 public class DefaultGwtAudio implements GwtAudio {
-	private WebAudioAPIManager webAudioAPIManager = null;
+    private WebAudioAPIManager webAudioAPIManager = null;
 
-	private ObjectMap<String, String> outputDeviceLabelsIds = new ObjectMap<>();
+    private ObjectMap<String, String> outputDeviceLabelsIds = new ObjectMap<>();
 
-	public DefaultGwtAudio () {
-		webAudioAPIManager = new WebAudioAPIManager();
+    public DefaultGwtAudio() {
+        webAudioAPIManager = new WebAudioAPIManager();
 
-		if (((GwtApplication)Gdx.app).config.fetchAvailableOutputDevices) {
-			getUserMedia();
-			Timer observer = new Timer() {
-				@Override
-				public void run () {
-					fetchAvailableOutputDevices(new DeviceListener() {
-						@Override
-						public void onDevicesChanged (String[] ids, String[] labels) {
-							outputDeviceLabelsIds.clear();
-							for (int i = 0; i < ids.length; i++) {
-								outputDeviceLabelsIds.put(labels[i], ids[i]);
-							}
-						}
-					});
-				}
-			};
-			observer.scheduleRepeating(1000);
-		}
-	}
+        if (((GwtApplication) Gdx.app).config.fetchAvailableOutputDevices) {
+            getUserMedia();
+            Timer observer = new Timer() {
+                @Override
+                public void run() {
+                    fetchAvailableOutputDevices(new DeviceListener() {
+                        @Override
+                        public void onDevicesChanged(String[] ids, String[] labels) {
+                            outputDeviceLabelsIds.clear();
+                            for (int i = 0; i < ids.length; i++) {
+                                outputDeviceLabelsIds.put(labels[i], ids[i]);
+                            }
+                        }
+                    });
+                }
+            };
+            observer.scheduleRepeating(1000);
+        }
+    }
 
-	@Override
-	public AudioDevice newAudioDevice (int samplingRate, boolean isMono) {
-		throw new GdxRuntimeException("AudioDevice not supported by GWT backend");
-	}
+    @Override
+    public AudioDevice newAudioDevice(int samplingRate, boolean isMono) {
+        throw new GdxRuntimeException("AudioDevice not supported by GWT backend");
+    }
 
-	@Override
-	public AudioRecorder newAudioRecorder (int samplingRate, boolean isMono) {
-		throw new GdxRuntimeException("AudioRecorder not supported by GWT backend");
-	}
+    @Override
+    public AudioRecorder newAudioRecorder(int samplingRate, boolean isMono) {
+        throw new GdxRuntimeException("AudioRecorder not supported by GWT backend");
+    }
 
-	@Override
-	public Sound newSound (FileHandle fileHandle) {
-		return webAudioAPIManager.createSound(fileHandle);
-	}
+    @Override
+    public Sound newSound(FileHandle fileHandle) {
+        return webAudioAPIManager.createSound(fileHandle);
+    }
 
-	@Override
-	public Music newMusic (FileHandle file) {
-		return webAudioAPIManager.createMusic(file);
-	}
+    @Override
+    public Music newMusic(FileHandle file) {
+        return webAudioAPIManager.createMusic(file);
+    }
 
-	@Override
-	public boolean switchOutputDevice (String label) {
-		String[] features = GwtFeaturePolicy.features();
-		if (features == null || !Array.with(features).contains("speaker-selection", false)
-			|| GwtFeaturePolicy.allowsFeature("speaker-selection")) {
-			String deviceIdentifier;
-			if (label == null) {
-				deviceIdentifier = ""; // Empty = default
-			} else {
-				deviceIdentifier = outputDeviceLabelsIds.get(label);
-			}
-			webAudioAPIManager.setSinkId(deviceIdentifier);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean switchOutputDevice(String label) {
+        String[] features = GwtFeaturePolicy.features();
+        if (features == null || !Array.with(features).contains("speaker-selection", false)
+                || GwtFeaturePolicy.allowsFeature("speaker-selection")) {
+            String deviceIdentifier;
+            if (label == null) {
+                deviceIdentifier = ""; // Empty = default
+            } else {
+                deviceIdentifier = outputDeviceLabelsIds.get(label);
+            }
+            webAudioAPIManager.setSinkId(deviceIdentifier);
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public String[] getAvailableOutputDevices () {
-		return outputDeviceLabelsIds.keys().toArray().toArray(String.class);
-	}
+    @Override
+    public String[] getAvailableOutputDevices() {
+        return outputDeviceLabelsIds.keys().toArray().toArray(String.class);
+    }
 
-	private native void getUserMedia () /*-{
+    private native void getUserMedia() /*-{
 		navigator.mediaDevices.getUserMedia({ audio: true });
 	}-*/;
 
-	private native void fetchAvailableOutputDevices (DeviceListener listener) /*-{
+    private native void fetchAvailableOutputDevices(DeviceListener listener) /*-{
 		navigator.mediaDevices
 			.enumerateDevices()
 			.then(function(devices) {
@@ -105,7 +103,7 @@ public class DefaultGwtAudio implements GwtAudio {
 			});
 	}-*/;
 
-	private interface DeviceListener {
-		void onDevicesChanged (String[] ids, String[] labels);
-	}
+    private interface DeviceListener {
+        void onDevicesChanged(String[] ids, String[] labels);
+    }
 }

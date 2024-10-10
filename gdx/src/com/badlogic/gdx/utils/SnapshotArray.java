@@ -1,10 +1,9 @@
-
-
 package com.badlogic.gdx.utils;
 
 import java.util.Comparator;
 
-/** An array that allows modification during iteration. Guarantees that array entries provided by {@link #begin()} between indexes
+/**
+ * An array that allows modification during iteration. Guarantees that array entries provided by {@link #begin()} between indexes
  * 0 and {@link #size} at the time begin was called will not be modified until {@link #end()} is called. If modification of the
  * SnapshotArray occurs between begin/end, the backing array is copied prior to the modification, ensuring that the backing array
  * that was returned by {@link #begin()} is unaffected. To avoid allocation, an attempt is made to reuse any extra array created
@@ -13,7 +12,7 @@ import java.util.Comparator;
  * Note that SnapshotArray is not for thread safety, only for modification during iteration.
  * <p>
  * It is suggested iteration be done in this specific way:
- * 
+ *
  * <pre>
  * SnapshotArray<Item> array = new SnapshotArray();
  * // ...
@@ -24,158 +23,163 @@ import java.util.Comparator;
  * }
  * array.end();
  * </pre>
- * 
- *  */
+ */
 public class SnapshotArray<T> extends Array<T> {
-	private T[] snapshot, recycled;
-	private int snapshots;
+    private T[] snapshot, recycled;
+    private int snapshots;
 
-	public SnapshotArray () {
-		super();
-	}
+    public SnapshotArray() {
+        super();
+    }
 
-	public SnapshotArray (Array array) {
-		super(array);
-	}
+    public SnapshotArray(Array array) {
+        super(array);
+    }
 
-	public SnapshotArray (boolean ordered, int capacity, Class arrayType) {
-		super(ordered, capacity, arrayType);
-	}
+    public SnapshotArray(boolean ordered, int capacity, Class arrayType) {
+        super(ordered, capacity, arrayType);
+    }
 
-	public SnapshotArray (boolean ordered, int capacity) {
-		super(ordered, capacity);
-	}
+    public SnapshotArray(boolean ordered, int capacity) {
+        super(ordered, capacity);
+    }
 
-	public SnapshotArray (boolean ordered, T[] array, int startIndex, int count) {
-		super(ordered, array, startIndex, count);
-	}
+    public SnapshotArray(boolean ordered, T[] array, int startIndex, int count) {
+        super(ordered, array, startIndex, count);
+    }
 
-	public SnapshotArray (Class arrayType) {
-		super(arrayType);
-	}
+    public SnapshotArray(Class arrayType) {
+        super(arrayType);
+    }
 
-	public SnapshotArray (int capacity) {
-		super(capacity);
-	}
+    public SnapshotArray(int capacity) {
+        super(capacity);
+    }
 
-	public SnapshotArray (T[] array) {
-		super(array);
-	}
+    public SnapshotArray(T[] array) {
+        super(array);
+    }
 
-	/** Returns the backing array, which is guaranteed to not be modified before {@link #end()}. */
-	public T[] begin () {
-		modified();
-		snapshot = items;
-		snapshots++;
-		return items;
-	}
+    /**
+     * @see #SnapshotArray(Object[])
+     */
+    static public <T> SnapshotArray<T> with(T... array) {
+        return new SnapshotArray(array);
+    }
 
-	/** Releases the guarantee that the array returned by {@link #begin()} won't be modified. */
-	public void end () {
-		snapshots = Math.max(0, snapshots - 1);
-		if (snapshot == null) return;
-		if (snapshot != items && snapshots == 0) {
-			// The backing array was copied, keep around the old array.
-			recycled = snapshot;
-			for (int i = 0, n = recycled.length; i < n; i++)
-				recycled[i] = null;
-		}
-		snapshot = null;
-	}
+    /**
+     * Returns the backing array, which is guaranteed to not be modified before {@link #end()}.
+     */
+    public T[] begin() {
+        modified();
+        snapshot = items;
+        snapshots++;
+        return items;
+    }
 
-	private void modified () {
-		if (snapshot == null || snapshot != items) return;
-		// Snapshot is in use, copy backing array to recycled array or create new backing array.
-		if (recycled != null && recycled.length >= size) {
-			System.arraycopy(items, 0, recycled, 0, size);
-			items = recycled;
-			recycled = null;
-		} else
-			resize(items.length);
-	}
+    /**
+     * Releases the guarantee that the array returned by {@link #begin()} won't be modified.
+     */
+    public void end() {
+        snapshots = Math.max(0, snapshots - 1);
+        if (snapshot == null) return;
+        if (snapshot != items && snapshots == 0) {
+            // The backing array was copied, keep around the old array.
+            recycled = snapshot;
+            for (int i = 0, n = recycled.length; i < n; i++)
+                recycled[i] = null;
+        }
+        snapshot = null;
+    }
 
-	public void set (int index, T value) {
-		modified();
-		super.set(index, value);
-	}
+    private void modified() {
+        if (snapshot == null || snapshot != items) return;
+        // Snapshot is in use, copy backing array to recycled array or create new backing array.
+        if (recycled != null && recycled.length >= size) {
+            System.arraycopy(items, 0, recycled, 0, size);
+            items = recycled;
+            recycled = null;
+        } else
+            resize(items.length);
+    }
 
-	public void insert (int index, T value) {
-		modified();
-		super.insert(index, value);
-	}
+    public void set(int index, T value) {
+        modified();
+        super.set(index, value);
+    }
 
-	public void insertRange (int index, int count) {
-		modified();
-		super.insertRange(index, count);
-	}
+    public void insert(int index, T value) {
+        modified();
+        super.insert(index, value);
+    }
 
-	public void swap (int first, int second) {
-		modified();
-		super.swap(first, second);
-	}
+    public void insertRange(int index, int count) {
+        modified();
+        super.insertRange(index, count);
+    }
 
-	public boolean removeValue (T value, boolean identity) {
-		modified();
-		return super.removeValue(value, identity);
-	}
+    public void swap(int first, int second) {
+        modified();
+        super.swap(first, second);
+    }
 
-	public T removeIndex (int index) {
-		modified();
-		return super.removeIndex(index);
-	}
+    public boolean removeValue(T value, boolean identity) {
+        modified();
+        return super.removeValue(value, identity);
+    }
 
-	public void removeRange (int start, int end) {
-		modified();
-		super.removeRange(start, end);
-	}
+    public T removeIndex(int index) {
+        modified();
+        return super.removeIndex(index);
+    }
 
-	public boolean removeAll (Array<? extends T> array, boolean identity) {
-		modified();
-		return super.removeAll(array, identity);
-	}
+    public void removeRange(int start, int end) {
+        modified();
+        super.removeRange(start, end);
+    }
 
-	public T pop () {
-		modified();
-		return super.pop();
-	}
+    public boolean removeAll(Array<? extends T> array, boolean identity) {
+        modified();
+        return super.removeAll(array, identity);
+    }
 
-	public void clear () {
-		modified();
-		super.clear();
-	}
+    public T pop() {
+        modified();
+        return super.pop();
+    }
 
-	public void sort () {
-		modified();
-		super.sort();
-	}
+    public void clear() {
+        modified();
+        super.clear();
+    }
 
-	public void sort (Comparator<? super T> comparator) {
-		modified();
-		super.sort(comparator);
-	}
+    public void sort() {
+        modified();
+        super.sort();
+    }
 
-	public void reverse () {
-		modified();
-		super.reverse();
-	}
+    public void sort(Comparator<? super T> comparator) {
+        modified();
+        super.sort(comparator);
+    }
 
-	public void shuffle () {
-		modified();
-		super.shuffle();
-	}
+    public void reverse() {
+        modified();
+        super.reverse();
+    }
 
-	public void truncate (int newSize) {
-		modified();
-		super.truncate(newSize);
-	}
+    public void shuffle() {
+        modified();
+        super.shuffle();
+    }
 
-	public T[] setSize (int newSize) {
-		modified();
-		return super.setSize(newSize);
-	}
+    public void truncate(int newSize) {
+        modified();
+        super.truncate(newSize);
+    }
 
-	/** @see #SnapshotArray(Object[]) */
-	static public <T> SnapshotArray<T> with (T... array) {
-		return new SnapshotArray(array);
-	}
+    public T[] setSize(int newSize) {
+        modified();
+        return super.setSize(newSize);
+    }
 }

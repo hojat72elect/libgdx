@@ -12,72 +12,74 @@ import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.math.Vector3;
 
 public class btSimpleBroadphaseProxy extends btBroadphaseProxy {
-	private long swigCPtr;
+    private long swigCPtr;
 
-	protected btSimpleBroadphaseProxy (final String className, long cPtr, boolean cMemoryOwn) {
-		super(className, CollisionJNI.btSimpleBroadphaseProxy_SWIGUpcast(cPtr), cMemoryOwn);
-		swigCPtr = cPtr;
-	}
+    protected btSimpleBroadphaseProxy(final String className, long cPtr, boolean cMemoryOwn) {
+        super(className, CollisionJNI.btSimpleBroadphaseProxy_SWIGUpcast(cPtr), cMemoryOwn);
+        swigCPtr = cPtr;
+    }
 
-	/** Construct a new btSimpleBroadphaseProxy, normally you should not need this constructor it's intended for low-level
-	 * usage. */
-	public btSimpleBroadphaseProxy (long cPtr, boolean cMemoryOwn) {
-		this("btSimpleBroadphaseProxy", cPtr, cMemoryOwn);
-		construct();
-	}
+    /**
+     * Construct a new btSimpleBroadphaseProxy, normally you should not need this constructor it's intended for low-level
+     * usage.
+     */
+    public btSimpleBroadphaseProxy(long cPtr, boolean cMemoryOwn) {
+        this("btSimpleBroadphaseProxy", cPtr, cMemoryOwn);
+        construct();
+    }
 
-	@Override
-	protected void reset (long cPtr, boolean cMemoryOwn) {
-		if (!destroyed) destroy();
-		super.reset(CollisionJNI.btSimpleBroadphaseProxy_SWIGUpcast(swigCPtr = cPtr), cMemoryOwn);
-	}
+    public btSimpleBroadphaseProxy() {
+        this(CollisionJNI.new_btSimpleBroadphaseProxy__SWIG_0(), true);
+    }
 
-	public static long getCPtr (btSimpleBroadphaseProxy obj) {
-		return (obj == null) ? 0 : obj.swigCPtr;
-	}
+    public btSimpleBroadphaseProxy(Vector3 minpt, Vector3 maxpt, int shapeType, long userPtr, int collisionFilterGroup,
+                                   int collisionFilterMask) {
+        this(CollisionJNI.new_btSimpleBroadphaseProxy__SWIG_1(minpt, maxpt, shapeType, userPtr, collisionFilterGroup,
+                collisionFilterMask), true);
+    }
 
-	@Override
-	protected void finalize () throws Throwable {
-		if (!destroyed) destroy();
-		super.finalize();
-	}
+    public static long getCPtr(btSimpleBroadphaseProxy obj) {
+        return (obj == null) ? 0 : obj.swigCPtr;
+    }
 
-	@Override
-	protected synchronized void delete () {
-		if (swigCPtr != 0) {
-			if (swigCMemOwn) {
-				swigCMemOwn = false;
-				CollisionJNI.delete_btSimpleBroadphaseProxy(swigCPtr);
-			}
-			swigCPtr = 0;
-		}
-		super.delete();
-	}
+    @Override
+    protected void reset(long cPtr, boolean cMemoryOwn) {
+        if (!destroyed) destroy();
+        super.reset(CollisionJNI.btSimpleBroadphaseProxy_SWIGUpcast(swigCPtr = cPtr), cMemoryOwn);
+    }
 
-	public void setNextFree (int value) {
-		CollisionJNI.btSimpleBroadphaseProxy_nextFree_set(swigCPtr, this, value);
-	}
+    @Override
+    protected void finalize() throws Throwable {
+        if (!destroyed) destroy();
+        super.finalize();
+    }
 
-	public int getNextFree () {
-		return CollisionJNI.btSimpleBroadphaseProxy_nextFree_get(swigCPtr, this);
-	}
+    @Override
+    protected synchronized void delete() {
+        if (swigCPtr != 0) {
+            if (swigCMemOwn) {
+                swigCMemOwn = false;
+                CollisionJNI.delete_btSimpleBroadphaseProxy(swigCPtr);
+            }
+            swigCPtr = 0;
+        }
+        super.delete();
+    }
 
-	public btSimpleBroadphaseProxy () {
-		this(CollisionJNI.new_btSimpleBroadphaseProxy__SWIG_0(), true);
-	}
+    public int getNextFree() {
+        return CollisionJNI.btSimpleBroadphaseProxy_nextFree_get(swigCPtr, this);
+    }
 
-	public btSimpleBroadphaseProxy (Vector3 minpt, Vector3 maxpt, int shapeType, long userPtr, int collisionFilterGroup,
-		int collisionFilterMask) {
-		this(CollisionJNI.new_btSimpleBroadphaseProxy__SWIG_1(minpt, maxpt, shapeType, userPtr, collisionFilterGroup,
-			collisionFilterMask), true);
-	}
+    public void setNextFree(int value) {
+        CollisionJNI.btSimpleBroadphaseProxy_nextFree_set(swigCPtr, this, value);
+    }
 
-	public void SetNextFree (int next) {
-		CollisionJNI.btSimpleBroadphaseProxy_SetNextFree(swigCPtr, this, next);
-	}
+    public void SetNextFree(int next) {
+        CollisionJNI.btSimpleBroadphaseProxy_SetNextFree(swigCPtr, this, next);
+    }
 
-	public int GetNextFree () {
-		return CollisionJNI.btSimpleBroadphaseProxy_GetNextFree(swigCPtr, this);
-	}
+    public int GetNextFree() {
+        return CollisionJNI.btSimpleBroadphaseProxy_GetNextFree(swigCPtr, this);
+    }
 
 }

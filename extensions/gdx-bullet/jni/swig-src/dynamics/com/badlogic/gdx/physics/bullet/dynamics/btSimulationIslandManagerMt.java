@@ -13,250 +13,256 @@ import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
 
 public class btSimulationIslandManagerMt extends btSimulationIslandManager {
-	private long swigCPtr;
+    private long swigCPtr;
 
-	protected btSimulationIslandManagerMt (final String className, long cPtr, boolean cMemoryOwn) {
-		super(className, DynamicsJNI.btSimulationIslandManagerMt_SWIGUpcast(cPtr), cMemoryOwn);
-		swigCPtr = cPtr;
-	}
+    protected btSimulationIslandManagerMt(final String className, long cPtr, boolean cMemoryOwn) {
+        super(className, DynamicsJNI.btSimulationIslandManagerMt_SWIGUpcast(cPtr), cMemoryOwn);
+        swigCPtr = cPtr;
+    }
 
-	/** Construct a new btSimulationIslandManagerMt, normally you should not need this constructor it's intended for low-level
-	 * usage. */
-	public btSimulationIslandManagerMt (long cPtr, boolean cMemoryOwn) {
-		this("btSimulationIslandManagerMt", cPtr, cMemoryOwn);
-		construct();
-	}
+    /**
+     * Construct a new btSimulationIslandManagerMt, normally you should not need this constructor it's intended for low-level
+     * usage.
+     */
+    public btSimulationIslandManagerMt(long cPtr, boolean cMemoryOwn) {
+        this("btSimulationIslandManagerMt", cPtr, cMemoryOwn);
+        construct();
+    }
 
-	@Override
-	protected void reset (long cPtr, boolean cMemoryOwn) {
-		if (!destroyed) destroy();
-		super.reset(DynamicsJNI.btSimulationIslandManagerMt_SWIGUpcast(swigCPtr = cPtr), cMemoryOwn);
-	}
+    public btSimulationIslandManagerMt() {
+        this(DynamicsJNI.new_btSimulationIslandManagerMt(), true);
+    }
 
-	public static long getCPtr (btSimulationIslandManagerMt obj) {
-		return (obj == null) ? 0 : obj.swigCPtr;
-	}
+    public static long getCPtr(btSimulationIslandManagerMt obj) {
+        return (obj == null) ? 0 : obj.swigCPtr;
+    }
 
-	@Override
-	protected void finalize () throws Throwable {
-		if (!destroyed) destroy();
-		super.finalize();
-	}
+    public static void serialIslandDispatch(SWIGTYPE_p_btAlignedObjectArrayT_btSimulationIslandManagerMt__Island_p_t islandsPtr,
+                                            btSimulationIslandManagerMt.IslandCallback callback) {
+        DynamicsJNI.btSimulationIslandManagerMt_serialIslandDispatch(
+                SWIGTYPE_p_btAlignedObjectArrayT_btSimulationIslandManagerMt__Island_p_t.getCPtr(islandsPtr),
+                btSimulationIslandManagerMt.IslandCallback.getCPtr(callback), callback);
+    }
 
-	@Override
-	protected synchronized void delete () {
-		if (swigCPtr != 0) {
-			if (swigCMemOwn) {
-				swigCMemOwn = false;
-				DynamicsJNI.delete_btSimulationIslandManagerMt(swigCPtr);
-			}
-			swigCPtr = 0;
-		}
-		super.delete();
-	}
+    public static void parallelIslandDispatch(SWIGTYPE_p_btAlignedObjectArrayT_btSimulationIslandManagerMt__Island_p_t islandsPtr,
+                                              btSimulationIslandManagerMt.IslandCallback callback) {
+        DynamicsJNI.btSimulationIslandManagerMt_parallelIslandDispatch(
+                SWIGTYPE_p_btAlignedObjectArrayT_btSimulationIslandManagerMt__Island_p_t.getCPtr(islandsPtr),
+                btSimulationIslandManagerMt.IslandCallback.getCPtr(callback), callback);
+    }
 
-	static public class Island extends BulletBase {
-		private long swigCPtr;
+    @Override
+    protected void reset(long cPtr, boolean cMemoryOwn) {
+        if (!destroyed) destroy();
+        super.reset(DynamicsJNI.btSimulationIslandManagerMt_SWIGUpcast(swigCPtr = cPtr), cMemoryOwn);
+    }
 
-		protected Island (final String className, long cPtr, boolean cMemoryOwn) {
-			super(className, cPtr, cMemoryOwn);
-			swigCPtr = cPtr;
-		}
+    @Override
+    protected void finalize() throws Throwable {
+        if (!destroyed) destroy();
+        super.finalize();
+    }
 
-		/** Construct a new Island, normally you should not need this constructor it's intended for low-level usage. */
-		public Island (long cPtr, boolean cMemoryOwn) {
-			this("Island", cPtr, cMemoryOwn);
-			construct();
-		}
+    @Override
+    protected synchronized void delete() {
+        if (swigCPtr != 0) {
+            if (swigCMemOwn) {
+                swigCMemOwn = false;
+                DynamicsJNI.delete_btSimulationIslandManagerMt(swigCPtr);
+            }
+            swigCPtr = 0;
+        }
+        super.delete();
+    }
 
-		@Override
-		protected void reset (long cPtr, boolean cMemoryOwn) {
-			if (!destroyed) destroy();
-			super.reset(swigCPtr = cPtr, cMemoryOwn);
-		}
+    public void buildAndProcessIslands(btDispatcher dispatcher, btCollisionWorld collisionWorld,
+                                       SWIGTYPE_p_btAlignedObjectArrayT_btTypedConstraint_p_t constraints, btSimulationIslandManagerMt.IslandCallback callback) {
+        DynamicsJNI.btSimulationIslandManagerMt_buildAndProcessIslands(swigCPtr, this, btDispatcher.getCPtr(dispatcher), dispatcher,
+                btCollisionWorld.getCPtr(collisionWorld), collisionWorld,
+                SWIGTYPE_p_btAlignedObjectArrayT_btTypedConstraint_p_t.getCPtr(constraints),
+                btSimulationIslandManagerMt.IslandCallback.getCPtr(callback), callback);
+    }
 
-		public static long getCPtr (Island obj) {
-			return (obj == null) ? 0 : obj.swigCPtr;
-		}
+    public void buildIslands(btDispatcher dispatcher, btCollisionWorld colWorld) {
+        DynamicsJNI.btSimulationIslandManagerMt_buildIslands(swigCPtr, this, btDispatcher.getCPtr(dispatcher), dispatcher,
+                btCollisionWorld.getCPtr(colWorld), colWorld);
+    }
 
-		@Override
-		protected void finalize () throws Throwable {
-			if (!destroyed) destroy();
-			super.finalize();
-		}
+    public int getMinimumSolverBatchSize() {
+        return DynamicsJNI.btSimulationIslandManagerMt_getMinimumSolverBatchSize(swigCPtr, this);
+    }
 
-		@Override
-		protected synchronized void delete () {
-			if (swigCPtr != 0) {
-				if (swigCMemOwn) {
-					swigCMemOwn = false;
-					DynamicsJNI.delete_btSimulationIslandManagerMt_Island(swigCPtr);
-				}
-				swigCPtr = 0;
-			}
-			super.delete();
-		}
+    public void setMinimumSolverBatchSize(int sz) {
+        DynamicsJNI.btSimulationIslandManagerMt_setMinimumSolverBatchSize(swigCPtr, this, sz);
+    }
 
-		public void setBodyArray (btCollisionObjectArray value) {
-			DynamicsJNI.btSimulationIslandManagerMt_Island_bodyArray_set(swigCPtr, this, btCollisionObjectArray.getCPtr(value),
-				value);
-		}
+    public SWIGTYPE_p_f_p_btAlignedObjectArray__p_btSimulationIslandManagerMt__Island___p_btSimulationIslandManagerMt__IslandCallback__void getIslandDispatchFunction() {
+        long cPtr = DynamicsJNI.btSimulationIslandManagerMt_getIslandDispatchFunction(swigCPtr, this);
+        return (cPtr == 0) ? null
+                : new SWIGTYPE_p_f_p_btAlignedObjectArray__p_btSimulationIslandManagerMt__Island___p_btSimulationIslandManagerMt__IslandCallback__void(
+                cPtr, false);
+    }
 
-		public btCollisionObjectArray getBodyArray () {
-			long cPtr = DynamicsJNI.btSimulationIslandManagerMt_Island_bodyArray_get(swigCPtr, this);
-			return (cPtr == 0) ? null : new btCollisionObjectArray(cPtr, false);
-		}
+    public void setIslandDispatchFunction(
+            SWIGTYPE_p_f_p_btAlignedObjectArray__p_btSimulationIslandManagerMt__Island___p_btSimulationIslandManagerMt__IslandCallback__void func) {
+        DynamicsJNI.btSimulationIslandManagerMt_setIslandDispatchFunction(swigCPtr, this,
+                SWIGTYPE_p_f_p_btAlignedObjectArray__p_btSimulationIslandManagerMt__Island___p_btSimulationIslandManagerMt__IslandCallback__void
+                        .getCPtr(func));
+    }
 
-		public void setManifoldArray (btPersistentManifoldArray value) {
-			DynamicsJNI.btSimulationIslandManagerMt_Island_manifoldArray_set(swigCPtr, this,
-				btPersistentManifoldArray.getCPtr(value), value);
-		}
+    static public class Island extends BulletBase {
+        private long swigCPtr;
 
-		public btPersistentManifoldArray getManifoldArray () {
-			long cPtr = DynamicsJNI.btSimulationIslandManagerMt_Island_manifoldArray_get(swigCPtr, this);
-			return (cPtr == 0) ? null : new btPersistentManifoldArray(cPtr, false);
-		}
+        protected Island(final String className, long cPtr, boolean cMemoryOwn) {
+            super(className, cPtr, cMemoryOwn);
+            swigCPtr = cPtr;
+        }
 
-		public void setConstraintArray (SWIGTYPE_p_btAlignedObjectArrayT_btTypedConstraint_p_t value) {
-			DynamicsJNI.btSimulationIslandManagerMt_Island_constraintArray_set(swigCPtr, this,
-				SWIGTYPE_p_btAlignedObjectArrayT_btTypedConstraint_p_t.getCPtr(value));
-		}
+        /**
+         * Construct a new Island, normally you should not need this constructor it's intended for low-level usage.
+         */
+        public Island(long cPtr, boolean cMemoryOwn) {
+            this("Island", cPtr, cMemoryOwn);
+            construct();
+        }
 
-		public SWIGTYPE_p_btAlignedObjectArrayT_btTypedConstraint_p_t getConstraintArray () {
-			long cPtr = DynamicsJNI.btSimulationIslandManagerMt_Island_constraintArray_get(swigCPtr, this);
-			return (cPtr == 0) ? null : new SWIGTYPE_p_btAlignedObjectArrayT_btTypedConstraint_p_t(cPtr, false);
-		}
+        public Island() {
+            this(DynamicsJNI.new_btSimulationIslandManagerMt_Island(), true);
+        }
 
-		public void setId (int value) {
-			DynamicsJNI.btSimulationIslandManagerMt_Island_id_set(swigCPtr, this, value);
-		}
+        public static long getCPtr(Island obj) {
+            return (obj == null) ? 0 : obj.swigCPtr;
+        }
 
-		public int getId () {
-			return DynamicsJNI.btSimulationIslandManagerMt_Island_id_get(swigCPtr, this);
-		}
+        @Override
+        protected void reset(long cPtr, boolean cMemoryOwn) {
+            if (!destroyed) destroy();
+            super.reset(swigCPtr = cPtr, cMemoryOwn);
+        }
 
-		public void setIsSleeping (boolean value) {
-			DynamicsJNI.btSimulationIslandManagerMt_Island_isSleeping_set(swigCPtr, this, value);
-		}
+        @Override
+        protected void finalize() throws Throwable {
+            if (!destroyed) destroy();
+            super.finalize();
+        }
 
-		public boolean getIsSleeping () {
-			return DynamicsJNI.btSimulationIslandManagerMt_Island_isSleeping_get(swigCPtr, this);
-		}
+        @Override
+        protected synchronized void delete() {
+            if (swigCPtr != 0) {
+                if (swigCMemOwn) {
+                    swigCMemOwn = false;
+                    DynamicsJNI.delete_btSimulationIslandManagerMt_Island(swigCPtr);
+                }
+                swigCPtr = 0;
+            }
+            super.delete();
+        }
 
-		public void append (btSimulationIslandManagerMt.Island other) {
-			DynamicsJNI.btSimulationIslandManagerMt_Island_append(swigCPtr, this, btSimulationIslandManagerMt.Island.getCPtr(other),
-				other);
-		}
+        public btCollisionObjectArray getBodyArray() {
+            long cPtr = DynamicsJNI.btSimulationIslandManagerMt_Island_bodyArray_get(swigCPtr, this);
+            return (cPtr == 0) ? null : new btCollisionObjectArray(cPtr, false);
+        }
 
-		public Island () {
-			this(DynamicsJNI.new_btSimulationIslandManagerMt_Island(), true);
-		}
+        public void setBodyArray(btCollisionObjectArray value) {
+            DynamicsJNI.btSimulationIslandManagerMt_Island_bodyArray_set(swigCPtr, this, btCollisionObjectArray.getCPtr(value),
+                    value);
+        }
 
-	}
+        public btPersistentManifoldArray getManifoldArray() {
+            long cPtr = DynamicsJNI.btSimulationIslandManagerMt_Island_manifoldArray_get(swigCPtr, this);
+            return (cPtr == 0) ? null : new btPersistentManifoldArray(cPtr, false);
+        }
 
-	static public class IslandCallback extends BulletBase {
-		private long swigCPtr;
+        public void setManifoldArray(btPersistentManifoldArray value) {
+            DynamicsJNI.btSimulationIslandManagerMt_Island_manifoldArray_set(swigCPtr, this,
+                    btPersistentManifoldArray.getCPtr(value), value);
+        }
 
-		protected IslandCallback (final String className, long cPtr, boolean cMemoryOwn) {
-			super(className, cPtr, cMemoryOwn);
-			swigCPtr = cPtr;
-		}
+        public SWIGTYPE_p_btAlignedObjectArrayT_btTypedConstraint_p_t getConstraintArray() {
+            long cPtr = DynamicsJNI.btSimulationIslandManagerMt_Island_constraintArray_get(swigCPtr, this);
+            return (cPtr == 0) ? null : new SWIGTYPE_p_btAlignedObjectArrayT_btTypedConstraint_p_t(cPtr, false);
+        }
 
-		/** Construct a new IslandCallback, normally you should not need this constructor it's intended for low-level usage. */
-		public IslandCallback (long cPtr, boolean cMemoryOwn) {
-			this("IslandCallback", cPtr, cMemoryOwn);
-			construct();
-		}
+        public void setConstraintArray(SWIGTYPE_p_btAlignedObjectArrayT_btTypedConstraint_p_t value) {
+            DynamicsJNI.btSimulationIslandManagerMt_Island_constraintArray_set(swigCPtr, this,
+                    SWIGTYPE_p_btAlignedObjectArrayT_btTypedConstraint_p_t.getCPtr(value));
+        }
 
-		@Override
-		protected void reset (long cPtr, boolean cMemoryOwn) {
-			if (!destroyed) destroy();
-			super.reset(swigCPtr = cPtr, cMemoryOwn);
-		}
+        public int getId() {
+            return DynamicsJNI.btSimulationIslandManagerMt_Island_id_get(swigCPtr, this);
+        }
 
-		public static long getCPtr (IslandCallback obj) {
-			return (obj == null) ? 0 : obj.swigCPtr;
-		}
+        public void setId(int value) {
+            DynamicsJNI.btSimulationIslandManagerMt_Island_id_set(swigCPtr, this, value);
+        }
 
-		@Override
-		protected void finalize () throws Throwable {
-			if (!destroyed) destroy();
-			super.finalize();
-		}
+        public boolean getIsSleeping() {
+            return DynamicsJNI.btSimulationIslandManagerMt_Island_isSleeping_get(swigCPtr, this);
+        }
 
-		@Override
-		protected synchronized void delete () {
-			if (swigCPtr != 0) {
-				if (swigCMemOwn) {
-					swigCMemOwn = false;
-					DynamicsJNI.delete_btSimulationIslandManagerMt_IslandCallback(swigCPtr);
-				}
-				swigCPtr = 0;
-			}
-			super.delete();
-		}
+        public void setIsSleeping(boolean value) {
+            DynamicsJNI.btSimulationIslandManagerMt_Island_isSleeping_set(swigCPtr, this, value);
+        }
 
-		public void processIsland (SWIGTYPE_p_p_btCollisionObject bodies, int numBodies,
-			SWIGTYPE_p_p_btPersistentManifold manifolds, int numManifolds, SWIGTYPE_p_p_btTypedConstraint constraints,
-			int numConstraints, int islandId) {
-			DynamicsJNI.btSimulationIslandManagerMt_IslandCallback_processIsland(swigCPtr, this,
-				SWIGTYPE_p_p_btCollisionObject.getCPtr(bodies), numBodies, SWIGTYPE_p_p_btPersistentManifold.getCPtr(manifolds),
-				numManifolds, SWIGTYPE_p_p_btTypedConstraint.getCPtr(constraints), numConstraints, islandId);
-		}
+        public void append(btSimulationIslandManagerMt.Island other) {
+            DynamicsJNI.btSimulationIslandManagerMt_Island_append(swigCPtr, this, btSimulationIslandManagerMt.Island.getCPtr(other),
+                    other);
+        }
 
-	}
+    }
 
-	public static void serialIslandDispatch (SWIGTYPE_p_btAlignedObjectArrayT_btSimulationIslandManagerMt__Island_p_t islandsPtr,
-		btSimulationIslandManagerMt.IslandCallback callback) {
-		DynamicsJNI.btSimulationIslandManagerMt_serialIslandDispatch(
-			SWIGTYPE_p_btAlignedObjectArrayT_btSimulationIslandManagerMt__Island_p_t.getCPtr(islandsPtr),
-			btSimulationIslandManagerMt.IslandCallback.getCPtr(callback), callback);
-	}
+    static public class IslandCallback extends BulletBase {
+        private long swigCPtr;
 
-	public static void parallelIslandDispatch (SWIGTYPE_p_btAlignedObjectArrayT_btSimulationIslandManagerMt__Island_p_t islandsPtr,
-		btSimulationIslandManagerMt.IslandCallback callback) {
-		DynamicsJNI.btSimulationIslandManagerMt_parallelIslandDispatch(
-			SWIGTYPE_p_btAlignedObjectArrayT_btSimulationIslandManagerMt__Island_p_t.getCPtr(islandsPtr),
-			btSimulationIslandManagerMt.IslandCallback.getCPtr(callback), callback);
-	}
+        protected IslandCallback(final String className, long cPtr, boolean cMemoryOwn) {
+            super(className, cPtr, cMemoryOwn);
+            swigCPtr = cPtr;
+        }
 
-	public btSimulationIslandManagerMt () {
-		this(DynamicsJNI.new_btSimulationIslandManagerMt(), true);
-	}
+        /**
+         * Construct a new IslandCallback, normally you should not need this constructor it's intended for low-level usage.
+         */
+        public IslandCallback(long cPtr, boolean cMemoryOwn) {
+            this("IslandCallback", cPtr, cMemoryOwn);
+            construct();
+        }
 
-	public void buildAndProcessIslands (btDispatcher dispatcher, btCollisionWorld collisionWorld,
-		SWIGTYPE_p_btAlignedObjectArrayT_btTypedConstraint_p_t constraints, btSimulationIslandManagerMt.IslandCallback callback) {
-		DynamicsJNI.btSimulationIslandManagerMt_buildAndProcessIslands(swigCPtr, this, btDispatcher.getCPtr(dispatcher), dispatcher,
-			btCollisionWorld.getCPtr(collisionWorld), collisionWorld,
-			SWIGTYPE_p_btAlignedObjectArrayT_btTypedConstraint_p_t.getCPtr(constraints),
-			btSimulationIslandManagerMt.IslandCallback.getCPtr(callback), callback);
-	}
+        public static long getCPtr(IslandCallback obj) {
+            return (obj == null) ? 0 : obj.swigCPtr;
+        }
 
-	public void buildIslands (btDispatcher dispatcher, btCollisionWorld colWorld) {
-		DynamicsJNI.btSimulationIslandManagerMt_buildIslands(swigCPtr, this, btDispatcher.getCPtr(dispatcher), dispatcher,
-			btCollisionWorld.getCPtr(colWorld), colWorld);
-	}
+        @Override
+        protected void reset(long cPtr, boolean cMemoryOwn) {
+            if (!destroyed) destroy();
+            super.reset(swigCPtr = cPtr, cMemoryOwn);
+        }
 
-	public int getMinimumSolverBatchSize () {
-		return DynamicsJNI.btSimulationIslandManagerMt_getMinimumSolverBatchSize(swigCPtr, this);
-	}
+        @Override
+        protected void finalize() throws Throwable {
+            if (!destroyed) destroy();
+            super.finalize();
+        }
 
-	public void setMinimumSolverBatchSize (int sz) {
-		DynamicsJNI.btSimulationIslandManagerMt_setMinimumSolverBatchSize(swigCPtr, this, sz);
-	}
+        @Override
+        protected synchronized void delete() {
+            if (swigCPtr != 0) {
+                if (swigCMemOwn) {
+                    swigCMemOwn = false;
+                    DynamicsJNI.delete_btSimulationIslandManagerMt_IslandCallback(swigCPtr);
+                }
+                swigCPtr = 0;
+            }
+            super.delete();
+        }
 
-	public SWIGTYPE_p_f_p_btAlignedObjectArray__p_btSimulationIslandManagerMt__Island___p_btSimulationIslandManagerMt__IslandCallback__void getIslandDispatchFunction () {
-		long cPtr = DynamicsJNI.btSimulationIslandManagerMt_getIslandDispatchFunction(swigCPtr, this);
-		return (cPtr == 0) ? null
-			: new SWIGTYPE_p_f_p_btAlignedObjectArray__p_btSimulationIslandManagerMt__Island___p_btSimulationIslandManagerMt__IslandCallback__void(
-				cPtr, false);
-	}
+        public void processIsland(SWIGTYPE_p_p_btCollisionObject bodies, int numBodies,
+                                  SWIGTYPE_p_p_btPersistentManifold manifolds, int numManifolds, SWIGTYPE_p_p_btTypedConstraint constraints,
+                                  int numConstraints, int islandId) {
+            DynamicsJNI.btSimulationIslandManagerMt_IslandCallback_processIsland(swigCPtr, this,
+                    SWIGTYPE_p_p_btCollisionObject.getCPtr(bodies), numBodies, SWIGTYPE_p_p_btPersistentManifold.getCPtr(manifolds),
+                    numManifolds, SWIGTYPE_p_p_btTypedConstraint.getCPtr(constraints), numConstraints, islandId);
+        }
 
-	public void setIslandDispatchFunction (
-		SWIGTYPE_p_f_p_btAlignedObjectArray__p_btSimulationIslandManagerMt__Island___p_btSimulationIslandManagerMt__IslandCallback__void func) {
-		DynamicsJNI.btSimulationIslandManagerMt_setIslandDispatchFunction(swigCPtr, this,
-			SWIGTYPE_p_f_p_btAlignedObjectArray__p_btSimulationIslandManagerMt__Island___p_btSimulationIslandManagerMt__IslandCallback__void
-				.getCPtr(func));
-	}
+    }
 
 }

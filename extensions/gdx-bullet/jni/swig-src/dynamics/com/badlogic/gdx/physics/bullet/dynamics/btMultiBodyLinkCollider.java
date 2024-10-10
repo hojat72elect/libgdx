@@ -12,77 +12,79 @@ import com.badlogic.gdx.physics.bullet.linearmath.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
 
 public class btMultiBodyLinkCollider extends btCollisionObject {
-	private long swigCPtr;
+    private long swigCPtr;
 
-	protected btMultiBodyLinkCollider (final String className, long cPtr, boolean cMemoryOwn) {
-		super(className, DynamicsJNI.btMultiBodyLinkCollider_SWIGUpcast(cPtr), cMemoryOwn);
-		swigCPtr = cPtr;
-	}
+    protected btMultiBodyLinkCollider(final String className, long cPtr, boolean cMemoryOwn) {
+        super(className, DynamicsJNI.btMultiBodyLinkCollider_SWIGUpcast(cPtr), cMemoryOwn);
+        swigCPtr = cPtr;
+    }
 
-	/** Construct a new btMultiBodyLinkCollider, normally you should not need this constructor it's intended for low-level
-	 * usage. */
-	public btMultiBodyLinkCollider (long cPtr, boolean cMemoryOwn) {
-		this("btMultiBodyLinkCollider", cPtr, cMemoryOwn);
-		construct();
-	}
+    /**
+     * Construct a new btMultiBodyLinkCollider, normally you should not need this constructor it's intended for low-level
+     * usage.
+     */
+    public btMultiBodyLinkCollider(long cPtr, boolean cMemoryOwn) {
+        this("btMultiBodyLinkCollider", cPtr, cMemoryOwn);
+        construct();
+    }
 
-	@Override
-	protected void reset (long cPtr, boolean cMemoryOwn) {
-		if (!destroyed) destroy();
-		super.reset(DynamicsJNI.btMultiBodyLinkCollider_SWIGUpcast(swigCPtr = cPtr), cMemoryOwn);
-	}
+    public btMultiBodyLinkCollider(btMultiBody multiBody, int link) {
+        this(DynamicsJNI.new_btMultiBodyLinkCollider(btMultiBody.getCPtr(multiBody), multiBody, link), true);
+    }
 
-	public static long getCPtr (btMultiBodyLinkCollider obj) {
-		return (obj == null) ? 0 : obj.swigCPtr;
-	}
+    public static long getCPtr(btMultiBodyLinkCollider obj) {
+        return (obj == null) ? 0 : obj.swigCPtr;
+    }
 
-	@Override
-	protected void finalize () throws Throwable {
-		if (!destroyed) destroy();
-		super.finalize();
-	}
+    public static btMultiBodyLinkCollider upcast(btCollisionObject colObj) {
+        long cPtr = DynamicsJNI.btMultiBodyLinkCollider_upcast(btCollisionObject.getCPtr(colObj), colObj);
+        return (cPtr == 0) ? null : new btMultiBodyLinkCollider(cPtr, false);
+    }
 
-	@Override
-	protected synchronized void delete () {
-		if (swigCPtr != 0) {
-			if (swigCMemOwn) {
-				swigCMemOwn = false;
-				DynamicsJNI.delete_btMultiBodyLinkCollider(swigCPtr);
-			}
-			swigCPtr = 0;
-		}
-		super.delete();
-	}
+    public static btMultiBodyLinkCollider upcastConstBtCollisionObject(btCollisionObject colObj) {
+        long cPtr = DynamicsJNI.btMultiBodyLinkCollider_upcastConstBtCollisionObject(btCollisionObject.getCPtr(colObj), colObj);
+        return (cPtr == 0) ? null : new btMultiBodyLinkCollider(cPtr, false);
+    }
 
-	public void setMultiBody (btMultiBody value) {
-		DynamicsJNI.btMultiBodyLinkCollider_multiBody_set(swigCPtr, this, btMultiBody.getCPtr(value), value);
-	}
+    @Override
+    protected void reset(long cPtr, boolean cMemoryOwn) {
+        if (!destroyed) destroy();
+        super.reset(DynamicsJNI.btMultiBodyLinkCollider_SWIGUpcast(swigCPtr = cPtr), cMemoryOwn);
+    }
 
-	public btMultiBody getMultiBody () {
-		long cPtr = DynamicsJNI.btMultiBodyLinkCollider_multiBody_get(swigCPtr, this);
-		return (cPtr == 0) ? null : new btMultiBody(cPtr, false);
-	}
+    @Override
+    protected void finalize() throws Throwable {
+        if (!destroyed) destroy();
+        super.finalize();
+    }
 
-	public void setLink (int value) {
-		DynamicsJNI.btMultiBodyLinkCollider_link_set(swigCPtr, this, value);
-	}
+    @Override
+    protected synchronized void delete() {
+        if (swigCPtr != 0) {
+            if (swigCMemOwn) {
+                swigCMemOwn = false;
+                DynamicsJNI.delete_btMultiBodyLinkCollider(swigCPtr);
+            }
+            swigCPtr = 0;
+        }
+        super.delete();
+    }
 
-	public int getLink () {
-		return DynamicsJNI.btMultiBodyLinkCollider_link_get(swigCPtr, this);
-	}
+    public btMultiBody getMultiBody() {
+        long cPtr = DynamicsJNI.btMultiBodyLinkCollider_multiBody_get(swigCPtr, this);
+        return (cPtr == 0) ? null : new btMultiBody(cPtr, false);
+    }
 
-	public btMultiBodyLinkCollider (btMultiBody multiBody, int link) {
-		this(DynamicsJNI.new_btMultiBodyLinkCollider(btMultiBody.getCPtr(multiBody), multiBody, link), true);
-	}
+    public void setMultiBody(btMultiBody value) {
+        DynamicsJNI.btMultiBodyLinkCollider_multiBody_set(swigCPtr, this, btMultiBody.getCPtr(value), value);
+    }
 
-	public static btMultiBodyLinkCollider upcast (btCollisionObject colObj) {
-		long cPtr = DynamicsJNI.btMultiBodyLinkCollider_upcast(btCollisionObject.getCPtr(colObj), colObj);
-		return (cPtr == 0) ? null : new btMultiBodyLinkCollider(cPtr, false);
-	}
+    public int getLink() {
+        return DynamicsJNI.btMultiBodyLinkCollider_link_get(swigCPtr, this);
+    }
 
-	public static btMultiBodyLinkCollider upcastConstBtCollisionObject (btCollisionObject colObj) {
-		long cPtr = DynamicsJNI.btMultiBodyLinkCollider_upcastConstBtCollisionObject(btCollisionObject.getCPtr(colObj), colObj);
-		return (cPtr == 0) ? null : new btMultiBodyLinkCollider(cPtr, false);
-	}
+    public void setLink(int value) {
+        DynamicsJNI.btMultiBodyLinkCollider_link_set(swigCPtr, this, value);
+    }
 
 }

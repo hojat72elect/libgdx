@@ -1,4 +1,3 @@
-
 package com.badlogic.gdx.math;
 
 import java.util.ArrayList;
@@ -17,77 +16,78 @@ import com.badlogic.gdx.utils.Array;
 @RunWith(Parameterized.class)
 public class BezierTest {
 
-	private static float epsilon = Float.MIN_NORMAL;
-	private static float epsilonApprimations = 1e-6f;
+    private static float epsilon = Float.MIN_NORMAL;
+    private static float epsilonApprimations = 1e-6f;
+    @Parameter(0)
+    public ImportType type;
+    /**
+     * use constructor or setter
+     */
+    @Parameter(1)
+    public boolean useSetter;
+    private Bezier<Vector2> bezier;
 
-	private static enum ImportType {
-		LibGDXArrays, JavaArrays, JavaVarArgs
-	}
+    @Parameters(name = "imported type {0} use setter {1}")
+    public static Collection<Object[]> parameters() {
+        Collection<Object[]> parameters = new ArrayList<Object[]>();
+        for (ImportType type : ImportType.values()) {
+            parameters.add(new Object[]{type, true});
+            parameters.add(new Object[]{type, false});
+        }
+        return parameters;
+    }
 
-	@Parameters(name = "imported type {0} use setter {1}")
-	public static Collection<Object[]> parameters () {
-		Collection<Object[]> parameters = new ArrayList<Object[]>();
-		for (ImportType type : ImportType.values()) {
-			parameters.add(new Object[] {type, true});
-			parameters.add(new Object[] {type, false});
-		}
-		return parameters;
-	}
+    @Before
+    public void setup() {
+        bezier = null;
+    }
 
-	@Parameter(0) public ImportType type;
+    protected Vector2[] create(Vector2[] points) {
+        if (useSetter) {
+            bezier = new Bezier<Vector2>();
+            if (type == ImportType.LibGDXArrays) {
+                bezier.set(new Array<Vector2>(points), 0, points.length);
+            } else if (type == ImportType.JavaArrays) {
+                bezier.set(points, 0, points.length);
+            } else {
+                bezier.set(points);
+            }
+        } else {
+            if (type == ImportType.LibGDXArrays) {
+                bezier = new Bezier<Vector2>(new Array<Vector2>(points), 0, points.length);
+            } else if (type == ImportType.JavaArrays) {
+                bezier = new Bezier<Vector2>(points, 0, points.length);
+            } else {
+                bezier = new Bezier<Vector2>(points);
+            }
 
-	/** use constructor or setter */
-	@Parameter(1) public boolean useSetter;
+        }
+        return points;
+    }
 
-	private Bezier<Vector2> bezier;
+    @Test
+    public void testLinear2D() {
+        Vector2[] points = create(new Vector2[]{new Vector2(0, 0), new Vector2(1, 1)});
 
-	@Before
-	public void setup () {
-		bezier = null;
-	}
+        float len = bezier.approxLength(2);
+        Assert.assertEquals(Math.sqrt(2), len, epsilonApprimations);
 
-	protected Vector2[] create (Vector2[] points) {
-		if (useSetter) {
-			bezier = new Bezier<Vector2>();
-			if (type == ImportType.LibGDXArrays) {
-				bezier.set(new Array<Vector2>(points), 0, points.length);
-			} else if (type == ImportType.JavaArrays) {
-				bezier.set(points, 0, points.length);
-			} else {
-				bezier.set(points);
-			}
-		} else {
-			if (type == ImportType.LibGDXArrays) {
-				bezier = new Bezier<Vector2>(new Array<Vector2>(points), 0, points.length);
-			} else if (type == ImportType.JavaArrays) {
-				bezier = new Bezier<Vector2>(points, 0, points.length);
-			} else {
-				bezier = new Bezier<Vector2>(points);
-			}
+        Vector2 d = bezier.derivativeAt(new Vector2(), 0.5f);
+        Assert.assertEquals(1, d.x, epsilon);
+        Assert.assertEquals(1, d.y, epsilon);
 
-		}
-		return points;
-	}
+        Vector2 v = bezier.valueAt(new Vector2(), 0.5f);
+        Assert.assertEquals(0.5f, v.x, epsilon);
+        Assert.assertEquals(0.5f, v.y, epsilon);
 
-	@Test
-	public void testLinear2D () {
-		Vector2[] points = create(new Vector2[] {new Vector2(0, 0), new Vector2(1, 1)});
+        float t = bezier.approximate(new Vector2(.5f, .5f));
+        Assert.assertEquals(.5f, t, epsilonApprimations);
 
-		float len = bezier.approxLength(2);
-		Assert.assertEquals(Math.sqrt(2), len, epsilonApprimations);
+        float l = bezier.locate(new Vector2(.5f, .5f));
+        Assert.assertEquals(.5f, t, epsilon);
+    }
 
-		Vector2 d = bezier.derivativeAt(new Vector2(), 0.5f);
-		Assert.assertEquals(1, d.x, epsilon);
-		Assert.assertEquals(1, d.y, epsilon);
-
-		Vector2 v = bezier.valueAt(new Vector2(), 0.5f);
-		Assert.assertEquals(0.5f, v.x, epsilon);
-		Assert.assertEquals(0.5f, v.y, epsilon);
-
-		float t = bezier.approximate(new Vector2(.5f, .5f));
-		Assert.assertEquals(.5f, t, epsilonApprimations);
-
-		float l = bezier.locate(new Vector2(.5f, .5f));
-		Assert.assertEquals(.5f, t, epsilon);
-	}
+    private static enum ImportType {
+        LibGDXArrays, JavaArrays, JavaVarArgs
+    }
 }
