@@ -28,7 +28,7 @@ import com.badlogic.gdx.graphics.VertexAttributes;
  * VertexBufferObjects must be disposed via the {@link #dispose()} method when no longer needed
  * </p>
  * 
- * @author mzechner, Dave Clayton <contact@redskyforge.com> */
+ * , Dave Clayton <contact@redskyforge.com> */
 public class VertexArray extends VertexBufferObject {
 	public VertexArray (int numVertices, VertexAttribute... attributes) {
 		this(numVertices, new VertexAttributes(attributes));

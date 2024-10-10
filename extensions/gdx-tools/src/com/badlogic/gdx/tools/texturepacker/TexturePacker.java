@@ -37,7 +37,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
-/** @author Nathan Sweet */
+/**  */
 public class TexturePacker {
 	String rootPath;
 	private final Settings settings;
@@ -546,7 +546,7 @@ public class TexturePacker {
 		this.progress = progressListener;
 	}
 
-	/** @author Nathan Sweet */
+	/**  */
 	static public class Page {
 		public String imageName;
 		public Array<Rect> outputRects, remainingRects;
@@ -555,7 +555,7 @@ public class TexturePacker {
 	}
 
 	/** @author Regnarock
-	 * @author Nathan Sweet */
+	 *  */
 	static public class Alias implements Comparable<Alias> {
 		public String name;
 		public int index;
@@ -590,7 +590,7 @@ public class TexturePacker {
 		}
 	}
 
-	/** @author Nathan Sweet */
+	/**  */
 	static public class Rect implements Comparable<Rect> {
 		public String name;
 		public int offsetX, offsetY, regionWidth, regionHeight, originalWidth, originalHeight;
@@ -880,7 +880,7 @@ public class TexturePacker {
 		abstract public void progress (float progress);
 	}
 
-	/** @author Nathan Sweet */
+	/**  */
 	static public class Settings {
 		public boolean pot = true;
 		public boolean multipleOfFour;

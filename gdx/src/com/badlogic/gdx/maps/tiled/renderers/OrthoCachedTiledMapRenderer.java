@@ -44,7 +44,7 @@ import com.badlogic.gdx.utils.Disposable;
  * This class may have poor performance when tiles are often changed dynamically, since the cache must be rebuilt after each
  * change.
  * @author Justin Shapcott
- * @author Nathan Sweet */
+ *  */
 public class OrthoCachedTiledMapRenderer implements TiledMapRenderer, Disposable {
 	static private final float tolerance = 0.00001f;
 	static protected final int NUM_VERTICES = 20;

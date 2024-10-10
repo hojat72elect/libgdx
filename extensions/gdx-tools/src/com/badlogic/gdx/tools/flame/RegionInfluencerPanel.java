@@ -15,7 +15,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.particles.influencers.RegionInfluencer;
 import com.badlogic.gdx.utils.Array;
 
-/** @author Inferno */
+/**  */
 public class RegionInfluencerPanel extends InfluencerPanel<RegionInfluencer> implements RegionPickerPanel.Listener {
 	JDialog regionSelectDialog;
 	RegionPickerPanel regionPickerPanel;

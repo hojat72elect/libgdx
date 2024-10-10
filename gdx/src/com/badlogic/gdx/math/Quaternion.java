@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.NumberUtils;
 
 /** A simple quaternion class.
  * @see <a href="http://en.wikipedia.org/wiki/Quaternion">http://en.wikipedia.org/wiki/Quaternion</a>
- * @author badlogicgames@gmail.com
+ * 
  * @author vesuvio
  * @author xoppa */
 public class Quaternion implements Serializable {

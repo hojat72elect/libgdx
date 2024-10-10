@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g3d.particles.ParticleEffect;
 import com.badlogic.gdx.graphics.g3d.particles.influencers.ParticleControllerInfluencer;
 import com.badlogic.gdx.utils.Array;
 
-/** @author Inferno */
+/**  */
 public class ParticleControllerInfluencerPanel extends InfluencerPanel<ParticleControllerInfluencer>
 	implements TemplatePickerPanel.Listener<ParticleController>, LoaderButton.Listener<ParticleEffect>, EventManager.Listener {
 	TemplatePickerPanel<ParticleController> controllerPicker;

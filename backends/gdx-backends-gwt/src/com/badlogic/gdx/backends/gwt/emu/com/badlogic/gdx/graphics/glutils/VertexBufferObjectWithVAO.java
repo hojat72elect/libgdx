@@ -29,7 +29,7 @@ import com.badlogic.gdx.utils.IntArray;
  * </p>
  *
  * Code adapted from {@link VertexBufferObject}.
- * @author mzechner, Dave Clayton <contact@redskyforge.com>, Nate Austin <nate.austin gmail> */
+ * , Dave Clayton <contact@redskyforge.com>, Nate Austin <nate.austin gmail> */
 public class VertexBufferObjectWithVAO implements VertexData {
 	final static IntBuffer tmpHandle = BufferUtils.newIntBuffer(1);
 

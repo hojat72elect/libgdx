@@ -11,8 +11,8 @@ import java.util.Random;
  * <p>
  * Instances of RandomXS128 are not thread-safe.
  * 
- * @author Inferno
- * @author davebaol */
+ * 
+ *  */
 public class RandomXS128 extends Random {
 
 	/** Normalization constant for double. */

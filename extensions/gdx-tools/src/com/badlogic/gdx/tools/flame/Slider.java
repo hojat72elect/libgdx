@@ -10,7 +10,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeListener;
 
-/** @author Inferno */
+/**  */
 public class Slider extends JPanel {
 	public JSpinner spinner;
 

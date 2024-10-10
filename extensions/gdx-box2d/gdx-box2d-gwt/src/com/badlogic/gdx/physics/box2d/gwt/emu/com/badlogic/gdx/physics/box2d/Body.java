@@ -9,7 +9,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.utils.Array;
 
 /** A rigid body. These are created via World.CreateBody.
- * @author mzechner */
+ *  */
 public class Body {
 	final World world;
 	public final org.jbox2d.dynamics.Body body;

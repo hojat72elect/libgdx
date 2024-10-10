@@ -17,7 +17,7 @@ import com.badlogic.gdx.tools.texturepacker.TexturePacker.Rect;
 import com.badlogic.gdx.tools.texturepacker.TexturePacker.Settings;
 import com.badlogic.gdx.utils.Array;
 
-/** @author Nathan Sweet */
+/**  */
 public class TexturePackerTest extends ApplicationAdapter {
 	ShapeRenderer renderer;
 	Array<Page> pages;

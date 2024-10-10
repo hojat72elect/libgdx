@@ -36,7 +36,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 /** Base class for all Box2D Testbed tests, all subclasses must implement the createWorld() method.
  * 
- * @author badlogicgames@gmail.com */
+ *  */
 public abstract class Box2DTest implements ApplicationListener, InputProcessor {
 	/** the camera **/
 	protected OrthographicCamera camera;

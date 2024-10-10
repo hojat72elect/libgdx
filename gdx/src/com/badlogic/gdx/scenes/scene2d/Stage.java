@@ -47,8 +47,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  * The Stage and its constituents (like Actors and Listeners) are not thread-safe and should only be updated and queried from a
  * single thread (presumably the main render thread). Methods should be reentrant, so you can update Actors and Stages from within
  * callbacks and handlers.
- * @author mzechner
- * @author Nathan Sweet */
+ * 
+ *  */
 public class Stage extends InputAdapter implements Disposable {
 	/** True if any actor has ever had debug enabled. */
 	static boolean debug;
@@ -862,7 +862,7 @@ public class Stage extends InputAdapter implements Disposable {
 	}
 
 	/** Internal class for managing touch focus. Public only for GWT.
-	 * @author Nathan Sweet */
+	 *  */
 	public static final class TouchFocus implements Poolable {
 		EventListener listener;
 		Actor listenerActor, target;

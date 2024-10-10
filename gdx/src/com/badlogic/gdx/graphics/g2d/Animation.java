@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.reflect.ArrayReflection;
  * <p>
  * <code>Animation&lt;TextureRegion&gt; myAnimation = new Animation&lt;TextureRegion&gt;(...);</code>
  * 
- * @author mzechner */
+ *  */
 public class Animation<T> {
 
 	/** Defines possible playback modes for an {@link Animation}. */

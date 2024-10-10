@@ -27,7 +27,7 @@ import com.badlogic.gdx.utils.I18NBundle;
  * <li>If you want to load the English bundle so to replace the Italian bundle you have to unload the Italian bundle first.
  * <li>If you want to load the English bundle without replacing the Italian bundle you should use another asset manager.
  * </ul>
- * @author davebaol */
+ *  */
 public class I18NBundleLoader extends AsynchronousAssetLoader<I18NBundle, I18NBundleLoader.I18NBundleParameter> {
 
 	public I18NBundleLoader (FileHandleResolver resolver) {

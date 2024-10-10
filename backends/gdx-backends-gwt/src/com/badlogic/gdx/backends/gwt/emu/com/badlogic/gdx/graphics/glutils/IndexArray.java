@@ -22,7 +22,7 @@ package com.badlogic.gdx.graphics.glutils;
  * VertexBufferObjects must be disposed via the {@link #dispose()} method when no longer needed
  * </p>
  * 
- * @author mzechner */
+ *  */
 public class IndexArray extends IndexBufferObject {
 	public IndexArray (int maxIndices) {
 		super(maxIndices);

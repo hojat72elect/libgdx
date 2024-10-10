@@ -19,7 +19,7 @@ import com.badlogic.gdx.tools.hiero.unicodefont.effects.ConfigurableEffect.Value
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
 /** Holds the settings needed to configure a UnicodeFont.
- * @author Nathan Sweet */
+ *  */
 public class HieroSettings {
 	private static final String RENDER_TYPE = "render_type";
 	private String fontName = "Arial";

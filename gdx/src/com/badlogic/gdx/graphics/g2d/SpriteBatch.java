@@ -19,8 +19,8 @@ import java.nio.Buffer;
 
 /** Draws batched quads using indices.
  * @see Batch
- * @author mzechner
- * @author Nathan Sweet */
+ * 
+ *  */
 public class SpriteBatch implements Batch {
 	/** @deprecated Do not use, this field is for testing only and is likely to be removed. Sets the {@link VertexDataType} to be
 	 *             used when gles 3 is not available, defaults to {@link VertexDataType#VertexArray}. */

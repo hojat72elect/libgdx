@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.JsonValue;
  * {@link Emitter#percent} to reflect the current percentage of the current emission cycle. It should consider
  * {@link Emitter#minParticleCount} and {@link Emitter#maxParticleCount} to rule particle emission. It should notify the particle
  * controller when particles are activated, killed, or when an emission cycle begins.
- * @author Inferno */
+ *  */
 public abstract class Emitter extends ParticleControllerComponent implements Json.Serializable {
 	/** The min/max quantity of particles */
 	public int minParticleCount, maxParticleCount = 4;

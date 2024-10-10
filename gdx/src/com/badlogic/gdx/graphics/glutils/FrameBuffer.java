@@ -26,7 +26,7 @@ import com.badlogic.gdx.graphics.Texture.TextureWrap;
  * A FrameBuffer must be disposed if it is no longer needed
  * </p>
  *
- * @author mzechner, realitix */
+ * , realitix */
 public class FrameBuffer extends GLFrameBuffer<Texture> {
 
 	FrameBuffer () {

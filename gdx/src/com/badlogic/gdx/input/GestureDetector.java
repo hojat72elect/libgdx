@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.Timer.Task;
 
 /** {@link InputProcessor} implementation that detects gestures (tap, long press, fling, pan, zoom, pinch) and hands them to a
  * {@link GestureListener}.
- * @author mzechner */
+ *  */
 public class GestureDetector extends InputAdapter {
 	final GestureListener listener;
 	private float tapRectangleWidth;
@@ -293,7 +293,7 @@ public class GestureDetector extends InputAdapter {
 	/** Register an instance of this class with a {@link GestureDetector} to receive gestures such as taps, long presses, flings,
 	 * panning or pinch zooming. Each method returns a boolean indicating if the event should be handed to the next listener (false
 	 * to hand it to the next listener, true otherwise).
-	 * @author mzechner */
+	 *  */
 	public static interface GestureListener {
 		/** @see InputProcessor#touchDown(int, int, int, int) */
 		public boolean touchDown (float x, float y, int pointer, int button);
@@ -339,7 +339,7 @@ public class GestureDetector extends InputAdapter {
 	}
 
 	/** Derrive from this if you only want to implement a subset of {@link GestureListener}.
-	 * @author mzechner */
+	 *  */
 	public static class GestureAdapter implements GestureListener {
 		@Override
 		public boolean touchDown (float x, float y, int pointer, int button) {

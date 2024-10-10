@@ -42,7 +42,7 @@ import com.badlogic.gdx.utils.Clipboard;
  * which allows multiple LwjglAWTCanvas to be used in a single application. All OpenGL calls are done on the EDT. Note that you
  * may need to call {@link #stop()} or a Swing application may deadlock on System.exit due to how LWJGL and/or Swing deal with
  * shutdown hooks.
- * @author Nathan Sweet */
+ *  */
 public class LwjglAWTCanvas implements Application {
 	static int instanceCount;
 

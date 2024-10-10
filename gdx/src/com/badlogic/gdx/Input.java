@@ -28,11 +28,11 @@ import com.badlogic.gdx.utils.ObjectIntMap;
  * keyboards, and cursor capture. Support for simple input dialogs is also provided.
  * </p>
  * 
- * @author mzechner */
+ *  */
 public interface Input {
 	/** Callback interface for {@link Input#getTextInput(TextInputListener, String, String, String)}
 	 * 
-	 * @author mzechner */
+	 *  */
 	static public interface TextInputListener {
 		public void input (String text);
 
@@ -40,7 +40,7 @@ public interface Input {
 	}
 
 	/** Mouse buttons.
-	 * @author mzechner */
+	 *  */
 	static public class Buttons {
 		public static final int LEFT = 0;
 		public static final int RIGHT = 1;
@@ -51,7 +51,7 @@ public interface Input {
 
 	/** Keys.
 	 * 
-	 * @author mzechner */
+	 *  */
 	static public class Keys {
 		public static final int ANY_KEY = -1;
 		public static final int NUM_0 = 7;
@@ -627,7 +627,7 @@ public interface Input {
 	}
 
 	/** Enumeration of potentially available peripherals. Use with {@link Input#isPeripheralAvailable(Peripheral)}.
-	 * @author mzechner */
+	 *  */
 	public enum Peripheral {
 		HardwareKeyboard, OnscreenKeyboard, MultitouchScreen, Accelerometer, Compass, Vibrator, HapticFeedback, Gyroscope, RotationVector, Pressure
 	}

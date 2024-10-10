@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 
 /** Executes a number of actions at the same time.
- * @author Nathan Sweet */
+ *  */
 public class ParallelAction extends Action {
 	Array<Action> actions = new Array(4);
 	private boolean complete;

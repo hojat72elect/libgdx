@@ -17,7 +17,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import static org.lwjgl.openal.AL10.*;
 
-/** @author Nathan Sweet */
+/**  */
 public abstract class OpenALMusic implements Music {
 	static private final int bufferSize = 4096 * 10;
 	static private final int bufferCount = 3;

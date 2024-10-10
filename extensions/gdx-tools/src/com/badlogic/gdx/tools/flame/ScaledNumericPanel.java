@@ -19,7 +19,7 @@ import javax.swing.event.ChangeListener;
 
 import com.badlogic.gdx.graphics.g3d.particles.values.ScaledNumericValue;
 
-/** @author Inferno */
+/**  */
 class ScaledNumericPanel extends ParticleValuePanel<ScaledNumericValue> {
 	Slider lowMinSlider, lowMaxSlider;
 	Slider highMinSlider, highMaxSlider;

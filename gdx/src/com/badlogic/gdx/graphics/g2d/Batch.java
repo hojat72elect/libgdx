@@ -29,8 +29,8 @@ import com.badlogic.gdx.utils.Disposable;
  * shader via {@link #setShader(ShaderProgram)}.
  * <p>
  * A Batch has to be disposed if it is no longer used.
- * @author mzechner
- * @author Nathan Sweet */
+ * 
+ *  */
 public interface Batch extends Disposable {
 	/** Sets up the Batch for drawing. This will disable depth buffer writing. It enables blending and texturing. If you have more
 	 * texture units enabled than the first one you have to disable them before calling this. Uses a screen coordinate system by

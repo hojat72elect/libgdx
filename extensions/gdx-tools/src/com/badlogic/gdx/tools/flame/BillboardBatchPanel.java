@@ -15,7 +15,7 @@ import javax.swing.event.ChangeListener;
 
 import com.badlogic.gdx.graphics.g3d.particles.batches.BillboardParticleBatch;
 
-/** @author Inferno */
+/**  */
 public class BillboardBatchPanel extends EditorPanel<BillboardParticleBatch> {
 	JComboBox alignCombo;
 	JCheckBox useGPUBox;

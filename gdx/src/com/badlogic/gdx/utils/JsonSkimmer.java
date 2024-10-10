@@ -29,7 +29,7 @@ import java.util.Arrays;
 import com.badlogic.gdx.files.FileHandle;
 
 /** Lightweight event-based JSON parser. All values are provided as strings to reduce work when many values are ignored.
- * @author Nathan Sweet */
+ *  */
 public class JsonSkimmer {
 	public void parse (String json) {
 		char[] data = json.toCharArray();

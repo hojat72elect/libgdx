@@ -27,7 +27,7 @@ import com.google.gwt.user.rebind.SourceWriter;
 /** Copies assets from the path specified in the modules gdx.assetpath configuration property to the war/ folder and generates the
  * assets.txt file. The type of a file is determined by an {@link AssetFilter}, which is either created by instantiating the class
  * specified in the gdx.assetfilterclass property, or falling back to the {@link DefaultAssetFilter}.
- * @author mzechner */
+ *  */
 public class PreloaderBundleGenerator extends Generator {
 	private class Asset {
 		String filePathOrig;

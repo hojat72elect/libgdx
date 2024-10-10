@@ -36,7 +36,7 @@ import org.lwjgl.openal.SOFTReopenDevice;
 import org.lwjgl.openal.SOFTXHoldOnDisconnect;
 import org.lwjgl.openal.SOFTDirectChannelsRemix;
 
-/** @author Nathan Sweet */
+/**  */
 public class OpenALLwjgl3Audio implements Lwjgl3Audio {
 	private final int deviceBufferSize;
 	private final int deviceBufferCount;

@@ -22,7 +22,7 @@ import java.math.BigInteger;
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
 
 /** Builder API for emitting JSON to a string.
- * @author Nathan Sweet */
+ *  */
 public class JsonString {
 	final StringBuilder buffer;
 	private final Array<JsonObject> stack = new Array();

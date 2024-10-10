@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.PixmapPacker.Page;
 import static com.badlogic.gdx.graphics.g2d.PixmapPacker.indexPattern;
 
 /** Saves PixmapPackers to files.
- * @author jshapcott */
+ * t */
 public class PixmapPackerIO {
 
 	/** Image formats which can be used when saving a PixmapPacker. */

@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ObjectMap;
 
 /** Resolves an image by a string, wrapper around a Map or AssetManager to load maps either directly or via AssetManager.
- * @author mzechner */
+ *  */
 public interface ImageResolver {
 	/** @param name
 	 * @return the Texture for the given image name or null. */

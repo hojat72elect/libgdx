@@ -19,7 +19,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
  * 
  * External files (e.g from the desktop) can be dragged into the GLFW window.
  * 
- * @author mbrlabs */
+ *  */
 public class DragNDropTest extends GdxTest {
 
 	private Skin skin;

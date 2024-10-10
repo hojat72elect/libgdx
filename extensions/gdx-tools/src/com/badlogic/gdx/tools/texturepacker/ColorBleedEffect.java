@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 
 /** @author Ruben Garat
  * @author Ariel Coppes
- * @author Nathan Sweet */
+ *  */
 public class ColorBleedEffect {
 	static private final int[] offsets = {-1, -1, 0, -1, 1, -1, -1, 0, 1, 0, -1, 1, 0, 1, 1, 1};
 

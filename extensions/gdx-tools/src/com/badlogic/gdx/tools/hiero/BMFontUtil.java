@@ -31,7 +31,7 @@ import com.badlogic.gdx.tools.hiero.unicodefont.GlyphPage;
 import com.badlogic.gdx.tools.hiero.unicodefont.UnicodeFont;
 import com.badlogic.gdx.utils.IntIntMap;
 
-/** @author Nathan Sweet */
+/**  */
 public class BMFontUtil {
 	private final UnicodeFont unicodeFont;
 

@@ -51,7 +51,7 @@ import java.util.regex.Pattern;
 /** Implementation of an {@link Application} based on GWT. Clients have to override {@link #getConfig()} and
  * {@link #createApplicationListener()}. Clients can override the default loading screen via {@link #getPreloaderCallback()} and
  * implement any loading screen drawing via GWT widgets.
- * @author mzechner */
+ *  */
 public abstract class GwtApplication implements EntryPoint, Application {
 	private ApplicationListener listener;
 	GwtApplicationConfiguration config;

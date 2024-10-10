@@ -29,7 +29,7 @@ import com.badlogic.gdx.utils.StreamUtils;
 
 /** Implements part of the {@link Net} API using {@link HttpURLConnection}, to be easily reused between the Android and Desktop
  * backends.
- * @author acoppes */
+ *  */
 public class NetJavaImpl {
 
 	static class HttpClientResponse implements HttpResponse {

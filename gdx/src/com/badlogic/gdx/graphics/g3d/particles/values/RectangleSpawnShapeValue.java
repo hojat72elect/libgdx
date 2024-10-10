@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 
 /** Encapsulate the formulas to spawn a particle on a rectangle shape.
- * @author Inferno */
+ *  */
 public final class RectangleSpawnShapeValue extends PrimitiveSpawnShapeValue {
 	public RectangleSpawnShapeValue (RectangleSpawnShapeValue value) {
 		super(value);

@@ -23,7 +23,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 import static org.lwjgl.openal.AL10.*;
 
-/** @author Nathan Sweet */
+/**  */
 public class OpenALLwjglAudio implements LwjglAudio {
 	private final int deviceBufferSize;
 	private final int deviceBufferCount;

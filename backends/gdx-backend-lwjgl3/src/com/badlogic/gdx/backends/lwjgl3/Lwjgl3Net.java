@@ -31,7 +31,7 @@ import com.badlogic.gdx.utils.Os;
 import com.badlogic.gdx.utils.SharedLibraryLoader;
 
 /** LWJGL implementation of the {@link Net} API, it could be reused in other Desktop backends since it doesn't depend on LWJGL.
- * @author acoppes */
+ *  */
 public class Lwjgl3Net implements Net {
 
 	NetJavaImpl netJavaImpl;

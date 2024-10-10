@@ -6,8 +6,8 @@ import java.util.Arrays;
 
 /** A bitset, without size limitation, allows comparison via bitwise operators to other bitfields.
  * 
- * @author mzechner
- * @author jshapcott */
+ * 
+ * t */
 public class Bits {
 
 	long[] bits = {0};

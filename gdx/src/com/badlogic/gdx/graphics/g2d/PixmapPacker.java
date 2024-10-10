@@ -80,8 +80,8 @@ import com.badlogic.gdx.utils.OrderedMap;
  * packer.dispose();
  * </pre>
  * 
- * @author mzechner
- * @author Nathan Sweet
+ * 
+ * 
  * @author Rob Rendell */
 public class PixmapPacker implements Disposable {
 	boolean packToTexture;
@@ -448,8 +448,8 @@ public class PixmapPacker implements Disposable {
 		this.packToTexture = packToTexture;
 	}
 
-	/** @author mzechner
-	 * @author Nathan Sweet
+	/** 
+	 * 
 	 * @author Rob Rendell */
 	static public class Page {
 		OrderedMap<String, PixmapPackerRectangle> rects = new OrderedMap();
@@ -503,7 +503,7 @@ public class PixmapPacker implements Disposable {
 	}
 
 	/** Choose the page and location for each rectangle.
-	 * @author Nathan Sweet */
+	 *  */
 	static public interface PackStrategy {
 		public void sort (Array<Pixmap> images);
 
@@ -513,8 +513,8 @@ public class PixmapPacker implements Disposable {
 
 	/** Does bin packing by inserting to the right or below previously packed rectangles. This is good at packing arbitrarily sized
 	 * images.
-	 * @author mzechner
-	 * @author Nathan Sweet
+	 * 
+	 * 
 	 * @author Rob Rendell */
 	static public class GuillotineStrategy implements PackStrategy {
 		Comparator<Pixmap> comparator;
@@ -619,7 +619,7 @@ public class PixmapPacker implements Disposable {
 	}
 
 	/** Does bin packing by inserting in rows. This is good at packing images that have similar heights.
-	 * @author Nathan Sweet */
+	 *  */
 	static public class SkylineStrategy implements PackStrategy {
 		Comparator<Pixmap> comparator;
 

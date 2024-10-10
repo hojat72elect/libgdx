@@ -30,7 +30,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * The touch coordinates will be translated to the desktop window's coordinate system, no matter the orientation of the device
  * </p>
  * 
- * @author mzechner */
+ *  */
 public class RemoteInput implements Runnable, Input {
 	public interface RemoteInputListener {
 		void onConnected ();

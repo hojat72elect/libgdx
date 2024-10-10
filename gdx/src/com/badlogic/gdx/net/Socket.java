@@ -20,7 +20,7 @@ import com.badlogic.gdx.utils.Disposable;
  * 
  * A socket needs to be disposed if it is no longer used. Disposing also closes the connection.
  * 
- * @author mzechner */
+ *  */
 public interface Socket extends Disposable {
 	/** @return whether the socket is connected */
 	public boolean isConnected ();

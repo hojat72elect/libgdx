@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Vector3;
 
 /** A camera with orthographic projection.
  * 
- * @author mzechner */
+ *  */
 public class OrthographicCamera extends Camera {
 	/** the zoom of the camera **/
 	public float zoom = 1;

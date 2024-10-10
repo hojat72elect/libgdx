@@ -18,8 +18,8 @@ package com.badlogic.gdx.net;
 
 /** Options for {@link Socket} instances.
  * 
- * @author mzechner
- * @author noblemaster */
+ * 
+ *  */
 public class SocketHints {
 
 	/** The connection timeout in milliseconds. Not used for sockets created via server.accept(). */

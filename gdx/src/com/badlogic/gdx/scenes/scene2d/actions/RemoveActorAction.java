@@ -5,7 +5,7 @@ package com.badlogic.gdx.scenes.scene2d.actions;
 import com.badlogic.gdx.scenes.scene2d.Action;
 
 /** Removes an actor from the stage.
- * @author Nathan Sweet */
+ *  */
 public class RemoveActorAction extends Action {
 	private boolean removed;
 

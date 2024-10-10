@@ -15,7 +15,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import static org.lwjgl.openal.AL10.*;
 
-/** @author Nathan Sweet */
+/**  */
 public class OpenALAudioDevice implements AudioDevice {
 	static private final int bytesPerSample = 2;
 

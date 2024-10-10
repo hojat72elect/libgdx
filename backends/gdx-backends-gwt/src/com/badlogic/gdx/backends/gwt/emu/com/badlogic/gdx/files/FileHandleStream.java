@@ -12,7 +12,7 @@ import com.badlogic.gdx.backends.gwt.GwtFileHandle;
 
 /** A FileHandle intended to be subclassed for the purpose of implementing {@link #read()} and/or {@link #write(boolean)}. Methods
  * that would manipulate the file instead throw UnsupportedOperationException.
- * @author Nathan Sweet */
+ *  */
 public abstract class FileHandleStream extends GwtFileHandle {
 	public FileHandleStream (String path) {
 		super(((GwtApplication)Gdx.app).getPreloader(), path, FileType.Internal);

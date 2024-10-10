@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.NumberUtils;
 
 /** Encapsulates a 2D vector. Allows chaining methods by returning a reference to itself
- * @author badlogicgames@gmail.com */
+ *  */
 public class Vector2 implements Serializable, Vector<Vector2> {
 	private static final long serialVersionUID = 913902788239530931L;
 

@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 /** Socket implementation using java.net.Socket.
  * 
- * @author noblemaster */
+ *  */
 public class NetJavaSocketImpl implements Socket {
 
 	/** Our socket or null for disposed, aka closed. */

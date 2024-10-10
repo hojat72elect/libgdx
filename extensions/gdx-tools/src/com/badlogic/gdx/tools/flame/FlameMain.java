@@ -101,7 +101,7 @@ import com.badlogic.gdx.utils.JsonWriter;
 import com.badlogic.gdx.utils.StreamUtils;
 import com.badlogic.gdx.utils.StringBuilder;
 
-/** @author Inferno */
+/**  */
 public class FlameMain extends JFrame implements AssetErrorListener {
 	public static final String DEFAULT_FONT = "default.fnt", DEFAULT_BILLBOARD_PARTICLE = "pre_particle.png",
 		DEFAULT_MODEL_PARTICLE = "monkey.g3db",

@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-/** @author mzechner */
+/**  */
 public class Gdx2DPixmap implements Disposable {
 	public static final int GDX2D_FORMAT_ALPHA = 1;
 	public static final int GDX2D_FORMAT_LUMINANCE_ALPHA = 2;

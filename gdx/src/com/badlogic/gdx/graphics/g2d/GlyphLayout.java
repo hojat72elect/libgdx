@@ -26,8 +26,8 @@ import com.badlogic.gdx.utils.Pools;
  * Glyphs positions are determined by {@link BitmapFontData#getGlyphs(GlyphRun, CharSequence, int, int, Glyph)}.
  * <p>
  * This class is not thread safe, even if synchronized externally, and must only be used from the game thread.
- * @author Nathan Sweet
- * @author davebaol
+ * 
+ * 
  * @author Alexander Dorokhov
  * @author Thomas Creutzenberg */
 public class GlyphLayout implements Poolable {
@@ -509,7 +509,7 @@ public class GlyphLayout implements Poolable {
 	}
 
 	/** Stores glyphs and positions for a line of text.
-	 * @author Nathan Sweet */
+	 *  */
 	static public class GlyphRun implements Poolable {
 		public Array<Glyph> glyphs = new Array();
 

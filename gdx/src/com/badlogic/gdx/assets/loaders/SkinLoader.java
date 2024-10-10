@@ -20,7 +20,7 @@ import com.badlogic.gdx.utils.ObjectMap.Entry;
  * {@link SkinParameter} also allows named resources to be set that will be added to the skin before loading the json file,
  * meaning that they can be referenced from inside the json file itself. This is useful for dynamic resources such as a BitmapFont
  * generated through FreeTypeFontGenerator.
- * @author Nathan Sweet */
+ *  */
 public class SkinLoader extends AsynchronousAssetLoader<Skin, SkinLoader.SkinParameter> {
 	public SkinLoader (FileHandleResolver resolver) {
 		super(resolver);

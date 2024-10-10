@@ -15,7 +15,7 @@ import com.badlogic.gdx.math.FloatCounter;
  * @see GL20Interceptor
  * @see GL30Interceptor
  * 
- * @author Daniel Holderbaum
+ * 
  * @author Jan Polák */
 public class GLProfiler {
 

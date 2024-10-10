@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 /** A 3x3 <a href="http://en.wikipedia.org/wiki/Row-major_order#Column-major_order">column major</a> matrix; useful for 2D
  * transforms.
  * 
- * @author mzechner */
+ *  */
 public class Matrix3 implements Serializable {
 	private static final long serialVersionUID = 7907569533774959788L;
 	public static final int M00 = 0;

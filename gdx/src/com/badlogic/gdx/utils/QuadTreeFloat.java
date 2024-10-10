@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Pool.Poolable;
 
 /** A quad tree that stores a float for each point.
- * @author Nathan Sweet */
+ *  */
 public class QuadTreeFloat implements Poolable {
 	static public final int VALUE = 0, X = 1, Y = 2, DISTSQR = 3;
 

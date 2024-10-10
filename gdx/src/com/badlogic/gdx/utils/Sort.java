@@ -20,7 +20,7 @@ import java.util.Comparator;
  * <br>
  * Note that sorting primitive arrays with the Arrays.sort methods does not allocate memory (unless sorting large arrays of char,
  * short, or byte).
- * @author Nathan Sweet */
+ *  */
 public class Sort {
 	static private Sort instance;
 

@@ -20,14 +20,14 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
 
 /** Class for encoding and decoding ETC1 compressed images. Also provides methods to add a PKM header.
- * @author mzechner */
+ *  */
 public class ETC1 {
 	/** The PKM header size in bytes **/
 	public static int PKM_HEADER_SIZE = 16;
 	public static int ETC1_RGB8_OES = 0x00008d64;
 
 	/** Class for storing ETC1 compressed image data.
-	 * @author mzechner */
+	 *  */
 	public final static class ETC1Data implements Disposable {
 		/** the width in pixels **/
 		public final int width;

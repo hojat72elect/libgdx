@@ -15,7 +15,7 @@ import com.badlogic.gdx.utils.reflect.ArrayReflection;
  * implementation, but may be acceptable for small maps and has the benefits that keys and values can be accessed by index, which
  * makes iteration fast. Like {@link Array}, if ordered is false, this class avoids a memory copy when removing elements (the last
  * element is moved to the removed element's position).
- * @author Nathan Sweet */
+ *  */
 public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 	public K[] keys;
 	public V[] values;

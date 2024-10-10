@@ -35,7 +35,7 @@ import java.awt.geom.AffineTransform;
  * {@link Display#setParent(Canvas)}, which is preferred over {@link AWTGLCanvas} but is limited to a single LwjglCanvas in an
  * application. All OpenGL calls are done on the EDT. Note that you may need to call {@link #stop()} or a Swing application may
  * deadlock on System.exit due to how LWJGL and/or Swing deal with shutdown hooks.
- * @author Nathan Sweet */
+ *  */
 public class LwjglCanvas implements LwjglApplicationBase {
 	static boolean isWindows = System.getProperty("os.name").contains("Windows");
 

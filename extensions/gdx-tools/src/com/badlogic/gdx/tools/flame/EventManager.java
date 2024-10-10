@@ -4,7 +4,7 @@ package com.badlogic.gdx.tools.flame;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 
-/** @author Inferno */
+/**  */
 public class EventManager {
 	private static EventManager mInstance;
 

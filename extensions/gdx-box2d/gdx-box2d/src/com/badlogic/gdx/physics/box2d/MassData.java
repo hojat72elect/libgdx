@@ -5,7 +5,7 @@ package com.badlogic.gdx.physics.box2d;
 import com.badlogic.gdx.math.Vector2;
 
 /** This holds the mass data computed for a shape.
- * @author mzechner */
+ *  */
 public class MassData {
 	/** The mass of the shape, usually in kilograms. **/
 	public float mass;

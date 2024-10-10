@@ -33,7 +33,7 @@ import com.badlogic.gdx.tools.hiero.unicodefont.effects.Effect;
 import com.badlogic.gdx.utils.Array;
 
 /** Stores a number of glyphs on a single texture.
- * @author Nathan Sweet */
+ *  */
 public class GlyphPage {
 	private final UnicodeFont unicodeFont;
 	private final int pageWidth, pageHeight;

@@ -5,7 +5,7 @@ package com.badlogic.gdx.backends.gwt.preloader;
 /** Interface used by the PreloaderBundleGenerator to decide whether an asset found in the gdx.assetpath should be included in the
  * war/ folder or not. Also used to determine the type of an asset. Default implementation can be found in DefaultAssetFilter, and
  * is used if user doesn't specify a custom filter in the module gwt.xml file.
- * @author mzechner */
+ *  */
 public interface AssetFilter {
 	public enum AssetType {
 		Image("i"), Audio("a"), Text("t"), Binary("b"), Directory("d");

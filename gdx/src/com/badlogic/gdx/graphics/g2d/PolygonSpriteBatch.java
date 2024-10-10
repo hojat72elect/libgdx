@@ -38,9 +38,9 @@ import com.badlogic.gdx.math.Matrix4;
  * all provided sprites. You can set your own custom shader via {@link #setShader(ShaderProgram)}.
  * <p>
  * A PolygonSpriteBatch has to be disposed if it is no longer used.
- * @author mzechner
+ * 
  * @author Stefan Bachmann
- * @author Nathan Sweet */
+ *  */
 public class PolygonSpriteBatch implements PolygonBatch {
 	private Mesh mesh;
 

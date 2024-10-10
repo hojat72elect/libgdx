@@ -46,7 +46,7 @@ package com.badlogic.gdx.utils;
  * The UTF-8 decoding is done by this class and no additional buffers are created. The UTF-8 code was inspired by
  * http://bjoern.hoehrmann.de/utf-8/decoder/dfa/
  * 
- * @author davebaol */
+ *  */
 public class Utf8Decoder {
 
 	private static final char REPLACEMENT = '\ufffd';

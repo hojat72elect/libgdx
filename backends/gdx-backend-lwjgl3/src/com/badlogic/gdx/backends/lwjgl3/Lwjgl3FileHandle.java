@@ -8,8 +8,8 @@ import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-/** @author mzechner
- * @author Nathan Sweet */
+/** 
+ *  */
 public final class Lwjgl3FileHandle extends FileHandle {
 	public Lwjgl3FileHandle (String fileName, FileType type) {
 		super(fileName, type);

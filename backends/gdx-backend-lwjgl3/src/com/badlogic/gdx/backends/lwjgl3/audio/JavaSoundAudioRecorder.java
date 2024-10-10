@@ -10,7 +10,7 @@ import javax.sound.sampled.TargetDataLine;
 import com.badlogic.gdx.audio.AudioRecorder;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-/** @author mzechner */
+/**  */
 public class JavaSoundAudioRecorder implements AudioRecorder {
 	private TargetDataLine line;
 	private byte[] buffer = new byte[1024 * 4];

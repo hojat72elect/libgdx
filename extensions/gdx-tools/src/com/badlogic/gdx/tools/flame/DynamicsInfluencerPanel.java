@@ -33,7 +33,7 @@ import com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier.Tang
 import com.badlogic.gdx.tools.flame.FlameMain.ControllerType;
 import com.badlogic.gdx.utils.Array;
 
-/** @author Inferno */
+/**  */
 public class DynamicsInfluencerPanel extends InfluencerPanel<DynamicsInfluencer> {
 
 	private static final String VEL_TYPE_ROTATIONAL_2D = "Angular Velocity 2D", VEL_TYPE_ROTATIONAL_3D = "Angular Velocity 3D",

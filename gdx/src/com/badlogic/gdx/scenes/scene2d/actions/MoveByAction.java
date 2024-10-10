@@ -3,7 +3,7 @@
 package com.badlogic.gdx.scenes.scene2d.actions;
 
 /** Moves an actor to a relative position.
- * @author Nathan Sweet */
+ *  */
 public class MoveByAction extends RelativeTemporalAction {
 	private float amountX, amountY;
 

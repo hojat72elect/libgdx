@@ -8,7 +8,7 @@ package com.badlogic.gdx.backends.iosrobovm;
  * 
  * The methods will be invoked on the UI thread.
  * 
- * @author mzechner */
+ *  */
 public interface IOSViewControllerListener {
 
 	/** Called when the {@link IOSApplication} root ViewController has appeared */

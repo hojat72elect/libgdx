@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.Scaling;
  * @see ImageButton
  * @see TextButton
  * @see Button
- * @author Nathan Sweet */
+ *  */
 public class ImageTextButton extends Button {
 	private final Image image;
 	private Label label;
@@ -176,7 +176,7 @@ public class ImageTextButton extends Button {
 	}
 
 	/** The style for an image text button, see {@link ImageTextButton}.
-	 * @author Nathan Sweet */
+	 *  */
 	static public class ImageTextButtonStyle extends TextButtonStyle {
 		public @Null Drawable imageUp, imageDown, imageOver, imageDisabled;
 		public @Null Drawable imageChecked, imageCheckedDown, imageCheckedOver;

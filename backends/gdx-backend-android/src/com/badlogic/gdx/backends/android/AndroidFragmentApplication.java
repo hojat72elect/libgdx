@@ -21,12 +21,12 @@ import com.badlogic.gdx.utils.*;
 /** Implementation of the {@link AndroidApplicationBase} that is based on the {@link Fragment} class. This class is similar in use
  * to the {@link AndroidApplication} class, which is based on an {@link Activity}.
  * 
- * @author Bartol Karuza (me@bartolkaruza.com) */
+ *  */
 public class AndroidFragmentApplication extends Fragment implements AndroidApplicationBase {
 
 	/** Callbacks interface for letting the fragment interact with the Activitiy, parent fragment or target fragment.
 	 * 
-	 * @author Bartol Karuza (me@bartolkaruza.com) */
+	 *  */
 	public interface Callbacks {
 		void exit ();
 	}

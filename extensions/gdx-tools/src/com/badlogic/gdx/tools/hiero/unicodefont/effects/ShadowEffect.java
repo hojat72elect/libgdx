@@ -17,7 +17,7 @@ import java.util.List;
 import com.badlogic.gdx.tools.hiero.unicodefont.Glyph;
 import com.badlogic.gdx.tools.hiero.unicodefont.UnicodeFont;
 
-/** @author Nathan Sweet */
+/**  */
 public class ShadowEffect implements ConfigurableEffect {
 	/** The numberof kernels to apply */
 	public static final int NUM_KERNELS = 16;

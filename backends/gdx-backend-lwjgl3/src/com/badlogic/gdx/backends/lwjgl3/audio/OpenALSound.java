@@ -11,7 +11,7 @@ import java.nio.ShortBuffer;
 
 import static org.lwjgl.openal.AL10.*;
 
-/** @author Nathan Sweet */
+/**  */
 public class OpenALSound implements Sound {
 	private int bufferID = -1;
 	private final OpenALLwjgl3Audio audio;

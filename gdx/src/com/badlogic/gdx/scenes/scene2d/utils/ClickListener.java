@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.TimeUtils;
  * makes it easier to press buttons on a touch interface when the initial touch happens near the edge of the actor. Double clicks
  * can be detected using {@link #getTapCount()}. Any touch (not just the first) will trigger this listener. While pressed, other
  * touch downs are ignored.
- * @author Nathan Sweet */
+ *  */
 public class ClickListener extends InputListener {
 	/** Time in seconds {@link #isVisualPressed()} reports true after a press resulting in a click is released. */
 	static public float visualPressedDuration = 0.1f;

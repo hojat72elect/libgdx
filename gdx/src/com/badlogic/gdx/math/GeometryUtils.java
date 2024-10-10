@@ -2,7 +2,7 @@
 
 package com.badlogic.gdx.math;
 
-/** @author Nathan Sweet */
+/**  */
 public final class GeometryUtils {
 
 	private GeometryUtils () {

@@ -30,7 +30,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
  * </p>
  *
  * Shows simple platformer collision detection as well as on-the-fly map modifications through destructible blocks!
- * @author mzechner */
+ *  */
 public class SuperKoalio extends GdxTest {
 	/** The player character, has state and state time, */
 	static class Koala {

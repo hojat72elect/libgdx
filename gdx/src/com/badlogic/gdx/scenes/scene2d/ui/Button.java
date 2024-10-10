@@ -26,7 +26,7 @@ import com.badlogic.gdx.utils.Pools;
  * was previously.
  * <p>
  * The preferred size of the button is determined by the background and the button contents.
- * @author Nathan Sweet */
+ *  */
 public class Button extends Table implements Disableable {
 	private ButtonStyle style;
 	boolean isChecked, isDisabled;
@@ -251,7 +251,7 @@ public class Button extends Table implements Disableable {
 	}
 
 	/** The style for a button, see {@link Button}.
-	 * @author mzechner */
+	 *  */
 	static public class ButtonStyle {
 		public @Null Drawable up, down, over, focused, disabled;
 		public @Null Drawable checked, checkedOver, checkedDown, checkedFocused;

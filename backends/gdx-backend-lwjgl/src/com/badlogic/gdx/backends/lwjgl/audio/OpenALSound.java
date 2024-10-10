@@ -10,7 +10,7 @@ import com.badlogic.gdx.audio.Sound;
 
 import static org.lwjgl.openal.AL10.*;
 
-/** @author Nathan Sweet */
+/**  */
 public class OpenALSound implements Sound {
 	private int bufferID = -1;
 	private final OpenALLwjglAudio audio;

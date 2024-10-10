@@ -23,7 +23,7 @@ import com.badlogic.gdx.utils.Null;
  * called, and automatically resumed when the {@link ApplicationListener#resume()} method is called.
  * </p>
  * 
- * @author mzechner */
+ *  */
 public interface Audio {
 	/** Creates a new {@link AudioDevice} either in mono or stereo mode. The AudioDevice has to be disposed via its
 	 * {@link AudioDevice#dispose()} method when it is no longer used.

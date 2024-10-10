@@ -7,7 +7,7 @@ import java.util.Random;
 /** Utility and fast math functions.
  * <p>
  * Thanks to Riven on JavaGaming.org for the basis of sin/cos/floor/ceil.
- * @author Nathan Sweet */
+ *  */
 public final class MathUtils {
 
 	private MathUtils () {

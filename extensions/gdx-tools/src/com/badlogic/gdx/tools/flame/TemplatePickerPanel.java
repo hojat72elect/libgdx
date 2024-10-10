@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.badlogic.gdx.utils.Array;
 
-/** @author Inferno */
+/**  */
 public class TemplatePickerPanel<T> extends EditorPanel<Array<T>> implements LoaderButton.Listener<T> {
 
 	public interface Listener<T> {

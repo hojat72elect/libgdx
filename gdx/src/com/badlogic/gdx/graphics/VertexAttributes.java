@@ -11,11 +11,11 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 /** Instances of this class specify the vertex attributes of a mesh. VertexAttributes are used by {@link Mesh} instances to define
  * its vertex structure. Vertex attributes have an order. The order is specified by the order they are added to this class.
  * 
- * @author mzechner, Xoppa */
+ * , Xoppa */
 public final class VertexAttributes implements Iterable<VertexAttribute>, Comparable<VertexAttributes> {
 	/** The usage of a vertex attribute.
 	 * 
-	 * @author mzechner */
+	 *  */
 	public static final class Usage {
 		public static final int Position = 1;
 		public static final int ColorUnpacked = 2;

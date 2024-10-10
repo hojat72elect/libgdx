@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FileTextureData;
 import com.badlogic.gdx.utils.Array;
 
-/** @author Inferno */
+/**  */
 public class TexturePanel extends ImagePanel {
 	private Color selectedColor = Color.GREEN, unselectedColor = Color.BLUE, indexBackgroundColor = Color.BLACK,
 		indexColor = Color.WHITE;

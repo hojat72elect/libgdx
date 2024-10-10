@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.JsonValue;
 /** It's the base class for any kind of influencer which operates on angular velocity and acceleration of the particles. All the
  * classes that will inherit this base class can and should be used only as sub-influencer of an instance of
  * {@link DynamicsInfluencer} .
- * @author Inferno */
+ *  */
 public abstract class DynamicsModifier extends Influencer {
 	protected static final Vector3 TMP_V1 = new Vector3(), TMP_V2 = new Vector3(), TMP_V3 = new Vector3();
 	protected static final Quaternion TMP_Q = new Quaternion();

@@ -9,7 +9,7 @@ import java.math.BigInteger;
 import java.util.regex.Pattern;
 
 /** Builder API for emitting JSON to a {@link Writer}.
- * @author Nathan Sweet */
+ *  */
 public class JsonWriter extends Writer {
 	final Writer writer;
 	private final Array<JsonObject> stack = new Array();

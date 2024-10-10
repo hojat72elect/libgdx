@@ -21,7 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Null;
 
 /** A tooltip that shows a label.
- * @author Nathan Sweet */
+ *  */
 public class TextTooltip extends Tooltip<Label> {
 	public TextTooltip (@Null String text, Skin skin) {
 		this(text, TooltipManager.getInstance(), skin.get(TextTooltipStyle.class));
@@ -69,7 +69,7 @@ public class TextTooltip extends Tooltip<Label> {
 	}
 
 	/** The style for a text tooltip, see {@link TextTooltip}.
-	 * @author Nathan Sweet */
+	 *  */
 	static public class TextTooltipStyle {
 		public LabelStyle label;
 		public @Null Drawable background;

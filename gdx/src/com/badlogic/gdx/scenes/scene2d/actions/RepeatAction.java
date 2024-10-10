@@ -3,7 +3,7 @@
 package com.badlogic.gdx.scenes.scene2d.actions;
 
 /** Repeats an action a number of times or forever.
- * @author Nathan Sweet */
+ *  */
 public class RepeatAction extends DelegateAction {
 	static public final int FOREVER = -1;
 

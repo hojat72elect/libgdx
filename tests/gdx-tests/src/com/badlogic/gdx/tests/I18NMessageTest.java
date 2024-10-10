@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 
 /** Performs some tests with {@link I18NBundle} and prints the results on the screen.
  * 
- * @author davebaol */
+ *  */
 public class I18NMessageTest extends GdxTest {
 
 	String message = "";

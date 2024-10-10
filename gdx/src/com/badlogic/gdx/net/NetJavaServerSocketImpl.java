@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 /** Server socket implementation using java.net.ServerSocket.
  * 
- * @author noblemaster */
+ *  */
 public class NetJavaServerSocketImpl implements ServerSocket {
 
 	private Protocol protocol;

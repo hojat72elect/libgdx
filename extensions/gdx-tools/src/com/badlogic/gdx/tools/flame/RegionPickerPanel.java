@@ -19,7 +19,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
-/** @author Inferno */
+/**  */
 public class RegionPickerPanel extends JPanel {
 
 	private enum GenerationMode {

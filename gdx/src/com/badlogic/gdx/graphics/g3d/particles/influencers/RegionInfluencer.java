@@ -15,7 +15,7 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 
 /** It's an {@link Influencer} which assigns a region of a {@link Texture} to the particles.
- * @author Inferno */
+ *  */
 public abstract class RegionInfluencer extends Influencer {
 
 	/** Assigns the first region of {@link RegionInfluencer#regions} to the particles. */

@@ -3,7 +3,7 @@
 package com.badlogic.gdx.utils;
 
 /** A simple linked list that pools its nodes.
- * @author mzechner */
+ *  */
 public class PooledLinkedList<T> {
 	static final class Item<T> {
 		public T payload;

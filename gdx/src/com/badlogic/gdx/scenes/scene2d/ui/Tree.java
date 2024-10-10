@@ -28,7 +28,7 @@ import com.badlogic.gdx.utils.Null;
  * {@link ChangeEvent} is fired when the selected node changes.
  * @param <N> The type of nodes in the tree.
  * @param <V> The type of values for each node.
- * @author Nathan Sweet */
+ *  */
 public class Tree<N extends Node, V> extends WidgetGroup {
 	static private final Vector2 tmp = new Vector2();
 
@@ -570,7 +570,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	 * @param <N> The type for the node's parent and child nodes.
 	 * @param <V> The type for the node's value.
 	 * @param <A> The type for the node's actor.
-	 * @author Nathan Sweet */
+	 *  */
 	static abstract public class Node<N extends Node, V, A extends Actor> {
 		A actor;
 		N parent;
@@ -865,7 +865,7 @@ public class Tree<N extends Node, V> extends WidgetGroup {
 	}
 
 	/** The style for a {@link Tree}.
-	 * @author Nathan Sweet */
+	 *  */
 	static public class TreeStyle {
 		public Drawable plus, minus;
 		public @Null Drawable plusOver, minusOver;

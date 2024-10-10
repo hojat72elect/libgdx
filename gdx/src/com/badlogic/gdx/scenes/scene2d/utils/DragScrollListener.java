@@ -18,7 +18,7 @@ import com.badlogic.gdx.utils.Timer.Task;
  * not be attached to the scroll pane, else it would also lose touch focus. Instead it can be attached to the scroll pane's actor.
  * <p>
  * If using drag and drop, {@link DragAndDrop#setCancelTouchFocus(boolean)} must be false.
- * @author Nathan Sweet */
+ *  */
 public class DragScrollListener extends DragListener {
 	static final Vector2 tmpCoords = new Vector2();
 

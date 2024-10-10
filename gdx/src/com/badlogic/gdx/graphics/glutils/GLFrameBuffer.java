@@ -39,7 +39,7 @@ import com.badlogic.gdx.utils.IntArray;
  * A FrameBuffer must be disposed if it is no longer needed
  * </p>
  *
- * @author mzechner, realitix */
+ * , realitix */
 public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
 	/** the frame buffers **/
 	protected final static Map<Application, Array<GLFrameBuffer>> buffers = new HashMap<Application, Array<GLFrameBuffer>>();

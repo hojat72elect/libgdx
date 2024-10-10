@@ -7,7 +7,7 @@ import java.awt.Insets;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.particles.influencers.ModelInfluencer;
 
-/** @author Inferno */
+/**  */
 public class ModelInfluencerPanel extends InfluencerPanel<ModelInfluencer>
 	implements TemplatePickerPanel.Listener<Model>, EventManager.Listener {
 

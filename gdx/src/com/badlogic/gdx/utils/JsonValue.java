@@ -24,7 +24,7 @@ import com.badlogic.gdx.utils.JsonWriter.OutputType;
  * 	System.out.println(entry.name + " = " + entry.asString());
  * </pre>
  * 
- * @author Nathan Sweet */
+ *  */
 public class JsonValue implements Iterable<JsonValue> {
 	private ValueType type;
 

@@ -13,9 +13,9 @@ import java.util.Arrays;
 import java.util.List;
 
 /** Class offering various static methods for intersection testing between different geometric objects.
- * @author badlogicgames@gmail.com
+ * 
  * @author jan.stria
- * @author Nathan Sweet */
+ *  */
 public final class Intersector {
 	private Intersector () {
 	}

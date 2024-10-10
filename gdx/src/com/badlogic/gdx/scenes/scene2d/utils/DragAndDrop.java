@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 
 /** Manages drag and drop operations through registered drag sources and drop targets.
- * @author Nathan Sweet */
+ *  */
 public class DragAndDrop {
 	static final Vector2 tmpVector = new Vector2();
 
@@ -256,7 +256,7 @@ public class DragAndDrop {
 	}
 
 	/** A source where a payload can be dragged from.
-	 * @author Nathan Sweet */
+	 *  */
 	static abstract public class Source {
 		final Actor actor;
 
@@ -285,7 +285,7 @@ public class DragAndDrop {
 	}
 
 	/** A target where a payload can be dropped to.
-	 * @author Nathan Sweet */
+	 *  */
 	static abstract public class Target {
 		final Actor actor;
 

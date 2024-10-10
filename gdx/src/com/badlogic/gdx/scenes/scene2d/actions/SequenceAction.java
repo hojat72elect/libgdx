@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.utils.Pool;
 
 /** Executes a number of actions one at a time.
- * @author Nathan Sweet */
+ *  */
 public class SequenceAction extends ParallelAction {
 	private int index;
 

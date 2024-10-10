@@ -30,7 +30,7 @@ import com.badlogic.gdx.utils.Array;
  * {@code assetManager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(new InternalFileHandleResolver()))}
  * to register it.
  * </p>
- * @author Daniel Holderbaum */
+ *  */
 public class FreeTypeFontGeneratorLoader
 	extends SynchronousAssetLoader<FreeTypeFontGenerator, FreeTypeFontGeneratorLoader.FreeTypeFontGeneratorParameters> {
 

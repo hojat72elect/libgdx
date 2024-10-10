@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 
 /** Executes an action only after all other actions on the actor at the time this action's target was set have finished.
- * @author Nathan Sweet */
+ *  */
 public class AfterAction extends DelegateAction {
 	private Array<Action> waitForActions = new Array(false, 4);
 

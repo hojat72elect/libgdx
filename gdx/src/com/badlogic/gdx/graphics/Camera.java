@@ -13,7 +13,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 
 /** Base class for {@link OrthographicCamera} and {@link PerspectiveCamera}.
- * @author mzechner */
+ *  */
 public abstract class Camera {
 	/** the position of the camera **/
 	public final Vector3 position = new Vector3();

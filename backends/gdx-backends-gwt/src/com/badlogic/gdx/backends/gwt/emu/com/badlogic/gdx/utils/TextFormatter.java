@@ -8,7 +8,7 @@ import java.util.Locale;
  * <p>
  * This class partially emulates its counterpart in the core package. See {@link #format(String, Object...)}
  * 
- * @author davebaol */
+ *  */
 public class TextFormatter {
 
 	private StringBuilder buffer = new StringBuilder();

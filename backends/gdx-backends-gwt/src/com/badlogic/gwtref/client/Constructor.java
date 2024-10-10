@@ -5,7 +5,7 @@ package com.badlogic.gwtref.client;
 import java.lang.annotation.Annotation;
 
 /** A constructor for the enclosing type.
- * @author mzechner */
+ *  */
 public class Constructor extends Method {
 	Constructor (String name, Class enclosingType, Class returnType, Parameter[] parameters, boolean isAbstract, boolean isFinal,
 		boolean isStatic, boolean isDefaultAccess, boolean isPrivate, boolean isProtected, boolean isPublic, boolean isNative,

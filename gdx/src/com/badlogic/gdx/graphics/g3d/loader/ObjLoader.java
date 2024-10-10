@@ -50,7 +50,7 @@ import com.badlogic.gdx.utils.FloatArray;
  * file might reference one or more texture files, in which case those filename(s) are expected to be located relative to the MTL
  * file.
  * </p>
- * @author mzechner, espitz, xoppa */
+ * , espitz, xoppa */
 public class ObjLoader extends ModelLoader<ObjLoader.ObjLoaderParameters> {
 	/** Set to false to prevent a warning from being logged when this class is used. Do not change this value, unless you are
 	 * absolutely sure what you are doing. Consult the documentation for more information. */

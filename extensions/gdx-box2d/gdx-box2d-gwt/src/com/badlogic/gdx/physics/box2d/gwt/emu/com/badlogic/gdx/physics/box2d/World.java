@@ -31,7 +31,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 /** The world class manages all physics entities, dynamic simulation, and asynchronous queries. The world also contains efficient
  * memory management facilities.
- * @author mzechner */
+ *  */
 public final class World implements Disposable {
 	org.jbox2d.dynamics.World world;
 	Vec2 tmp = new Vec2();

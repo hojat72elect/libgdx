@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.Null;
  * functionality and more. A button may only be in one group at a time.
  * <p>
  * The {@link #canCheck(Button, boolean)} method can be overridden to control if a button check or uncheck is allowed.
- * @author Nathan Sweet */
+ *  */
 public class ButtonGroup<T extends Button> {
 	private final Array<T> buttons = new Array();
 	private Array<T> checkedButtons = new Array(1);

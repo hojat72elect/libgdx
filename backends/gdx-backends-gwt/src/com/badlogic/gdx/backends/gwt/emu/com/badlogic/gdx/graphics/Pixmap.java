@@ -31,7 +31,7 @@ public class Pixmap implements Disposable {
 
 	/** Different pixel formats.
 	 * 
-	 * @author mzechner */
+	 *  */
 	public enum Format {
 		Alpha, Intensity, LuminanceAlpha, RGB565, RGBA4444, RGB888, RGBA8888;
 
@@ -59,14 +59,14 @@ public class Pixmap implements Disposable {
 	}
 
 	/** Blending functions to be set with {@link Pixmap#setBlending}.
-	 * @author mzechner */
+	 *  */
 	public enum Blending {
 		None, SourceOver
 	}
 
 	/** Filters to be used with {@link Pixmap#drawPixmap(Pixmap, int, int, int, int, int, int, int, int)}.
 	 * 
-	 * @author mzechner */
+	 *  */
 	public enum Filter {
 		NearestNeighbour, BiLinear
 	}

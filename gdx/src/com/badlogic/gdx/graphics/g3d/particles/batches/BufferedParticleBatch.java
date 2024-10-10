@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRende
 import com.badlogic.gdx.utils.Array;
 
 /** Base class of all the batches requiring to buffer {@link ParticleControllerRenderData}
- * @author Inferno */
+ *  */
 public abstract class BufferedParticleBatch<T extends ParticleControllerRenderData> implements ParticleBatch<T> {
 	protected Array<T> renderData;
 	protected int bufferedParticlesCount, currentCapacity = 0;

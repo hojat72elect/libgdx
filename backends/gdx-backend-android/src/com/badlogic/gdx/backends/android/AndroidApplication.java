@@ -27,7 +27,7 @@ import com.badlogic.gdx.utils.*;
  * In the {@link Activity#onCreate(Bundle)} method call the {@link #initialize(ApplicationListener)} method specifying the
  * configuration for the GLSurfaceView.
  * 
- * @author mzechner */
+ *  */
 public class AndroidApplication extends Activity implements AndroidApplicationBase {
 
 	protected AndroidGraphics graphics;

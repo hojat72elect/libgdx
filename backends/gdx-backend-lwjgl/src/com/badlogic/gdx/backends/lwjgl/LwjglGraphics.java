@@ -33,7 +33,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.SharedLibraryLoader;
 
 /** An implementation of the {@link Graphics} interface based on Lwjgl.
- * @author mzechner */
+ *  */
 public class LwjglGraphics extends AbstractGraphics {
 
 	/** The suppored OpenGL extensions */

@@ -53,7 +53,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * exactly for this to work.
  * </p>
  *
- * @author mzechner, Dave Clayton <contact@redskyforge.com>, Xoppa */
+ * , Dave Clayton <contact@redskyforge.com>, Xoppa */
 public class Mesh implements Disposable {
 	public enum VertexDataType {
 		VertexArray, VertexBufferObject, VertexBufferObjectSubData, VertexBufferObjectWithVAO
@@ -117,7 +117,7 @@ public class Mesh implements Disposable {
 	 * @param attributes the {@link VertexAttributes}. Each vertex attribute defines one property of a vertex such as position,
 	 *           normal or texture coordinate
 	 *
-	 * @author Jaroslaw Wisniewski <j.wisniewski@appsisle.com> **/
+	 *  **/
 	public Mesh (boolean staticVertices, boolean staticIndices, int maxVertices, int maxIndices, VertexAttributes attributes) {
 		vertices = makeVertexBuffer(staticVertices, maxVertices, attributes);
 		indices = new IndexBufferObject(staticIndices, maxIndices);

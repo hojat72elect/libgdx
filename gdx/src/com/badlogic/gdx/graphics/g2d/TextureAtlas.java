@@ -25,7 +25,7 @@ import com.badlogic.gdx.utils.StreamUtils;
 /** Loads images from texture atlases created by TexturePacker.<br>
  * <br>
  * A TextureAtlas must be disposed to free up the resources consumed by the backing textures.
- * @author Nathan Sweet */
+ *  */
 public class TextureAtlas implements Disposable {
 	private final ObjectSet<Texture> textures = new ObjectSet(4);
 	private final Array<AtlasRegion> regions = new Array();

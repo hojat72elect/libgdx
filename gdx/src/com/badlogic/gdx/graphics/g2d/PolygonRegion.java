@@ -5,7 +5,7 @@ package com.badlogic.gdx.graphics.g2d;
 /** Defines a polygon shape on top of a texture region to avoid drawing transparent pixels.
  * @see PolygonRegionLoader
  * @author Stefan Bachmann
- * @author Nathan Sweet */
+ *  */
 public class PolygonRegion {
 	final float[] textureCoords; // texture coordinates in atlas coordinates
 	final float[] vertices; // pixel coordinates relative to source image.

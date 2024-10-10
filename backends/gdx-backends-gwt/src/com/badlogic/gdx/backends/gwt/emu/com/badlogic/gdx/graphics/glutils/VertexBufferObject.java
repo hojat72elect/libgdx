@@ -33,7 +33,7 @@ import com.badlogic.gdx.utils.BufferUtils;
  * VertexBufferObjects must be disposed via the {@link #dispose()} method when no longer needed
  * </p>
  * 
- * @author mzechner, Dave Clayton <contact@redskyforge.com> */
+ * , Dave Clayton <contact@redskyforge.com> */
 public class VertexBufferObject implements VertexData {
 	final VertexAttributes attributes;
 	final FloatBuffer buffer;

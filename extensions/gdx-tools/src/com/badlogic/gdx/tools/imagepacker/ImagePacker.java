@@ -48,7 +48,7 @@ import javax.imageio.ImageIO;
  * Happy packing!
  * </p>
  * 
- * @author mzechner */
+ *  */
 public class ImagePacker {
 	static final class Node {
 		public Node leftChild;

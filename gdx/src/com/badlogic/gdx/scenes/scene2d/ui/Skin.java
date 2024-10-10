@@ -40,7 +40,7 @@ import com.badlogic.gdx.utils.reflect.ReflectionException;
  * The new* methods return a copy of an instance in the skin.
  * <p>
  * See the <a href="https://libgdx.com/wiki/graphics/2d/scene2d/skin">documentation</a> for more.
- * @author Nathan Sweet */
+ *  */
 public class Skin implements Disposable {
 	ObjectMap<Class, ObjectMap<String, Object>> resources = new ObjectMap();
 	TextureAtlas atlas;
@@ -614,7 +614,7 @@ public class Skin implements Disposable {
 		return null;
 	}
 
-	/** @author Nathan Sweet */
+	/**  */
 	static public class TintedDrawable {
 		public String name;
 		public Color color;

@@ -12,7 +12,7 @@ import com.badlogic.gdx.backends.android.ZipResourceFile.ZipEntryRO;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-/** @author sarkanyi */
+/**  */
 public class AndroidZipFileHandle extends AndroidFileHandle {
 	private boolean hasAssetFd;
 	private long fdLength;

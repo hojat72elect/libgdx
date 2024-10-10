@@ -23,7 +23,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 /** Displays a dialog, which is a window with a title, a content table, and a button table. Methods are provided to add a label to
  * the content table and buttons to the button table, but any widgets can be added. When a button is clicked,
  * {@link #result(Object)} is called and the dialog is removed from the stage.
- * @author Nathan Sweet */
+ *  */
 public class Dialog extends Window {
 	Table contentTable, buttonTable;
 	private @Null Skin skin;

@@ -80,11 +80,11 @@ import com.badlogic.gdx.utils.Clipboard;
  * Android.
  * </p>
  * 
- * @author mzechner */
+ *  */
 public interface Application {
 	/** Enumeration of possible {@link Application} types
 	 * 
-	 * @author mzechner */
+	 *  */
 	public enum ApplicationType {
 		Android, Desktop, HeadlessDesktop, Applet, WebGL, iOS
 	}

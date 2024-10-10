@@ -4,8 +4,8 @@ package com.badlogic.gdx.net;
 
 /** Options for {@link ServerSocket} instances.
  * 
- * @author mzechner
- * @author noblemaster */
+ * 
+ *  */
 public class ServerSocketHints {
 
 	/** The listen backlog length. Needs to be greater than 0, otherwise the system default is used. backlog is the maximum queue

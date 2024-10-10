@@ -32,18 +32,18 @@ import com.badlogic.gdx.graphics.glutils.VertexBufferObject;
  * , {@link VertexBufferObject}, {@link IndexBufferObject}, {@link Mesh}, {@link ShaderProgram} and {@link FrameBuffer},
  * {@link BitmapFont}, {@link Batch} and so on. All these classes are managed, meaning they don't need to be reloaded on a context
  * loss. Explore the com.badlogic.gdx.graphics package for more classes that might come in handy.
- * @author mzechner */
+ *  */
 public interface Graphics {
 	/** Enumeration describing different types of {@link Graphics} implementations.
 	 *
-	 * @author mzechner */
+	 *  */
 	enum GraphicsType {
 		AndroidGL, LWJGL, WebGL, iOSGL, JGLFW, Mock, LWJGL3
 	}
 
 	/** Describe a fullscreen display mode
 	 *
-	 * @author mzechner */
+	 *  */
 	class DisplayMode {
 		/** the width in physical pixels **/
 		public final int width;

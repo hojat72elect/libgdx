@@ -7,7 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.LifecycleListener;
 
 /** Executes tasks in the future on the main loop thread.
- * @author Nathan Sweet */
+ *  */
 public class Timer {
 	static final Array<Timer> instances = new Array(1);
 	static TimerThread thread;
@@ -164,7 +164,7 @@ public class Timer {
 
 	/** Runnable with a cancel method.
 	 * @see Timer
-	 * @author Nathan Sweet */
+	 *  */
 	static abstract public class Task implements Runnable {
 		long executeTimeMillis;
 		long intervalMillis;
@@ -192,7 +192,7 @@ public class Timer {
 	}
 
 	/** Manages the single timer thread. Stops thread on libGDX application pause and dispose, starts thread on resume.
-	 * @author Nathan Sweet */
+	 *  */
 	static class TimerThread extends com.google.gwt.user.client.Timer implements Runnable, LifecycleListener {
 		private Application app;
 		private long pauseMillis;

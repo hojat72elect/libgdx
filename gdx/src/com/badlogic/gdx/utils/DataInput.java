@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /** Extends {@link DataInputStream} with additional convenience methods.
- * @author Nathan Sweet */
+ *  */
 public class DataInput extends DataInputStream {
 	private char[] chars = new char[32];
 

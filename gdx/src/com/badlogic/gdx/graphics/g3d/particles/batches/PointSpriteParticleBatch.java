@@ -29,7 +29,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 
 /** This class is used to draw particles as point sprites.
- * @author Inferno */
+ *  */
 public class PointSpriteParticleBatch extends BufferedParticleBatch<PointSpriteControllerRenderData> {
 	private static boolean pointSpritesEnabled = false;
 	protected static final Vector3 TMP_V1 = new Vector3();

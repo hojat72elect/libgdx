@@ -49,7 +49,7 @@ import com.badlogic.gdx.utils.ObjectMap;
  * automatically reloaded when the OpenGL context is recreated so you don't have to do this manually.
  * </p>
  *
- * @author mzechner */
+ *  */
 public class ShaderProgram implements Disposable {
 	/** default name for position attributes **/
 	public static final String POSITION_ATTRIBUTE = "a_position";

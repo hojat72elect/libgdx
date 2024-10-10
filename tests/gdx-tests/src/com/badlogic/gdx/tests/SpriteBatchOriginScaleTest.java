@@ -12,7 +12,7 @@ import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 /** Test for issue http://code.google.com/p/libgdx/issues/detail?id=493
- * @author mzechner */
+ *  */
 public class SpriteBatchOriginScaleTest extends GdxTest {
 	SpriteBatch batch;
 	TextureRegion region;

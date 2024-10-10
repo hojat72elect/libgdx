@@ -13,7 +13,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.tools.hiero.unicodefont.UnicodeFont.RenderType;
 
 /** Represents the glyph in a font for a unicode codepoint.
- * @author Nathan Sweet */
+ *  */
 public class Glyph {
 	private int codePoint;
 	private short width, height;

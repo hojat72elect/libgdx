@@ -15,8 +15,8 @@ import com.badlogic.gdx.math.Rectangle;
  * bottom left corner of that rectangle. A Sprite also has an origin around which rotations and scaling are performed (that is,
  * the origin is not modified by rotation and scaling). The origin is given relative to the bottom left corner of the Sprite, its
  * position.
- * @author mzechner
- * @author Nathan Sweet */
+ * 
+ *  */
 public class Sprite extends TextureRegion {
 	static final int VERTEX_SIZE = 2 + 1 + 2;
 	static final int SPRITE_SIZE = 4 * VERTEX_SIZE;

@@ -17,7 +17,7 @@ import com.badlogic.gdx.math.Matrix4;
 
 /** Class with static helper methods to increase the speed of array/direct buffer and direct buffer/direct buffer transfers
  * 
- * @author mzechner, xoppa */
+ * , xoppa */
 public final class BufferUtils {
 
 	private BufferUtils () {

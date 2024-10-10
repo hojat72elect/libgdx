@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.reflect.ReflectionException;
 
 /** Pool that creates new instances of a type using reflection. The type must have a zero argument constructor.
  * {@link Constructor#setAccessible(boolean)} will be used if the class and/or constructor is not visible.
- * @author Nathan Sweet */
+ *  */
 public class ReflectionPool<T> extends Pool<T> {
 	private final Constructor constructor;
 

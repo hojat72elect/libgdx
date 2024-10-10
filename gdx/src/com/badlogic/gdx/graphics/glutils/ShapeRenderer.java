@@ -58,12 +58,12 @@ import com.badlogic.gdx.utils.Disposable;
  * <p>
  * The projection and transformation matrices are a state of the ShapeRenderer, just like the color, and will be applied to all
  * shapes until they are changed.
- * @author mzechner
+ * 
  * @author stbachmann
- * @author Nathan Sweet */
+ *  */
 public class ShapeRenderer implements Disposable {
 	/** Shape types to be used with {@link #begin(ShapeType)}.
-	 * @author mzechner, stbachmann */
+	 * , stbachmann */
 	public enum ShapeType {
 		Point(GL20.GL_POINTS), Line(GL20.GL_LINES), Filled(GL20.GL_TRIANGLES);
 

@@ -39,8 +39,8 @@ import com.badlogic.gdx.utils.Pool.Poolable;
  * {@link #newServerSocket(Protocol, int, ServerSocketHints)} method. The returned {@link ServerSocket} offers an
  * {@link ServerSocket#accept(SocketHints options)} method that waits for an incoming connection.
  * 
- * @author mzechner
- * @author noblemaster
+ * 
+ * 
  * @author arielsan */
 public interface Net {
 
@@ -338,7 +338,7 @@ public interface Net {
 
 	/** Protocol used by {@link Net#newServerSocket(Protocol, int, ServerSocketHints)} and
 	 * {@link Net#newClientSocket(Protocol, String, int, SocketHints)}.
-	 * @author mzechner */
+	 *  */
 	public enum Protocol {
 		TCP
 	}

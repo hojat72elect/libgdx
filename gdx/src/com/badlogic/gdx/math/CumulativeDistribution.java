@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.Array;
  * cumulative distribution using triangles areas as interval size, in this way triangles with a large area will be picked more
  * often than triangles with a smaller one. See
  * <a href="http://en.wikipedia.org/wiki/Cumulative_distribution_function">Wikipedia</a> for a detailed explanation.
- * @author Inferno */
+ *  */
 public class CumulativeDistribution<T> {
 	public class CumulativeValue {
 		public T value;

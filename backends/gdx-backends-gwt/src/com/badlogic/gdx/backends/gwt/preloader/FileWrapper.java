@@ -23,8 +23,8 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
 
 /** Used in PreloaderBundleGenerator to ease my pain. Since we emulate the original FileHandle, i have to make a copy...
- * @author mzechner
- * @author Nathan Sweet */
+ * 
+ *  */
 public class FileWrapper {
 	protected File file;
 	protected FileType type;

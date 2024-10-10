@@ -19,7 +19,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
-/** @author Inferno */
+/**  */
 public class TextureLoaderPanel extends EditorPanel {
 	public TextureLoaderPanel (FlameMain editor, String name, String description) {
 		super(editor, name, description);

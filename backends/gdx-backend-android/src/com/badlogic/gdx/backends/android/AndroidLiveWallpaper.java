@@ -33,7 +33,7 @@ import com.badlogic.gdx.utils.*;
 /** An implementation of the {@link Application} interface to be used with an AndroidLiveWallpaperService. Not directly
  * constructable, instead the {@link AndroidLiveWallpaperService} will create this class internally.
  * 
- * @author mzechner */
+ *  */
 public class AndroidLiveWallpaper implements AndroidApplicationBase {
 
 	protected AndroidLiveWallpaperService service;

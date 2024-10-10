@@ -38,8 +38,8 @@ import com.badlogic.gdx.utils.reflect.ClassReflection;
  * An {@link InputListener} can receive all the basic input events. More complex listeners (like {@link ClickListener} and
  * {@link ActorGestureListener}) can listen for and combine primitive events and recognize complex interactions like multi-touch
  * or pinch.
- * @author mzechner
- * @author Nathan Sweet */
+ * 
+ *  */
 public class Actor {
 	private @Null Stage stage;
 	@Null Group parent;

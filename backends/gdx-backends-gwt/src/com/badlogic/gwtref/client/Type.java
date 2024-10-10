@@ -11,7 +11,7 @@ import java.util.Set;
 
 /** Describes a type (equivalent to {@link Class}), providing methods to retrieve fields, constructors, methods and super
  * interfaces of the type. Only types that are visible (public) can be described by this class.
- * @author mzechner */
+ *  */
 public class Type {
 	private static final Field[] EMPTY_FIELDS = new Field[0];
 	private static final Method[] EMPTY_METHODS = new Method[0];

@@ -17,7 +17,7 @@ package com.badlogic.gdx.utils;
  * "https://probablydance.com/2018/06/16/fibonacci-hashing-the-optimization-that-the-world-forgot-or-a-better-alternative-to-integer-modulo/">Malte
  * Skarupke's blog post</a>). Linear probing continues to work even when all hashCodes collide, just more slowly.
  * @author Tommy Ettinger
- * @author Nathan Sweet */
+ *  */
 public class IdentityMap<K, V> extends ObjectMap<K, V> {
 	/** Creates a new map with an initial capacity of 51 and a load factor of 0.8. */
 	public IdentityMap () {

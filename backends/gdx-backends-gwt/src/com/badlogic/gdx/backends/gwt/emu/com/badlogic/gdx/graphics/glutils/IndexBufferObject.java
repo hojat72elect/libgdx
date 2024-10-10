@@ -29,7 +29,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * VertexBufferObjects must be disposed via the {@link #dispose()} method when no longer needed
  * </p>
  * 
- * @author mzechner */
+ *  */
 public class IndexBufferObject implements IndexData {
 	ShortBuffer buffer;
 	int bufferHandle;

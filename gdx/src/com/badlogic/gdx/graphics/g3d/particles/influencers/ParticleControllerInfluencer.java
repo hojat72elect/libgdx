@@ -17,7 +17,7 @@ import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.Pool;
 
 /** It's an {@link Influencer} which controls which {@link ParticleController} will be assigned to a particle.
- * @author Inferno */
+ *  */
 public abstract class ParticleControllerInfluencer extends Influencer {
 
 	/** Assigns the first controller of {@link ParticleControllerInfluencer#templates} to the particles. */

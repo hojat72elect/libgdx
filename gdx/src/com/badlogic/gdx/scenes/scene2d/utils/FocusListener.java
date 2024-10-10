@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.utils.Null;
 
 /** Listener for {@link FocusEvent}.
- * @author Nathan Sweet */
+ *  */
 abstract public class FocusListener implements EventListener {
 	public boolean handle (Event event) {
 		if (!(event instanceof FocusEvent)) return false;
@@ -33,7 +33,7 @@ abstract public class FocusListener implements EventListener {
 	}
 
 	/** Fired when an actor gains or loses keyboard or scroll focus. Can be cancelled to prevent losing or gaining focus.
-	 * @author Nathan Sweet */
+	 *  */
 	static public class FocusEvent extends Event {
 		private boolean focused;
 		private Type type;
@@ -71,7 +71,7 @@ abstract public class FocusListener implements EventListener {
 			this.relatedActor = relatedActor;
 		}
 
-		/** @author Nathan Sweet */
+		/**  */
 		static public enum Type {
 			keyboard, scroll
 		}

@@ -14,7 +14,7 @@ import com.badlogic.gdx.math.MathUtils;
  * 
  * @see com.badlogic.gdx.math.MathUtils#lerpAngleDeg(float, float, float)
  * 
- * @author Nathan Sweet */
+ *  */
 public class RotateToAction extends TemporalAction {
 	private float start, end;
 

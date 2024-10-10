@@ -11,7 +11,7 @@ import javax.swing.event.ChangeListener;
 
 import com.badlogic.gdx.graphics.g3d.particles.ParticleController;
 
-/** @author Inferno */
+/**  */
 class CountPanel extends EditorPanel {
 	Slider maxSlider, minSlider;
 

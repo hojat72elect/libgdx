@@ -6,7 +6,7 @@ import java.lang.annotation.Annotation;
 import java.util.Arrays;
 
 /** Describes a method of a {@link Type}.
- * @author mzechner */
+ *  */
 public class Method {
 	private static final Parameter[] EMPTY_PARAMS = new Parameter[0];
 	final String name;

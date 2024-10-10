@@ -52,8 +52,8 @@ import java.util.List;
 
 /** An implementation of the {@link Input} interface for Android.
  *
- * @author mzechner
- * @author jshapcot */
+ * 
+ *  */
 public class DefaultAndroidInput extends AbstractInput implements AndroidInput, KeyboardHeightObserver {
 
 	static class KeyEvent {

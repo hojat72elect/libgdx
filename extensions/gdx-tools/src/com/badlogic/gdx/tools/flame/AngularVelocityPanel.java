@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 import com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier;
 
-/** @author Inferno */
+/**  */
 public class AngularVelocityPanel extends EditorPanel<DynamicsModifier.Angular> {
 	JCheckBox isGlobalCheckBox;
 	ScaledNumericPanel thetaPanel;

@@ -26,7 +26,7 @@ import com.badlogic.gdx.utils.SnapshotArray;
  * In the Activity#onCreate(Bundle) method call the {@link #initialize(ApplicationListener)} method specifying the configuration
  * for the {@link GLSurfaceView}.
  * 
- * @author mzechner */
+ *  */
 public class AndroidDaydream extends DreamService implements AndroidApplicationBase {
 
 	protected AndroidGraphics graphics;

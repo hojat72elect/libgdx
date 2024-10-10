@@ -1,16 +1,4 @@
-/*
- * Copyright 2013 Jaroslaw Wisniewski <j.wisniewski@appsisle.com>
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
- * License. You may obtain a copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
- * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- *
- */
+
 
 package com.badlogic.gdx.backends.android;
 
@@ -53,7 +41,7 @@ import com.badlogic.gdx.graphics.Color;
  * between living instances of wallpaper services'! And depending on your implementation - it can cause problems you were not
  * prepared to.
  * 
- * @author Jaroslaw Wisniewski <j.wisniewski@appsisle.com> */
+ *  */
 public abstract class AndroidLiveWallpaperService extends WallpaperService {
 
 	static final String TAG = "WallpaperService";
@@ -211,7 +199,7 @@ public abstract class AndroidLiveWallpaperService extends WallpaperService {
 	/** Bridge between surface on which wallpaper is rendered and the wallpaper service. The problem is that there can be a group
 	 * of Engines at one time and we must share libGDX application between them.
 	 * 
-	 * @author libGDX team and Jaroslaw Wisniewski <j.wisniewski@appsisle.com> */
+	 *  */
 	public class AndroidWallpaperEngine extends Engine {
 
 		protected boolean engineIsVisible = false;

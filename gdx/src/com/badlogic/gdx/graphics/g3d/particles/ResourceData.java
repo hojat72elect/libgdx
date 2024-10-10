@@ -23,7 +23,7 @@ import com.badlogic.gdx.utils.reflect.ReflectionException;
  * of serialization, because the per object {@link SaveData} blocks are stored as an {@link Array} within the {@link ResourceData}
  * , while the global {@link SaveData} instances can be accessed in any order because require a unique {@link String} and are
  * stored in an {@link ObjectMap}.
- * @author Inferno */
+ *  */
 public class ResourceData<T> implements Json.Serializable {
 
 	/** This interface must be implemented by any class requiring additional assets to be loaded/saved */

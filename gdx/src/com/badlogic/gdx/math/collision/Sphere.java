@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.NumberUtils;
 
 /** Encapsulates a 3D sphere with a center and a radius
  * 
- * @author badlogicgames@gmail.com */
+ *  */
 public class Sphere implements Serializable {
 	private static final long serialVersionUID = -6487336868908521596L;
 	/** the radius of the sphere **/

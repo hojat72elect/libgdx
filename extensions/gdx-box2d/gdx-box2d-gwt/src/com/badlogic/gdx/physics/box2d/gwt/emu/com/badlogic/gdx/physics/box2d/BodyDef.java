@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 /** A body definition holds all the data needed to construct a rigid body. You can safely re-use body definitions. Shapes are
  * added to a body after construction.
  * 
- * @author mzechner */
+ *  */
 public class BodyDef {
 	/** The body type. static: zero mass, zero velocity, may be manually moved kinematic: zero mass, non-zero velocity set by user,
 	 * moved by solver dynamic: positive mass, non-zero velocity determined by forces, moved by solver */

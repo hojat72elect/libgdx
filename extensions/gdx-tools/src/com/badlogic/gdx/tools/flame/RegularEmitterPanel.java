@@ -10,7 +10,7 @@ import javax.swing.SwingConstants;
 
 import com.badlogic.gdx.graphics.g3d.particles.emitters.RegularEmitter;
 
-/** @author Inferno */
+/**  */
 public class RegularEmitterPanel extends EditorPanel<RegularEmitter> {
 
 	CountPanel countPanel;

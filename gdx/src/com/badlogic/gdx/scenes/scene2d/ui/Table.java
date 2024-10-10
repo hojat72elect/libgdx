@@ -30,7 +30,7 @@ import com.badlogic.gdx.utils.Pools;
  * By default, {@link #getTouchable()} is {@link Touchable#childrenOnly}.
  * <p>
  * The preferred and minimum sizes are that of the children laid out in columns and rows.
- * @author Nathan Sweet */
+ *  */
 public class Table extends WidgetGroup {
 	static public Color debugTableColor = new Color(0, 0, 1, 1);
 	static public Color debugCellColor = new Color(1, 0, 0, 1);
@@ -1254,19 +1254,19 @@ public class Table extends WidgetGroup {
 		return skin;
 	}
 
-	/** @author Nathan Sweet */
+	/**  */
 	static public class DebugRect extends Rectangle {
 		static Pool<DebugRect> pool = Pools.get(DebugRect.class);
 		Color color;
 	}
 
-	/** @author Nathan Sweet */
+	/**  */
 	static public enum Debug {
 		none, all, table, cell, actor
 	}
 
 	/** Value that is the top padding of the table's background.
-	 * @author Nathan Sweet */
+	 *  */
 	static public Value backgroundTop = new Value() {
 		public float get (@Null Actor context) {
 			Drawable background = ((Table)context).background;
@@ -1275,7 +1275,7 @@ public class Table extends WidgetGroup {
 	};
 
 	/** Value that is the left padding of the table's background.
-	 * @author Nathan Sweet */
+	 *  */
 	static public Value backgroundLeft = new Value() {
 		public float get (@Null Actor context) {
 			Drawable background = ((Table)context).background;
@@ -1284,7 +1284,7 @@ public class Table extends WidgetGroup {
 	};
 
 	/** Value that is the bottom padding of the table's background.
-	 * @author Nathan Sweet */
+	 *  */
 	static public Value backgroundBottom = new Value() {
 		public float get (@Null Actor context) {
 			Drawable background = ((Table)context).background;
@@ -1293,7 +1293,7 @@ public class Table extends WidgetGroup {
 	};
 
 	/** Value that is the right padding of the table's background.
-	 * @author Nathan Sweet */
+	 *  */
 	static public Value backgroundRight = new Value() {
 		public float get (@Null Actor context) {
 			Drawable background = ((Table)context).background;

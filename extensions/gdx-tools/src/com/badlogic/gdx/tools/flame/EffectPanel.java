@@ -48,7 +48,7 @@ import com.badlogic.gdx.graphics.g3d.particles.values.PrimitiveSpawnShapeValue.S
 import com.badlogic.gdx.tools.flame.FlameMain.ControllerData;
 import com.badlogic.gdx.tools.flame.FlameMain.ControllerType;
 
-/** @author Inferno */
+/**  */
 class EffectPanel extends JPanel {
 	FlameMain editor;
 	JTable emitterTable;

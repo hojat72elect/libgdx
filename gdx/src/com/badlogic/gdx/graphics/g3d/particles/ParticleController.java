@@ -19,7 +19,7 @@ import com.badlogic.gdx.utils.reflect.ClassReflection;
 
 /** Base class of all the particle controllers. Encapsulate the generic structure of a controller and methods to update the
  * particles simulation.
- * @author Inferno */
+ *  */
 public class ParticleController implements Json.Serializable, ResourceData.Configurable {
 
 	/** the default time step used to update the simulation */

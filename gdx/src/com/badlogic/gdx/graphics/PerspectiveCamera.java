@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector3;
 
 /** A Camera with perspective projection.
  * 
- * @author mzechner */
+ *  */
 public class PerspectiveCamera extends Camera {
 	/** the field of view of the height, in degrees **/
 	public float fieldOfView = 67;

@@ -5,7 +5,7 @@ package com.badlogic.gdx.physics.box2d;
 import com.badlogic.gdx.math.Vector2;
 
 /** A circle shape.
- * @author mzechner */
+ *  */
 public class CircleShape extends Shape {
 	org.jbox2d.collision.shapes.CircleShape shape;
 

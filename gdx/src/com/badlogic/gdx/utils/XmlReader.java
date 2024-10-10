@@ -19,7 +19,7 @@ import com.badlogic.gdx.utils.ObjectMap.Entry;
  * <br>
  * The default behavior is to parse the XML into a DOM. Extends this class and override methods to perform event driven parsing.
  * When this is done, the parse methods will return null.
- * @author Nathan Sweet */
+ *  */
 public class XmlReader {
 	private final Array<Element> elements = new Array(8);
 	private Element root, current;

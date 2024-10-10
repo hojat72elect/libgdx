@@ -24,7 +24,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * <p>
  * VertexBufferObjects must be disposed via the {@link #dispose()} method when no longer needed
  *
- * @author mzechner, Dave Clayton <contact@redskyforge.com> */
+ * , Dave Clayton <contact@redskyforge.com> */
 public class VertexBufferObject implements VertexData {
 	private VertexAttributes attributes;
 	private FloatBuffer buffer;

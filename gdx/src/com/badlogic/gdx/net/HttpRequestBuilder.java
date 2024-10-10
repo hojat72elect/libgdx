@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.Pools;
  * 
  * It also offers a few utility methods to deal with content encoding and HTTP headers.
  * 
- * @author Daniel Holderbaum */
+ *  */
 public class HttpRequestBuilder {
 
 	/** Will be added as a prefix to each URL when {@link #url(String)} is called. Empty by default. */

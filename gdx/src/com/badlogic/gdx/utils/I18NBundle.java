@@ -48,7 +48,7 @@ import com.badlogic.gdx.files.FileHandle;
  * 
  * @see PropertiesUtils
  * 
- * @author davebaol */
+ *  */
 public class I18NBundle {
 
 	private static final String DEFAULT_ENCODING = "UTF-8";

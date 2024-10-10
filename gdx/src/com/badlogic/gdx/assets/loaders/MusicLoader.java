@@ -11,7 +11,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 
 /** {@link AssetLoader} for {@link Music} instances. The Music instance is loaded synchronously.
- * @author mzechner */
+ *  */
 public class MusicLoader extends AsynchronousAssetLoader<Music, MusicLoader.MusicParameter> {
 
 	private Music music;

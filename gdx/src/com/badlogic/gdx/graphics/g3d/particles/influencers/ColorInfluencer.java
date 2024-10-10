@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 
 /** It's an {@link Influencer} which controls particles color and transparency.
- * @author Inferno */
+ *  */
 public abstract class ColorInfluencer extends Influencer {
 
 	/** It's an {@link Influencer} which assigns a random color when a particle is activated. */

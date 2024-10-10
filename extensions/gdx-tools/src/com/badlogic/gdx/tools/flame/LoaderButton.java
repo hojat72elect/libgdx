@@ -17,7 +17,7 @@ import com.badlogic.gdx.graphics.g3d.particles.ParticleEffect;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.UBJsonReader;
 
-/** @author Inferno */
+/**  */
 public abstract class LoaderButton<T> extends JButton {
 
 	public static class ParticleEffectLoaderButton extends LoaderButton<ParticleEffect> {

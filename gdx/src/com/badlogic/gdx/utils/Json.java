@@ -27,7 +27,7 @@ import com.badlogic.gdx.utils.reflect.ReflectionException;
 
 /** Reads/writes Java objects to/from JSON, automatically. See the wiki for usage:
  * https://libgdx.com/wiki/utils/reading-and-writing-json
- * @author Nathan Sweet */
+ *  */
 public class Json {
 	static private final boolean debug = false;
 

@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 
 /** Static convenience methods for using pooled actions, intended for static import.
- * @author Nathan Sweet */
+ *  */
 public class Actions {
 	/** Returns a new or pooled action of the specified type. */
 	static public <T extends Action> T action (Class<T> type) {

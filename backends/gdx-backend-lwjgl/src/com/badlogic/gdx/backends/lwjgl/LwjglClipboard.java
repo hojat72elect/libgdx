@@ -13,7 +13,7 @@ import java.util.List;
 import com.badlogic.gdx.utils.Clipboard;
 
 /** Clipboard implementation for desktop that uses the system clipboard via the default AWT {@link Toolkit}.
- * @author mzechner */
+ *  */
 public class LwjglClipboard implements Clipboard, ClipboardOwner {
 	@Override
 	public boolean hasContents () {

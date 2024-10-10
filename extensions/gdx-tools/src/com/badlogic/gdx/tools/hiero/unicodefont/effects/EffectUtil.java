@@ -32,7 +32,7 @@ import com.badlogic.gdx.tools.hiero.unicodefont.GlyphPage;
 import com.badlogic.gdx.tools.hiero.unicodefont.effects.ConfigurableEffect.Value;
 
 /** Provides utility methods for effects.
- * @author Nathan Sweet */
+ *  */
 public class EffectUtil {
 	static private BufferedImage scratchImage = new BufferedImage(GlyphPage.MAX_GLYPH_SIZE, GlyphPage.MAX_GLYPH_SIZE,
 		BufferedImage.TYPE_INT_ARGB);

@@ -10,7 +10,7 @@ import java.util.BitSet;
  * efficient than {@link BitSet}, except for very small sizes. It more CPU efficient than {@link BitSet}, except for very large
  * sizes or if BitSet functionality such as and, or, xor, etc are needed. If unordered, this class avoids a memory copy when
  * removing elements (the last element is moved to the removed element's position).
- * @author Nathan Sweet */
+ *  */
 public class BooleanArray {
 	public boolean[] items;
 	public int size;

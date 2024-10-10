@@ -15,7 +15,7 @@ import java.io.InputStream;
  * 
  * Thanks to the Apache FOP project for their inspiring work!
  * 
- * @author Nathan Sweet */
+ *  */
 public class Kerning {
 	private TTFInputStream input;
 	private float scale;

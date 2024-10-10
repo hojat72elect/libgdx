@@ -15,7 +15,7 @@ import com.badlogic.gdx.utils.Null;
 /** A stack of {@link Rectangle} objects to be used for clipping via {@link GL20#glScissor(int, int, int, int)}. When a new
  * Rectangle is pushed onto the stack, it will be merged with the current top of stack. The minimum area of overlap is then set as
  * the real top of the stack.
- * @author mzechner */
+ *  */
 public class ScissorStack {
 	private static Array<Rectangle> scissors = new Array<Rectangle>();
 	static Vector3 tmp = new Vector3();

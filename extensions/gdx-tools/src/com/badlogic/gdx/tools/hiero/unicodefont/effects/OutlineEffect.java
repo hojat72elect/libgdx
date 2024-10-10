@@ -15,7 +15,7 @@ import com.badlogic.gdx.tools.hiero.unicodefont.Glyph;
 import com.badlogic.gdx.tools.hiero.unicodefont.UnicodeFont;
 
 /** Strokes glyphs with an outline.
- * @author Nathan Sweet */
+ *  */
 public class OutlineEffect implements ConfigurableEffect {
 	private float width = 2;
 	private Color color = Color.black;

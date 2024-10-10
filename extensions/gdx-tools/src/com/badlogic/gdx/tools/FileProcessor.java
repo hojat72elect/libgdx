@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  * either {@link #processFile(Entry)} or {@link #processDir(Entry, ArrayList)} can be overridden, or both. The entries provided to
  * the callbacks have the original file, the output directory, and the output file. If {@link #setFlattenOutput(boolean)} is
  * false, the output will match the directory structure of the input.
- * @author Nathan Sweet */
+ *  */
 public class FileProcessor {
 	FilenameFilter inputFilter;
 	Comparator<File> comparator = new Comparator<File>() {
@@ -224,7 +224,7 @@ public class FileProcessor {
 		outputFiles.add(entry);
 	}
 
-	/** @author Nathan Sweet */
+	/**  */
 	static public class Entry {
 		public File inputFile;
 		/** May be null. */

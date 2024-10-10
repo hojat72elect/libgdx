@@ -10,7 +10,7 @@ import com.badlogic.gdx.tools.hiero.unicodefont.Glyph;
 import com.badlogic.gdx.tools.hiero.unicodefont.UnicodeFont;
 
 /** Applys a {@link BufferedImageOp} filter to glyphs. Many filters can be fond here: http://www.jhlabs.com/ip/filters/index.html
- * @author Nathan Sweet */
+ *  */
 public class FilterEffect implements Effect {
 	private BufferedImageOp filter;
 

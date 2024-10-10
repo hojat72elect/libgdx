@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
 /** @author Stefan Bachmann
- * @author Nathan Sweet */
+ *  */
 public class PolygonSprite {
 	PolygonRegion region;
 	private float x, y;

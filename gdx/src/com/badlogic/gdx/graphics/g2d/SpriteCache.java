@@ -51,7 +51,7 @@ import com.badlogic.gdx.utils.IntArray;
  * SpriteCache works with OpenGL ES 1.x and 2.0. For 2.0, it uses its own custom shader to draw.<br>
  * <br>
  * SpriteCache must be disposed once it is no longer needed.
- * @author Nathan Sweet */
+ *  */
 public class SpriteCache implements Disposable {
 	static private final float[] tempVertices = new float[VERTEX_SIZE * 6];
 
