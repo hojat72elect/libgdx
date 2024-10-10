@@ -16,17 +16,15 @@ import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-import java.awt.image.BufferedImage;
-
 public class Lwjgl3DebugStarter {
-    public static void main(String[] argv) throws NoSuchFieldException, SecurityException, ClassNotFoundException {
+    public static void main(String[] argv) throws SecurityException {
         GdxTest test = new GdxTest() {
-            float r = 0;
+
+            final FPSLogger fps = new FPSLogger();
             SpriteBatch batch;
             BitmapFont font;
-            FPSLogger fps = new FPSLogger();
             Texture texture;
-            long start = System.nanoTime();
+
 
             @Override
             public void create() {
@@ -46,7 +44,7 @@ public class Lwjgl3DebugStarter {
                         Gdx.app.log("LifecycleListener", "Application dispose()");
                     }
                 });
-                BufferedImage image = new BufferedImage(10, 10, BufferedImage.TYPE_4BYTE_ABGR);
+
                 texture = new Texture("data/badlogic.jpg");
                 batch = new SpriteBatch();
                 font = new BitmapFont();
@@ -70,13 +68,7 @@ public class Lwjgl3DebugStarter {
 
                         if (character == 'f') {
                             Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
-// DisplayMode[] modes = Gdx.graphics.getDisplayModes();
-// for(DisplayMode mode: modes) {
-// if(mode.width == 1920 && mode.height == 1080) {
-// Gdx.graphics.setFullscreenMode(mode);
-// break;
-// }
-// }
+
                         }
                         if (character == 'w') {
                             Gdx.graphics.setWindowedMode(MathUtils.random(400, 800), MathUtils.random(400, 800));

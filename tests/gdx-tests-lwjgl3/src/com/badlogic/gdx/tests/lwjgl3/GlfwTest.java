@@ -13,8 +13,7 @@ import java.nio.IntBuffer;
 import static org.lwjgl.glfw.GLFW.*;
 
 public class GlfwTest {
-    private static long windowHandle;
-    private static GLFWErrorCallback errorCallback = GLFWErrorCallback.createPrint(System.err);
+    private static final GLFWErrorCallback errorCallback = GLFWErrorCallback.createPrint(System.err);
 
     public static void main(String[] argv) {
         GLFW.glfwSetErrorCallback(errorCallback);
@@ -28,12 +27,12 @@ public class GlfwTest {
 
         // fullscreen, not current resolution, fails
         Buffer modes = glfwGetVideoModes(glfwGetPrimaryMonitor());
-        for (int i = 0; i < modes.limit(); i++) {
+        for (int i = 0; i < java.util.Objects.requireNonNull(modes).limit(); i++) {
             System.out.println(modes.get(i).width() + "x" + modes.get(i).height());
         }
         GLFWVidMode mode = modes.get(7);
         System.out.println("Mode: " + mode.width() + "x" + mode.height());
-        windowHandle = glfwCreateWindow(mode.width(), mode.height(), "Test", glfwGetPrimaryMonitor(), 0);
+        long windowHandle = glfwCreateWindow(mode.width(), mode.height(), "Test", glfwGetPrimaryMonitor(), 0);
         if (windowHandle == 0) {
             throw new RuntimeException("Couldn't create window");
         }

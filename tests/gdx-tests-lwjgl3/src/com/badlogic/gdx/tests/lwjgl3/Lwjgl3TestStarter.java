@@ -59,7 +59,7 @@ public class Lwjgl3TestStarter {
             }
         } else if (options.angle) {
             config.setOpenGLEmulation(Lwjgl3ApplicationConfiguration.GLEmulation.ANGLE_GLES20, 0, 0);
-            // Use CPU sync if ANGLE is enabled on macOS, otherwise the framerate gets halfed
+            // Use CPU sync if ANGLE is enabled on macOS, otherwise the framerate gets halved
             // by each new open window.
             if (SharedLibraryLoader.os == Os.MacOsX) {
                 config.useVsync(false);
@@ -140,7 +140,7 @@ public class Lwjgl3TestStarter {
             container.add(scroll).expand().fill();
             container.row();
 
-            lastClickedTestButton = (TextButton) table.findActor(prefs.getString("LastTest"));
+            lastClickedTestButton = table.findActor(prefs.getString("LastTest"));
             if (lastClickedTestButton != null) {
                 lastClickedTestButton.setColor(Color.CYAN);
                 scroll.layout();

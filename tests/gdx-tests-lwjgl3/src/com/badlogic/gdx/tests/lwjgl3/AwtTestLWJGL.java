@@ -7,12 +7,7 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.Configuration;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.URL;
 
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -22,39 +17,32 @@ public class AwtTestLWJGL {
         public void invoke(long window, int button, int action, int mods) {
             if (action == GLFW_PRESS) {
                 System.out.println("Bam");
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        JFrame frame = new JFrame("test");
-                        frame.setSize(640, 480);
-                        frame.setLocationRelativeTo(null);
+                SwingUtilities.invokeLater(() -> {
+                    javax.swing.JFrame frame = new javax.swing.JFrame("test");
+                    frame.setSize(640, 480);
+                    frame.setLocationRelativeTo(null);
 
-                        JButton button = new JButton("Try ImageIO");
-                        frame.getContentPane().add(button, BorderLayout.SOUTH);
+                    javax.swing.JButton button1 = new javax.swing.JButton("Try ImageIO");
+                    frame.getContentPane().add(button1, java.awt.BorderLayout.SOUTH);
 
-                        button.addActionListener((event) -> {
-                            try {
-                                BufferedImage image = ImageIO.read(new URL("http://n4te.com/x/2586-tiNN.jpg").openStream());
-                                frame.getContentPane().add(new JLabel(new ImageIcon(image)), BorderLayout.CENTER);
-                                frame.getContentPane().revalidate();
-                            } catch (IOException ex) {
-                                throw new RuntimeException(ex);
-                            }
-                        });
+                    button1.addActionListener((event) -> {
+                        try {
+                            java.awt.image.BufferedImage image = javax.imageio.ImageIO.read(new java.net.URL("http://n4te.com/x/2586-tiNN.jpg").openStream());
+                            frame.getContentPane().add(new javax.swing.JLabel(new javax.swing.ImageIcon(image)), java.awt.BorderLayout.CENTER);
+                            frame.getContentPane().revalidate();
+                        } catch (java.io.IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    });
 
-                        frame.setVisible(true);
-                    }
+                    frame.setVisible(true);
                 });
             }
         }
     };
 
     public static void main(String[] args) throws Exception {
-        java.awt.EventQueue.invokeAndWait(new Runnable() {
-            public void run() {
-                java.awt.Toolkit.getDefaultToolkit();
-            }
-        });
+        java.awt.EventQueue.invokeAndWait(java.awt.Toolkit::getDefaultToolkit);
 
         if (SharedLibraryLoader.os == Os.MacOsX) {
             Configuration.GLFW_LIBRARY_NAME.set("glfw_async");
