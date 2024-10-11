@@ -5,12 +5,8 @@ import com.badlogic.gdx.tools.hiero.unicodefont.Glyph;
 import com.badlogic.gdx.tools.hiero.unicodefont.GlyphPage;
 import com.badlogic.gdx.tools.hiero.unicodefont.UnicodeFont;
 import com.badlogic.gdx.utils.IntIntMap;
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Font;
+import java.awt.Rectangle;
 import java.awt.font.GlyphVector;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
@@ -20,12 +16,16 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.Buffer;
 import java.nio.IntBuffer;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
-import java.util.*;
+import javax.imageio.ImageIO;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
-/**
- *
- */
 public class BMFontUtil {
     private final UnicodeFont unicodeFont;
 
@@ -36,7 +36,8 @@ public class BMFontUtil {
     public void save(File outputBMFontFile) throws IOException {
         File outputDir = outputBMFontFile.getParentFile();
         String outputName = outputBMFontFile.getName();
-        if (outputName.endsWith(".fnt")) outputName = outputName.substring(0, outputName.length() - 4);
+        if (outputName.endsWith(".fnt"))
+            outputName = outputName.substring(0, outputName.length() - 4);
 
         // Always include space and the missing gyph.
         getGlyph(' ');
@@ -75,8 +76,10 @@ public class BMFontUtil {
         for (Iterator pageIter = unicodeFont.getGlyphPages().iterator(); pageIter.hasNext(); ) {
             GlyphPage page = (GlyphPage) pageIter.next();
             List<Glyph> glyphs = page.getGlyphs();
-            Collections.sort(glyphs, new             class KerningPair {
-                public int firstCodePoint, secondCodePoint, offset;
+            Collections.sort(glyphs, new Comparator<Glyph>() {
+                public int compare(Glyph o1, Glyph o2) {
+                    return o1.getCodePoint() - o2.getCodePoint();
+                }
             });
             for (Iterator glyphIter = page.getGlyphs().iterator(); glyphIter.hasNext(); ) {
                 Glyph glyph = (Glyph) glyphIter.next();
@@ -105,10 +108,8 @@ public class BMFontUtil {
             }
 
             List kernings = new ArrayList(256);
-Comparator<Glyph>() {
-                public int compare(Glyph o1, Glyph o2) {
-                    return o1.getCodePoint() - o2.getCodePoint();
-                }
+            class KerningPair {
+                public int firstCodePoint, secondCodePoint, offset;
             }
             for (IntIntMap.Entry entry : kerning.getKernings()) {
                 int firstGlyphCode = entry.key >> 16;
