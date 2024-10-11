@@ -13,10 +13,22 @@ import com.badlogic.gdx.tests.utils.GdxTestWrapper;
 import com.badlogic.gdx.tests.utils.GdxTests;
 import com.badlogic.gdx.utils.Os;
 import com.badlogic.gdx.utils.SharedLibraryLoader;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.DefaultListSelectionModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
 
 public class LwjglTestStarter extends JFrame {
     static CommandLineOptions options;
@@ -128,9 +140,6 @@ public class LwjglTestStarter extends JFrame {
 
             add(pane, BorderLayout.CENTER);
             add(button, BorderLayout.SOUTH);
-
-            // GdxTest test = GdxTests.newTest("BitmapFontFlipTest");
-            // new LwjglApplication(test, "Test", 480, 320, test.needsGL20());
         }
     }
 }

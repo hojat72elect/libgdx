@@ -2,9 +2,10 @@ package com.badlogic.gdx.tests.lwjgl;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglCanvas;
 import com.badlogic.gdx.tests.UITest;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 public class LwjglCanvasTest extends JFrame {
     LwjglCanvas canvas;
