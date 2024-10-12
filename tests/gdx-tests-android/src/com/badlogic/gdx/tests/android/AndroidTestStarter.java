@@ -1,7 +1,5 @@
 package com.badlogic.gdx.tests.android;
 
-import java.util.List;
-
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -11,9 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import com.badlogic.gdx.tests.BackTest;
 import com.badlogic.gdx.tests.utils.GdxTests;
+import java.util.List;
 
 public class AndroidTestStarter extends ListActivity {
     SharedPreferences prefs;
@@ -22,10 +20,11 @@ public class AndroidTestStarter extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (!GdxTests.tests.contains(MatrixTest.class)) GdxTests.tests.add(MatrixTest.class);
-        if (!GdxTests.tests.contains(APKExpansionTest.class)) GdxTests.tests.add(APKExpansionTest.class);
+        if (!GdxTests.tests.contains(APKExpansionTest.class))
+            GdxTests.tests.add(APKExpansionTest.class);
         if (!GdxTests.tests.contains(BackTest.class)) GdxTests.tests.add(BackTest.class);
         List<String> testNames = GdxTests.getNames();
-        setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, testNames));
+        setListAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, testNames));
 
         prefs = getSharedPreferences("libgdx-tests", Context.MODE_PRIVATE);
         getListView().setSelectionFromTop(prefs.getInt("index", 0), prefs.getInt("top", 0));

@@ -1,10 +1,8 @@
 package com.badlogic.gdx.tests.android;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -35,22 +33,11 @@ public class WindowedTest extends AndroidApplication implements ApplicationListe
 
         setContentView(layout);
 
-        b1.setOnClickListener(new OnClickListener() {
+        b1.setOnClickListener(arg0 -> color.set((float) Math.random(), (float) Math.random(), (float) Math.random(), 1));
 
-            @Override
-            public void onClick(View arg0) {
-                color.set((float) Math.random(), (float) Math.random(), (float) Math.random(), 1);
-            }
-
-        });
-
-        b2.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(WindowedTest.this, WindowedTest.class);
-                WindowedTest.this.startActivity(intent);
-            }
+        b2.setOnClickListener(v -> {
+            android.content.Intent intent = new android.content.Intent(com.badlogic.gdx.tests.android.WindowedTest.this, com.badlogic.gdx.tests.android.WindowedTest.class);
+            com.badlogic.gdx.tests.android.WindowedTest.this.startActivity(intent);
         });
     }
 
