@@ -9,7 +9,7 @@ public class SortedIntListTest {
     public void testIteratorWithAllocation() {
         Collections.allocateIterators = true;
         try {
-            SortedIntList<String> list = new SortedIntList<String>();
+            SortedIntList<String> list = new SortedIntList<>();
             list.insert(0, "hello");
             Assert.assertEquals(1, list.size);
             Assert.assertEquals("hello", list.get(0));

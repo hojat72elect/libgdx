@@ -1,6 +1,7 @@
 package com.badlogic.gdx.utils;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +12,7 @@ public class PooledLinkedListTest {
 
     @Before
     public void setUp() {
-        list = new PooledLinkedList<Integer>(10);
+        list = new PooledLinkedList<>(10);
         list.add(1);
         list.add(2);
         list.add(3);

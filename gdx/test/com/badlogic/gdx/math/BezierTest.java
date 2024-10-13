@@ -1,8 +1,8 @@
 package com.badlogic.gdx.math;
 
+import com.badlogic.gdx.utils.Array;
 import java.util.ArrayList;
 import java.util.Collection;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,13 +11,9 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.badlogic.gdx.utils.Array;
-
 @RunWith(Parameterized.class)
 public class BezierTest {
 
-    private static float epsilon = Float.MIN_NORMAL;
-    private static float epsilonApprimations = 1e-6f;
     @Parameter(0)
     public ImportType type;
     /**
@@ -29,7 +25,7 @@ public class BezierTest {
 
     @Parameters(name = "imported type {0} use setter {1}")
     public static Collection<Object[]> parameters() {
-        Collection<Object[]> parameters = new ArrayList<Object[]>();
+        Collection<Object[]> parameters = new ArrayList<>();
         for (ImportType type : ImportType.values()) {
             parameters.add(new Object[]{type, true});
             parameters.add(new Object[]{type, false});
@@ -44,9 +40,9 @@ public class BezierTest {
 
     protected Vector2[] create(Vector2[] points) {
         if (useSetter) {
-            bezier = new Bezier<Vector2>();
+            bezier = new Bezier<>();
             if (type == ImportType.LibGDXArrays) {
-                bezier.set(new Array<Vector2>(points), 0, points.length);
+                bezier.set(new Array<>(points), 0, points.length);
             } else if (type == ImportType.JavaArrays) {
                 bezier.set(points, 0, points.length);
             } else {
@@ -54,11 +50,11 @@ public class BezierTest {
             }
         } else {
             if (type == ImportType.LibGDXArrays) {
-                bezier = new Bezier<Vector2>(new Array<Vector2>(points), 0, points.length);
+                bezier = new Bezier<>(new Array<>(points), 0, points.length);
             } else if (type == ImportType.JavaArrays) {
-                bezier = new Bezier<Vector2>(points, 0, points.length);
+                bezier = new Bezier<>(points, 0, points.length);
             } else {
-                bezier = new Bezier<Vector2>(points);
+                bezier = new Bezier<>(points);
             }
 
         }
@@ -70,9 +66,11 @@ public class BezierTest {
         Vector2[] points = create(new Vector2[]{new Vector2(0, 0), new Vector2(1, 1)});
 
         float len = bezier.approxLength(2);
+        float epsilonApprimations = 1e-6f;
         Assert.assertEquals(Math.sqrt(2), len, epsilonApprimations);
 
         Vector2 d = bezier.derivativeAt(new Vector2(), 0.5f);
+        float epsilon = Float.MIN_NORMAL;
         Assert.assertEquals(1, d.x, epsilon);
         Assert.assertEquals(1, d.y, epsilon);
 

@@ -1,16 +1,15 @@
 package com.badlogic.gdx.utils;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import java.util.HashMap;
 import java.util.Iterator;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class MixedPutRemoveTest {
     @Test
     public void testLongMapPut() {
-        LongMap<Integer> gdxMap = new LongMap<Integer>();
-        HashMap<Long, Integer> jdkMap = new HashMap<Long, Integer>();
+        LongMap<Integer> gdxMap = new LongMap<>();
+        HashMap<Long, Integer> jdkMap = new HashMap<>();
         long stateA = 0L, stateB = 1L;
         int gdxRepeats = 0, jdkRepeats = 0;
         long item;
@@ -28,8 +27,8 @@ public class MixedPutRemoveTest {
 
     @Test
     public void testLongMapMix() {
-        LongMap<Integer> gdxMap = new LongMap<Integer>();
-        HashMap<Long, Integer> jdkMap = new HashMap<Long, Integer>();
+        LongMap<Integer> gdxMap = new LongMap<>();
+        HashMap<Long, Integer> jdkMap = new HashMap<>();
         long stateA = 0L, stateB = 1L;
         int gdxRemovals = 0, jdkRemovals = 0;
         long item;
@@ -53,8 +52,8 @@ public class MixedPutRemoveTest {
 
     @Test
     public void testLongMapIterator() {
-        LongMap<Long> gdxMap = new LongMap<Long>();
-        long stateA = 0L, stateB = 1L, temp;
+        LongMap<Long> gdxMap = new LongMap<>();
+        long stateA = 0L, stateB = 1L;
         int actualSize = 0;
         long item;
         for (int i = 0; i < 0x10000; i++) { // 64K should do
@@ -87,8 +86,8 @@ public class MixedPutRemoveTest {
 
     @Test
     public void testIntMapPut() {
-        IntMap<Integer> gdxMap = new IntMap<Integer>();
-        HashMap<Integer, Integer> jdkMap = new HashMap<Integer, Integer>();
+        IntMap<Integer> gdxMap = new IntMap<>();
+        HashMap<Integer, Integer> jdkMap = new HashMap<>();
         long stateA = 0L, stateB = 1L, temp;
         int gdxRepeats = 0, jdkRepeats = 0;
         int item;
@@ -107,8 +106,8 @@ public class MixedPutRemoveTest {
 
     @Test
     public void testIntMapMix() {
-        IntMap<Integer> gdxMap = new IntMap<Integer>();
-        HashMap<Integer, Integer> jdkMap = new HashMap<Integer, Integer>();
+        IntMap<Integer> gdxMap = new IntMap<>();
+        HashMap<Integer, Integer> jdkMap = new HashMap<>();
         long stateA = 0L, stateB = 1L, temp;
         int gdxRemovals = 0, jdkRemovals = 0;
         int item;
@@ -133,9 +132,9 @@ public class MixedPutRemoveTest {
 
     @Test
     public void testIntMapIterator() {
-        IntMap<Integer> gdxMap = new IntMap<Integer>();
+        IntMap<Integer> gdxMap = new IntMap<>();
         long stateA = 0L, stateB = 1L, temp;
-        int gdxRemovals = 0, actualSize = 0;
+        int actualSize = 0;
         int item;
         for (int i = 0; i < 0x10000; i++) { // 64K should do
             // simple-ish RNG that repeats more than RandomXS128; we want repeats to test behavior
@@ -168,8 +167,8 @@ public class MixedPutRemoveTest {
 
     @Test
     public void testObjectMapPut() {
-        ObjectMap<Integer, Integer> gdxMap = new ObjectMap<Integer, Integer>();
-        HashMap<Integer, Integer> jdkMap = new HashMap<Integer, Integer>();
+        ObjectMap<Integer, Integer> gdxMap = new ObjectMap<>();
+        HashMap<Integer, Integer> jdkMap = new HashMap<>();
         long stateA = 0L, stateB = 1L, temp;
         int gdxRepeats = 0, jdkRepeats = 0;
         int item;
@@ -188,8 +187,8 @@ public class MixedPutRemoveTest {
 
     @Test
     public void testObjectMapMix() {
-        ObjectMap<Integer, Integer> gdxMap = new ObjectMap<Integer, Integer>();
-        HashMap<Integer, Integer> jdkMap = new HashMap<Integer, Integer>();
+        ObjectMap<Integer, Integer> gdxMap = new ObjectMap<>();
+        HashMap<Integer, Integer> jdkMap = new HashMap<>();
         long stateA = 0L, stateB = 1L, temp;
         int gdxRemovals = 0, jdkRemovals = 0;
         int item;

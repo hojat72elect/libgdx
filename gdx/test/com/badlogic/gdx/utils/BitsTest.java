@@ -1,6 +1,9 @@
 package com.badlogic.gdx.utils;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -15,21 +18,20 @@ public class BitsTest {
         b2.set(1);
 
         assertEquals(b1.hashCode(), b2.hashCode());
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
-        // temporarily setting/clearing a single bit causing
-        // the backing array to grow
+        // temporarily setting/clearing a single bit causing the backing array to grow
         b2.set(420);
         b2.clear(420);
 
         assertEquals(b1.hashCode(), b2.hashCode());
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1.set(810);
         b1.clear(810);
 
         assertEquals(b1.hashCode(), b2.hashCode());
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
     }
 
     @Test
@@ -93,9 +95,9 @@ public class BitsTest {
         b1.set(150);
 
         Bits b2 = new Bits(b1);
-        assertTrue(b1 != b2);
+        assertNotSame(b1, b2);
         assertTrue(b1.containsAll(b2));
         assertTrue(b2.containsAll(b1));
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
     }
 }

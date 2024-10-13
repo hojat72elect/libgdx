@@ -1,8 +1,8 @@
 package com.badlogic.gdx.math;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 public class Vector4Test {
     @Test

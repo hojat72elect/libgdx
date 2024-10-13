@@ -4,11 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.Arrays;
-
-import org.junit.Test;
-
 import com.badlogic.gdx.utils.FloatArray;
+import java.util.Arrays;
+import org.junit.Test;
 
 public class ConvexHullTest {
     @Test
@@ -54,6 +52,6 @@ public class ConvexHullTest {
             }
         }
 
-        fail("Array items " + array.toString() + " does not match witness array " + Arrays.toString(witness));
+        fail("Array items " + array + " does not match witness array " + Arrays.toString(witness));
     }
 }

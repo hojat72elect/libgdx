@@ -1,10 +1,11 @@
 package com.badlogic.gdx.math;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import com.badlogic.gdx.math.Intersector.SplitTriangle;
-
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class IntersectorTest {
 
@@ -12,15 +13,14 @@ public class IntersectorTest {
      * Compares two triangles for equality. Triangles must have the same winding, but may begin with different vertex. Values are
      * epsilon compared, with default tolerance. Triangles are assumed to be valid triangles - no duplicate vertices.
      */
-    private static boolean triangleEquals(float[] base, int baseOffset, int stride, float[] comp) {
-        assertTrue(stride >= 3);
+    private static boolean triangleEquals(float[] base, int baseOffset, float[] comp) {
         assertTrue(base.length - baseOffset >= 9);
-        assertTrue(comp.length == 9);
+        assertEquals(9, comp.length);
 
         int offset = -1;
         // Find first comp vertex in base triangle
         for (int i = 0; i < 3; i++) {
-            int b = baseOffset + i * stride;
+            int b = baseOffset + i * 3;
             if (MathUtils.isEqual(base[b], comp[0]) && MathUtils.isEqual(base[b + 1], comp[1])
                     && MathUtils.isEqual(base[b + 2], comp[2])) {
                 offset = i;
@@ -30,8 +30,8 @@ public class IntersectorTest {
         assertTrue("Triangles do not have common first vertex.", offset != -1);
         // Compare vertices
         for (int i = 0; i < 3; i++) {
-            int b = baseOffset + ((offset + i) * stride) % (3 * stride);
-            int c = i * stride;
+            int b = baseOffset + ((offset + i) * 3) % (3 * 3);
+            int c = i * 3;
             if (!MathUtils.isEqual(base[b], comp[c]) || !MathUtils.isEqual(base[b + 1], comp[c + 1])
                     || !MathUtils.isEqual(base[b + 2], comp[c + 2])) {
                 return false;
@@ -48,61 +48,61 @@ public class IntersectorTest {
         {// All back
             float[] fTriangle = {-10, 0, 10, -1, 0, 0, -12, 0, 10}; // Whole triangle on the back side
             Intersector.splitTriangle(fTriangle, plane, split);
-            assertTrue(split.numBack == 1);
-            assertTrue(split.numFront == 0);
-            assertTrue(split.total == 1);
-            assertTrue(triangleEquals(split.back, 0, 3, fTriangle));
+            assertEquals(1, split.numBack);
+            assertEquals(0, split.numFront);
+            assertEquals(1, split.total);
+            assertTrue(triangleEquals(split.back, 0, fTriangle));
 
             fTriangle[4] = 5f;
-            assertFalse("Test is broken", triangleEquals(split.back, 0, 3, fTriangle));
+            assertFalse("Test is broken", triangleEquals(split.back, 0, fTriangle));
         }
 
         {// All front
             float[] fTriangle = {10, 0, 10, 1, 0, 0, 12, 0, 10}; // Whole triangle on the front side
             Intersector.splitTriangle(fTriangle, plane, split);
-            assertTrue(split.numBack == 0);
-            assertTrue(split.numFront == 1);
-            assertTrue(split.total == 1);
-            assertTrue(triangleEquals(split.front, 0, 3, fTriangle));
+            assertEquals(0, split.numBack);
+            assertEquals(1, split.numFront);
+            assertEquals(1, split.total);
+            assertTrue(triangleEquals(split.front, 0, fTriangle));
         }
 
         {// Two back, one front
             float[] triangle = {-10, 0, 10, 10, 0, 0, -10, 0, -10}; // ABC One vertex in front, two in back
             Intersector.splitTriangle(triangle, plane, split); // Split points are D (0,0,5) and E (0,0,-5)
-            assertTrue(split.numBack == 2);
-            assertTrue(split.numFront == 1);
-            assertTrue(split.total == 3);
+            assertEquals(2, split.numBack);
+            assertEquals(1, split.numFront);
+            assertEquals(3, split.total);
             // There is only one way to triangulate front
-            assertTrue(triangleEquals(split.front, 0, 3, new float[]{0, 0, 5, 10, 0, 0, 0, 0, -5}));
+            assertTrue(triangleEquals(split.front, 0, new float[]{0, 0, 5, 10, 0, 0, 0, 0, -5}));
 
             // There are two ways to triangulate back
             float[][] firstWay = {{-10, 0, 10, 0, 0, 5, 0, 0, -5}, {-10, 0, 10, 0, 0, -5, -10, 0, -10}};// ADE AEC
             float[][] secondWay = {{-10, 0, 10, 0, 0, 5, -10, 0, -10}, {0, 0, 5, 0, 0, -5, -10, 0, -10}};// ADC DEC
             float[] base = split.back;
-            boolean first = (triangleEquals(base, 0, 3, firstWay[0]) && triangleEquals(base, 9, 3, firstWay[1]))
-                    || (triangleEquals(base, 0, 3, firstWay[1]) && triangleEquals(base, 9, 3, firstWay[0]));
-            boolean second = (triangleEquals(base, 0, 3, secondWay[0]) && triangleEquals(base, 9, 3, secondWay[1]))
-                    || (triangleEquals(base, 0, 3, secondWay[1]) && triangleEquals(base, 9, 3, secondWay[0]));
+            boolean first = (triangleEquals(base, 0, firstWay[0]) && triangleEquals(base, 9, firstWay[1]))
+                    || (triangleEquals(base, 0, firstWay[1]) && triangleEquals(base, 9, firstWay[0]));
+            boolean second = (triangleEquals(base, 0, secondWay[0]) && triangleEquals(base, 9, secondWay[1]))
+                    || (triangleEquals(base, 0, secondWay[1]) && triangleEquals(base, 9, secondWay[0]));
             assertTrue("Either first or second way must be right (first: " + first + ", second: " + second + ")", first ^ second);
         }
 
         {// Two front, one back
             float[] triangle = {10, 0, 10, -10, 0, 0, 10, 0, -10}; // ABC One vertex in back, two in front
             Intersector.splitTriangle(triangle, plane, split); // Split points are D (0,0,5) and E (0,0,-5)
-            assertTrue(split.numBack == 1);
-            assertTrue(split.numFront == 2);
-            assertTrue(split.total == 3);
+            assertEquals(1, split.numBack);
+            assertEquals(2, split.numFront);
+            assertEquals(3, split.total);
             // There is only one way to triangulate back
-            assertTrue(triangleEquals(split.back, 0, 3, new float[]{0, 0, 5, -10, 0, 0, 0, 0, -5}));
+            assertTrue(triangleEquals(split.back, 0, new float[]{0, 0, 5, -10, 0, 0, 0, 0, -5}));
 
             // There are two ways to triangulate front
             float[][] firstWay = {{10, 0, 10, 0, 0, 5, 0, 0, -5}, {10, 0, 10, 0, 0, -5, 10, 0, -10}};// ADE AEC
             float[][] secondWay = {{10, 0, 10, 0, 0, 5, 10, 0, -10}, {0, 0, 5, 0, 0, -5, 10, 0, -10}};// ADC DEC
             float[] base = split.front;
-            boolean first = (triangleEquals(base, 0, 3, firstWay[0]) && triangleEquals(base, 9, 3, firstWay[1]))
-                    || (triangleEquals(base, 0, 3, firstWay[1]) && triangleEquals(base, 9, 3, firstWay[0]));
-            boolean second = (triangleEquals(base, 0, 3, secondWay[0]) && triangleEquals(base, 9, 3, secondWay[1]))
-                    || (triangleEquals(base, 0, 3, secondWay[1]) && triangleEquals(base, 9, 3, secondWay[0]));
+            boolean first = (triangleEquals(base, 0, firstWay[0]) && triangleEquals(base, 9, firstWay[1]))
+                    || (triangleEquals(base, 0, firstWay[1]) && triangleEquals(base, 9, firstWay[0]));
+            boolean second = (triangleEquals(base, 0, secondWay[0]) && triangleEquals(base, 9, secondWay[1]))
+                    || (triangleEquals(base, 0, secondWay[1]) && triangleEquals(base, 9, secondWay[0]));
             assertTrue("Either first or second way must be right (first: " + first + ", second: " + second + ")", first ^ second);
         }
     }
@@ -126,18 +126,18 @@ public class IntersectorTest {
         Intersector.MinimumTranslationVector mtv = new Intersector.MinimumTranslationVector();
         intersects = Intersector.intersectSegmentCircle(new Vector2(1.5f, 6f), new Vector2(1.5f, 3f), circle, mtv);
         assertTrue(intersects);
-        assertTrue(mtv.normal.equals(new Vector2(-1f, 0)));
-        assertTrue(mtv.depth == 0.5f);
+        assertEquals(mtv.normal, new Vector2(-1f, 0));
+        assertEquals(0.5f, mtv.depth, 0.0);
         // Segment contains circle center point
         intersects = Intersector.intersectSegmentCircle(new Vector2(4f, 5f), new Vector2(6f, 5f), circle, mtv);
         assertTrue(intersects);
         assertTrue(mtv.normal.equals(new Vector2(0, 1f)) || mtv.normal.equals(new Vector2(0f, -1f)));
-        assertTrue(mtv.depth == 4f);
+        assertEquals(4f, mtv.depth, 0.0);
         // Segment contains circle center point which is the same as the end point
         intersects = Intersector.intersectSegmentCircle(new Vector2(4f, 5f), new Vector2(5f, 5f), circle, mtv);
         assertTrue(intersects);
         assertTrue(mtv.normal.equals(new Vector2(0, 1f)) || mtv.normal.equals(new Vector2(0f, -1f)));
-        assertTrue(mtv.depth == 4f);
+        assertEquals(4f, mtv.depth, 0.0);
     }
 
     @Test

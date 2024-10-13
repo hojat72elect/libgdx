@@ -1,7 +1,11 @@
 package com.badlogic.gdx.math;
 
-import static com.badlogic.gdx.math.MathUtils.*;
-import static org.junit.Assert.*;
+import static com.badlogic.gdx.math.MathUtils.FLOAT_ROUNDING_ERROR;
+import static com.badlogic.gdx.math.MathUtils.HALF_PI;
+import static com.badlogic.gdx.math.MathUtils.PI;
+import static com.badlogic.gdx.math.MathUtils.PI2;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
