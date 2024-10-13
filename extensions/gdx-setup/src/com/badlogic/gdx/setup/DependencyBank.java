@@ -75,8 +75,7 @@ public class DependencyBank {
                 new String[]{"com.mobidevelop.robovm:robovm-rt:$roboVMVersion",
                         "com.mobidevelop.robovm:robovm-cocoatouch:$roboVMVersion", "com.badlogicgames.gdx:gdx-backend-robovm:$gdxVersion",
                         "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-ios"},
-                new String[]{"com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion", "com.badlogicgames.gdx:gdx:$gdxVersion:sources",
-                        "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources",
+                new String[]{ "com.badlogicgames.gdx:gdx:$gdxVersion:sources",
                         "com.google.jsinterop:jsinterop-annotations:2.0.2:sources"},
                 new String[]{"com.badlogic.gdx.backends.gdx_backends_gwt"},
 
