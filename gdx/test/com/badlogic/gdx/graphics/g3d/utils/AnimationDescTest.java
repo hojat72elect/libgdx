@@ -1,11 +1,10 @@
 package com.badlogic.gdx.graphics.g3d.utils;
 
+import com.badlogic.gdx.graphics.g3d.model.Animation;
+import com.badlogic.gdx.graphics.g3d.utils.AnimationController.AnimationDesc;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.badlogic.gdx.graphics.g3d.model.Animation;
-import com.badlogic.gdx.graphics.g3d.utils.AnimationController.AnimationDesc;
 
 public class AnimationDescTest {
     private static final float epsilon = 1e-6f;

@@ -1,14 +1,13 @@
 package com.badlogic.gdx.graphics.g3d.utils;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.model.Animation;
 import com.badlogic.gdx.graphics.g3d.model.NodeKeyframe;
 import com.badlogic.gdx.graphics.g3d.utils.AnimationController.AnimationDesc;
 import com.badlogic.gdx.utils.Array;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class AnimationControllerTest {
 
@@ -21,12 +20,12 @@ public class AnimationControllerTest {
     @Test
     public void testGetFirstKeyframeIndexAtTimeNominal() {
 
-        Array<NodeKeyframe<String>> keyFrames = new Array<NodeKeyframe<String>>();
+        Array<NodeKeyframe<String>> keyFrames = new Array<>();
 
-        keyFrames.add(new NodeKeyframe<String>(0f, "1st"));
-        keyFrames.add(new NodeKeyframe<String>(3f, "2nd"));
-        keyFrames.add(new NodeKeyframe<String>(12f, "3rd"));
-        keyFrames.add(new NodeKeyframe<String>(13f, "4th"));
+        keyFrames.add(new NodeKeyframe<>(0f, "1st"));
+        keyFrames.add(new NodeKeyframe<>(3f, "2nd"));
+        keyFrames.add(new NodeKeyframe<>(12f, "3rd"));
+        keyFrames.add(new NodeKeyframe<>(13f, "4th"));
 
         Assert.assertEquals(0, BaseAnimationController.getFirstKeyframeIndexAtTime(keyFrames, -1f));
         Assert.assertEquals(0, BaseAnimationController.getFirstKeyframeIndexAtTime(keyFrames, 0f));
@@ -40,9 +39,9 @@ public class AnimationControllerTest {
     @Test
     public void testGetFirstKeyframeIndexAtTimeSingleKey() {
 
-        Array<NodeKeyframe<String>> keyFrames = new Array<NodeKeyframe<String>>();
+        Array<NodeKeyframe<String>> keyFrames = new Array<>();
 
-        keyFrames.add(new NodeKeyframe<String>(10f, "1st"));
+        keyFrames.add(new NodeKeyframe<>(10f, "1st"));
 
         Assert.assertEquals(0, BaseAnimationController.getFirstKeyframeIndexAtTime(keyFrames, 9f));
         Assert.assertEquals(0, BaseAnimationController.getFirstKeyframeIndexAtTime(keyFrames, 10f));
@@ -52,7 +51,7 @@ public class AnimationControllerTest {
     @Test
     public void testGetFirstKeyframeIndexAtTimeEmpty() {
 
-        Array<NodeKeyframe<String>> keyFrames = new Array<NodeKeyframe<String>>();
+        Array<NodeKeyframe<String>> keyFrames = new Array<>();
 
         Assert.assertEquals(0, BaseAnimationController.getFirstKeyframeIndexAtTime(keyFrames, 3f));
     }
