@@ -69,9 +69,6 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.Writer;
 
-/**
- *
- */
 public class FlameMain extends JFrame implements AssetErrorListener {
     public static final String DEFAULT_FONT = "default.fnt", DEFAULT_BILLBOARD_PARTICLE = "pre_particle.png",
             DEFAULT_MODEL_PARTICLE = "monkey.g3db",

@@ -50,11 +50,11 @@ public class Lwjgl3Application implements Lwjgl3ApplicationBase {
     private final Lwjgl3ApplicationConfiguration config;
     private final Files files;
     private final Net net;
-    private final ObjectMap<String, Preferences> preferences = new ObjectMap<String, Preferences>();
+    private final ObjectMap<String, Preferences> preferences = new ObjectMap<>();
     private final Lwjgl3Clipboard clipboard;
-    private final Array<Runnable> runnables = new Array<Runnable>();
-    private final Array<Runnable> executedRunnables = new Array<Runnable>();
-    private final Array<LifecycleListener> lifecycleListeners = new Array<LifecycleListener>();
+    private final Array<Runnable> runnables = new Array<>();
+    private final Array<Runnable> executedRunnables = new Array<>();
+    private final Array<LifecycleListener> lifecycleListeners = new Array<>();
     private final Sync sync;
     private volatile Lwjgl3Window currentWindow;
     private Lwjgl3Audio audio;

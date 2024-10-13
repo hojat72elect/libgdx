@@ -9,9 +9,6 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import java.io.*;
 
-/**
- *
- */
 public class AndroidZipFileHandle extends AndroidFileHandle {
     private boolean hasAssetFd;
     private long fdLength;

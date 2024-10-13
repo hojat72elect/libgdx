@@ -12,9 +12,6 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import java.io.File;
 import java.io.IOException;
 
-/**
- *
- */
 public class DefaultAndroidFiles implements AndroidFiles {
     protected final String externalFilesPath;
     protected final String localpath;

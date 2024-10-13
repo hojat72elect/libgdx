@@ -53,8 +53,8 @@ import java.util.regex.Pattern;
  */
 public abstract class GwtApplication implements EntryPoint, Application {
     private static AgentInfo agentInfo;
-    protected final Array<Runnable> runnables = new Array<Runnable>();
-    protected final Array<Runnable> runnablesHelper = new Array<Runnable>();
+    protected final Array<Runnable> runnables = new Array<>();
+    protected final Array<Runnable> runnablesHelper = new Array<>();
     protected final Array<LifecycleListener> lifecycleListeners = new Array<LifecycleListener>();
     protected TextArea log = null;
     GwtApplicationConfiguration config;

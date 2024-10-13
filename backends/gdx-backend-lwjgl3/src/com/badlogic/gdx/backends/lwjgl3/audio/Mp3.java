@@ -6,9 +6,6 @@ import javazoom.jl.decoder.*;
 
 import java.io.ByteArrayOutputStream;
 
-/**
- *
- */
 public class Mp3 {
     static public class Music extends OpenALMusic {
         // Note: This uses a slightly modified version of JLayer.

@@ -24,20 +24,17 @@ public class Lwjgl3Window implements Disposable {
     final Lwjgl3ApplicationBase application;
     private final Array<LifecycleListener> lifecycleListeners;
     private final Lwjgl3ApplicationConfiguration config;
-    private final Array<Runnable> runnables = new Array<Runnable>();
-    private final Array<Runnable> executedRunnables = new Array<Runnable>();
+    private final Array<Runnable> runnables = new Array<>();
+    private final Array<Runnable> executedRunnables = new Array<>();
     private final IntBuffer tmpBuffer;
     private final IntBuffer tmpBuffer2;
     Lwjgl3WindowListener windowListener;
     private final GLFWWindowMaximizeCallback maximizeCallback = new GLFWWindowMaximizeCallback() {
         @Override
         public void invoke(long windowHandle, final boolean maximized) {
-            postRunnable(new Runnable() {
-                @Override
-                public void run() {
-                    if (windowListener != null) {
-                        windowListener.maximized(maximized);
-                    }
+            postRunnable(() -> {
+                if (windowListener != null) {
+                    windowListener.maximized(maximized);
                 }
             });
         }

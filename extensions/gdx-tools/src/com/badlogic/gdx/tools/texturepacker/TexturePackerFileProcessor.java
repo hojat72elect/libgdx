@@ -3,8 +3,11 @@ package com.badlogic.gdx.tools.texturepacker;
 import com.badlogic.gdx.tools.FileProcessor;
 import com.badlogic.gdx.tools.texturepacker.TexturePacker.ProgressListener;
 import com.badlogic.gdx.tools.texturepacker.TexturePacker.Settings;
-import com.badlogic.gdx.utils.*;
-
+import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonValue;
+import com.badlogic.gdx.utils.ObjectMap;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -260,7 +263,8 @@ public class TexturePackerFileProcessor extends FileProcessor {
                 }
             } catch (IOException ignored) {
             }
-            if (inputPath == null || inputPath.length() == 0) inputPath = inputDir.inputFile.getName();
+            if (inputPath == null || inputPath.length() == 0)
+                inputPath = inputDir.inputFile.getName();
             progress.setMessage(inputPath);
         }
         TexturePacker packer = newTexturePacker(root, settings);

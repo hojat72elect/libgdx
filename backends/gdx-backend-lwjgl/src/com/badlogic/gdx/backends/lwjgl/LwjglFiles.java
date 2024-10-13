@@ -2,12 +2,8 @@ package com.badlogic.gdx.backends.lwjgl;
 
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.files.FileHandle;
-
 import java.io.File;
 
-/**
- *
- */
 public final class LwjglFiles implements Files {
     static public final String externalPath = System.getProperty("user.home") + File.separator;
     static public final String localPath = new File("").getAbsolutePath() + File.separator;

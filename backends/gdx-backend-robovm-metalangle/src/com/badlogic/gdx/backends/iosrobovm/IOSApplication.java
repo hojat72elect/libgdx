@@ -38,9 +38,9 @@ public class IOSApplication implements Application {
      * The display scale factor (1.0f for normal; 2.0f to use retina coordinates/dimensions).
      */
     float pixelsPerPoint;
-    Array<Runnable> runnables = new Array<Runnable>();
-    Array<Runnable> executedRunnables = new Array<Runnable>();
-    Array<LifecycleListener> lifecycleListeners = new Array<LifecycleListener>();
+    Array<Runnable> runnables = new Array<>();
+    Array<Runnable> executedRunnables = new Array<>();
+    Array<LifecycleListener> lifecycleListeners = new Array<>();
     private IOSScreenBounds lastScreenBounds = null;
 
     public IOSApplication(ApplicationListener listener, IOSApplicationConfiguration config) {
