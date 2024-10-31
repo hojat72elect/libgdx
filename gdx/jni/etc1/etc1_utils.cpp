@@ -1,17 +1,3 @@
-// Copyright 2009 Google Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 #include <etc1/etc1_utils.h>
 
 #include <string.h>
@@ -108,64 +94,56 @@
  */
 
 static const int kModifierTable[] = {
-/* 0 */2, 8, -2, -8,
-/* 1 */5, 17, -5, -17,
-/* 2 */9, 29, -9, -29,
-/* 3 */13, 42, -13, -42,
-/* 4 */18, 60, -18, -60,
-/* 5 */24, 80, -24, -80,
-/* 6 */33, 106, -33, -106,
-/* 7 */47, 183, -47, -183 };
+        /* 0 */ 2, 8, -2, -8,
+        /* 1 */ 5, 17, -5, -17,
+        /* 2 */ 9, 29, -9, -29,
+        /* 3 */ 13, 42, -13, -42,
+        /* 4 */ 18, 60, -18, -60,
+        /* 5 */ 24, 80, -24, -80,
+        /* 6 */ 33, 106, -33, -106,
+        /* 7 */ 47, 183, -47, -183};
 
-static const int kLookup[8] = { 0, 1, 2, 3, -4, -3, -2, -1 };
+static const int kLookup[8] = {0, 1, 2, 3, -4, -3, -2, -1};
 
 static inline etc1_byte clamp(int x) {
-    return (etc1_byte) (x >= 0 ? (x < 255 ? x : 255) : 0);
+    return (etc1_byte)(x >= 0 ? (x < 255 ? x : 255) : 0);
 }
 
-static
-inline int convert4To8(int b) {
+static inline int convert4To8(int b) {
     int c = b & 0xf;
     return (c << 4) | c;
 }
 
-static
-inline int convert5To8(int b) {
+static inline int convert5To8(int b) {
     int c = b & 0x1f;
     return (c << 3) | (c >> 2);
 }
 
-static
-inline int convert6To8(int b) {
+static inline int convert6To8(int b) {
     int c = b & 0x3f;
     return (c << 2) | (c >> 4);
 }
 
-static
-inline int divideBy255(int d) {
+static inline int divideBy255(int d) {
     return (d + 128 + (d >> 8)) >> 8;
 }
 
-static
-inline int convert8To4(int b) {
+static inline int convert8To4(int b) {
     int c = b & 0xff;
     return divideBy255(c * 15);
 }
 
-static
-inline int convert8To5(int b) {
+static inline int convert8To5(int b) {
     int c = b & 0xff;
     return divideBy255(c * 31);
 }
 
-static
-inline int convertDiff(int base, int diff) {
+static inline int convertDiff(int base, int diff) {
     return convert5To8((0x1f & base) + kLookup[0x7 & diff]);
 }
 
-static
-void decode_subblock(etc1_byte* pOut, int r, int g, int b, const int* table,
-        etc1_uint32 low, bool second, bool flipped) {
+static void decode_subblock(etc1_byte *pOut, int r, int g, int b, const int *table,
+                            etc1_uint32 low, bool second, bool flipped) {
     int baseX = 0;
     int baseY = 0;
     if (second) {
@@ -187,7 +165,7 @@ void decode_subblock(etc1_byte* pOut, int r, int g, int b, const int* table,
         int k = y + (x * 4);
         int offset = ((low >> k) & 1) | ((low >> (k + 15)) & 2);
         int delta = table[offset];
-        etc1_byte* q = pOut + 3 * (x + 4 * y);
+        etc1_byte *q = pOut + 3 * (x + 4 * y);
         *q++ = clamp(r + delta);
         *q++ = clamp(g + delta);
         *q++ = clamp(b + delta);
@@ -197,7 +175,7 @@ void decode_subblock(etc1_byte* pOut, int r, int g, int b, const int* table,
 // Input is an ETC1 compressed version of the data.
 // Output is a 4 x 4 square of 3-byte pixels in form R, G, B
 
-void etc1_decode_block(const etc1_byte* pIn, etc1_byte* pOut) {
+void etc1_decode_block(const etc1_byte *pIn, etc1_byte *pOut) {
     etc1_uint32 high = (pIn[0] << 24) | (pIn[1] << 16) | (pIn[2] << 8) | pIn[3];
     etc1_uint32 low = (pIn[4] << 24) | (pIn[5] << 16) | (pIn[6] << 8) | pIn[7];
     int r1, r2, g1, g2, b1, b2;
@@ -223,8 +201,8 @@ void etc1_decode_block(const etc1_byte* pIn, etc1_byte* pOut) {
     }
     int tableIndexA = 7 & (high >> 5);
     int tableIndexB = 7 & (high >> 2);
-    const int* tableA = kModifierTable + tableIndexA * 4;
-    const int* tableB = kModifierTable + tableIndexB * 4;
+    const int *tableA = kModifierTable + tableIndexA * 4;
+    const int *tableB = kModifierTable + tableIndexB * 4;
     bool flipped = (high & 1) != 0;
     decode_subblock(pOut, r1, g1, b1, tableA, low, false, flipped);
     decode_subblock(pOut, r2, g2, b2, tableB, low, true, flipped);
@@ -236,16 +214,14 @@ typedef struct {
     etc1_uint32 score; // Lower is more accurate
 } etc_compressed;
 
-static
-inline void take_best(etc_compressed* a, const etc_compressed* b) {
+static inline void take_best(etc_compressed *a, const etc_compressed *b) {
     if (a->score > b->score) {
         *a = *b;
     }
 }
 
-static
-void etc_average_colors_subblock(const etc1_byte* pIn, etc1_uint32 inMask,
-        etc1_byte* pColors, bool flipped, bool second) {
+static void etc_average_colors_subblock(const etc1_byte *pIn, etc1_uint32 inMask,
+                                        etc1_byte *pColors, bool flipped, bool second) {
     int r = 0;
     int g = 0;
     int b = 0;
@@ -260,7 +236,7 @@ void etc_average_colors_subblock(const etc1_byte* pIn, etc1_uint32 inMask,
             for (int x = 0; x < 4; x++) {
                 int i = x + 4 * yy;
                 if (inMask & (1 << i)) {
-                    const etc1_byte* p = pIn + i * 3;
+                    const etc1_byte *p = pIn + i * 3;
                     r += *(p++);
                     g += *(p++);
                     b += *(p++);
@@ -277,7 +253,7 @@ void etc_average_colors_subblock(const etc1_byte* pIn, etc1_uint32 inMask,
                 int xx = bx + x;
                 int i = xx + 4 * y;
                 if (inMask & (1 << i)) {
-                    const etc1_byte* p = pIn + i * 3;
+                    const etc1_byte *p = pIn + i * 3;
                     r += *(p++);
                     g += *(p++);
                     b += *(p++);
@@ -290,14 +266,13 @@ void etc_average_colors_subblock(const etc1_byte* pIn, etc1_uint32 inMask,
     pColors[2] = (etc1_byte)((b + 4) >> 3);
 }
 
-static
-inline int square(int x) {
+static inline int square(int x) {
     return x * x;
 }
 
-static etc1_uint32 chooseModifier(const etc1_byte* pBaseColors,
-        const etc1_byte* pIn, etc1_uint32 *pLow, int bitIndex,
-        const int* pModifierTable) {
+static etc1_uint32 chooseModifier(const etc1_byte *pBaseColors,
+                                  const etc1_byte *pIn, etc1_uint32 *pLow, int bitIndex,
+                                  const int *pModifierTable) {
     etc1_uint32 bestScore = ~0;
     int bestIndex = 0;
     int pixelR = pIn[0];
@@ -309,12 +284,12 @@ static etc1_uint32 chooseModifier(const etc1_byte* pBaseColors,
     for (int i = 0; i < 4; i++) {
         int modifier = pModifierTable[i];
         int decodedG = clamp(g + modifier);
-        etc1_uint32 score = (etc1_uint32) (6 * square(decodedG - pixelG));
+        etc1_uint32 score = (etc1_uint32)(6 * square(decodedG - pixelG));
         if (score >= bestScore) {
             continue;
         }
         int decodedR = clamp(r + modifier);
-        score += (etc1_uint32) (3 * square(decodedR - pixelR));
+        score += (etc1_uint32)(3 * square(decodedR - pixelR));
         if (score >= bestScore) {
             continue;
         }
@@ -331,10 +306,9 @@ static etc1_uint32 chooseModifier(const etc1_byte* pBaseColors,
     return bestScore;
 }
 
-static
-void etc_encode_subblock_helper(const etc1_byte* pIn, etc1_uint32 inMask,
-        etc_compressed* pCompressed, bool flipped, bool second,
-        const etc1_byte* pBaseColors, const int* pModifierTable) {
+static void etc_encode_subblock_helper(const etc1_byte *pIn, etc1_uint32 inMask,
+                                       etc_compressed *pCompressed, bool flipped, bool second,
+                                       const etc1_byte *pBaseColors, const int *pModifierTable) {
     int score = pCompressed->score;
     if (flipped) {
         int by = 0;
@@ -347,7 +321,7 @@ void etc_encode_subblock_helper(const etc1_byte* pIn, etc1_uint32 inMask,
                 int i = x + 4 * yy;
                 if (inMask & (1 << i)) {
                     score += chooseModifier(pBaseColors, pIn + i * 3,
-                            &pCompressed->low, yy + x * 4, pModifierTable);
+                                            &pCompressed->low, yy + x * 4, pModifierTable);
                 }
             }
         }
@@ -362,7 +336,7 @@ void etc_encode_subblock_helper(const etc1_byte* pIn, etc1_uint32 inMask,
                 int i = xx + 4 * y;
                 if (inMask & (1 << i)) {
                     score += chooseModifier(pBaseColors, pIn + i * 3,
-                            &pCompressed->low, y + xx * 4, pModifierTable);
+                                            &pCompressed->low, y + xx * 4, pModifierTable);
                 }
             }
         }
@@ -374,8 +348,8 @@ static bool inRange4bitSigned(int color) {
     return color >= -4 && color <= 3;
 }
 
-static void etc_encodeBaseColors(etc1_byte* pBaseColors,
-        const etc1_byte* pColors, etc_compressed* pCompressed) {
+static void etc_encodeBaseColors(etc1_byte *pBaseColors,
+                                 const etc1_byte *pColors, etc_compressed *pCompressed) {
     int r1, g1, b1, r2, g2, b2; // 8 bit base colors for sub-blocks
     bool differential;
     {
@@ -394,14 +368,14 @@ static void etc_encodeBaseColors(etc1_byte* pBaseColors,
         int dg = g52 - g51;
         int db = b52 - b51;
 
-        differential = inRange4bitSigned(dr) && inRange4bitSigned(dg)
-                && inRange4bitSigned(db);
+        differential = inRange4bitSigned(dr) && inRange4bitSigned(dg) && inRange4bitSigned(db);
         if (differential) {
             r2 = convert5To8(r51 + dr);
             g2 = convert5To8(g51 + dg);
             b2 = convert5To8(b51 + db);
-            pCompressed->high |= (r51 << 27) | ((7 & dr) << 24) | (g51 << 19)
-                    | ((7 & dg) << 16) | (b51 << 11) | ((7 & db) << 8) | 2;
+            pCompressed->high |=
+                    (r51 << 27) | ((7 & dr) << 24) | (g51 << 19) | ((7 & dg) << 16) | (b51 << 11) |
+                    ((7 & db) << 8) | 2;
         }
     }
 
@@ -418,8 +392,8 @@ static void etc_encodeBaseColors(etc1_byte* pBaseColors,
         r2 = convert4To8(r42);
         g2 = convert4To8(g42);
         b2 = convert4To8(b42);
-        pCompressed->high |= (r41 << 28) | (r42 << 24) | (g41 << 20) | (g42
-                << 16) | (b41 << 12) | (b42 << 8);
+        pCompressed->high |=
+                (r41 << 28) | (r42 << 24) | (g41 << 20) | (g42 << 16) | (b41 << 12) | (b42 << 8);
     }
     pBaseColors[0] = r1;
     pBaseColors[1] = g1;
@@ -429,9 +403,9 @@ static void etc_encodeBaseColors(etc1_byte* pBaseColors,
     pBaseColors[5] = b2;
 }
 
-static
-void etc_encode_block_helper(const etc1_byte* pIn, etc1_uint32 inMask,
-        const etc1_byte* pColors, etc_compressed* pCompressed, bool flipped) {
+static void etc_encode_block_helper(const etc1_byte *pIn, etc1_uint32 inMask,
+                                    const etc1_byte *pColors, etc_compressed *pCompressed,
+                                    bool flipped) {
     pCompressed->score = ~0;
     pCompressed->high = (flipped ? 1 : 0);
     pCompressed->low = 0;
@@ -442,14 +416,14 @@ void etc_encode_block_helper(const etc1_byte* pIn, etc1_uint32 inMask,
 
     int originalHigh = pCompressed->high;
 
-    const int* pModifierTable = kModifierTable;
+    const int *pModifierTable = kModifierTable;
     for (int i = 0; i < 8; i++, pModifierTable += 4) {
         etc_compressed temp;
         temp.score = 0;
         temp.high = originalHigh | (i << 5);
         temp.low = 0;
         etc_encode_subblock_helper(pIn, inMask, &temp, flipped, false,
-                pBaseColors, pModifierTable);
+                                   pBaseColors, pModifierTable);
         take_best(pCompressed, &temp);
     }
     pModifierTable = kModifierTable;
@@ -460,7 +434,7 @@ void etc_encode_block_helper(const etc1_byte* pIn, etc1_uint32 inMask,
         temp.high = firstHalf.high | (i << 2);
         temp.low = firstHalf.low;
         etc_encode_subblock_helper(pIn, inMask, &temp, flipped, true,
-                pBaseColors + 3, pModifierTable);
+                                   pBaseColors + 3, pModifierTable);
         if (i == 0) {
             *pCompressed = temp;
         } else {
@@ -469,7 +443,7 @@ void etc_encode_block_helper(const etc1_byte* pIn, etc1_uint32 inMask,
     }
 }
 
-static void writeBigEndian(etc1_byte* pOut, etc1_uint32 d) {
+static void writeBigEndian(etc1_byte *pOut, etc1_uint32 d) {
     pOut[0] = (etc1_byte)(d >> 24);
     pOut[1] = (etc1_byte)(d >> 16);
     pOut[2] = (etc1_byte)(d >> 8);
@@ -481,8 +455,8 @@ static void writeBigEndian(etc1_byte* pOut, etc1_uint32 d) {
 // pixel is valid or not. Invalid pixel color values are ignored when compressing.
 // Output is an ETC1 compressed version of the data.
 
-void etc1_encode_block(const etc1_byte* pIn, etc1_uint32 inMask,
-        etc1_byte* pOut) {
+void etc1_encode_block(const etc1_byte *pIn, etc1_uint32 inMask,
+                       etc1_byte *pOut) {
     etc1_byte colors[6];
     etc1_byte flippedColors[6];
     etc_average_colors_subblock(pIn, inMask, colors, false, false);
@@ -509,14 +483,14 @@ etc1_uint32 etc1_get_encoded_data_size(etc1_uint32 width, etc1_uint32 height) {
 //       pixel (x,y) is at pIn + pixelSize * x + stride * y + redOffset;
 // pOut - pointer to encoded data. Must be large enough to store entire encoded image.
 
-int etc1_encode_image(const etc1_byte* pIn, etc1_uint32 width, etc1_uint32 height,
-        etc1_uint32 pixelSize, etc1_uint32 stride, etc1_byte* pOut) {
+int etc1_encode_image(const etc1_byte *pIn, etc1_uint32 width, etc1_uint32 height,
+                      etc1_uint32 pixelSize, etc1_uint32 stride, etc1_byte *pOut) {
     if (pixelSize < 2 || pixelSize > 3) {
         return -1;
     }
-    static const unsigned short kYMask[] = { 0x0, 0xf, 0xff, 0xfff, 0xffff };
-    static const unsigned short kXMask[] = { 0x0, 0x1111, 0x3333, 0x7777,
-            0xffff };
+    static const unsigned short kYMask[] = {0x0, 0xf, 0xff, 0xfff, 0xffff};
+    static const unsigned short kXMask[] = {0x0, 0x1111, 0x3333, 0x7777,
+                                            0xffff};
     etc1_byte block[ETC1_DECODED_BLOCK_SIZE];
     etc1_byte encoded[ETC1_ENCODED_BLOCK_SIZE];
 
@@ -536,8 +510,8 @@ int etc1_encode_image(const etc1_byte* pIn, etc1_uint32 width, etc1_uint32 heigh
             }
             int mask = ymask & kXMask[xEnd];
             for (etc1_uint32 cy = 0; cy < yEnd; cy++) {
-                etc1_byte* q = block + (cy * 4) * 3;
-                const etc1_byte* p = pIn + pixelSize * x + stride * (y + cy);
+                etc1_byte *q = block + (cy * 4) * 3;
+                const etc1_byte *p = pIn + pixelSize * x + stride * (y + cy);
                 if (pixelSize == 3) {
                     memcpy(q, p, xEnd * 3);
                 } else {
@@ -564,10 +538,9 @@ int etc1_encode_image(const etc1_byte* pIn, etc1_uint32 width, etc1_uint32 heigh
 //       pixel (x,y) is at pIn + pixelSize * x + stride * y + redOffset. Must be
 //        large enough to store entire image.
 
-
-int etc1_decode_image(const etc1_byte* pIn, etc1_byte* pOut,
-        etc1_uint32 width, etc1_uint32 height,
-        etc1_uint32 pixelSize, etc1_uint32 stride) {
+int etc1_decode_image(const etc1_byte *pIn, etc1_byte *pOut,
+                      etc1_uint32 width, etc1_uint32 height,
+                      etc1_uint32 pixelSize, etc1_uint32 stride) {
     if (pixelSize < 2 || pixelSize > 3) {
         return -1;
     }
@@ -589,8 +562,8 @@ int etc1_decode_image(const etc1_byte* pIn, etc1_byte* pOut,
             etc1_decode_block(pIn, block);
             pIn += ETC1_ENCODED_BLOCK_SIZE;
             for (etc1_uint32 cy = 0; cy < yEnd; cy++) {
-                const etc1_byte* q = block + (cy * 4) * 3;
-                etc1_byte* p = pOut + pixelSize * x + stride * (y + cy);
+                const etc1_byte *q = block + (cy * 4) * 3;
+                etc1_byte *p = pOut + pixelSize * x + stride * (y + cy);
                 if (pixelSize == 3) {
                     memcpy(p, q, xEnd * 3);
                 } else {
@@ -600,7 +573,7 @@ int etc1_decode_image(const etc1_byte* pIn, etc1_byte* pOut,
                         etc1_byte b = *q++;
                         etc1_uint32 pixel = ((r >> 3) << 11) | ((g >> 2) << 5) | (b >> 3);
                         *p++ = (etc1_byte) pixel;
-                        *p++ = (etc1_byte) (pixel >> 8);
+                        *p++ = (etc1_byte)(pixel >> 8);
                     }
                 }
             }
@@ -609,7 +582,7 @@ int etc1_decode_image(const etc1_byte* pIn, etc1_byte* pOut,
     return 0;
 }
 
-static const char kMagic[] = { 'P', 'K', 'M', ' ', '1', '0' };
+static const char kMagic[] = {'P', 'K', 'M', ' ', '1', '0'};
 
 static const etc1_uint32 ETC1_PKM_FORMAT_OFFSET = 6;
 static const etc1_uint32 ETC1_PKM_ENCODED_WIDTH_OFFSET = 8;
@@ -619,18 +592,18 @@ static const etc1_uint32 ETC1_PKM_HEIGHT_OFFSET = 14;
 
 static const etc1_uint32 ETC1_RGB_NO_MIPMAPS = 0;
 
-static void writeBEUint16(etc1_byte* pOut, etc1_uint32 data) {
-    pOut[0] = (etc1_byte) (data >> 8);
+static void writeBEUint16(etc1_byte *pOut, etc1_uint32 data) {
+    pOut[0] = (etc1_byte)(data >> 8);
     pOut[1] = (etc1_byte) data;
 }
 
-static etc1_uint32 readBEUint16(const etc1_byte* pIn) {
+static etc1_uint32 readBEUint16(const etc1_byte *pIn) {
     return (pIn[0] << 8) | pIn[1];
 }
 
 // Format a PKM header
 
-void etc1_pkm_format_header(etc1_byte* pHeader, etc1_uint32 width, etc1_uint32 height) {
+void etc1_pkm_format_header(etc1_byte *pHeader, etc1_uint32 width, etc1_uint32 height) {
     memcpy(pHeader, kMagic, sizeof(kMagic));
     etc1_uint32 encodedWidth = (width + 3) & ~3;
     etc1_uint32 encodedHeight = (height + 3) & ~3;
@@ -643,7 +616,7 @@ void etc1_pkm_format_header(etc1_byte* pHeader, etc1_uint32 width, etc1_uint32 h
 
 // Check if a PKM header is correctly formatted.
 
-etc1_bool etc1_pkm_is_valid(const etc1_byte* pHeader) {
+etc1_bool etc1_pkm_is_valid(const etc1_byte *pHeader) {
     if (memcmp(pHeader, kMagic, sizeof(kMagic))) {
         return false;
     }
@@ -653,18 +626,18 @@ etc1_bool etc1_pkm_is_valid(const etc1_byte* pHeader) {
     etc1_uint32 width = readBEUint16(pHeader + ETC1_PKM_WIDTH_OFFSET);
     etc1_uint32 height = readBEUint16(pHeader + ETC1_PKM_HEIGHT_OFFSET);
     return format == ETC1_RGB_NO_MIPMAPS &&
-            encodedWidth >= width && encodedWidth - width < 4 &&
-            encodedHeight >= height && encodedHeight - height < 4;
+           encodedWidth >= width && encodedWidth - width < 4 &&
+           encodedHeight >= height && encodedHeight - height < 4;
 }
 
 // Read the image width from a PKM header
 
-etc1_uint32 etc1_pkm_get_width(const etc1_byte* pHeader) {
+etc1_uint32 etc1_pkm_get_width(const etc1_byte *pHeader) {
     return readBEUint16(pHeader + ETC1_PKM_WIDTH_OFFSET);
 }
 
 // Read the image height from a PKM header
 
-etc1_uint32 etc1_pkm_get_height(const etc1_byte* pHeader){
+etc1_uint32 etc1_pkm_get_height(const etc1_byte *pHeader) {
     return readBEUint16(pHeader + ETC1_PKM_HEIGHT_OFFSET);
 }
