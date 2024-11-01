@@ -6,9 +6,26 @@ subprojects {
             options.release = versions.java
         }
     }
-    sourceCompatibility = versions.java
-    targetCompatibility = versions.java
 
     sourceSets.main.java.srcDirs = ["src"]
     sourceSets.main.resources.srcDirs = ["res"]
+}
+buildscript {
+    ext.kotlin_version = '2.0.21'
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+apply plugin: 'kotlin'
+repositories {
+    mavenCentral()
+}
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+}
+kotlin {
+    jvmToolchain(17)
 }

@@ -5,7 +5,7 @@ ext {
     gdxnatives = [:]
 }
 
-versions.java = project.hasProperty("javaVersion") ? Integer.parseInt(project.getProperty("javaVersion")) : 7
+versions.java = project.hasProperty("javaVersion") ? Integer.parseInt(project.getProperty("javaVersion")) : 8
 versions.javaLwjgl3 = project.hasProperty("javaVersion") ? Integer.parseInt(project.getProperty("javaVersion")) : 8
 versions.robovm = "2.3.21"
 versions.gwt = "2.11.0"
@@ -22,7 +22,7 @@ versions.androidPlugin = "8.1.2"
 versions.multiDex = "2.0.1"
 versions.androidCompileSdk = 33
 versions.androidTargetSdk = 33
-versions.androidMinSdk = 19
+versions.androidMinSdk = 26
 versions.androidBuildTools = "33.0.2"
 versions.androidFragment = "1.5.7"
 versions.javaparser = "2.3.0"

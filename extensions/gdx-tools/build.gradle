@@ -1,8 +1,12 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+}
 dependencies {
     api project(":backends:gdx-backend-lwjgl")
     api project(":extensions:gdx-freetype")
     api project(":backends:gdx-backend-headless")
     api testnatives.desktop
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 sourceSets.main.resources.srcDirs = ["assets"]
@@ -74,5 +78,18 @@ tasks.register('buildRunnables') {
     dependsOn dist3DParticles, distHiero, distTexturePacker
     doLast {
         println "Building ye runnables"
+    }
+}
+repositories {
+    mavenCentral()
+}
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }

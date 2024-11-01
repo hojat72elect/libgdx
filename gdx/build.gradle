@@ -1,4 +1,5 @@
 apply plugin: "java"
+apply plugin: 'kotlin'
 
 if (JavaVersion.current().isJava9Compatible()) {
     compileJava {
@@ -70,6 +71,7 @@ task validateIOSHeader {
 dependencies {
     testImplementation libraries.junit
     api "com.badlogicgames.gdx:gdx-jnigen-loader:2.5.2"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
 
 test {
@@ -106,5 +108,27 @@ jnigen {
     }
     robovm {
         extraXCFramework("libs/ObjectAL.xcframework")
+    }
+}
+buildscript {
+    ext.kotlin_version = '2.0.21'
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+repositories {
+    mavenCentral()
+}
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
