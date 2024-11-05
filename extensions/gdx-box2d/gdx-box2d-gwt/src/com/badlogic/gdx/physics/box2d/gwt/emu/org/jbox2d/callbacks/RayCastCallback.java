@@ -10,8 +10,6 @@ import org.jbox2d.dynamics.World;
 
 /**
  * Callback class for ray casts. See {@link World#raycast(RayCastCallback, Vec2, Vec2)}
- *
- * @author Daniel Murphy
  */
 public interface RayCastCallback {
 

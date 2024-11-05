@@ -7,9 +7,7 @@ import com.badlogic.gdx.backends.headless.mock.input.MockInput;
 import com.badlogic.gdx.utils.*;
 
 /**
- * a headless implementation of a GDX Application primarily intended to be used in servers
- *
- * @author Jon Renner
+ * a headless implementation of a GDX Application primarily intended to be used in servers.
  */
 public class HeadlessApplication implements Application {
     protected final ApplicationListener listener;

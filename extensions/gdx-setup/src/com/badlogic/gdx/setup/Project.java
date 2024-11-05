@@ -6,8 +6,6 @@ import java.util.List;
 /**
  * Describes all the files required to generate a new project for an Application. Files are found on the classpath of the
  * gdx-setup project, see package com.badlogic.gdx.setup.resources.
- *
- * @author badlogic
  */
 public class Project {
     /**

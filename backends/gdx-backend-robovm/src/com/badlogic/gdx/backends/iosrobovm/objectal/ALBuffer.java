@@ -23,9 +23,6 @@ import org.robovm.objc.annotation.NativeClass;
 import org.robovm.rt.bro.annotation.Library;
 import org.robovm.rt.bro.ptr.VoidPtr;
 
-/**
- * @author Niklas Therning
- */
 @Library(Library.INTERNAL)
 @NativeClass
 public class ALBuffer extends NSObject {

@@ -22,9 +22,6 @@ import com.badlogic.gdx.backends.iosrobovm.objectal.AVAudioPlayerDelegateAdapter
 import com.badlogic.gdx.backends.iosrobovm.objectal.OALAudioTrack;
 import org.robovm.apple.foundation.NSObject;
 
-/**
- * @author Niklas Therning
- */
 public class IOSMusic implements Music {
     private final OALAudioTrack track;
     private final String filePath;

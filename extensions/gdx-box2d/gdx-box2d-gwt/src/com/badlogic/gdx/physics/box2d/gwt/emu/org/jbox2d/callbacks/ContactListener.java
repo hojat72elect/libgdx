@@ -11,7 +11,6 @@ import org.jbox2d.dynamics.contacts.Contact;
  * continuous physics leads to sub-stepping. Additionally you may receive multiple callbacks for the same contact in a single time
  * step. You should strive to make your callbacks efficient because there may be many callbacks per time step.
  *
- * @author Daniel Murphy
  * @warning You cannot create/destroy Box2D entities inside these callbacks.
  */
 public interface ContactListener {

@@ -24,9 +24,7 @@ import java.awt.*;
 import java.awt.Desktop.Action;
 
 /**
- * Headless implementation of the {@link com.badlogic.gdx.Net} API, based on LWJGL implementation
- *
- * @author Jon Renner
+ * Headless implementation of the {@link com.badlogic.gdx.Net} API, based on LWJGL implementation.
  */
 public class HeadlessNet implements Net {
 

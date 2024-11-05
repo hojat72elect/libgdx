@@ -10,9 +10,6 @@ import com.badlogic.gdx.utils.IntArray;
 import org.robovm.apple.foundation.NSArray;
 
 /**
- * @author tescott
- * @author Tomski
- * <p>
  * First pass at implementing OALSimpleAudio support.
  */
 public class IOSSound implements Sound {

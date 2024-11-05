@@ -4,8 +4,6 @@ import org.jbox2d.dynamics.World;
 
 /**
  * Callback class for AABB queries. See {@link World#queryAABB(QueryCallback, org.jbox2d.collision.AABB)}.
- *
- * @author dmurph
  */
 public interface ParticleQueryCallback {
     /**

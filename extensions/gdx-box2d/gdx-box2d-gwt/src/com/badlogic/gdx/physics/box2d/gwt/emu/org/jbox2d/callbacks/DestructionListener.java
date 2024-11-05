@@ -10,8 +10,6 @@ import org.jbox2d.dynamics.joints.Joint;
 /**
  * Joints and fixtures are destroyed when their associated body is destroyed. Implement this listener so that you may nullify
  * references to these joints and shapes.
- *
- * @author Daniel Murphy
  */
 public interface DestructionListener {
 

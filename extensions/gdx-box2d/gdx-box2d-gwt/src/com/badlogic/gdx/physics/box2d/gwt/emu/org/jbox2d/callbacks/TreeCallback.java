@@ -6,8 +6,6 @@ import org.jbox2d.collision.broadphase.DynamicTree;
 
 /**
  * callback for {@link DynamicTree}
- *
- * @author Daniel Murphy
  */
 public interface TreeCallback {
 

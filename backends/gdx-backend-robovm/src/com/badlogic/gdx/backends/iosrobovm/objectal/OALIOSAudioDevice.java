@@ -1,21 +1,16 @@
 package com.badlogic.gdx.backends.iosrobovm.objectal;
 
+import static com.badlogic.gdx.backends.iosrobovm.objectal.ALConsts.AL_FORMAT_MONO16;
+import static com.badlogic.gdx.backends.iosrobovm.objectal.ALConsts.AL_FORMAT_STEREO16;
+
 import com.badlogic.gdx.audio.AudioDevice;
+import java.nio.ShortBuffer;
+import java.util.ArrayList;
+import java.util.List;
 import org.robovm.rt.bro.Struct;
 import org.robovm.rt.bro.ptr.ShortPtr;
 import org.robovm.rt.bro.ptr.VoidPtr;
 
-import java.nio.ShortBuffer;
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.badlogic.gdx.backends.iosrobovm.objectal.ALConsts.AL_FORMAT_MONO16;
-import static com.badlogic.gdx.backends.iosrobovm.objectal.ALConsts.AL_FORMAT_STEREO16;
-
-/**
- * @author Jile Gao
- * @author Berstanio
- */
 class OALIOSAudioDevice implements AudioDevice {
     private final int samplingRate;
     private final boolean isMono;
@@ -38,7 +33,8 @@ class OALIOSAudioDevice implements AudioDevice {
         alSource = new ALSource();
         for (int i = 0; i < bufferCount; i++) {
             ALBuffer buffer = new ALBuffer().initWithNameDataSizeFormatFrequency("test", Struct.allocate(VoidPtr.class, 1), 2,
-                    format, samplingRate);
+                    format, samplingRate
+            );
             alBuffersFree.add(buffer);
         }
     }
