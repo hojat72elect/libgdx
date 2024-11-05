@@ -26,7 +26,6 @@ versions.androidMinSdk = 26
 versions.androidBuildTools = "33.0.2"
 versions.androidFragment = "1.5.7"
 versions.javaparser = "2.3.0"
-versions.spotless = "6.7.1"
 
 libraries.compileOnly = [:]
 
