@@ -14,11 +14,10 @@ import org.junit.runners.Parameterized.Parameters;
 @RunWith(Parameterized.class)
 public class BezierTest {
 
-    @Parameter(0)
+    @Parameter()
     public ImportType type;
-    /**
-     * use constructor or setter
-     */
+
+    // use constructor or setter
     @Parameter(1)
     public boolean useSetter;
     private Bezier<Vector2> bezier;
@@ -38,7 +37,7 @@ public class BezierTest {
         bezier = null;
     }
 
-    protected Vector2[] create(Vector2[] points) {
+    protected void create(Vector2[] points) {
         if (useSetter) {
             bezier = new Bezier<>();
             if (type == ImportType.LibGDXArrays) {
@@ -58,16 +57,15 @@ public class BezierTest {
             }
 
         }
-        return points;
     }
 
     @Test
     public void testLinear2D() {
-        Vector2[] points = create(new Vector2[]{new Vector2(0, 0), new Vector2(1, 1)});
+        create(new Vector2[]{new Vector2(0, 0), new Vector2(1, 1)});
 
         float len = bezier.approxLength(2);
-        float epsilonApprimations = 1e-6f;
-        Assert.assertEquals(Math.sqrt(2), len, epsilonApprimations);
+        float epsilonApproximation = 1e-6f;
+        Assert.assertEquals(Math.sqrt(2), len, epsilonApproximation);
 
         Vector2 d = bezier.derivativeAt(new Vector2(), 0.5f);
         float epsilon = Float.MIN_NORMAL;
@@ -79,13 +77,12 @@ public class BezierTest {
         Assert.assertEquals(0.5f, v.y, epsilon);
 
         float t = bezier.approximate(new Vector2(.5f, .5f));
-        Assert.assertEquals(.5f, t, epsilonApprimations);
+        Assert.assertEquals(.5f, t, epsilonApproximation);
 
-        float l = bezier.locate(new Vector2(.5f, .5f));
         Assert.assertEquals(.5f, t, epsilon);
     }
 
-    private static enum ImportType {
+    private enum ImportType {
         LibGDXArrays, JavaArrays, JavaVarArgs
     }
 }
