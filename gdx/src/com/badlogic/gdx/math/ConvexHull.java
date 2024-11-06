@@ -28,10 +28,9 @@ public class ConvexHull {
         return computePolygon(polygon, 0, polygon.length, sorted);
     }
 
-    /** Returns a list of points on the convex hull in counter-clockwise order. Note: the last point in the returned list is the
-     * same as the first one. */
     /**
-     * Returns the convex hull polygon for the given point cloud.
+     * Returns the convex hull polygon for the given point cloud (Returns a list of points on the convex hull in counter-clockwise order. Note: the last point in the returned
+     * list is the same as the first one.).
      *
      * @param points x,y pairs describing points in counter-clockwise order. Duplicate points will result in undefined behavior.
      * @param sorted If false, the points will be sorted by the x coordinate then the y coordinate, which is required by the convex
@@ -261,7 +260,8 @@ public class ConvexHull {
     }
 
     private int quicksortPartitionWithIndices(final float[] values, int lower, int upper, boolean yDown,
-                                              short[] originalIndices) {
+                                              short[] originalIndices
+    ) {
         float x = values[lower];
         float y = values[lower + 1];
         int up = upper;
