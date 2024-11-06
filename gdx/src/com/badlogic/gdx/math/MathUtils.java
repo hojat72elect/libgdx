@@ -4,13 +4,10 @@ import java.util.Random;
 
 /**
  * Utility and fast math functions.
- * <p>
- * Thanks to Riven on JavaGaming.org for the basis of sin/cos/floor/ceil.
  */
 public final class MathUtils {
 
     static public final float nanoToSec = 1 / 1000000000f;
-    // ---
     static public final float FLOAT_ROUNDING_ERROR = 0.000001f; // 32 bits
     static public final float PI = (float) Math.PI;
     static public final float PI2 = PI * 2;
@@ -18,14 +15,11 @@ public final class MathUtils {
     static public final float HALF_PI = PI / 2;
 
     static public final float E = (float) Math.E;
-    /**
-     * multiply by this to convert from radians to degrees
-     */
+    // multiply by this to convert from radians to degrees
     static public final float radiansToDegrees = 180f / PI;
     static public final float radDeg = radiansToDegrees;
-    /**
-     * multiply by this to convert from degrees to radians
-     */
+
+    // multiply by this to convert from degrees to radians
     static public final float degreesToRadians = PI / 180;
     static public final float degRad = degreesToRadians;
     static private final int SIN_BITS = 14; // 16KB. Adjust for accuracy.
@@ -51,8 +45,6 @@ public final class MathUtils {
     static public float sin(float radians) {
         return Sin.table[(int) (radians * radToIndex) & SIN_MASK];
     }
-
-    // ---
 
     /**
      * Returns the cosine in radians from a lookup table. For optimal precision, use radians between -PI2 and PI2 (both
@@ -571,8 +563,6 @@ public final class MathUtils {
         return value;
     }
 
-    // ---
-
     static public int clamp(int value, int min, int max) {
         if (value < min) return min;
         if (value > max) return max;
@@ -603,8 +593,6 @@ public final class MathUtils {
     static public float lerp(float fromValue, float toValue, float progress) {
         return fromValue + (toValue - fromValue) * progress;
     }
-
-    // ---
 
     /**
      * Linearly normalizes value from a range. Range must not be empty. This is the inverse of {@link #lerp(float, float, float)}.
