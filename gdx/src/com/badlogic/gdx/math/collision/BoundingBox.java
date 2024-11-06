@@ -2,15 +2,12 @@ package com.badlogic.gdx.math.collision;
 
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
-
 import java.io.Serializable;
 import java.util.List;
 
 /**
  * Encapsulates an axis aligned bounding box represented by a minimum and a maximum Vector. Additionally you can query for the
  * bounding box's center, dimensions and corner points.
- * <p>
- * , Xoppa
  */
 public class BoundingBox implements Serializable {
     private static final long serialVersionUID = -1286036817192127343L;
@@ -172,9 +169,11 @@ public class BoundingBox implements Serializable {
      */
     public BoundingBox set(Vector3 minimum, Vector3 maximum) {
         min.set(minimum.x < maximum.x ? minimum.x : maximum.x, minimum.y < maximum.y ? minimum.y : maximum.y,
-                minimum.z < maximum.z ? minimum.z : maximum.z);
+                minimum.z < maximum.z ? minimum.z : maximum.z
+        );
         max.set(minimum.x > maximum.x ? minimum.x : maximum.x, minimum.y > maximum.y ? minimum.y : maximum.y,
-                minimum.z > maximum.z ? minimum.z : maximum.z);
+                minimum.z > maximum.z ? minimum.z : maximum.z
+        );
         update();
         return this;
     }
@@ -233,8 +232,10 @@ public class BoundingBox implements Serializable {
      * @return This bounding box for chaining.
      */
     public BoundingBox ext(Vector3 point) {
-        return this.set(min.set(min(min.x, point.x), min(min.y, point.y), min(min.z, point.z)),
-                max.set(Math.max(max.x, point.x), Math.max(max.y, point.y), Math.max(max.z, point.z)));
+        return this.set(
+                min.set(min(min.x, point.x), min(min.y, point.y), min(min.z, point.z)),
+                max.set(Math.max(max.x, point.x), Math.max(max.y, point.y), Math.max(max.z, point.z))
+        );
     }
 
     /**
@@ -262,8 +263,10 @@ public class BoundingBox implements Serializable {
      * @return This bounding box for chaining.
      */
     public BoundingBox ext(BoundingBox a_bounds) {
-        return this.set(min.set(min(min.x, a_bounds.min.x), min(min.y, a_bounds.min.y), min(min.z, a_bounds.min.z)),
-                max.set(max(max.x, a_bounds.max.x), max(max.y, a_bounds.max.y), max(max.z, a_bounds.max.z)));
+        return this.set(
+                min.set(min(min.x, a_bounds.min.x), min(min.y, a_bounds.min.y), min(min.z, a_bounds.min.z)),
+                max.set(max(max.x, a_bounds.max.x), max(max.y, a_bounds.max.y), max(max.z, a_bounds.max.z))
+        );
     }
 
     /**
@@ -274,8 +277,10 @@ public class BoundingBox implements Serializable {
      * @return This bounding box for chaining.
      */
     public BoundingBox ext(Vector3 center, float radius) {
-        return this.set(min.set(min(min.x, center.x - radius), min(min.y, center.y - radius), min(min.z, center.z - radius)),
-                max.set(max(max.x, center.x + radius), max(max.y, center.y + radius), max(max.z, center.z + radius)));
+        return this.set(
+                min.set(min(min.x, center.x - radius), min(min.y, center.y - radius), min(min.z, center.z - radius)),
+                max.set(max(max.x, center.x + radius), max(max.y, center.y + radius), max(max.z, center.z + radius))
+        );
     }
 
     /**

@@ -1,19 +1,3 @@
-/*******************************************************************************
- * Copyright 2020 See AUTHORS file.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- ******************************************************************************/
-
 package com.badlogic.gdx.math;
 
 import com.badlogic.gdx.math.collision.BoundingBox;
@@ -63,6 +47,9 @@ import com.badlogic.gdx.utils.Pool;
  * 	modelBatch.render(gameObject);
  * }
  * </pre>
+ * <p>
+ * Octree is a data structure, commonly used for spatial partitioning in 3D applications like games and simulations.
+ * It efficiently organizes objects within a 3D space, allowing for fast queries like collision detection and frustum culling.
  */
 public class Octree<T> {
 
@@ -80,9 +67,11 @@ public class Octree<T> {
     public Octree(Vector3 minimum, Vector3 maximum, int maxDepth, int maxItemsPerNode, Collider<T> collider) {
         super();
         Vector3 realMin = new Vector3(Math.min(minimum.x, maximum.x), Math.min(minimum.y, maximum.y),
-                Math.min(minimum.z, maximum.z));
+                Math.min(minimum.z, maximum.z)
+        );
         Vector3 realMax = new Vector3(Math.max(minimum.x, maximum.x), Math.max(minimum.y, maximum.y),
-                Math.max(minimum.z, maximum.z));
+                Math.max(minimum.z, maximum.z)
+        );
 
         this.root = createNode(realMin, realMax, maxDepth);
         this.collider = collider;
@@ -113,7 +102,6 @@ public class Octree<T> {
     /**
      * Method to retrieve all the geometries.
      *
-     * @param resultSet
      * @return the result set
      */
     public ObjectSet<T> getAll(ObjectSet<T> resultSet) {
@@ -151,8 +139,6 @@ public class Octree<T> {
 
     /**
      * Method to get nodes as bounding boxes. Useful for debug purpose.
-     *
-     * @param boxes
      */
     public ObjectSet<BoundingBox> getNodesBoxes(ObjectSet<BoundingBox> boxes) {
         root.getBoundingBox(boxes);
@@ -218,21 +204,29 @@ public class Octree<T> {
             leaf = false;
             if (children == null) children = new Octree.OctreeNode[8];
             children[0] = createNode(new Vector3(bounds.min.x, midy, midz), new Vector3(midx, bounds.max.y, bounds.max.z),
-                    deeperLevel);
+                    deeperLevel
+            );
             children[1] = createNode(new Vector3(midx, midy, midz), new Vector3(bounds.max.x, bounds.max.y, bounds.max.z),
-                    deeperLevel);
+                    deeperLevel
+            );
             children[2] = createNode(new Vector3(midx, midy, bounds.min.z), new Vector3(bounds.max.x, bounds.max.y, midz),
-                    deeperLevel);
+                    deeperLevel
+            );
             children[3] = createNode(new Vector3(bounds.min.x, midy, bounds.min.z), new Vector3(midx, bounds.max.y, midz),
-                    deeperLevel);
+                    deeperLevel
+            );
             children[4] = createNode(new Vector3(bounds.min.x, bounds.min.y, midz), new Vector3(midx, midy, bounds.max.z),
-                    deeperLevel);
+                    deeperLevel
+            );
             children[5] = createNode(new Vector3(midx, bounds.min.y, midz), new Vector3(bounds.max.x, midy, bounds.max.z),
-                    deeperLevel);
+                    deeperLevel
+            );
             children[6] = createNode(new Vector3(midx, bounds.min.y, bounds.min.z), new Vector3(bounds.max.x, midy, midz),
-                    deeperLevel);
+                    deeperLevel
+            );
             children[7] = createNode(new Vector3(bounds.min.x, bounds.min.y, bounds.min.z), new Vector3(midx, midy, midz),
-                    deeperLevel);
+                    deeperLevel
+            );
 
             // Move geometries from parent to children
             for (Octree.OctreeNode child : children) {
@@ -308,6 +302,9 @@ public class Octree<T> {
             return geometries.removeValue(object, true);
         }
 
+        /**
+         * @return whether this node in our Octree is a leaf node or not.
+         */
         protected boolean isLeaf() {
             return leaf;
         }
