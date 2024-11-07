@@ -33,8 +33,6 @@ import java.nio.FloatBuffer;
  * hardware rendering were to be used for occlusion culling queries.
  * <p>
  * Based on the algorithm from the Bullet CDTestFramework, BulletSAPCompleteBoxPruningTest.cpp, written by Erwin Coumans.
- *
- * @author jsjolund
  */
 public class OcclusionBuffer implements Disposable {
 

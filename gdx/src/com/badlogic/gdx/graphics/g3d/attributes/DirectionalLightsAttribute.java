@@ -10,7 +10,6 @@ import com.badlogic.gdx.utils.Array;
  * The lights are stored by reference, the {@link #copy()} or {@link #DirectionalLightsAttribute(DirectionalLightsAttribute)}
  * method will not create new lights.
  *
- * @author Xoppa
  */
 public class DirectionalLightsAttribute extends Attribute {
     public final static String Alias = "directionalLights";

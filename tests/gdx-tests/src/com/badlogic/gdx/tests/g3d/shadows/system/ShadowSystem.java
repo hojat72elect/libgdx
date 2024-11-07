@@ -59,7 +59,7 @@ import com.badlogic.gdx.graphics.g3d.utils.ShaderProvider;
  * If you have two different environments, when you switch, you should add and remove all lights in shadow system.
  * </p>
  *
- * @author realitix
+ * 
  */
 public interface ShadowSystem {
 

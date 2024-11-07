@@ -14,8 +14,6 @@ import com.badlogic.gdx.graphics.glutils.FileTextureArrayData;
  * </p>
  * <p>
  * Look at {@link FileTextureArrayData} for example implementation of this interface.
- *
- * @author Tomski
  */
 public interface TextureArrayData {
 
@@ -69,8 +67,6 @@ public interface TextureArrayData {
 
     /**
      * Provides static method to instantiate the right implementation.
-     *
-     * @author Tomski
      */
     public static class Factory {
 

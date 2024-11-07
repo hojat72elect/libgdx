@@ -10,7 +10,6 @@ import com.badlogic.gdx.utils.Array;
  * lights are stored by reference, the {@link #copy()} or {@link #SpotLightsAttribute(SpotLightsAttribute)} method will not create
  * new lights.
  *
- * @author Xoppa
  */
 public class SpotLightsAttribute extends Attribute {
     public final static String Alias = "spotLights";

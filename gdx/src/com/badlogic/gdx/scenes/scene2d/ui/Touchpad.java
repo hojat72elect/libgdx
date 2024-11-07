@@ -21,8 +21,6 @@ import com.badlogic.gdx.utils.Pools;
  * <p>
  * {@link ChangeEvent} is fired when the touchpad knob is moved. Cancelling the event will move the knob to where it was
  * previously.
- *
- * @author Josh Street
  */
 public class Touchpad extends Widget {
     private final Circle knobBounds = new Circle(0, 0, 0);
@@ -231,8 +229,6 @@ public class Touchpad extends Widget {
 
     /**
      * The style for a {@link Touchpad}.
-     *
-     * @author Josh Street
      */
     public static class TouchpadStyle {
         /**

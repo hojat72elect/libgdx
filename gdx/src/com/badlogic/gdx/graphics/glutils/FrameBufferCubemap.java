@@ -43,7 +43,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * Cubemap cubemap = frameBuffer.getColorBufferCubemap();
  * </p>
  *
- * @author realitix
+ * 
  */
 public class FrameBufferCubemap extends GLFrameBuffer<Cubemap> {
 

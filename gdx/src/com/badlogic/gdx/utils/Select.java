@@ -13,9 +13,6 @@ import java.util.Comparator;
  * <p>
  * This class uses very minimal extra memory, as it makes no copies of the array. The underlying algorithms used are a naive
  * single-pass for k=min and k=max, and Hoare's quickselect for values in between.
- * </p>
- *
- * @author Jon Renner
  */
 public class Select {
     private static Select instance;

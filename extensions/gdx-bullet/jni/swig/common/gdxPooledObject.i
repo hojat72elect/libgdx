@@ -1,6 +1,6 @@
 /** Creates a pool for the type and sets SWIG to use the pool instead of creating a new java object every time.
  * TODO: Add better pointer support
- * @author Xoppa */
+ **/
 %define CREATE_POOLED_OBJECT_EXT(CTYPE, JTYPE, _JCLASS)
 
 // Add pooling to the java class

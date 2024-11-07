@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.ShortArray;
 /**
  * Helper class with static methods to build sphere shapes using {@link MeshPartBuilder}.
  *
- * @author xoppa
+ * 
  */
 public class SphereShapeBuilder extends BaseShapeBuilder {
     private final static ShortArray tmpIndices = new ShortArray();

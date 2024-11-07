@@ -14,8 +14,6 @@ import java.nio.FloatBuffer;
 /**
  * Modification of the {@link VertexBufferObjectSubData} class. Sets the glVertexAttribDivisor for every {@link VertexAttribute}
  * automatically.
- *
- * @author mrdlink
  */
 public class InstanceBufferObjectSubData implements InstanceData {
 

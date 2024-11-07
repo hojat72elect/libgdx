@@ -7,8 +7,6 @@ import java.io.OutputStream;
 
 /**
  * Builder style API for emitting UBJSON.
- *
- * @author Justin Shapcott
  */
 public class UBJsonWriter implements Closeable {
 

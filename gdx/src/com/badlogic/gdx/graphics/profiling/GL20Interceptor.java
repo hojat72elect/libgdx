@@ -22,9 +22,7 @@ import java.nio.IntBuffer;
 
 import com.badlogic.gdx.graphics.GL20;
 
-/**
- * @author Jan Polák
- */
+
 public class GL20Interceptor extends GLInterceptor implements GL20 {
 
     protected final GL20 gl20;

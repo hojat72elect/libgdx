@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * Class that you assign a range of texture units and binds textures for you within that range. It does some basic usage tracking
  * to avoid unnecessary bind calls.
  *
- * @author xoppa
+ * 
  */
 public final class DefaultTextureBinder implements TextureBinder {
     public final static int ROUNDROBIN = 0;

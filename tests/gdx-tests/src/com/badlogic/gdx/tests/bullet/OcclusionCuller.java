@@ -36,8 +36,6 @@ import java.nio.FloatBuffer;
  * <p>
  * k-DOP culling determines which objects are inside a camera frustum. The process is accelerated by the dynamic bounding volume
  * tree.
- *
- * @author jsjolund
  */
 public abstract class OcclusionCuller implements Disposable {
 

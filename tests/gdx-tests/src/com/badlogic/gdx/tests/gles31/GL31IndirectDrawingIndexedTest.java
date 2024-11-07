@@ -39,7 +39,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
  * Example of indirect commands. Note that commands could be defined directly in GPU via a comput shader. Also note that multi
  * draw (glMultiDrawElementsIndirect) requires an extension to GLES 3.1
  *
- * @author mgsx
  */
 @GdxTestConfig(requireGL31 = true)
 public class GL31IndirectDrawingIndexedTest extends GdxTest {

@@ -37,13 +37,14 @@ import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.tests.utils.GdxTestConfig;
-import com.badlogic.gdx.utils.*;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.utils.Pool;
+import com.badlogic.gdx.utils.ScreenUtils;
 
 /**
- * MRT test compliant with GLES 3.0, with per pixel lighting and normal and specular mapping. Thanks to
- * http://www.blendswap.com/blends/view/73922 for the cannon model, licensed under CC-BY-SA
- * <p>
- * /** @author Tomski
+ * MRT test compliant with GLES 3.0, with per pixel lighting and normal and specular mapping. The cannon model was downloaded from
+ * <a href="http://www.blendswap.com/blends/view/73922">here</a>.
  */
 @GdxTestConfig(requireGL30 = true)
 public class MultipleRenderTargetTest extends GdxTest {
@@ -101,8 +102,10 @@ public class MultipleRenderTargetTest extends GdxTest {
 
         };
 
-        mrtSceneShader = new ShaderProgram(Gdx.files.internal("data/g3d/shaders/mrtscene.vert"),
-                Gdx.files.internal("data/g3d/shaders/mrtscene.frag"));
+        mrtSceneShader = new ShaderProgram(
+                Gdx.files.internal("data/g3d/shaders/mrtscene.vert"),
+                Gdx.files.internal("data/g3d/shaders/mrtscene.frag")
+        );
         if (!mrtSceneShader.isCompiled()) {
             System.out.println(mrtSceneShader.getLog());
         }
@@ -120,8 +123,10 @@ public class MultipleRenderTargetTest extends GdxTest {
         cameraController.setVelocity(50);
         Gdx.input.setInputProcessor(cameraController);
 
-        GLFrameBuffer.FrameBufferBuilder frameBufferBuilder = new GLFrameBuffer.FrameBufferBuilder(Gdx.graphics.getWidth(),
-                Gdx.graphics.getHeight());
+        GLFrameBuffer.FrameBufferBuilder frameBufferBuilder = new GLFrameBuffer.FrameBufferBuilder(
+                Gdx.graphics.getWidth(),
+                Gdx.graphics.getHeight()
+        );
         frameBufferBuilder.addColorTextureAttachment(GL30.GL_RGBA8, GL30.GL_RGBA, GL30.GL_UNSIGNED_BYTE);
         frameBufferBuilder.addColorTextureAttachment(GL30.GL_RGB8, GL30.GL_RGB, GL30.GL_UNSIGNED_BYTE);
         frameBufferBuilder.addColorTextureAttachment(GL30.GL_RGB8, GL30.GL_RGB, GL30.GL_UNSIGNED_BYTE);
@@ -151,7 +156,8 @@ public class MultipleRenderTargetTest extends GdxTest {
             light.vz = MathUtils.random(-10f, 10f);
 
             MeshPartBuilder meshPartBuilder = modelBuilder.part("light", GL20.GL_TRIANGLES,
-                    VertexAttributes.Usage.Position | VertexAttributes.Usage.ColorPacked | VertexAttributes.Usage.Normal, new Material());
+                    VertexAttributes.Usage.Position | VertexAttributes.Usage.ColorPacked | VertexAttributes.Usage.Normal, new Material()
+            );
             meshPartBuilder.setColor(light.color.x, light.color.y, light.color.z, 1f);
             meshPartBuilder.sphere(0.2f, 0.2f, 0.2f, 10, 10);
 
@@ -161,7 +167,8 @@ public class MultipleRenderTargetTest extends GdxTest {
 
         modelBuilder.begin();
         MeshPartBuilder meshPartBuilder = modelBuilder.part("floor", GL20.GL_TRIANGLES,
-                VertexAttributes.Usage.Position | VertexAttributes.Usage.ColorPacked | VertexAttributes.Usage.Normal, new Material());
+                VertexAttributes.Usage.Position | VertexAttributes.Usage.ColorPacked | VertexAttributes.Usage.Normal, new Material()
+        );
         meshPartBuilder.setColor(0.2f, 0.2f, 0.2f, 1f);
         meshPartBuilder.box(0, -0.1f, 0f, 20f, 0.1f, 20f);
         floorInstance = new ModelInstance(modelBuilder.end());
@@ -227,14 +234,22 @@ public class MultipleRenderTargetTest extends GdxTest {
         frameBuffer.end();
 
         mrtSceneShader.bind();
-        mrtSceneShader.setUniformi("u_diffuseTexture",
-                renderContext.textureBinder.bind(frameBuffer.getTextureAttachments().get(DIFFUSE_ATTACHMENT)));
-        mrtSceneShader.setUniformi("u_normalTexture",
-                renderContext.textureBinder.bind(frameBuffer.getTextureAttachments().get(NORMAL_ATTACHMENT)));
-        mrtSceneShader.setUniformi("u_positionTexture",
-                renderContext.textureBinder.bind(frameBuffer.getTextureAttachments().get(POSITION_ATTACHMENT)));
-        mrtSceneShader.setUniformi("u_depthTexture",
-                renderContext.textureBinder.bind(frameBuffer.getTextureAttachments().get(DEPTH_ATTACHMENT)));
+        mrtSceneShader.setUniformi(
+                "u_diffuseTexture",
+                renderContext.textureBinder.bind(frameBuffer.getTextureAttachments().get(DIFFUSE_ATTACHMENT))
+        );
+        mrtSceneShader.setUniformi(
+                "u_normalTexture",
+                renderContext.textureBinder.bind(frameBuffer.getTextureAttachments().get(NORMAL_ATTACHMENT))
+        );
+        mrtSceneShader.setUniformi(
+                "u_positionTexture",
+                renderContext.textureBinder.bind(frameBuffer.getTextureAttachments().get(POSITION_ATTACHMENT))
+        );
+        mrtSceneShader.setUniformi(
+                "u_depthTexture",
+                renderContext.textureBinder.bind(frameBuffer.getTextureAttachments().get(DEPTH_ATTACHMENT))
+        );
         for (int i = 0; i < lights.size; i++) {
             Light light = lights.get(i);
             mrtSceneShader.setUniformf("lights[" + i + "].lightPosition", light.position);
@@ -248,13 +263,17 @@ public class MultipleRenderTargetTest extends GdxTest {
         batch.disableBlending();
         batch.begin();
         batch.draw(frameBuffer.getTextureAttachments().get(DIFFUSE_ATTACHMENT), 0, 0, Gdx.graphics.getWidth() / 4f,
-                Gdx.graphics.getHeight() / 4f, 0f, 0f, 1f, 1f);
+                Gdx.graphics.getHeight() / 4f, 0f, 0f, 1f, 1f
+        );
         batch.draw(frameBuffer.getTextureAttachments().get(NORMAL_ATTACHMENT), Gdx.graphics.getWidth() / 4f, 0,
-                Gdx.graphics.getWidth() / 4f, Gdx.graphics.getHeight() / 4f, 0f, 0f, 1f, 1f);
+                Gdx.graphics.getWidth() / 4f, Gdx.graphics.getHeight() / 4f, 0f, 0f, 1f, 1f
+        );
         batch.draw(frameBuffer.getTextureAttachments().get(POSITION_ATTACHMENT), 2 * Gdx.graphics.getWidth() / 4f, 0,
-                Gdx.graphics.getWidth() / 4f, Gdx.graphics.getHeight() / 4f, 0f, 0f, 1f, 1f);
+                Gdx.graphics.getWidth() / 4f, Gdx.graphics.getHeight() / 4f, 0f, 0f, 1f, 1f
+        );
         batch.draw(frameBuffer.getTextureAttachments().get(DEPTH_ATTACHMENT), 3 * Gdx.graphics.getWidth() / 4f, 0,
-                Gdx.graphics.getWidth() / 4f, Gdx.graphics.getHeight() / 4f, 0f, 0f, 1f, 1f);
+                Gdx.graphics.getWidth() / 4f, Gdx.graphics.getHeight() / 4f, 0f, 0f, 1f, 1f
+        );
         batch.end();
     }
 
@@ -301,7 +320,8 @@ public class MultipleRenderTargetTest extends GdxTest {
         verts[i++] = 1f;
 
         Mesh mesh = new Mesh(true, 4, 0, new VertexAttribute(VertexAttributes.Usage.Position, 3, ShaderProgram.POSITION_ATTRIBUTE),
-                new VertexAttribute(VertexAttributes.Usage.TextureCoordinates, 2, ShaderProgram.TEXCOORD_ATTRIBUTE + "0"));
+                new VertexAttribute(VertexAttributes.Usage.TextureCoordinates, 2, ShaderProgram.TEXCOORD_ATTRIBUTE + "0")
+        );
 
         mesh.setVertices(verts);
         return mesh;

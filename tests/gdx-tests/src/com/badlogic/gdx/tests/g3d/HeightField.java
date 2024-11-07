@@ -64,7 +64,6 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * of the constructor. This will cause the number of vertices to be around four times the amount grid points and each normal is
  * estimated for each face instead of each point.
  *
- * @author Xoppa
  */
 public class HeightField implements Disposable {
     public final Vector2 uvOffset = new Vector2(0, 0);

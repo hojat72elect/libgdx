@@ -30,7 +30,6 @@ import com.badlogic.gdx.utils.BufferUtils;
 /**
  * see https://www.khronos.org/opengl/wiki/Program_Introspection#Interface_query
  *
- * @author mgsx
  */
 @GdxTestConfig(requireGL31 = true)
 public class GL31ProgramIntrospectionTest extends GdxTest {

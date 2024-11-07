@@ -12,7 +12,6 @@ import com.badlogic.gdx.physics.box2d.RayCastCallback;
 import com.badlogic.gdx.physics.box2d.World;
 
 /**
- * @author kalle_h
  * <p>
  * ParticleEmitterBox2D use box2d rayCast:ing to achieve continuous collision detection against box2d fixtures. If
  * particle detect collision it change it's direction before actual collision would occur. Velocity is 100% reflected.

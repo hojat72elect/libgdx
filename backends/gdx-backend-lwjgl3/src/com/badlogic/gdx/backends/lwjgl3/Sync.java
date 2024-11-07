@@ -36,9 +36,6 @@ import static org.lwjgl.glfw.GLFW.glfwGetTime;
 
 /**
  * A highly accurate sync method that continually adapts to the system it runs on to provide reliable results.
- *
- * @author Riven
- * @author kappaOne
  */
 class Sync {
 

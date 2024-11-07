@@ -8,11 +8,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.bullet.collision.*;
 
-/**
- * Based on FrustumCullingTest by Xoppa.
- *
- * @author jsjolund
- */
+
 public class PairCacheTest extends BaseBulletTest {
 
     final static float BOX_X_MIN = -25;

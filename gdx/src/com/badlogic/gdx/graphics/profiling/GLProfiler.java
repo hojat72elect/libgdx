@@ -11,7 +11,6 @@ import com.badlogic.gdx.math.FloatCounter;
  * When enabled, collects statistics about GL calls and checks for GL errors. Enabling will wrap Gdx.gl* instances with delegate
  * classes which provide described functionality and route GL calls to the actual GL instances.
  *
- * @author Jan Polák
  * @see GL20Interceptor
  * @see GL30Interceptor
  */

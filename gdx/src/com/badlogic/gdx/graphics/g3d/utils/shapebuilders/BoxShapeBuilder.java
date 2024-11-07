@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 /**
  * Helper class with static methods to build box shapes using {@link MeshPartBuilder}.
  *
- * @author realitix, xoppa
+ * , xoppa
  */
 public class BoxShapeBuilder extends BaseShapeBuilder {
 

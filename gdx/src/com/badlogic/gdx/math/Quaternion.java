@@ -8,7 +8,7 @@ import java.io.Serializable;
  * A simple quaternion class.
  *
  * @author vesuvio
- * @author xoppa
+ * 
  * @see <a href="http://en.wikipedia.org/wiki/Quaternion">http://en.wikipedia.org/wiki/Quaternion</a>
  */
 public class Quaternion implements Serializable {

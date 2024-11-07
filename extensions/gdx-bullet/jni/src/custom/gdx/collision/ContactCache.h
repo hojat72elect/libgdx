@@ -1,5 +1,3 @@
-
-
 #ifdef _MSC_VER
 #pragma once
 #endif
@@ -14,7 +12,7 @@
 struct ContactPair;
 #endif //SWIG
 
-/** @author Xoppa */
+
 class ContactCache {
 protected:
 #ifndef SWIG

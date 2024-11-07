@@ -19,11 +19,6 @@ import com.badlogic.gdx.utils.ShortArray;
  * If the polygon vertices are very large or very close together then {@link GeometryUtils#isClockwise(float[], int, int)} may not
  * be able to properly assess the winding (because it uses floats). In that case the vertices should be adjusted, eg by finding
  * the smallest X and Y values and subtracting that from each vertex.
- *
- * @author Nicolas Gramlich (optimizations, collinear edge support)
- * @author Eric Spitz
- * @author Thomas ten Cate (bugfixes, optimizations)
- * (rewrite, return indices, no allocation, optimizations)
  */
 public class EarClippingTriangulator {
     static private final int CONCAVE = -1;
@@ -129,7 +124,8 @@ public class EarClippingTriangulator {
         int next = indices[nextIndex(index)] * 2;
         float[] vertices = this.vertices;
         return computeSpannedAreaSign(vertices[previous], vertices[previous + 1], vertices[current], vertices[current + 1],
-                vertices[next], vertices[next + 1]);
+                vertices[next], vertices[next + 1]
+        );
     }
 
     private int findEarTip() {

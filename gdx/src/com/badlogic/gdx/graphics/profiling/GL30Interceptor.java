@@ -24,9 +24,7 @@ import java.nio.LongBuffer;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
 
-/**
- * @author Jan Polák
- */
+
 public class GL30Interceptor extends GLInterceptor implements GL30 {
 
     protected final GL30 gl30;

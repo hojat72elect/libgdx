@@ -15,7 +15,7 @@ import com.badlogic.gdx.tests.g3d.shadows.utils.ShadowMapAllocator;
  * The Realistic shadow system creates real shadows. Indeed, with this system, a shadow is the absence of light. This system
  * performs only one render pass for each light and then render the scene.
  *
- * @author realitix
+ * 
  */
 public class RealisticShadowSystem extends FirstPassBaseShadowSystem {
 

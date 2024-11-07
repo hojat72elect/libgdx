@@ -22,7 +22,7 @@ import static com.badlogic.gdx.utils.ObjectSet.tableSize;
  * "https://probablydance.com/2018/06/16/fibonacci-hashing-the-optimization-that-the-world-forgot-or-a-better-alternative-to-integer-modulo/">Malte
  * Skarupke's blog post</a>). Linear probing continues to work even when all hashCodes collide, just more slowly.
  *
- * @author Tommy Ettinger
+ * 
  */
 public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
     static final Object dummy = new Object();

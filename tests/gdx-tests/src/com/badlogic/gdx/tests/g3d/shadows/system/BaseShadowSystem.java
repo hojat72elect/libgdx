@@ -35,7 +35,7 @@ import com.badlogic.gdx.utils.ObjectMap.Entries;
 /**
  * BaseShadowSystem allows to easily create custom shadow system.
  *
- * @author realitix
+ * 
  */
 public abstract class BaseShadowSystem implements ShadowSystem, Disposable {
     /**
@@ -467,7 +467,7 @@ public abstract class BaseShadowSystem implements ShadowSystem, Disposable {
     /**
      * This class handles camera and texture region.
      *
-     * @author realitix
+     * 
      */
     public static class LightProperties {
         public Camera camera;
@@ -481,7 +481,7 @@ public abstract class BaseShadowSystem implements ShadowSystem, Disposable {
     /**
      * This class handles LightProperties for each side of PointLight.
      *
-     * @author realitix
+     * 
      */
     public static class PointLightProperties {
         public ObjectMap<CubemapSide, LightProperties> properties = new ObjectMap<CubemapSide, LightProperties>(6);

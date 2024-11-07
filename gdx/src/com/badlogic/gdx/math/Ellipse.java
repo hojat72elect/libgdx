@@ -5,9 +5,7 @@ import com.badlogic.gdx.utils.NumberUtils;
 import java.io.Serializable;
 
 /**
- * A convenient 2D ellipse class, based on the circle class
- *
- * @author tonyp7
+ * A convenient 2D ellipse class, based on the circle class.
  */
 public class Ellipse implements Serializable, Shape2D {
 

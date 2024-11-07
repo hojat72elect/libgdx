@@ -18,9 +18,7 @@ import com.badlogic.gdx.physics.bullet.collision.btTriangleRaycastCallback;
 import com.badlogic.gdx.physics.bullet.collision.btTriangleRaycastCallback.EFlags;
 import com.badlogic.gdx.physics.bullet.linearmath.btVector3;
 
-/**
- * @author jsjolund
- */
+
 public class TriangleRaycastTest extends BaseBulletTest {
 
     private Model model;

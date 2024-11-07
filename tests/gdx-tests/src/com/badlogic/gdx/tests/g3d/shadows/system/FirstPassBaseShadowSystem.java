@@ -11,8 +11,6 @@ import com.badlogic.gdx.tests.g3d.shadows.utils.ShadowMapAllocator;
 
 /**
  * FirstPassBaseShadowSystem assumes that the first pass renders all depth map in one texture.
- *
- * @author realitix
  */
 public abstract class FirstPassBaseShadowSystem extends BaseShadowSystem {
 
@@ -42,8 +40,6 @@ public abstract class FirstPassBaseShadowSystem extends BaseShadowSystem {
         if (n == FIRST_PASS) beginPass1();
     }
 
-    ;
-
     protected void beginPass1() {
         allocator.begin();
         Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -56,8 +52,6 @@ public abstract class FirstPassBaseShadowSystem extends BaseShadowSystem {
         super.endPass(n);
         if (n == FIRST_PASS) endPass1();
     }
-
-    ;
 
     protected void endPass1() {
         allocator.end();

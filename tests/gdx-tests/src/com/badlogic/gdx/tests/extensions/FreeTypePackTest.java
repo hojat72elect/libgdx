@@ -21,8 +21,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
  * <p>
  * This example uses enum ordinals for fast access to a two-dimensional array, which stores BitmapFonts by size and style. A more
  * flexible solution might be to use an OjectMap and and IntMap instead.
- *
- * @author mattdesl AKA davedes
  */
 public class FreeTypePackTest extends GdxTest {
 

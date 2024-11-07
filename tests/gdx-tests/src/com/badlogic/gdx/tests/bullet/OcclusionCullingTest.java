@@ -48,9 +48,6 @@ import com.badlogic.gdx.physics.bullet.dynamics.btSequentialImpulseConstraintSol
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.StringBuilder;
 
-/**
- * @author jsjolund
- */
 public class OcclusionCullingTest extends BaseBulletTest {
 
     /**

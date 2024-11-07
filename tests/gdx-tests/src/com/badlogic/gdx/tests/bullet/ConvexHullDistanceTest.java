@@ -21,7 +21,7 @@ import com.badlogic.gdx.physics.bullet.collision.btManifoldPoint;
 import com.badlogic.gdx.physics.bullet.collision.btShapeHull;
 
 /**
- * @author xoppa, didum
+ * , didum
  */
 public class ConvexHullDistanceTest extends BaseBulletTest {
     private ConvexHullDistance distance;

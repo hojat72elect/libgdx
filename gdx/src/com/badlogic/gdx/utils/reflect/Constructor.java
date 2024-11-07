@@ -4,8 +4,6 @@ import java.lang.reflect.InvocationTargetException;
 
 /**
  * Provides information about, and access to, a single constructor for a Class.
- *
- * @author nexsoftware
  */
 public final class Constructor {
 

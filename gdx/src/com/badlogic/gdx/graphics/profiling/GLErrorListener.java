@@ -24,7 +24,6 @@ import static com.badlogic.gdx.graphics.profiling.GLInterceptor.resolveErrorNumb
 /**
  * Listener for GL errors detected by {@link GLProfiler}.
  *
- * @author Jan Polák
  * @see GLProfiler
  */
 public interface GLErrorListener {

@@ -24,7 +24,7 @@ import com.badlogic.gdx.utils.Pool;
  * <p>
  * To provide multiple {@link Renderable}s at once a {@link RenderableProvider} can be used, e.g. a {@link ModelInstance}.
  *
- * @author xoppa, badlogic
+ * , badlogic
  */
 public class ModelBatch implements Disposable {
     protected final RenderablePool renderablesPool = new RenderablePool();

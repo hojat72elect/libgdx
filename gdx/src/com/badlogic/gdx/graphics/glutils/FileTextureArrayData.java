@@ -8,9 +8,6 @@ import com.badlogic.gdx.graphics.TextureArrayData;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-/**
- * @author Tomski
- **/
 public class FileTextureArrayData implements TextureArrayData {
 
     boolean useMipMaps;

@@ -18,7 +18,6 @@ import com.badlogic.gdx.utils.Pool;
  * You can use multiple AnimationControllers on the same ModelInstance, as long as they don't interfere with each other (don't
  * affect the same {@link Node}s).
  *
- * @author Xoppa
  */
 public class AnimationController extends BaseAnimationController {
 

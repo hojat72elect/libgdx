@@ -1,12 +1,9 @@
-
-
 #ifndef CollisionObjectWrapper_H
 #define CollisionObjectWrapper_H
 
 #include "../../../bullet/BulletCollision/CollisionDispatch/btCollisionObject.h"
 #include "../../../bullet/BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h"
 
-/** @author Xoppa */
 class CollisionObjectWrapper {
 	btCollisionObjectWrapper wrapper;
 

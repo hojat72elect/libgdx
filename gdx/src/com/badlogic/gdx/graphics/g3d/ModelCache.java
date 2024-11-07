@@ -21,7 +21,6 @@ import com.badlogic.gdx.utils.Pool;
  * directly transformed, therefore the resulting {@link Renderable#worldTransform} might not be suitable for sorting anymore (such
  * as the default sorter of ModelBatch does).
  *
- * @author Xoppa
  */
 public class ModelCache implements Disposable, RenderableProvider {
     private Array<Renderable> renderables = new Array<Renderable>();

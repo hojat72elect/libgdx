@@ -10,9 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Open GLES wrapper for TextureArray
- *
- * @author Tomski
+ * Open GLES wrapper for TextureArray.
  */
 public class TextureArray extends GLTexture {
 

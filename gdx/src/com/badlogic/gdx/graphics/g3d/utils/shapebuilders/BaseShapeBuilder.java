@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.FlushablePool;
  * This class allows to reduce the static allocation needed for shape builders. It contains all the objects used internally by
  * shape builders.
  *
- * @author realitix, xoppa
+ * , xoppa
  */
 public class BaseShapeBuilder {
     /* Color */

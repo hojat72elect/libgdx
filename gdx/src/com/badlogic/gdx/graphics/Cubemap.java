@@ -19,11 +19,9 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 /**
  * Wraps a standard OpenGL ES Cubemap. Must be disposed when it is no longer used.
- *
- * @author Xoppa
  */
 public class Cubemap extends GLTexture {
-    final static Map<Application, Array<Cubemap>> managedCubemaps = new HashMap<Application, Array<Cubemap>>();
+    final static Map<Application, Array<Cubemap>> managedCubemaps = new HashMap<>();
     private static AssetManager assetManager;
     protected CubemapData data;
 
@@ -97,7 +95,7 @@ public class Cubemap extends GLTexture {
 
     private static void addManagedCubemap(Application app, Cubemap cubemap) {
         Array<Cubemap> managedCubemapArray = managedCubemaps.get(app);
-        if (managedCubemapArray == null) managedCubemapArray = new Array<Cubemap>();
+        if (managedCubemapArray == null) managedCubemapArray = new Array<>();
         managedCubemapArray.add(cubemap);
         managedCubemaps.put(app, managedCubemapArray);
     }
@@ -129,7 +127,7 @@ public class Cubemap extends GLTexture {
 
             // next we go through each cubemap and reload either directly or via the
             // asset manager.
-            Array<Cubemap> cubemaps = new Array<Cubemap>(managedCubemapArray);
+            Array<Cubemap> cubemaps = new Array<>(managedCubemapArray);
             for (Cubemap cubemap : cubemaps) {
                 String fileName = assetManager.getAssetFileName(cubemap);
                 if (fileName == null) {

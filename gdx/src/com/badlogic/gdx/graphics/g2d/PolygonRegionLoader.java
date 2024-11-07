@@ -19,8 +19,6 @@ import com.badlogic.gdx.utils.StreamUtils;
 
 /**
  * loads {@link PolygonRegion PolygonRegions} using a {@link com.badlogic.gdx.graphics.g2d.PolygonRegionLoader}
- *
- * @author dermetfan
  */
 public class PolygonRegionLoader extends SynchronousAssetLoader<PolygonRegion, PolygonRegionParameters> {
 

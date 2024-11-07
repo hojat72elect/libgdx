@@ -11,8 +11,6 @@ import java.io.IOException;
 
 /**
  * Contains extra information that can only be calculated after a Tiled Map's tile set images are loaded.
- *
- * @author David Fraska
  */
 public class TileSetLayout {
 

@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 /**
  * Helper class with static methods to build capsule shapes using {@link MeshPartBuilder}.
  *
- * @author xoppa
+ * 
  */
 public class CapsuleShapeBuilder extends BaseShapeBuilder {
     public static void build(MeshPartBuilder builder, float radius, float height, int divisions) {

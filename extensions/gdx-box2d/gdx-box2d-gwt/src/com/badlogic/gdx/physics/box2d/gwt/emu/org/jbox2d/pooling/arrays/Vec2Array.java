@@ -6,8 +6,6 @@ import java.util.HashMap;
 
 /**
  * not thread safe Vec2[] pool
- *
- * @author dmurph
  */
 public class Vec2Array {
 

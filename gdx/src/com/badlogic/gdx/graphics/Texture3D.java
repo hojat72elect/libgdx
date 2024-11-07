@@ -29,7 +29,6 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 /**
  * Open GLES wrapper for Texture3D
  *
- * @author mgsx
  */
 public class Texture3D extends GLTexture {
 

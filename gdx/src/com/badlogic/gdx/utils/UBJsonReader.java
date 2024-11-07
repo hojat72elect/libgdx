@@ -12,7 +12,6 @@ import com.badlogic.gdx.files.FileHandle;
  * The default behavior is to parse the JSON into a DOM containing {@link JsonValue} objects. Extend this class and override
  * methods to perform event driven parsing. When this is done, the parse methods will return null. <br>
  *
- * @author Xoppa
  */
 public class UBJsonReader implements BaseJsonReader {
     public boolean oldFormat = true;

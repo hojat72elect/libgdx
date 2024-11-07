@@ -10,9 +10,7 @@ import com.badlogic.gdx.utils.PerformanceCounter;
 import java.util.Comparator;
 
 /**
- * For testing and benchmarking of gdx.utils.Select and its associated algorithms/classes
- *
- * @author Jon Renner
+ * For testing and benchmarking of gdx.utils.Select and its associated algorithms/classes.
  */
 public class SelectTest extends GdxTest {
     public static int nextID = 1;

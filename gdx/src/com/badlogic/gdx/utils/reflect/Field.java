@@ -7,8 +7,6 @@ import java.lang.reflect.Type;
 
 /**
  * Provides information about, and access to, a single field of a class or interface.
- *
- * @author nexsoftware
  */
 public final class Field {
 

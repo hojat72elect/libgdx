@@ -51,10 +51,6 @@ import com.badlogic.gdx.utils.StreamUtils;
  * * The texture for a BitmapFont loaded from a file is managed. {@link #dispose()} must be called to free the texture when no
  * longer needed. A BitmapFont loaded using a {@link TextureRegion} is managed if the region's texture is managed. Disposing the
  * BitmapFont disposes the region's texture, which may not be desirable if the texture is still being used elsewhere.
- * <p>
- * The code was originally based on Matthias Mann's TWL BitmapFont class. Thanks for sharing, Matthias! :)
- *
- * @author Matthias Mann
  */
 public class BitmapFont implements Disposable {
     static private final int LOG2_PAGE_SIZE = 9;
