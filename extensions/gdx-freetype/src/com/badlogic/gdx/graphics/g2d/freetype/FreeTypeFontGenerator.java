@@ -783,8 +783,6 @@ public class FreeTypeFontGenerator implements Disposable {
      * into a single Texture atlas. If no packer is specified, the generator will use its own PixmapPacker to pack the glyphs into
      * a power-of-two sized texture, and the resulting {@link FreeTypeBitmapFontData} will have a valid {@link TextureRegion} which
      * can be used to construct a new {@link BitmapFont}.
-     *
-     * @author siondream
      */
     public static class FreeTypeFontParameter {
         /**

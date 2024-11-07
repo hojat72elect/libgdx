@@ -1,17 +1,3 @@
-
-/*
- * Copyright 2010 Mario Zechner (contact@badlogicgames.com), Nathan Sweet (admin@esotericsoftware.com)
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
- * License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
- * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- */
-
 package com.badlogic.gdx.tests;
 
 import com.badlogic.gdx.Gdx;
@@ -89,17 +75,20 @@ public class FrameBufferTest extends GdxTest {
 
         spriteBatch.begin();
         spriteBatch.draw(frameBuffer.getColorBufferTexture(), 0, 0, 256, 256, 0, 0, frameBuffer.getColorBufferTexture().getWidth(),
-                frameBuffer.getColorBufferTexture().getHeight(), false, true);
+                frameBuffer.getColorBufferTexture().getHeight(), false, true
+        );
 
         spriteBatch.draw(stencilFrameBuffer.getColorBufferTexture(), 256, 256, 256, 256, 0, 0,
-                frameBuffer.getColorBufferTexture().getWidth(), frameBuffer.getColorBufferTexture().getHeight(), false, true);
+                frameBuffer.getColorBufferTexture().getWidth(), frameBuffer.getColorBufferTexture().getHeight(), false, true
+        );
         spriteBatch.end();
     }
 
     @Override
     public void create() {
         mesh = new Mesh(true, 3, 0, new VertexAttribute(Usage.Position, 3, "a_Position"),
-                new VertexAttribute(Usage.ColorPacked, 4, "a_Color"), new VertexAttribute(Usage.TextureCoordinates, 2, "a_texCoords"));
+                new VertexAttribute(Usage.ColorPacked, 4, "a_Color"), new VertexAttribute(Usage.TextureCoordinates, 2, "a_texCoords")
+        );
         float c1 = Color.toFloatBits(255, 0, 0, 255);
         float c2 = Color.toFloatBits(255, 0, 0, 255);
         float c3 = Color.toFloatBits(0, 0, 255, 255);
@@ -107,7 +96,8 @@ public class FrameBufferTest extends GdxTest {
         mesh.setVertices(new float[]{-0.5f, -0.5f, 0, c1, 0, 0, 0.5f, -0.5f, 0, c2, 1, 0, 0, 0.5f, 0, c3, 0.5f, 1});
 
         stencilMesh = new Mesh(true, 3, 0, new VertexAttribute(Usage.Position, 3, "a_Position"),
-                new VertexAttribute(Usage.ColorPacked, 4, "a_Color"), new VertexAttribute(Usage.TextureCoordinates, 2, "a_texCoords"));
+                new VertexAttribute(Usage.ColorPacked, 4, "a_Color"), new VertexAttribute(Usage.TextureCoordinates, 2, "a_texCoords")
+        );
         stencilMesh.setVertices(new float[]{-0.5f, 0.5f, 0, c1, 0, 0, 0.5f, 0.5f, 0, c2, 1, 0, 0, -0.5f, 0, c3, 0.5f, 1});
 
         texture = new Texture(Gdx.files.internal("data/badlogic.jpg"));

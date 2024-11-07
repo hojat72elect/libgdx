@@ -12,8 +12,6 @@ import com.badlogic.gdx.utils.Disposable;
 /**
  * It's a set of particles controllers. It can be updated, rendered, transformed which means the changes will be applied on all
  * the particles controllers.
- *
- * @author inferno
  */
 public class ParticleEffect implements Disposable, ResourceData.Configurable {
     private Array<ParticleController> controllers;

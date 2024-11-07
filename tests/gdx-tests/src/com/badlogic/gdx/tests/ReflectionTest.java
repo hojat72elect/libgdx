@@ -15,8 +15,6 @@ import com.badlogic.gdx.utils.reflect.Method;
 
 /**
  * Performs some tests with {@link ClassReflection} and prints the results on the screen.
- *
- * @author hneuer
  */
 public class ReflectionTest extends GdxTest {
     String message = "";

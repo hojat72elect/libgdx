@@ -11,8 +11,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 /**
  * This tests is used to illustrate how backing the Pixmap in GWT with a Canvas can cause problems.
- *
- * @author barkholt
  */
 public class GWTLossyPremultipliedAlphaTest extends GdxTest {
     private SpriteBatch batch;

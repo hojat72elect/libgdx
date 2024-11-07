@@ -15,8 +15,6 @@ import com.badlogic.gdx.utils.Pools;
 /**
  * Caches glyph geometry for a BitmapFont, providing a fast way to render static text. This saves needing to compute the glyph
  * geometry each frame.
- *
- * @author Alexander Dorokhov
  */
 public class BitmapFontCache {
     static private final Color tempColor = new Color(1, 1, 1, 1);

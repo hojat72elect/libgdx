@@ -7,9 +7,7 @@ import com.badlogic.gdx.utils.ShortArray;
 
 /**
  * Renders polygon filled with a repeating TextureRegion with specified density Without causing an additional flush or render
- * call
- *
- * @author Avetis Zakharyan
+ * call.
  */
 public class RepeatablePolygonSprite {
 
@@ -18,9 +16,9 @@ public class RepeatablePolygonSprite {
     private TextureRegion region;
     private float density;
     private boolean dirty = true;
-    private Array<float[]> parts = new Array<float[]>();
-    private Array<float[]> vertices = new Array<float[]>();
-    private Array<short[]> indices = new Array<short[]>();
+    private Array<float[]> parts = new Array<>();
+    private Array<float[]> vertices = new Array<>();
+    private Array<short[]> indices = new Array<>();
     private int cols, rows;
     private float gridWidth, gridHeight;
     private Color color = Color.WHITE;

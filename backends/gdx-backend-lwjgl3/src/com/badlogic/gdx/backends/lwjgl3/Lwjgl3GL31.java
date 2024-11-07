@@ -1,28 +1,17 @@
-/*******************************************************************************
- * Copyright 2022 See AUTHORS file.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- ******************************************************************************/
-
 package com.badlogic.gdx.backends.lwjgl3;
 
 import com.badlogic.gdx.graphics.GL31;
 import com.badlogic.gdx.utils.BufferUtils;
-import org.lwjgl.opengl.*;
-
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL32;
+import org.lwjgl.opengl.GL40;
+import org.lwjgl.opengl.GL41;
+import org.lwjgl.opengl.GL42;
+import org.lwjgl.opengl.GL43;
+import org.lwjgl.opengl.GL46;
 
 public class Lwjgl3GL31 extends Lwjgl3GL30 implements GL31 {
 
@@ -75,7 +64,8 @@ public class Lwjgl3GL31 extends Lwjgl3GL30 implements GL31 {
 
     @Override
     public void glGetProgramResourceiv(int program, int programInterface, int index, IntBuffer props, IntBuffer length,
-                                       IntBuffer params) {
+                                       IntBuffer params
+    ) {
         GL43.glGetProgramResourceiv(program, programInterface, index, props, length, params);
     }
 
@@ -328,7 +318,8 @@ public class Lwjgl3GL31 extends Lwjgl3GL30 implements GL31 {
 
     @Override
     public void glTexStorage2DMultisample(int target, int samples, int internalformat, int width, int height,
-                                          boolean fixedsamplelocations) {
+                                          boolean fixedsamplelocations
+    ) {
         GL43.glTexStorage2DMultisample(target, samples, internalformat, width, height, fixedsamplelocations);
     }
 

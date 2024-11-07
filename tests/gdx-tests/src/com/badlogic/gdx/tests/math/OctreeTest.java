@@ -1,19 +1,3 @@
-/*******************************************************************************
- * Copyright 2020 See AUTHORS file.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- ******************************************************************************/
-
 package com.badlogic.gdx.tests.math;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -42,7 +26,6 @@ import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectSet;
-
 import java.util.Random;
 
 public class OctreeTest extends GdxTest implements ApplicationListener {
@@ -59,9 +42,9 @@ public class OctreeTest extends GdxTest implements ApplicationListener {
     public Environment lights;
 
     public Octree<GameObject> octree;
-    public ObjectSet<GameObject> tmpResult = new ObjectSet<GameObject>();
-    public Array<GameObject> gameObjects = new Array<GameObject>();
-    public Array<ModelInstance> octreeBounds = new Array<ModelInstance>();
+    public ObjectSet<GameObject> tmpResult = new ObjectSet<>();
+    public Array<GameObject> gameObjects = new Array<>();
+    public Array<ModelInstance> octreeBounds = new Array<>();
 
     private GameObject lastSelected;
 
@@ -196,11 +179,13 @@ public class OctreeTest extends GdxTest implements ApplicationListener {
             float depth = random.nextFloat() * 3;
 
             Vector3 center = new Vector3(-AREA_SIZE / 2 + random.nextFloat() * AREA_SIZE, random.nextFloat() * AREA_SIZE / 2,
-                    -AREA_SIZE / 2 + random.nextFloat() * AREA_SIZE);
+                    -AREA_SIZE / 2 + random.nextFloat() * AREA_SIZE
+            );
 
             GameObject gameObject = new GameObject();
             Model modelBox = modelBuilder.createBox(width, height, depth, GL20.GL_TRIANGLES, objectMaterial,
-                    VertexAttributes.Usage.Position);
+                    VertexAttributes.Usage.Position
+            );
             gameObject.instance = new ModelInstance(modelBox);
             gameObject.instance.transform.translate(center);
 
@@ -210,7 +195,8 @@ public class OctreeTest extends GdxTest implements ApplicationListener {
             gameObject.box = new BoundingBox(min, max);
 
             modelBox = modelBuilder.createBox(width, height, depth, GL20.GL_LINES, wireframeMaterial,
-                    VertexAttributes.Usage.Position);
+                    VertexAttributes.Usage.Position
+            );
             gameObject.boxEdges = new ModelInstance(modelBox);
             gameObject.boxEdges.transform.translate(center);
 
@@ -233,7 +219,8 @@ public class OctreeTest extends GdxTest implements ApplicationListener {
             BoundingBox box = iterator.next();
 
             Model model = modelBuilder.createBox(box.getWidth(), box.getHeight(), box.getDepth(), GL20.GL_LINES, material,
-                    VertexAttributes.Usage.Position);
+                    VertexAttributes.Usage.Position
+            );
             ModelInstance instance = new ModelInstance(model);
             instance.transform.translate(box.getCenterX(), box.getCenterY(), box.getCenterZ());
 

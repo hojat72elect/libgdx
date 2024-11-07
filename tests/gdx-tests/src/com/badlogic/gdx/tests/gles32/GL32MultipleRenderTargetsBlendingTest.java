@@ -1,19 +1,3 @@
-/*******************************************************************************
- * Copyright 2022 See AUTHORS file.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- ******************************************************************************/
-
 package com.badlogic.gdx.tests.gles32;
 
 import com.badlogic.gdx.Application.ApplicationType;
@@ -35,68 +19,67 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 @GdxTestConfig(requireGL32 = true)
 public class GL32MultipleRenderTargetsBlendingTest extends GdxTest {
-    static final String shapeRendererVS = "" + "attribute vec4 a_position;\n" + //
-            "attribute vec4 a_color;\n" + //
-            "uniform mat4 u_projModelView;\n" + //
-            "varying vec4 v_color;\n" + //
-            "void main() {\n" + //
-            "    v_color = a_color;\n" + //
-            "    gl_Position = u_projModelView * a_position;\n" + //
+    static final String shapeRendererVS = "attribute vec4 a_position;\n" +
+            "attribute vec4 a_color;\n" +
+            "uniform mat4 u_projModelView;\n" +
+            "varying vec4 v_color;\n" +
+            "void main() {\n" +
+            "    v_color = a_color;\n" +
+            "    gl_Position = u_projModelView * a_position;\n" +
             "}";
 
-    static final String shapeRendererFS = "" + //
-            "#if __VERSION__ < 300\n" + //
-            "#extension GL_ARB_explicit_attrib_location : enable\n" + //
-            "#endif\n" + //
-            "\n" + //
-            "layout(location = 0) out vec4 out_FragColor0;\n" + //
-            "layout(location = 1) out vec4 out_FragColor1;\n" + //
-            "layout(location = 2) out vec4 out_FragColor2;\n" + //
-            "layout(location = 3) out vec4 out_FragColor3;\n" + //
-            "layout(location = 4) out vec4 out_FragColor4;\n" + //
-            "layout(location = 5) out vec4 out_FragColor5;\n" + //
-            "layout(location = 6) out vec4 out_FragColor6;\n" + //
-            "layout(location = 7) out vec4 out_FragColor7;\n" + //
-            "in vec4 v_color;\n" + //
-            "void main() {\n" + //
-            "    out_FragColor0 = v_color;\n" + //
-            "    out_FragColor1 = v_color;\n" + //
-            "    out_FragColor2 = v_color;\n" + //
-            "    out_FragColor3 = v_color;\n" + //
-            "    out_FragColor4 = v_color;\n" + //
-            "    out_FragColor5 = v_color;\n" + //
-            "    out_FragColor6 = v_color;\n" + //
-            "    out_FragColor7 = v_color;\n" + //
+    static final String shapeRendererFS = "#if __VERSION__ < 300\n" +
+            "#extension GL_ARB_explicit_attrib_location : enable\n" +
+            "#endif\n" +
+            "\n" +
+            "layout(location = 0) out vec4 out_FragColor0;\n" +
+            "layout(location = 1) out vec4 out_FragColor1;\n" +
+            "layout(location = 2) out vec4 out_FragColor2;\n" +
+            "layout(location = 3) out vec4 out_FragColor3;\n" +
+            "layout(location = 4) out vec4 out_FragColor4;\n" +
+            "layout(location = 5) out vec4 out_FragColor5;\n" +
+            "layout(location = 6) out vec4 out_FragColor6;\n" +
+            "layout(location = 7) out vec4 out_FragColor7;\n" +
+            "in vec4 v_color;\n" +
+            "void main() {\n" +
+            "    out_FragColor0 = v_color;\n" +
+            "    out_FragColor1 = v_color;\n" +
+            "    out_FragColor2 = v_color;\n" +
+            "    out_FragColor3 = v_color;\n" +
+            "    out_FragColor4 = v_color;\n" +
+            "    out_FragColor5 = v_color;\n" +
+            "    out_FragColor6 = v_color;\n" +
+            "    out_FragColor7 = v_color;\n" +
             "}";
 
-    static final String spriteBatchVS = "attribute vec4 " + ShaderProgram.POSITION_ATTRIBUTE + ";\n" //
-            + "attribute vec4 " + ShaderProgram.COLOR_ATTRIBUTE + ";\n" //
-            + "attribute vec2 " + ShaderProgram.TEXCOORD_ATTRIBUTE + "0;\n" //
-            + "uniform mat4 u_projTrans;\n" //
-            + "varying vec4 v_color;\n" //
-            + "varying vec2 v_texCoords;\n" //
-            + "\n" //
-            + "void main()\n" //
-            + "{\n" //
-            + "   v_color = " + ShaderProgram.COLOR_ATTRIBUTE + ";\n" //
-            + "   v_color.a = v_color.a * (255.0/254.0);\n" //
-            + "   v_texCoords = " + ShaderProgram.TEXCOORD_ATTRIBUTE + "0;\n" //
-            + "   gl_Position =  u_projTrans * " + ShaderProgram.POSITION_ATTRIBUTE + ";\n" //
+    static final String spriteBatchVS = "attribute vec4 " + ShaderProgram.POSITION_ATTRIBUTE + ";\n"
+            + "attribute vec4 " + ShaderProgram.COLOR_ATTRIBUTE + ";\n"
+            + "attribute vec2 " + ShaderProgram.TEXCOORD_ATTRIBUTE + "0;\n"
+            + "uniform mat4 u_projTrans;\n"
+            + "varying vec4 v_color;\n"
+            + "varying vec2 v_texCoords;\n"
+            + "\n"
+            + "void main()\n"
+            + "{\n"
+            + "   v_color = " + ShaderProgram.COLOR_ATTRIBUTE + ";\n"
+            + "   v_color.a = v_color.a * (255.0/254.0);\n"
+            + "   v_texCoords = " + ShaderProgram.TEXCOORD_ATTRIBUTE + "0;\n"
+            + "   gl_Position =  u_projTrans * " + ShaderProgram.POSITION_ATTRIBUTE + ";\n"
             + "}\n";
 
-    static final String spriteBatchFS = "#ifdef GL_ES\n" //
-            + "#define LOWP lowp\n" //
-            + "precision mediump float;\n" //
-            + "#else\n" //
-            + "#define LOWP \n" //
-            + "#endif\n" //
-            + "varying LOWP vec4 v_color;\n" //
-            + "varying vec2 v_texCoords;\n" //
-            + "uniform sampler2D u_texture;\n" //
-            + "void main()\n"//
-            + "{\n" //
-            + "  float a = texture2D(u_texture, v_texCoords).a;\n" //
-            + "  gl_FragColor = v_color * vec4(a, a, a, 1.0);\n" //
+    static final String spriteBatchFS = "#ifdef GL_ES\n"
+            + "#define LOWP lowp\n"
+            + "precision mediump float;\n"
+            + "#else\n"
+            + "#define LOWP \n"
+            + "#endif\n"
+            + "varying LOWP vec4 v_color;\n"
+            + "varying vec2 v_texCoords;\n"
+            + "uniform sampler2D u_texture;\n"
+            + "void main()\n"
+            + "{\n"
+            + "  float a = texture2D(u_texture, v_texCoords).a;\n"
+            + "  gl_FragColor = v_color * vec4(a, a, a, 1.0);\n"
             + "}";
 
     private FrameBuffer fbo;

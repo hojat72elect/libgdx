@@ -1,28 +1,22 @@
-/*******************************************************************************
- * Copyright 2022 See AUTHORS file.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- ******************************************************************************/
-
 package com.badlogic.gdx.backends.lwjgl3;
 
 import com.badlogic.gdx.graphics.GL32;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import java.nio.Buffer;
+import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
+import java.nio.ShortBuffer;
 import org.lwjgl.PointerBuffer;
-import org.lwjgl.opengl.*;
+import org.lwjgl.opengl.GL30;
+import org.lwjgl.opengl.GL31;
+import org.lwjgl.opengl.GL33;
+import org.lwjgl.opengl.GL40;
+import org.lwjgl.opengl.GL43;
+import org.lwjgl.opengl.GL45;
+import org.lwjgl.opengl.GLDebugMessageCallbackI;
+import org.lwjgl.opengl.KHRBlendEquationAdvanced;
 import org.lwjgl.system.MemoryUtil;
-
-import java.nio.*;
 
 public class Lwjgl3GL32 extends Lwjgl3GL31 implements GL32 {
 
@@ -37,9 +31,11 @@ public class Lwjgl3GL32 extends Lwjgl3GL31 implements GL32 {
 
     @Override
     public void glCopyImageSubData(int srcName, int srcTarget, int srcLevel, int srcX, int srcY, int srcZ, int dstName,
-                                   int dstTarget, int dstLevel, int dstX, int dstY, int dstZ, int srcWidth, int srcHeight, int srcDepth) {
+                                   int dstTarget, int dstLevel, int dstX, int dstY, int dstZ, int srcWidth, int srcHeight, int srcDepth
+    ) {
         GL43.glCopyImageSubData(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ,
-                srcWidth, srcHeight, srcDepth);
+                srcWidth, srcHeight, srcDepth
+        );
     }
 
     @Override
@@ -68,7 +64,8 @@ public class Lwjgl3GL32 extends Lwjgl3GL31 implements GL32 {
 
     @Override
     public int glGetDebugMessageLog(int count, IntBuffer sources, IntBuffer types, IntBuffer ids, IntBuffer severities,
-                                    IntBuffer lengths, ByteBuffer messageLog) {
+                                    IntBuffer lengths, ByteBuffer messageLog
+    ) {
         return GL43.glGetDebugMessageLog(count, sources, types, ids, severities, lengths, messageLog);
     }
 
@@ -197,7 +194,8 @@ public class Lwjgl3GL32 extends Lwjgl3GL31 implements GL32 {
 
     @Override
     public void glDrawElementsInstancedBaseVertex(int mode, int count, int type, Buffer indices, int instanceCount,
-                                                  int basevertex) {
+                                                  int basevertex
+    ) {
         if (indices instanceof ShortBuffer && type == com.badlogic.gdx.graphics.GL20.GL_UNSIGNED_SHORT) {
             ShortBuffer sb = (ShortBuffer) indices;
             int position = sb.position();
@@ -226,7 +224,8 @@ public class Lwjgl3GL32 extends Lwjgl3GL31 implements GL32 {
 
     @Override
     public void glDrawElementsInstancedBaseVertex(int mode, int count, int type, int indicesOffset, int instanceCount,
-                                                  int basevertex) {
+                                                  int basevertex
+    ) {
         org.lwjgl.opengl.GL32.glDrawElementsInstancedBaseVertex(mode, count, type, indicesOffset, instanceCount, basevertex);
     }
 
@@ -339,7 +338,8 @@ public class Lwjgl3GL32 extends Lwjgl3GL31 implements GL32 {
 
     @Override
     public void glTexStorage3DMultisample(int target, int samples, int internalformat, int width, int height, int depth,
-                                          boolean fixedsamplelocations) {
+                                          boolean fixedsamplelocations
+    ) {
         GL43.glTexStorage3DMultisample(target, samples, internalformat, width, height, depth, fixedsamplelocations);
     }
 

@@ -30,8 +30,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 /**
  * Simple test and example for the KTX/ZKTX file format
- *
- * @author Vincent Bousquet
  */
 public class KTXTest extends GdxTest {
 

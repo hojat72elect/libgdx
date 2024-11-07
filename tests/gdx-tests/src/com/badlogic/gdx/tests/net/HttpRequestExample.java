@@ -9,8 +9,6 @@ import com.badlogic.gdx.tests.utils.GdxTest;
 
 /**
  * Demonstrates how to perform a simple HTTP request. Need to add internet permission to AndroidManifest.xml.
- *
- * 
  */
 public class HttpRequestExample extends GdxTest {
     @Override

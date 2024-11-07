@@ -490,8 +490,6 @@ public class AnimationController extends BaseAnimationController {
 
     /**
      * Listener that will be informed when an animation is looped or completed.
-     *
-     * @author Xoppa
      */
     public interface AnimationListener {
         /**
@@ -513,8 +511,6 @@ public class AnimationController extends BaseAnimationController {
     /**
      * Class describing how to play and {@link Animation}. You can read the values within this class to get the progress of the
      * animation. Do not change the values. Only valid when the animation is currently played.
-     *
-     * @author Xoppa
      */
     public static class AnimationDesc {
         /**

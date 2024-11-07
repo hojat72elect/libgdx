@@ -260,13 +260,11 @@ public class ModelCache implements Disposable, RenderableProvider {
      * A basic {@link MeshPool} implementation that avoids creating new meshes at the cost of memory usage. It does this by making
      * the mesh always the maximum (64k) size. Use this when for dynamic caching where you need to obtain meshes very frequently
      * (typically every frame).
-     *
-     * @author Xoppa
      */
     public static class SimpleMeshPool implements MeshPool {
         // FIXME Make a better (preferable JNI) MeshPool implementation
-        private Array<Mesh> freeMeshes = new Array<Mesh>();
-        private Array<Mesh> usedMeshes = new Array<Mesh>();
+        private Array<Mesh> freeMeshes = new Array<>();
+        private Array<Mesh> usedMeshes = new Array<>();
 
         @Override
         public void flush() {
@@ -305,8 +303,6 @@ public class ModelCache implements Disposable, RenderableProvider {
 
     /**
      * A tight {@link MeshPool} implementation, which is typically used for static meshes (create once, use many).
-     *
-     * @author Xoppa
      */
     public static class TightMeshPool implements MeshPool {
         private Array<Mesh> freeMeshes = new Array<Mesh>();
@@ -348,8 +344,6 @@ public class ModelCache implements Disposable, RenderableProvider {
     /**
      * A {@link RenderableSorter} that sorts by vertex attributes, material attributes and primitive types (in that order), so
      * that meshes can be easily merged.
-     *
-     * @author Xoppa
      */
     public static class Sorter implements RenderableSorter, Comparator<Renderable> {
         @Override

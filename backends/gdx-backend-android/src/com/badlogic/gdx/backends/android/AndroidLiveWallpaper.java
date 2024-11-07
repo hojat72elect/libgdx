@@ -1,19 +1,3 @@
-/*
- * Copyright 2010 Mario Zechner (contact@badlogicgames.com), Nathan Sweet (admin@esotericsoftware.com)
- *
- * Modified by Elijah Cornell
- * 2013.01 Modified by Jaroslaw Wisniewski <j.wisniewski@appsisle.com>
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
- * License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
- * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- */
-
 package com.badlogic.gdx.backends.android;
 
 import android.content.Context;
@@ -25,10 +9,23 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
-import com.badlogic.gdx.*;
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.ApplicationLogger;
+import com.badlogic.gdx.Audio;
+import com.badlogic.gdx.Files;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
+import com.badlogic.gdx.LifecycleListener;
+import com.badlogic.gdx.Net;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.backends.android.surfaceview.FillResolutionStrategy;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.utils.*;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Clipboard;
+import com.badlogic.gdx.utils.GdxNativesLoader;
+import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.utils.SnapshotArray;
 
 /**
  * An implementation of the {@link Application} interface to be used with an AndroidLiveWallpaperService. Not directly
@@ -64,7 +61,8 @@ public class AndroidLiveWallpaper implements AndroidApplicationBase {
         GdxNativesLoader.load();
         setApplicationLogger(new AndroidApplicationLogger());
         graphics = new AndroidGraphicsLiveWallpaper(this, config,
-                config.resolutionStrategy == null ? new FillResolutionStrategy() : config.resolutionStrategy);
+                config.resolutionStrategy == null ? new FillResolutionStrategy() : config.resolutionStrategy
+        );
 
         // factory in use, but note: AndroidInputFactory causes exceptions when obfuscated: java.lang.RuntimeException: Couldn't
         // construct AndroidInput, this should never happen, proguard deletes constructor used only by reflection

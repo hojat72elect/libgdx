@@ -11,8 +11,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 /**
  * Simple test case for mouse cursor change Switch between two cursors every frame, a third cursor is used when a mouse button is
  * pressed
- *
- * @author haedri
  */
 public class CursorTest extends GdxTest {
     Cursor cursor1;

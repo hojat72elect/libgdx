@@ -28,8 +28,6 @@ import com.badlogic.gdx.utils.StreamUtils;
  * like texture compression, cubemapping, mipmapping, etc.
  * <p>
  * For example, KTXTextureData can be used for {@link Texture} or {@link Cubemap}.
- *
- * @author Vincent Bousquet
  */
 public class KTXTextureData implements TextureData, CubemapData {
 

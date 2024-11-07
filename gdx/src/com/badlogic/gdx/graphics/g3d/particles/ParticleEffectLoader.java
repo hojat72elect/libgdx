@@ -24,8 +24,6 @@ import com.badlogic.gdx.utils.reflect.ClassReflection;
  * present the batches settings will be loaded automatically. When the load and save parameters are absent, once the effect will
  * be created, one will have to set the required batches manually otherwise the {@link ParticleController} instances contained
  * inside the effect will not be able to render themselves.
- *
- * @author inferno
  */
 public class ParticleEffectLoader
         extends AsynchronousAssetLoader<ParticleEffect, ParticleEffectLoader.ParticleEffectLoadParameter> {

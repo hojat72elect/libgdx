@@ -13,8 +13,6 @@ import com.badlogic.gdx.graphics.glutils.KTXTextureData;
  * </p>
  * <p>
  * Look at {@link KTXTextureData} for example implementation of this interface.
- *
- * @author Vincent Bousquet
  */
 public interface CubemapData {
 

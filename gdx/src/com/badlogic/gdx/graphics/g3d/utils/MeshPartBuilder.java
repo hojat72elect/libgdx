@@ -541,8 +541,6 @@ public interface MeshPartBuilder {
 
     /**
      * Class that contains all vertex information the builder can use.
-     *
-     * @author Xoppa
      */
     public static class VertexInfo implements Poolable {
         public final Vector3 position = new Vector3();
