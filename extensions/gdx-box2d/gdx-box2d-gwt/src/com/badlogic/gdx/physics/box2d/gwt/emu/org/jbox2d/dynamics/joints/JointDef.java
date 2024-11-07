@@ -4,8 +4,6 @@ import org.jbox2d.dynamics.Body;
 
 /**
  * Joint definitions are used to construct joints.
- *
- * @author Daniel Murphy
  */
 public class JointDef {
 

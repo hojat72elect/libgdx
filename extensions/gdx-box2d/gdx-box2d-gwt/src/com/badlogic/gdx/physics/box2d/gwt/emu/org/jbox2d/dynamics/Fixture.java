@@ -18,7 +18,6 @@ import org.jbox2d.dynamics.contacts.ContactEdge;
  * Fixtures hold additional non-geometric data such as friction, collision filters, etc. Fixtures are created via
  * Body::CreateFixture.
  *
- * @author daniel
  * @warning you cannot reuse fixtures.
  */
 public class Fixture {

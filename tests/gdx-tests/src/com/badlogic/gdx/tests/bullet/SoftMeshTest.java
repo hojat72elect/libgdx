@@ -18,9 +18,7 @@ import com.badlogic.gdx.physics.bullet.softbody.btSoftBodyWorldInfo;
 import com.badlogic.gdx.physics.bullet.softbody.btSoftRigidDynamicsWorld;
 import com.badlogic.gdx.utils.BufferUtils;
 
-/**
- * @author xoppa
- */
+
 public class SoftMeshTest extends BaseBulletTest {
     btSoftBodyWorldInfo worldInfo;
     btSoftBody softBody;

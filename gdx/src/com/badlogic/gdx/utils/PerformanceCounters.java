@@ -2,9 +2,7 @@ package com.badlogic.gdx.utils;
 
 import com.badlogic.gdx.math.MathUtils;
 
-/**
- * @author xoppa
- */
+
 public class PerformanceCounters {
     private final static float nano2seconds = MathUtils.nanoToSec;
     public final Array<PerformanceCounter> counters = new Array<PerformanceCounter>();

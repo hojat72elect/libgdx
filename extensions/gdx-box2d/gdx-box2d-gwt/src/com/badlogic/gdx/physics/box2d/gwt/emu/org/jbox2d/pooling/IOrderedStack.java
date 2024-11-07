@@ -2,16 +2,12 @@ package org.jbox2d.pooling;
 
 /**
  * This stack assumes that when you push 'n' items back, you're pushing back the last 'n' items popped.
- *
  * @param <E>
- * @author Daniel
  */
 public interface IOrderedStack<E> {
 
     /**
-     * Returns the next object in the pool
-     *
-     * @return
+     * Returns the next object in the pool.
      */
     public E pop();
 

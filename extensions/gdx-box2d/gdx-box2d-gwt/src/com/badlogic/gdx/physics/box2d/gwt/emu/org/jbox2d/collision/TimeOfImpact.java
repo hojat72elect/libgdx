@@ -12,8 +12,6 @@ enum Type {
 /**
  * Class used for computing the time of impact. This class should not be constructed usually, just retrieve from the
  * {@link SingletonPool#getTOI()}.
- *
- * @author daniel
  */
 public class TimeOfImpact {
     public static final int MAX_ITERATIONS = 1000;
@@ -244,8 +242,6 @@ public class TimeOfImpact {
 
     /**
      * Input parameters for TOI
-     *
-     * @author Daniel Murphy
      */
     public static class TOIInput {
         public final DistanceProxy proxyA = new DistanceProxy();
@@ -260,8 +256,6 @@ public class TimeOfImpact {
 
     /**
      * Output parameters for TimeOfImpact
-     *
-     * @author daniel
      */
     public static class TOIOutput {
         public TOIOutputState state;

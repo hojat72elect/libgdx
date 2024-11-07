@@ -12,9 +12,7 @@ import org.jbox2d.common.Vec3;
 import org.jbox2d.dynamics.contacts.Contact;
 
 /**
- * World pool interface
- *
- * @author Daniel
+ * World pool interface.
  */
 public interface IWorldPool {
 

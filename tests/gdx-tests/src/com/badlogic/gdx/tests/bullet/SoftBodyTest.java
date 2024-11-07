@@ -33,9 +33,7 @@ import java.nio.Buffer;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
-/**
- * @author xoppa
- */
+
 public class SoftBodyTest extends BaseBulletTest {
     btSoftBodyWorldInfo worldInfo;
     btSoftBody softBody;

@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * A point in a 2D grid, with integer x and y coordinates
  *
- * @author badlogic
+ * 
  */
 public class GridPoint2 implements Serializable {
     private static final long serialVersionUID = -4019969926331717380L;

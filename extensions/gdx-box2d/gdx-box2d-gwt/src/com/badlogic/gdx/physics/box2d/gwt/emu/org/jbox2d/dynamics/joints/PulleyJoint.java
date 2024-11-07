@@ -16,8 +16,6 @@ import org.jbox2d.pooling.IWorldPool;
  * ratio * length2 <= constant Yes, the force transmitted is scaled by the ratio. Warning: the pulley joint can get a bit
  * squirrelly by itself. They often work better when combined with prismatic joints. You should also cover the the anchor points
  * with static shapes to prevent one side from going to zero length.
- *
- * @author Daniel Murphy
  */
 public class PulleyJoint extends Joint {
 

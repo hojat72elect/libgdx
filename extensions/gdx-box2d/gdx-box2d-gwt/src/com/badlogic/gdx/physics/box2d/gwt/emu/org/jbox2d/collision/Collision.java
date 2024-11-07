@@ -810,8 +810,6 @@ public class Collision {
 
     /**
      * This is used for determining the state of contact points.
-     *
-     * @author Daniel Murphy
      */
     public static enum PointState {
         /**

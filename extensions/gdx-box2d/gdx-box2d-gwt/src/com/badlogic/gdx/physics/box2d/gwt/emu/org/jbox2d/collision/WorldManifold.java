@@ -4,8 +4,6 @@ import org.jbox2d.common.*;
 
 /**
  * This is used to compute the current state of a contact manifold.
- *
- * @author daniel
  */
 public class WorldManifold {
     /**

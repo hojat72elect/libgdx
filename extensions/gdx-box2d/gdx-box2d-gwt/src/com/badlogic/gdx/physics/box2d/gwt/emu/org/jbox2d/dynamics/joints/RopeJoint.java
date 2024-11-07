@@ -12,8 +12,6 @@ import org.jbox2d.pooling.IWorldPool;
  * change the maximum length during the simulation you will get some non-physical behavior. A model that would allow you to
  * dynamically modify the length would have some sponginess, so I chose not to implement it that way. See DistanceJoint if you
  * want to dynamically control length.
- *
- * @author Daniel Murphy
  */
 public class RopeJoint extends Joint {
     // Solver shared

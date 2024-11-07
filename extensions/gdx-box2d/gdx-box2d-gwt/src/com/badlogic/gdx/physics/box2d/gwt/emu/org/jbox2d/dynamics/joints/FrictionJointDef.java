@@ -9,8 +9,6 @@ import org.jbox2d.dynamics.Body;
 
 /**
  * Friction joint definition.
- *
- * @author Daniel Murphy
  */
 public class FrictionJointDef extends JointDef {
 

@@ -4,8 +4,6 @@ import java.util.HashMap;
 
 /**
  * Not thread safe float[] pooling.
- *
- * @author Daniel
  */
 public class FloatArray {
 

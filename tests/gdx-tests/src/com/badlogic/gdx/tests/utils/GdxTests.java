@@ -1,26 +1,4 @@
-
-/*
- * Copyright 2010 Mario Zechner (contact@badlogicgames.com), Nathan Sweet (admin@esotericsoftware.com)
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
- * License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
- * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- */
-
 package com.badlogic.gdx.tests.utils;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 import com.badlogic.gdx.tests.*;
 import com.badlogic.gdx.tests.bench.TiledMapBench;
@@ -35,10 +13,6 @@ import com.badlogic.gdx.tests.extensions.FreeTypeMetricsTest;
 import com.badlogic.gdx.tests.extensions.FreeTypePackTest;
 import com.badlogic.gdx.tests.extensions.FreeTypeTest;
 import com.badlogic.gdx.tests.extensions.InternationalFontsTest;
-import com.badlogic.gdx.tests.gles3.NonPowerOfTwoTest;
-import com.badlogic.gdx.tests.gles3.UniformBufferObjectsTest;
-import com.badlogic.gdx.tests.math.CollisionPlaygroundTest;
-import com.badlogic.gdx.tests.math.OctreeTest;
 import com.badlogic.gdx.tests.g3d.Animation3DTest;
 import com.badlogic.gdx.tests.g3d.AnisotropyTest;
 import com.badlogic.gdx.tests.g3d.Basic3DSceneTest;
@@ -72,7 +46,9 @@ import com.badlogic.gdx.tests.gles2.VertexArrayTest;
 import com.badlogic.gdx.tests.gles3.GL30Texture3DTest;
 import com.badlogic.gdx.tests.gles3.InstancedRenderingTest;
 import com.badlogic.gdx.tests.gles3.ModelInstancedRenderingTest;
+import com.badlogic.gdx.tests.gles3.NonPowerOfTwoTest;
 import com.badlogic.gdx.tests.gles3.PixelBufferObjectTest;
+import com.badlogic.gdx.tests.gles3.UniformBufferObjectsTest;
 import com.badlogic.gdx.tests.gles31.GL31FrameBufferMultisampleMRTTest;
 import com.badlogic.gdx.tests.gles31.GL31FrameBufferMultisampleTest;
 import com.badlogic.gdx.tests.gles31.GL31IndirectDrawingIndexedTest;
@@ -82,18 +58,27 @@ import com.badlogic.gdx.tests.gles32.GL32AdvancedBlendingTest;
 import com.badlogic.gdx.tests.gles32.GL32DebugControlTest;
 import com.badlogic.gdx.tests.gles32.GL32MultipleRenderTargetsBlendingTest;
 import com.badlogic.gdx.tests.gles32.GL32OffsetElementsTest;
+import com.badlogic.gdx.tests.math.CollisionPlaygroundTest;
+import com.badlogic.gdx.tests.math.OctreeTest;
 import com.badlogic.gdx.tests.math.collision.OrientedBoundingBoxTest;
 import com.badlogic.gdx.tests.net.NetAPITest;
 import com.badlogic.gdx.tests.superkoalio.SuperKoalio;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.StreamUtils;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * List of GdxTest classes. To be used by the test launchers. If you write your own test, add it in here!
  */
 public class GdxTests {
-    public static final List<Class<? extends GdxTest>> tests = new ArrayList<Class<? extends GdxTest>>(Arrays.asList(
-            // @off
+    public static final List<Class<? extends GdxTest>> tests = new ArrayList<>(Arrays.asList(
+
             IssueTest.class,
             AccelerometerTest.class,
             ActionSequenceTest.class,
@@ -144,7 +129,6 @@ public class GdxTests {
             DownloadTest.class,
             DragAndDropTest.class,
             ETC1Test.class,
-//		EarClippingTriangulatorTest.class,
             EdgeDetectionTest.class,
             ExitTest.class,
             ExternalMusicTest.class,
@@ -331,10 +315,6 @@ public class GdxTests {
             JsonTest.class,
             QuadTreeFloatTest.class,
             QuadTreeFloatNearestTest.class
-            // @on
-
-            // SoundTouchTest.class, Mpg123Test.class, WavTest.class, FreeTypeTest.class,
-            // VorbisTest.class
     ));
 
     static final ObjectMap<String, String> obfuscatedToOriginal = new ObjectMap();

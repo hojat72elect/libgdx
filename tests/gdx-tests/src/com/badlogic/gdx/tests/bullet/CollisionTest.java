@@ -9,9 +9,7 @@ import com.badlogic.gdx.physics.bullet.collision.btPersistentManifold;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 
-/**
- * @author Xoppa
- */
+
 public class CollisionTest extends ShootTest {
     BulletEntity projectile;
     Array<BulletEntity> hits = new Array<BulletEntity>();

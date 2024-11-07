@@ -3,9 +3,7 @@ package org.jbox2d.particle;
 import org.jbox2d.common.Color3f;
 
 /**
- * Small color object for each particle
- *
- * @author dmurph
+ * Small color object for each particle.
  */
 public class ParticleColor {
     public byte r, g, b, a;

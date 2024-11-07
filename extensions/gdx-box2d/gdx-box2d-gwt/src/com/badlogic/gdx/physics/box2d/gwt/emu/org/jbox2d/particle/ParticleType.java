@@ -2,8 +2,6 @@ package org.jbox2d.particle;
 
 /**
  * The particle type. Can be combined with | operator. Zero means liquid.
- *
- * @author dmurph
  */
 public class ParticleType {
     public static final int b2_waterParticle = 0;

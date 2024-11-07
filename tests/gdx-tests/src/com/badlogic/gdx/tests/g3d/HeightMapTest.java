@@ -17,8 +17,6 @@ import com.badlogic.gdx.utils.Array;
 
 /**
  * Simple test showing how to use a height map. Uses {@link HeightField}.
- *
- * @author Xoppa
  */
 public class HeightMapTest extends BaseG3dTest {
     HeightField field;

@@ -11,9 +11,6 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.SolverData;
 import org.jbox2d.pooling.IWorldPool;
 
-/**
- * @author Daniel Murphy
- */
 public class FrictionJoint extends Joint {
 
     private final Vec2 m_localAnchorA;

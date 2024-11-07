@@ -1,8 +1,6 @@
 package com.badlogic.gdx.math;
 
-/**
- * @author Xoppa
- */
+
 public class CatmullRomSpline<T extends Vector<T>> implements Path<T> {
     public T[] controlPoints;
     public boolean continuous;

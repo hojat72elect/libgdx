@@ -127,8 +127,6 @@ import org.jbox2d.dynamics.joints.Joint;
 
 /**
  * This is an internal class.
- *
- * @author Daniel Murphy
  */
 public class Island {
 

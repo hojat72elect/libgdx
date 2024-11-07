@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.ArrayMap;
  * A combination of {@link MeshPart} and {@link Material}, used to represent a {@link Node}'s graphical properties. A NodePart is
  * the smallest visible part of a {@link Model}, each NodePart implies a render call.
  *
- * @author badlogic, Xoppa
+ * , Xoppa
  */
 public class NodePart {
     /**

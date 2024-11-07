@@ -437,7 +437,7 @@ public interface Graphics {
     /**
      * Describes a monitor
      *
-     * @author badlogic
+     * 
      */
     class Monitor {
         public final int virtualX;

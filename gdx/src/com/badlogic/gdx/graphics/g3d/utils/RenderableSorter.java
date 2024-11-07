@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.Array;
 /**
  * Responsible for sorting {@link Renderable} lists by whatever criteria (material, distance to camera, etc.)
  *
- * @author badlogic
+ * 
  */
 public interface RenderableSorter {
     /**

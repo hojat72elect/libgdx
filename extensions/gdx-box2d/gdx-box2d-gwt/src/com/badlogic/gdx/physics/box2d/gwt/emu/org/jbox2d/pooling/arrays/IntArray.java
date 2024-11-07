@@ -7,9 +7,7 @@ package org.jbox2d.pooling.arrays;
 import java.util.HashMap;
 
 /**
- * Not thread safe int[] pooling
- *
- * @author Daniel Murphy
+ * Not thread safe int[] pooling.
  */
 public class IntArray {
 

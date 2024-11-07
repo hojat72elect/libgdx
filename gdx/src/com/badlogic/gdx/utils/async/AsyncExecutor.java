@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * {@link #dispose()} when no longer used, in which case the executor waits for running tasks to finish. Scheduled but not yet
  * running tasks will not be executed.
  *
- * @author badlogic
+ * 
  */
 public class AsyncExecutor implements Disposable {
     private final ExecutorService executor;

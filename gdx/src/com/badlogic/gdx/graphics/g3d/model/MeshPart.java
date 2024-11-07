@@ -28,7 +28,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
  * The {@link Mesh} referenced by the {@link #mesh} member must outlive the MeshPart. When the mesh is disposed, the MeshPart is
  * unusable.
  *
- * @author badlogic, Xoppa
+ * , Xoppa
  */
 public class MeshPart {
     /**

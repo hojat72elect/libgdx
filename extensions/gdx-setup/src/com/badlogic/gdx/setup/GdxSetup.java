@@ -9,10 +9,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Command line tool to generate libgdx projects
- *
- * @author badlogic
- * @author Tomski
+ * Command line tool to generate libgdx projects.
  */
 public class GdxSetup {
 

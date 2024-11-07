@@ -10,9 +10,6 @@ import org.jbox2d.dynamics.Fixture;
 import org.jbox2d.dynamics.TimeStep;
 import org.jbox2d.dynamics.contacts.ContactVelocityConstraint.VelocityConstraintPoint;
 
-/**
- * @author Daniel
- */
 public class ContactSolver {
 
     public static final boolean DEBUG_SOLVER = false;

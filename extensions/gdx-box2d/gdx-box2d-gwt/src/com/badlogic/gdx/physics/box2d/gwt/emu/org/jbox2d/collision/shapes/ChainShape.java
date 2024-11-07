@@ -9,8 +9,6 @@ import org.jbox2d.common.*;
  * A chain shape is a free form sequence of line segments. The chain has two-sided collision, so you can use inside and outside
  * collision. Therefore, you may use any winding order. Connectivity information is used to create smooth collisions. WARNING: The
  * chain will not collide properly if there are self-intersections.
- *
- * @author Daniel
  */
 public class ChainShape extends Shape {
 

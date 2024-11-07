@@ -3,9 +3,7 @@ package com.badlogic.gdx.setup;
 import java.io.File;
 
 /**
- * A temporary file that wraps {@link ProjectFile} for use in a {@link Project}
- *
- * @author Tomski
+ * A temporary file that wraps {@link ProjectFile} for use in a {@link Project}.
  */
 public class TemporaryProjectFile extends ProjectFile {
 

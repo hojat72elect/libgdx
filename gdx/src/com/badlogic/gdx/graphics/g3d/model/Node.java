@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * A node is part of a hierarchy of Nodes in a {@link Model}. A Node encodes a transform relative to its parents. A Node can have
  * child nodes. Optionally a node can specify a {@link MeshPart} and a {@link Material} to be applied to the mesh part.
  *
- * @author badlogic
+ * 
  */
 public class Node {
     /**

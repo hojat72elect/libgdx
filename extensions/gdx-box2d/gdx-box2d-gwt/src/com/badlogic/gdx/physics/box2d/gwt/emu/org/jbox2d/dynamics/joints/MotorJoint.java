@@ -22,8 +22,6 @@ import org.jbox2d.pooling.IWorldPool;
 /**
  * A motor joint is used to control the relative motion between two bodies. A typical usage is to control the movement of a
  * dynamic body with respect to the ground.
- *
- * @author dmurph
  */
 public class MotorJoint extends Joint {
 

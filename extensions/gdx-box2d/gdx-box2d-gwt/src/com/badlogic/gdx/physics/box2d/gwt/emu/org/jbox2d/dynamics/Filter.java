@@ -4,8 +4,6 @@ package org.jbox2d.dynamics;
 
 /**
  * This holds contact filtering data.
- *
- * @author daniel
  */
 public class Filter {
     /**

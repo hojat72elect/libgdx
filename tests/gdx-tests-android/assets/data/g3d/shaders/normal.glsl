@@ -1,6 +1,5 @@
 /**
- * Shader to visualize normals
- * @author Xoppa
+ * Shader to visualize normals.
  */
 [VS]
 #include "g_attributes.glsl:VS"

@@ -29,8 +29,6 @@ import org.jbox2d.pooling.normal.DefaultWorldPool;
 /**
  * The world class manages all physics entities, dynamic simulation, and asynchronous queries. The world also contains efficient
  * memory management facilities.
- *
- * @author Daniel Murphy
  */
 public class World {
     public static final int WORLD_POOL_SIZE = 100;

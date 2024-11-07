@@ -3,13 +3,6 @@ package org.jbox2d.dynamics.joints;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 
-/**
- * Created at 3:38:52 AM Jan 15, 2011
- */
-
-/**
- * @author Daniel Murphy
- */
 public class WeldJointDef extends JointDef {
     /**
      * The local anchor point relative to body1's origin.

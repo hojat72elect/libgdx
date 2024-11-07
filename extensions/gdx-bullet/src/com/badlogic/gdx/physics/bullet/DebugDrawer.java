@@ -12,9 +12,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-/**
- * @author xoppa
- */
+
 public class DebugDrawer extends btIDebugDraw implements Disposable {
 
     private ShapeRenderer shapeRenderer = new ShapeRenderer();

@@ -28,8 +28,6 @@ import org.jbox2d.pooling.IWorldPool;
  * A wheel joint. This joint provides two degrees of freedom: translation along an axis fixed in bodyA and rotation in the plane.
  * You can use a joint limit to restrict the range of motion and a joint motor to drive the rotation or to model rotational
  * friction. This joint is designed for vehicle suspensions.
- *
- * @author Daniel Murphy
  */
 public class WheelJoint extends Joint {
 

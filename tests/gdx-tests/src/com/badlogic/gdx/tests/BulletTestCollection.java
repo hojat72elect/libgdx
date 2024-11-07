@@ -13,13 +13,40 @@ import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.tests.bullet.*;
+import com.badlogic.gdx.tests.bullet.BasicBulletTest;
+import com.badlogic.gdx.tests.bullet.BasicShapesTest;
+import com.badlogic.gdx.tests.bullet.BulletTest;
+import com.badlogic.gdx.tests.bullet.CharacterTest;
+import com.badlogic.gdx.tests.bullet.CollisionDispatcherTest;
+import com.badlogic.gdx.tests.bullet.CollisionTest;
+import com.badlogic.gdx.tests.bullet.CollisionWorldTest;
+import com.badlogic.gdx.tests.bullet.ConstraintsTest;
+import com.badlogic.gdx.tests.bullet.ContactCacheTest;
+import com.badlogic.gdx.tests.bullet.ContactCallbackTest;
+import com.badlogic.gdx.tests.bullet.ContactCallbackTest2;
+import com.badlogic.gdx.tests.bullet.ConvexHullDistanceTest;
+import com.badlogic.gdx.tests.bullet.ConvexHullTest;
+import com.badlogic.gdx.tests.bullet.FrustumCullingTest;
+import com.badlogic.gdx.tests.bullet.GimpactTest;
+import com.badlogic.gdx.tests.bullet.HeightFieldTest;
+import com.badlogic.gdx.tests.bullet.ImportTest;
+import com.badlogic.gdx.tests.bullet.InternalTickTest;
+import com.badlogic.gdx.tests.bullet.KinematicTest;
+import com.badlogic.gdx.tests.bullet.MeshShapeTest;
+import com.badlogic.gdx.tests.bullet.OcclusionCullingTest;
+import com.badlogic.gdx.tests.bullet.PairCacheTest;
+import com.badlogic.gdx.tests.bullet.RayCastTest;
+import com.badlogic.gdx.tests.bullet.RayPickRagdollTest;
+import com.badlogic.gdx.tests.bullet.ShootTest;
+import com.badlogic.gdx.tests.bullet.SoftBodyTest;
+import com.badlogic.gdx.tests.bullet.SoftMeshTest;
+import com.badlogic.gdx.tests.bullet.TriangleRaycastTest;
+import com.badlogic.gdx.tests.bullet.VehicleFilterTest;
+import com.badlogic.gdx.tests.bullet.VehicleTest;
 import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.Align;
 
-/**
- * @author xoppa
- */
+
 public class BulletTestCollection extends GdxTest implements InputProcessor, GestureListener {
     protected final BulletTest[] tests = {new BasicBulletTest(), new ShootTest(), new BasicShapesTest(), new KinematicTest(),
             new ConstraintsTest(), new MeshShapeTest(), new GimpactTest(), new ConvexHullTest(), new ConvexHullDistanceTest(),

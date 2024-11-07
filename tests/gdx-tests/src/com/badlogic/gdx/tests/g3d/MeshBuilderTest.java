@@ -21,9 +21,6 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
-/**
- * @author Xoppa
- */
 public class MeshBuilderTest extends BaseG3dHudTest {
     Model model;
     Environment environment;

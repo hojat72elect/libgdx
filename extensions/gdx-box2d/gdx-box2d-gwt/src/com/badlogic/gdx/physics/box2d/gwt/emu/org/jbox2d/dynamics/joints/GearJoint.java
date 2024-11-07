@@ -37,7 +37,6 @@ import org.jbox2d.pooling.IWorldPool;
  * joint is a revolute joint and the other joint is a prismatic joint, then the ratio will have units of length or units of
  * 1/length.
  *
- * @author Daniel Murphy
  * @warning The revolute and prismatic joints must be attached to fixed bodies (which must be body1 on those joints).
  * @warning You have to manually destroy the gear joint if joint1 or joint2 is destroyed.
  */

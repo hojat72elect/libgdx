@@ -5,8 +5,6 @@ import org.jbox2d.common.Vec2;
 /**
  * A body definition holds all the data needed to construct a rigid body. You can safely re-use body definitions. Shapes are
  * added to a body after construction.
- *
- * @author daniel
  */
 public class BodyDef {
 

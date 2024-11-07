@@ -5,8 +5,6 @@ import com.badlogic.gdx.graphics.g3d.environment.BaseLight;
 
 /**
  * Select only casting shadow lights. Allows to optimize shadow system.
- *
- * @author realitix
  */
 public interface LightFilter {
     /**

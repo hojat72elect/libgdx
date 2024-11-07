@@ -2,8 +2,6 @@ package org.jbox2d.common;
 
 /**
  * Orientated bounding box viewport transform
- *
- * @author Daniel Murphy
  */
 public class OBBViewportTransform implements IViewportTransform {
 

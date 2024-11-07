@@ -2,9 +2,6 @@ package org.jbox2d.common;
 
 import java.io.Serializable;
 
-/**
- * @author Daniel Murphy
- */
 public class Vec3 implements Serializable {
     private static final long serialVersionUID = 1L;
 

@@ -5,8 +5,6 @@ import org.jbox2d.dynamics.Body;
 
 /**
  * Motor joint definition.
- *
- * @author dmurph
  */
 public class MotorJointDef extends JointDef {
     /**

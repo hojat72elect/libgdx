@@ -10,8 +10,6 @@ import org.jbox2d.dynamics.joints.JointEdge;
 
 /**
  * A rigid body. These are created via World.createBody.
- *
- * @author Daniel Murphy
  */
 public class Body {
     public static final int e_islandFlag = 0x0001;

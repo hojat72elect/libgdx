@@ -53,7 +53,7 @@ import com.badlogic.gdx.utils.Pool;
  * be set to null.
  * </p>
  *
- * @author badlogic, xoppa
+ * , xoppa
  */
 public class Renderable {
     /**

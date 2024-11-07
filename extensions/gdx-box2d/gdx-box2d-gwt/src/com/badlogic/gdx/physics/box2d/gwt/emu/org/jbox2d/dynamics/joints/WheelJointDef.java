@@ -12,8 +12,6 @@ import org.jbox2d.dynamics.Body;
  * anchor points and a local axis so that the initial configuration can violate the constraint slightly. The joint translation is
  * zero when the local anchor points coincide in world space. Using local anchors and a local axis helps when saving and loading a
  * game.
- *
- * @author Daniel Murphy
  */
 public class WheelJointDef extends JointDef {
 

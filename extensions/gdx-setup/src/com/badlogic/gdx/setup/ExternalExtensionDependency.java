@@ -1,8 +1,5 @@
 package com.badlogic.gdx.setup;
 
-/**
- * @author Kotcrab
- */
 public class ExternalExtensionDependency {
     public final String text;
     /**

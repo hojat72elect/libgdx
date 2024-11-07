@@ -9,7 +9,6 @@ import org.jbox2d.dynamics.Body;
  * translation is zero when the local anchor points coincide in world space. Using local anchors and a local axis helps when
  * saving and loading a game.
  *
- * @author Daniel
  * @warning at least one body should by dynamic with a non-fixed rotation.
  */
 public class PrismaticJointDef extends JointDef {

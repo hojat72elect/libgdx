@@ -7,7 +7,7 @@ import com.badlogic.gdx.ApplicationListener;
  * set per window via {@link Lwjgl3ApplicationConfiguration} and {@link Lwjgl3WindowConfiguration}. Close events can be canceled
  * by returning false.
  *
- * @author badlogic
+ * 
  */
 public interface Lwjgl3WindowListener {
 

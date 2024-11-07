@@ -15,8 +15,6 @@ import org.jbox2d.pooling.IWorldPool;
 /**
  * The class manages contact between two shapes. A contact exists for each overlapping AABB in the broad-phase (except if
  * filtered). Therefore a contact object may exist that has no contact points.
- *
- * @author daniel
  */
 public abstract class Contact {
 

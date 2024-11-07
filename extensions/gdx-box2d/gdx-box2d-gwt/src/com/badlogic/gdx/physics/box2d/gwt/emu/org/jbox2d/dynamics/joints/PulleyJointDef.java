@@ -10,8 +10,6 @@ import org.jbox2d.dynamics.Body;
 
 /**
  * Pulley joint definition. This requires two ground anchors, two dynamic body anchor points, and a pulley ratio.
- *
- * @author Daniel Murphy
  */
 public class PulleyJointDef extends JointDef {
 

@@ -17,8 +17,6 @@ import com.badlogic.gdx.utils.reflect.Method;
 
 /**
  * Performs some tests with {@link Annotation} and prints the results on the screen.
- *
- * @author dludwig
  */
 public class AnnotationTest extends GdxTest {
     String message = "";

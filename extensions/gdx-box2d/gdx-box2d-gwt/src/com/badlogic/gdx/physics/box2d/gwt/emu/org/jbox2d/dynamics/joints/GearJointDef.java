@@ -7,8 +7,6 @@ package org.jbox2d.dynamics.joints;
 /**
  * Gear joint definition. This definition requires two existing revolute or prismatic joints (any combination will work). The
  * provided joints must attach a dynamic body to a static body.
- *
- * @author Daniel Murphy
  */
 public class GearJointDef extends JointDef {
     /**

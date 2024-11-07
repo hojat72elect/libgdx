@@ -26,8 +26,6 @@ package org.jbox2d.common;
 
 /**
  * This is the viewport transform used from drawing. Use yFlip if you are drawing from the top-left corner.
- *
- * @author Daniel
  */
 public interface IViewportTransform {
 

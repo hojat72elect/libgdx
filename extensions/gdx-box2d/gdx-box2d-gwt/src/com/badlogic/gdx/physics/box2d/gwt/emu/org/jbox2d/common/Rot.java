@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 /**
  * Represents a rotation
- *
- * @author Daniel
  */
 public class Rot implements Serializable {
     private static final long serialVersionUID = 1L;

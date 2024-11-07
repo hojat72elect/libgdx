@@ -9,8 +9,6 @@ import org.jbox2d.dynamics.contacts.ContactEdge;
 
 /**
  * Delegate of World.
- *
- * @author Daniel Murphy
  */
 public class ContactManager implements PairCallback {
 

@@ -11,8 +11,6 @@ import org.jbox2d.pooling.IWorldPool;
 /**
  * The base joint class. Joints are used to constrain two bodies together in various fashions. Some joints also feature limits
  * and motors.
- *
- * @author Daniel Murphy
  */
 public abstract class Joint {
 

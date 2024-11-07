@@ -18,7 +18,7 @@ import com.badlogic.gdx.tests.utils.GdxTest;
  * the PONG message from the server. This example won't work in HTML. Messages are delimited by the new line character, so we can
  * use a {@link BufferedReader}.
  *
- * @author badlogic
+ * 
  */
 public class PingPongSocketExample extends GdxTest {
     @Override
