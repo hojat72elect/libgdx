@@ -17,7 +17,6 @@ import com.badlogic.gdx.utils.Pool;
  * <p>
  * You can use multiple AnimationControllers on the same ModelInstance, as long as they don't interfere with each other (don't
  * affect the same {@link Node}s).
- *
  */
 public class AnimationController extends BaseAnimationController {
 
@@ -64,6 +63,7 @@ public class AnimationController extends BaseAnimationController {
      */
     public boolean allowSameAnimation;
     private boolean justChangedAnimation = false;
+
     /**
      * Construct a new AnimationController.
      *
@@ -74,7 +74,8 @@ public class AnimationController extends BaseAnimationController {
     }
 
     private AnimationDesc obtain(final Animation anim, float offset, float duration, int loopCount, float speed,
-                                 final AnimationListener listener) {
+                                 final AnimationListener listener
+    ) {
         if (anim == null) return null;
         final AnimationDesc result = animationPool.obtain();
         result.animation = anim;
@@ -88,7 +89,8 @@ public class AnimationController extends BaseAnimationController {
     }
 
     private AnimationDesc obtain(final String id, float offset, float duration, int loopCount, float speed,
-                                 final AnimationListener listener) {
+                                 final AnimationListener listener
+    ) {
         if (id == null) return null;
         final Animation anim = target.getAnimation(id);
         if (anim == null) throw new GdxRuntimeException("Unknown animation: " + id);
@@ -127,7 +129,8 @@ public class AnimationController extends BaseAnimationController {
         }
         if (previous != null)
             applyAnimations(previous.animation, previous.offset + previous.time, current.animation, current.offset + current.time,
-                    transitionCurrentTime / transitionTargetTime);
+                    transitionCurrentTime / transitionTargetTime
+            );
         else
             applyAnimation(current.animation, current.offset + current.time);
     }
@@ -215,7 +218,8 @@ public class AnimationController extends BaseAnimationController {
      * is completed.
      */
     public AnimationDesc setAnimation(final String id, float offset, float duration, int loopCount, float speed,
-                                      final AnimationListener listener) {
+                                      final AnimationListener listener
+    ) {
         return setAnimation(obtain(id, offset, duration, loopCount, speed, listener));
     }
 
@@ -223,7 +227,8 @@ public class AnimationController extends BaseAnimationController {
      * Set the active animation, replacing any current animation.
      */
     protected AnimationDesc setAnimation(final Animation anim, float offset, float duration, int loopCount, float speed,
-                                         final AnimationListener listener) {
+                                         final AnimationListener listener
+    ) {
         return setAnimation(obtain(anim, offset, duration, loopCount, speed, listener));
     }
 
@@ -300,7 +305,8 @@ public class AnimationController extends BaseAnimationController {
      * is completed.
      */
     public AnimationDesc animate(final String id, int loopCount, float speed, final AnimationListener listener,
-                                 float transitionTime) {
+                                 float transitionTime
+    ) {
         return animate(id, 0f, -1f, loopCount, speed, listener, transitionTime);
     }
 
@@ -321,7 +327,8 @@ public class AnimationController extends BaseAnimationController {
      * is completed.
      */
     public AnimationDesc animate(final String id, float offset, float duration, int loopCount, float speed,
-                                 final AnimationListener listener, float transitionTime) {
+                                 final AnimationListener listener, float transitionTime
+    ) {
         return animate(obtain(id, offset, duration, loopCount, speed, listener), transitionTime);
     }
 
@@ -329,7 +336,8 @@ public class AnimationController extends BaseAnimationController {
      * Changes the current animation by blending the new on top of the old during the transition time.
      */
     protected AnimationDesc animate(final Animation anim, float offset, float duration, int loopCount, float speed,
-                                    final AnimationListener listener, float transitionTime) {
+                                    final AnimationListener listener, float transitionTime
+    ) {
         return animate(obtain(anim, offset, duration, loopCount, speed, listener), transitionTime);
     }
 
@@ -374,7 +382,8 @@ public class AnimationController extends BaseAnimationController {
      * is completed.
      */
     public AnimationDesc queue(final String id, int loopCount, float speed, final AnimationListener listener,
-                               float transitionTime) {
+                               float transitionTime
+    ) {
         return queue(id, 0f, -1f, loopCount, speed, listener, transitionTime);
     }
 
@@ -396,7 +405,8 @@ public class AnimationController extends BaseAnimationController {
      * is completed.
      */
     public AnimationDesc queue(final String id, float offset, float duration, int loopCount, float speed,
-                               final AnimationListener listener, float transitionTime) {
+                               final AnimationListener listener, float transitionTime
+    ) {
         return queue(obtain(id, offset, duration, loopCount, speed, listener), transitionTime);
     }
 
@@ -404,7 +414,8 @@ public class AnimationController extends BaseAnimationController {
      * Queue an animation to be applied when the current is finished. If current is continuous it will be synced on next loop.
      */
     protected AnimationDesc queue(final Animation anim, float offset, float duration, int loopCount, float speed,
-                                  final AnimationListener listener, float transitionTime) {
+                                  final AnimationListener listener, float transitionTime
+    ) {
         return queue(obtain(anim, offset, duration, loopCount, speed, listener), transitionTime);
     }
 
@@ -438,7 +449,8 @@ public class AnimationController extends BaseAnimationController {
      * is completed.
      */
     public AnimationDesc action(final String id, int loopCount, float speed, final AnimationListener listener,
-                                float transitionTime) {
+                                float transitionTime
+    ) {
         return action(id, 0, -1f, loopCount, speed, listener, transitionTime);
     }
 
@@ -459,7 +471,8 @@ public class AnimationController extends BaseAnimationController {
      * is completed.
      */
     public AnimationDesc action(final String id, float offset, float duration, int loopCount, float speed,
-                                final AnimationListener listener, float transitionTime) {
+                                final AnimationListener listener, float transitionTime
+    ) {
         return action(obtain(id, offset, duration, loopCount, speed, listener), transitionTime);
     }
 
@@ -467,7 +480,8 @@ public class AnimationController extends BaseAnimationController {
      * Apply an action animation on top of the current animation.
      */
     protected AnimationDesc action(final Animation anim, float offset, float duration, int loopCount, float speed,
-                                   final AnimationListener listener, float transitionTime) {
+                                   final AnimationListener listener, float transitionTime
+    ) {
         return action(obtain(anim, offset, duration, loopCount, speed, listener), transitionTime);
     }
 
@@ -509,7 +523,7 @@ public class AnimationController extends BaseAnimationController {
     }
 
     /**
-     * Class describing how to play and {@link Animation}. You can read the values within this class to get the progress of the
+     * Class describing how to play an {@link Animation}. You can read the values within this class to get the progress of the
      * animation. Do not change the values. Only valid when the animation is currently played.
      */
     public static class AnimationDesc {
