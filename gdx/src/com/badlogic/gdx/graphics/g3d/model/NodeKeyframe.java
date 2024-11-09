@@ -2,8 +2,6 @@ package com.badlogic.gdx.graphics.g3d.model;
 
 /**
  * A NodeKeyframe specifies the a value (e.g. the translation, rotation or scale) of a frame within a {@link NodeAnimation}.
- *
- * , Xoppa
  */
 public class NodeKeyframe<T> {
     /**

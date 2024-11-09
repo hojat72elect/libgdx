@@ -22,7 +22,7 @@ import com.badlogic.gdx.utils.Pool.Poolable;
  *
  */
 public class BaseAnimationController {
-    private final static ObjectMap<Node, Transform> transforms = new ObjectMap<Node, Transform>();
+    private final static ObjectMap<Node, Transform> transforms = new ObjectMap<>();
     private final static Transform tmpT = new Transform();
     /**
      * The {@link ModelInstance} on which the animations are being performed.
