@@ -1,11 +1,10 @@
 package com.badlogic.gdx.utils;
 
+import com.badlogic.gdx.utils.JsonWriter.OutputType;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
-import com.badlogic.gdx.utils.JsonWriter.OutputType;
 
 /**
  * Container for a JSON object, array, string, double, long, boolean, or null.
@@ -25,19 +24,16 @@ import com.badlogic.gdx.utils.JsonWriter.OutputType;
  */
 public class JsonValue implements Iterable<JsonValue> {
     public String name;
-    /**
-     * May be null.
-     */
+
+    // May be null.
     public JsonValue child, parent;
-    /**
-     * May be null. When changing this field the parent {@link #size()} may need to be changed.
-     */
+
+    // May be null. When changing this field the parent {@link #size()} may need to be changed.
     public JsonValue next, prev;
     public int size;
     private ValueType type;
-    /**
-     * May be null.
-     */
+
+    //  May be null.
     private String stringValue;
     private double doubleValue;
     private long longValue;
